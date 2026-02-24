@@ -679,12 +679,12 @@
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Accessibility Agents</button>
-          <ul class="nav-dropdown-menu" role="menu">
-            <li role="none"><a href="docs.html" role="menuitem">Documentation</a></li>
-            <li role="none"><a href="#agents" role="menuitem">Agents</a></li>
-            <li role="none"><a href="#install" role="menuitem">Install</a></li>
-            <li role="none"><a href="#contribute" role="menuitem">Contribute</a></li>
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="#install">Install</a></li>
+            <li><a href="#contribute">Contribute</a></li>
           </ul>
         </li>
         <li><a href="#mission">Mission</a></li>
@@ -927,24 +927,53 @@
   var toggle = dropdown.querySelector('.nav-dropdown-toggle');
   var menu = dropdown.querySelector('.nav-dropdown-menu');
 
+  function openMenu() {
+    toggle.setAttribute('aria-expanded', 'true');
+    menu.classList.add('open');
+    var first = menu.querySelector('a');
+    if (first) first.focus();
+  }
+
+  function closeMenu(returnFocus) {
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('open');
+    if (returnFocus) toggle.focus();
+  }
+
   toggle.addEventListener('click', function () {
-    var expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    menu.classList.toggle('open');
+    if (toggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu(true);
+    } else {
+      openMenu();
+    }
+  });
+
+  toggle.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      openMenu();
+    }
+  });
+
+  menu.addEventListener('keydown', function (e) {
+    var links = menu.querySelectorAll('a');
+    var idx = Array.prototype.indexOf.call(links, document.activeElement);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (idx < links.length - 1) links[idx + 1].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (idx > 0) links[idx - 1].focus();
+      else toggle.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeMenu(true);
+    }
   });
 
   document.addEventListener('click', function (e) {
     if (!dropdown.contains(e.target)) {
-      toggle.setAttribute('aria-expanded', 'false');
-      menu.classList.remove('open');
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && menu.classList.contains('open')) {
-      toggle.setAttribute('aria-expanded', 'false');
-      menu.classList.remove('open');
-      toggle.focus();
+      closeMenu(false);
     }
   });
 })();
