@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Documentation for Accessibility Agents by Community Access. Guides, agent references, skills, tools, scanning, and prompts.">
+  <meta name="description" content="Documentation for 47 Accessibility Agents by Community Access. Guides, agent references, 14 skills, tools, scanning, and 52 prompts.">
   <title>Documentation - Community Access</title>
   <style>
     /* === Reset & Base === */
@@ -789,6 +789,10 @@
         <li><a href="#docs/agents/web-accessibility-wizard.md" data-doc="docs/agents/web-accessibility-wizard.md">Web Accessibility Wizard</a></li>
         <li><a href="#docs/agents/web-issue-fixer.md" data-doc="docs/agents/web-issue-fixer.md">Web Issue Fixer</a></li>
         <li><a href="#docs/agents/word-accessibility.md" data-doc="docs/agents/word-accessibility.md">Word Accessibility</a></li>
+        <li><a href="#docs/agents/nexus.md" data-doc="docs/agents/nexus.md">Nexus</a></li>
+        <li><a href="#docs/agents/document-csv-reporter.md" data-doc="docs/agents/document-csv-reporter.md">Document CSV Reporter</a></li>
+        <li><a href="#docs/agents/markdown-csv-reporter.md" data-doc="docs/agents/markdown-csv-reporter.md">Markdown CSV Reporter</a></li>
+        <li><a href="#docs/agents/web-csv-reporter.md" data-doc="docs/agents/web-csv-reporter.md">Web CSV Reporter</a></li>
       </ul>
     </div>
 
@@ -808,6 +812,7 @@
         <li><a href="#docs/skills/report-generation.md" data-doc="docs/skills/report-generation.md">Report Generation</a></li>
         <li><a href="#docs/skills/web-scanning.md" data-doc="docs/skills/web-scanning.md">Web Scanning</a></li>
         <li><a href="#docs/skills/web-severity-scoring.md" data-doc="docs/skills/web-severity-scoring.md">Web Severity Scoring</a></li>
+        <li><a href="#docs/skills/help-url-reference.md" data-doc="docs/skills/help-url-reference.md">Help URL Reference</a></li>
       </ul>
     </div>
 
@@ -838,6 +843,7 @@
         <li><a href="#docs/prompts/web/audit-web-multi-page.md" data-doc="docs/prompts/web/audit-web-multi-page.md">Audit Multi-Page</a></li>
         <li><a href="#docs/prompts/web/fix-web-issues.md" data-doc="docs/prompts/web/fix-web-issues.md">Fix Web Issues</a></li>
         <li><a href="#docs/prompts/web/compare-web-audits.md" data-doc="docs/prompts/web/compare-web-audits.md">Compare Web Audits</a></li>
+        <li><a href="#docs/prompts/web/export-web-csv.md" data-doc="docs/prompts/web/export-web-csv.md">Export Web CSV</a></li>
       </ul>
     </div>
 
@@ -853,6 +859,7 @@
         <li><a href="#docs/prompts/documents/generate-remediation-scripts.md" data-doc="docs/prompts/documents/generate-remediation-scripts.md">Generate Remediation Scripts</a></li>
         <li><a href="#docs/prompts/documents/generate-vpat.md" data-doc="docs/prompts/documents/generate-vpat.md">Generate VPAT</a></li>
         <li><a href="#docs/prompts/documents/setup-document-cicd.md" data-doc="docs/prompts/documents/setup-document-cicd.md">Setup Document CI/CD</a></li>
+        <li><a href="#docs/prompts/documents/export-document-csv.md" data-doc="docs/prompts/documents/export-document-csv.md">Export Document CSV</a></li>
       </ul>
     </div>
 
@@ -886,6 +893,21 @@
         <li><a href="#docs/prompts/github/notifications.md" data-doc="docs/prompts/github/notifications.md">Notifications</a></li>
         <li><a href="#docs/prompts/github/explain-code.md" data-doc="docs/prompts/github/explain-code.md">Explain Code</a></li>
         <li><a href="#docs/prompts/github/react.md" data-doc="docs/prompts/github/react.md">React</a></li>
+        <li><a href="#docs/prompts/github/triage.md" data-doc="docs/prompts/github/triage.md">Triage</a></li>
+        <li><a href="#docs/prompts/github/security-dashboard.md" data-doc="docs/prompts/github/security-dashboard.md">Security Dashboard</a></li>
+        <li><a href="#docs/prompts/github/sprint-review.md" data-doc="docs/prompts/github/sprint-review.md">Sprint Review</a></li>
+        <li><a href="#docs/prompts/github/team-dashboard.md" data-doc="docs/prompts/github/team-dashboard.md">Team Dashboard</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-markdown">Prompts: Markdown</button>
+      <ul class="sidebar-links" id="nav-prompts-markdown">
+        <li><a href="#docs/prompts/markdown/audit-markdown.md" data-doc="docs/prompts/markdown/audit-markdown.md">Audit Markdown</a></li>
+        <li><a href="#docs/prompts/markdown/quick-markdown-check.md" data-doc="docs/prompts/markdown/quick-markdown-check.md">Quick Markdown Check</a></li>
+        <li><a href="#docs/prompts/markdown/fix-markdown-issues.md" data-doc="docs/prompts/markdown/fix-markdown-issues.md">Fix Markdown Issues</a></li>
+        <li><a href="#docs/prompts/markdown/compare-markdown-audits.md" data-doc="docs/prompts/markdown/compare-markdown-audits.md">Compare Markdown Audits</a></li>
+        <li><a href="#docs/prompts/markdown/export-markdown-csv.md" data-doc="docs/prompts/markdown/export-markdown-csv.md">Export Markdown CSV</a></li>
       </ul>
     </div>
 
@@ -915,7 +937,7 @@
   <main class="docs-content" id="docs-content" aria-live="polite">
     <div class="docs-welcome" id="docs-welcome">
       <h1>Accessibility Agents Documentation</h1>
-      <p>Browse the documentation for Community Access Accessibility Agents. Select a topic from the navigation to get started, or choose one of the quick links below.</p>
+      <p>Browse the documentation for Community Access Accessibility Agents&mdash;47 agents, 14 skills, and 52 prompts. Select a topic from the navigation to get started, or choose one of the quick links below.</p>
       <ul class="quick-links">
         <li><a href="#docs/getting-started.md" data-doc="docs/getting-started.md">Getting Started Guide</a></li>
         <li><a href="#docs/agents/README.md" data-doc="docs/agents/README.md">Agent Overview</a></li>
