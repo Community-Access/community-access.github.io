@@ -6,4 +6,4 @@ The site is published via GitHub Pages at [community-access.github.io](https://c
 
 ## About
 
-Community Access is focused on making software accessible by default. This site is the central hub where all org projects are documented and linked.
+Community Access builds tools that make software accessible by default. This site is the central hub for all org projects, where you can find documentation, project links, and installation instructions in one place.
