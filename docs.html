@@ -710,12 +710,12 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Accessibility Agents</button>
-          <ul class="nav-dropdown-menu" role="menu">
-            <li role="none"><a href="docs.html" role="menuitem" aria-current="page">Documentation</a></li>
-            <li role="none"><a href="index.html#agents" role="menuitem">Agents</a></li>
-            <li role="none"><a href="index.html#install" role="menuitem">Install</a></li>
-            <li role="none"><a href="index.html#contribute" role="menuitem">Contribute</a></li>
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html" aria-current="page">Documentation</a></li>
+            <li><a href="index.html#agents">Agents</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
           </ul>
         </li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
@@ -1134,24 +1134,53 @@
   var ddToggle = dropdown.querySelector('.nav-dropdown-toggle');
   var ddMenu = dropdown.querySelector('.nav-dropdown-menu');
 
+  function openDdMenu() {
+    ddToggle.setAttribute('aria-expanded', 'true');
+    ddMenu.classList.add('open');
+    var first = ddMenu.querySelector('a');
+    if (first) first.focus();
+  }
+
+  function closeDdMenu(returnFocus) {
+    ddToggle.setAttribute('aria-expanded', 'false');
+    ddMenu.classList.remove('open');
+    if (returnFocus) ddToggle.focus();
+  }
+
   ddToggle.addEventListener('click', function () {
-    var expanded = ddToggle.getAttribute('aria-expanded') === 'true';
-    ddToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    ddMenu.classList.toggle('open');
+    if (ddToggle.getAttribute('aria-expanded') === 'true') {
+      closeDdMenu(true);
+    } else {
+      openDdMenu();
+    }
+  });
+
+  ddToggle.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      openDdMenu();
+    }
+  });
+
+  ddMenu.addEventListener('keydown', function (e) {
+    var links = ddMenu.querySelectorAll('a');
+    var idx = Array.prototype.indexOf.call(links, document.activeElement);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (idx < links.length - 1) links[idx + 1].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (idx > 0) links[idx - 1].focus();
+      else ddToggle.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDdMenu(true);
+    }
   });
 
   document.addEventListener('click', function (e) {
     if (!dropdown.contains(e.target)) {
-      ddToggle.setAttribute('aria-expanded', 'false');
-      ddMenu.classList.remove('open');
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && ddMenu.classList.contains('open')) {
-      ddToggle.setAttribute('aria-expanded', 'false');
-      ddMenu.classList.remove('open');
-      ddToggle.focus();
+      closeDdMenu(false);
     }
   });
 })();
