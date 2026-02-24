@@ -1,0 +1,190 @@
+name: Accessibility Audit
+
+# Runs a full WCAG 2.1 AA accessibility audit against the live site.
+# Crawls https://community-access.github.io, runs axe-core WCAG 2.1 AA checks,
+# and creates or updates GitHub issues for each unique violation found.
+
+on:
+  schedule:
+    # 9:00 AM Central Time (UTC-6) = 15:00 UTC
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Install audit dependencies
+        run: npm install --no-save @axe-core/playwright playwright
+
+      - name: Run accessibility audit
+        run: |
+          mkdir -p screenshots
+          node scripts/a11y-crawl.js https://community-access.github.io ./screenshots > accessibility-report.json 2> crawl-log.txt
+          cat crawl-log.txt
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-screenshots
+          path: screenshots/
+          retention-days: 30
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: accessibility-report.json
+          retention-days: 30
+
+      - name: Upload crawl log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crawl-log
+          path: crawl-log.txt
+          retention-days: 7
+
+      - name: Create or update GitHub issues for violations
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            let report;
+            try {
+              report = JSON.parse(fs.readFileSync('accessibility-report.json', 'utf-8'));
+            } catch (err) {
+              console.log('No report file found or invalid JSON. Skipping issue creation.');
+              return;
+            }
+
+            if (!report.violations || report.violations.length === 0) {
+              console.log('No violations found. No issues to create.');
+              return;
+            }
+
+            // Deduplicate: one issue per unique (ruleId, page) pair
+            const seen = new Map();
+            for (const v of report.violations) {
+              const key = `${v.ruleId}::${v.page}`;
+              if (!seen.has(key)) {
+                seen.set(key, { ...v, nodes: [v] });
+              } else {
+                seen.get(key).nodes.push(v);
+              }
+            }
+
+            const labels = ['accessibility', 'automated'];
+
+            // Ensure labels exist
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label,
+                });
+              } catch {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label,
+                  color: label === 'accessibility' ? 'd93f0b' : '0e8a16',
+                  description: label === 'accessibility'
+                    ? 'WCAG accessibility violation'
+                    : 'Created by automated workflow',
+                });
+              }
+            }
+
+            let created = 0;
+            let updated = 0;
+
+            for (const [key, violation] of seen) {
+              const title = `[A11y] ${violation.ruleId} - ${violation.page}`;
+
+              const elementsSection = violation.nodes
+                .map((n, i) => {
+                  return `**Element ${i + 1}:**\n\`\`\`html\n${n.html}\n\`\`\`\n**Selector:** \`${n.selector}\``;
+                })
+                .join('\n\n');
+
+              const body = [
+                `### Accessibility Violation: \`${violation.ruleId}\``,
+                '',
+                `**Impact:** ${violation.impact}`,
+                `**Page:** ${violation.page}`,
+                `**URL:** ${violation.pageUrl}`,
+                '',
+                `**Description:** ${violation.description}`,
+                '',
+                `**Help:** [${violation.help}](${violation.helpUrl})`,
+                '',
+                '---',
+                '',
+                elementsSection,
+                '',
+                '---',
+                '',
+                `Screenshots and full report available in the [workflow run artifacts](${runUrl}).`,
+                '',
+                `*Last detected: ${report.auditDate}*`,
+              ].join('\n');
+
+              const existing = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'accessibility',
+                per_page: 100,
+              });
+
+              const match = existing.data.find((issue) => issue.title === title);
+
+              if (match) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: match.number,
+                  body: body,
+                  labels: labels,
+                });
+                console.log(`Updated issue #${match.number}: ${title}`);
+                updated++;
+              } else {
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: title,
+                  body: body,
+                  labels: labels,
+                });
+                console.log(`Created issue: ${title}`);
+                created++;
+              }
+            }
+
+            console.log(`Done. Created ${created} issues, updated ${updated} issues.`);
