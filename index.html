@@ -861,6 +861,242 @@
       margin-right: auto;
     }
 
+    /* === Back to Top === */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 2px solid var(--ca-gray-200);
+      background: var(--ca-white);
+      color: var(--ca-gray-800);
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition), background var(--transition);
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--ca-gray-100); }
+    @media (prefers-reduced-motion: reduce) {
+      .back-to-top { transition: none; }
+    }
+
+    /* === Accordion Controls === */
+    .accordion-controls {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      max-width: 52rem;
+      margin: 0 auto 1rem;
+    }
+    .accordion-controls button {
+      background: var(--ca-white);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 6px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ca-gray-700);
+      cursor: pointer;
+      font-family: inherit;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .accordion-controls button:hover { background: var(--ca-gray-100); border-color: var(--ca-gray-700); }
+
+    /* === Search Filter === */
+    .search-filter {
+      max-width: 52rem;
+      margin: 0 auto 1.5rem;
+    }
+    .search-filter label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ca-gray-700);
+      margin-bottom: 0.35rem;
+    }
+    .search-filter input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 2px solid var(--ca-gray-200);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--ca-gray-800);
+      background: var(--ca-white);
+      transition: border-color var(--transition);
+    }
+    .search-filter input:focus {
+      border-color: var(--ca-indigo);
+      outline: 3px solid var(--ca-focus);
+      outline-offset: 2px;
+    }
+    .search-status {
+      font-size: 0.85rem;
+      color: var(--ca-gray-700);
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+
+    /* === Active Nav (Scroll Spy) === */
+    .header-nav a.nav-active,
+    .nav-dropdown-toggle.nav-active {
+      background: rgba(255,255,255,0.2);
+      color: var(--ca-gray-50);
+    }
+
+    /* === FAQ Section === */
+    .faq-section { padding: 5rem 0; }
+    .faq-list {
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    .faq-list details {
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      background: var(--ca-white);
+      overflow: hidden;
+    }
+    .faq-list summary {
+      padding: 1.1rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition);
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '';
+      display: inline-block;
+      width: 0.45em;
+      height: 0.45em;
+      border-right: 2.5px solid currentColor;
+      border-bottom: 2.5px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform var(--transition);
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .faq-list details[open] > summary::after { transform: rotate(-135deg); }
+    .faq-list summary:hover { background: var(--ca-gray-50); }
+    .faq-list .faq-body {
+      padding: 0 1.5rem 1.25rem;
+      color: var(--ca-gray-700);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    /* === Changelog === */
+    .changelog-section { background: var(--ca-gray-50); padding: 5rem 0; }
+    @media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-900); } }
+    .changelog-list {
+      max-width: 48rem;
+      margin: 0 auto;
+      list-style: none;
+      padding: 0;
+      border-left: 3px solid var(--ca-indigo-light);
+    }
+    .changelog-item {
+      padding: 1.25rem 1.5rem;
+      position: relative;
+    }
+    .changelog-item::before {
+      content: '';
+      position: absolute;
+      left: -0.55rem;
+      top: 1.6rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: var(--ca-indigo-light);
+      border-radius: 50%;
+      border: 2px solid var(--ca-gray-50);
+    }
+    @media (prefers-color-scheme: dark) {
+      .changelog-item::before { border-color: var(--ca-gray-900); }
+    }
+    .changelog-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ca-indigo-light);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .changelog-item p {
+      color: var(--ca-gray-700);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* === Demo Snippet === */
+    .demo-section { padding: 5rem 0; }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    @media (max-width: 48rem) { .demo-grid { grid-template-columns: 1fr; } }
+    .demo-panel {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--ca-gray-200);
+    }
+    .demo-panel-header {
+      padding: 0.75rem 1.25rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .demo-bad .demo-panel-header {
+      background: #fef2f2;
+      color: #991b1b;
+      border-bottom: 2px solid #fca5a5;
+    }
+    .demo-good .demo-panel-header {
+      background: #f0fdf4;
+      color: #166534;
+      border-bottom: 2px solid #86efac;
+    }
+    @media (prefers-color-scheme: dark) {
+      .demo-bad .demo-panel-header { background: #451a1a; color: #fca5a5; border-color: #7f1d1d; }
+      .demo-good .demo-panel-header { background: #14332a; color: #86efac; border-color: #166534; }
+    }
+    .demo-panel pre {
+      margin: 0;
+      padding: 1.25rem;
+      background: var(--ca-gray-900);
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.65;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    @media (prefers-color-scheme: dark) {
+      .demo-panel pre { background: #0f172a; }
+    }
+    .demo-comment { color: #94a3b8; }
+    .demo-tag { color: #7dd3fc; }
+    .demo-attr { color: #c4b5fd; }
+    .demo-val { color: #86efac; }
+    .demo-err { color: #fca5a5; }
+
     /* === Responsive === */
     @media (max-width: 48rem) {
       .hero { padding: 4rem 0 3.5rem; }
@@ -891,6 +1127,7 @@
           </ul>
         </li>
         <li><a href="#mission">Mission</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
@@ -997,6 +1234,17 @@
       <h2>Meet the Agents</h2>
       <p>47 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
     </div>
+    <div class="search-filter">
+      <label for="agent-search">Search agents, skills, prompts, and tools</label>
+      <input type="search" id="agent-search" placeholder="Type to filter… e.g. contrast, PDF, heading" autocomplete="off">
+      <div class="search-status" aria-live="polite" id="search-status"></div>
+    </div>
+
+    <div class="accordion-controls" role="group" aria-label="Accordion controls">
+      <button type="button" id="expand-all" aria-label="Expand all sections">Expand All</button>
+      <button type="button" id="collapse-all" aria-label="Collapse all sections">Collapse All</button>
+    </div>
+
     <div class="accordion-group">
 
       <details>
@@ -1627,6 +1875,121 @@
   </div>
 </section>
 
+<section id="demo" class="demo-section bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>See It in Action</h2>
+      <p>Here is a real example. An AI tool generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-panel demo-bad" role="region" aria-label="Inaccessible code example">
+        <div class="demo-panel-header">Before &mdash; AI-Generated Code</div>
+        <pre><code><span class="demo-comment">&lt;!-- Missing alt, generic link text,</span>
+<span class="demo-comment">     no form label, wrong heading order --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h3&gt;</span>Our Team<span class="demo-tag">&lt;/h3&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span><span class="demo-err">Click here</span><span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">placeholder=</span><span class="demo-val">"Email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+      <div class="demo-panel demo-good" role="region" aria-label="Accessible code example">
+        <div class="demo-panel-header">After &mdash; Agent-Fixed Code</div>
+        <pre><code><span class="demo-comment">&lt;!-- Heading hierarchy, alt text,</span>
+<span class="demo-comment">     descriptive link, labeled input --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h2&gt;</span>Our Team<span class="demo-tag">&lt;/h2&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span> <span class="demo-attr">alt=</span><span class="demo-val">"Our team at the 2025 summit"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span>Learn about our team<span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;label</span> <span class="demo-attr">for=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span>Email<span class="demo-tag">&lt;/label&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">id=</span><span class="demo-val">"email"</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">autocomplete=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Does this work with VS Code?</summary>
+        <div class="faq-body">
+          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal) and Claude Desktop (standalone app). The install command sets up all three platforms automatically.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Does any data leave my machine?</summary>
+        <div class="faq-body">
+          <p>The MCP tools all run locally. Document scanning, contrast checking, heading analysis, and axe-core scans happen entirely on your machine. The only network calls are the ones your AI platform already makes to its own API.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I use only some agents?</summary>
+        <div class="faq-body">
+          <p>Yes. Each agent is independent Markdown. You can delete any agent file you do not need, or use the <code>--project</code> flag to install only at the project level. You can also disable individual agents in your platform settings.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I update?</summary>
+        <div class="faq-body">
+          <p>Run the same install command again. It will pull the latest agents, skills, and prompts. Your existing configuration is never overwritten. You can also enable auto-update during installation.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What WCAG version do the agents target?</summary>
+        <div class="faq-body">
+          <p>All web agents target WCAG 2.2 Level AA. Document agents map to WCAG 2.1 AA plus Microsoft Office Accessibility Checker rules. PDF agents follow PDF/UA (ISO 14289-1) via the Matterhorn Protocol.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Does this replace manual accessibility testing?</summary>
+        <div class="faq-body">
+          <p>No. Automated tools catch many issues but cannot replace testing with actual screen readers (NVDA, JAWS, VoiceOver) and keyboard-only navigation. These agents are a powerful first pass, not a substitute for real-world testing with assistive technology.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is this free?</summary>
+        <div class="faq-body">
+          <p>Yes. Community Access is open source and licensed under MIT. Every agent, skill, prompt, and tool is free to use, modify, and distribute.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="changelog-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>What&rsquo;s New</h2>
+      <p>Recent updates and milestones from the project.</p>
+    </div>
+    <ol class="changelog-list" aria-label="Recent project updates">
+      <li class="changelog-item">
+        <time class="changelog-date" datetime="2025-02">February 2025</time>
+        <p><strong>47 agents, 14 skills, 52 prompts.</strong> Full coverage for web, document (Word, Excel, PowerPoint, PDF, EPUB), Markdown, and GitHub workflows.</p>
+      </li>
+      <li class="changelog-item">
+        <time class="changelog-date" datetime="2025-02">February 2025</time>
+        <p><strong>MCP server with 11 tools.</strong> Claude Desktop integration with contrast checking, axe-core scanning, document scanning, VPAT generation, and more.</p>
+      </li>
+      <li class="changelog-item">
+        <time class="changelog-date" datetime="2025-01">January 2025</time>
+        <p><strong>GitHub Copilot support.</strong> All agents now install as Copilot instructions alongside Claude Code and Desktop.</p>
+      </li>
+      <li class="changelog-item">
+        <time class="changelog-date" datetime="2025-01">January 2025</time>
+        <p><strong>Document accessibility agents.</strong> Word, Excel, PowerPoint, PDF, and EPUB scanning using Open XML parsing and Matterhorn Protocol.</p>
+      </li>
+      <li class="changelog-item">
+        <time class="changelog-date" datetime="2024-12">December 2024</time>
+        <p><strong>Initial release.</strong> Web accessibility agents for Claude Code with one-command installer.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
 <div style="text-align:center; padding: 2rem 1.5rem; background: var(--ca-gray-100); color: var(--ca-gray-700); font-size: 0.9rem;">
   <p style="max-width: 48rem; margin: 0 auto;"><strong>AI and automated tools are not perfect.</strong> They miss things, make mistakes, and cannot replace testing with real screen readers and assistive technology. Always verify with VoiceOver, NVDA, JAWS, and keyboard-only navigation. This tooling is a helpful starting point, not a substitute for real accessibility testing.</p>
 </div>
@@ -1737,6 +2100,192 @@
       });
     });
   });
+</script>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
+  <span aria-hidden="true">&uarr;</span>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* === Back to Top === */
+  var btt = document.getElementById('back-to-top');
+  if (btt) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 600) {
+        btt.classList.add('visible');
+      } else {
+        btt.classList.remove('visible');
+      }
+    }, { passive: true });
+    btt.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      /* After scroll, move focus to skip link for keyboard users */
+      var skip = document.querySelector('.skip-link');
+      if (skip) {
+        setTimeout(function () { skip.focus(); }, 300);
+      }
+    });
+  }
+
+  /* === Expand / Collapse All === */
+  var expandBtn = document.getElementById('expand-all');
+  var collapseBtn = document.getElementById('collapse-all');
+
+  function getAllAccordions() {
+    return document.querySelectorAll('.accordion-group details, .faq-list details');
+  }
+
+  if (expandBtn) {
+    expandBtn.addEventListener('click', function () {
+      getAllAccordions().forEach(function (d) { d.open = true; });
+    });
+  }
+  if (collapseBtn) {
+    collapseBtn.addEventListener('click', function () {
+      getAllAccordions().forEach(function (d) { d.open = false; });
+    });
+  }
+
+  /* === Search / Filter === */
+  var searchInput = document.getElementById('agent-search');
+  var searchStatus = document.getElementById('search-status');
+
+  if (searchInput) {
+    var debounceTimer;
+    searchInput.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(filterAccordions, 200);
+    });
+  }
+
+  function filterAccordions() {
+    var query = searchInput.value.trim().toLowerCase();
+    var visibleCount = 0;
+    var totalCount = 0;
+
+    /* Get all accordion-group containers (agents, skills, prompts, tools) */
+    var groups = document.querySelectorAll('.accordion-group');
+    groups.forEach(function (group) {
+      var details = group.querySelectorAll(':scope > details');
+      details.forEach(function (det) {
+        var rows = det.querySelectorAll('.agent-table tr:not(.method-row), .agent-table tbody tr:not(.method-row)');
+
+        if (!query) {
+          /* No filter: show everything, collapse */
+          det.style.display = '';
+          rows.forEach(function (r) { r.style.display = ''; });
+          return;
+        }
+
+        var groupHasMatch = false;
+        rows.forEach(function (row) {
+          var text = row.textContent.toLowerCase();
+          totalCount++;
+          if (text.indexOf(query) !== -1) {
+            row.style.display = '';
+            groupHasMatch = true;
+            visibleCount++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        /* Also check the summary text */
+        var summaryText = det.querySelector('summary').textContent.toLowerCase();
+        if (summaryText.indexOf(query) !== -1) groupHasMatch = true;
+
+        /* Also check accordion-body paragraphs */
+        var bodyPs = det.querySelectorAll('.accordion-body > p');
+        bodyPs.forEach(function (p) {
+          if (p.textContent.toLowerCase().indexOf(query) !== -1) groupHasMatch = true;
+        });
+
+        if (groupHasMatch) {
+          det.style.display = '';
+          det.open = true;
+        } else {
+          det.style.display = 'none';
+        }
+      });
+    });
+
+    /* Also filter FAQ */
+    var faqs = document.querySelectorAll('.faq-list details');
+    faqs.forEach(function (faq) {
+      if (!query) {
+        faq.style.display = '';
+        return;
+      }
+      var text = faq.textContent.toLowerCase();
+      if (text.indexOf(query) !== -1) {
+        faq.style.display = '';
+      } else {
+        faq.style.display = 'none';
+      }
+    });
+
+    /* Update live region */
+    if (searchStatus) {
+      if (!query) {
+        searchStatus.textContent = '';
+      } else if (visibleCount > 0) {
+        searchStatus.textContent = visibleCount + ' result' + (visibleCount !== 1 ? 's' : '') + ' found.';
+      } else {
+        searchStatus.textContent = 'No results found for \u201C' + searchInput.value.trim() + '\u201D.';
+      }
+    }
+  }
+
+  /* === Scroll Spy === */
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.header-nav a[href^="#"], .nav-dropdown-menu a[href^="#"]');
+
+  function updateScrollSpy() {
+    var scrollPos = window.scrollY + 120;
+    var currentId = '';
+
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollPos) {
+        currentId = section.id;
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href === '#' + currentId) {
+        link.classList.add('nav-active');
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.classList.remove('nav-active');
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    /* Also highlight the dropdown toggle if any child section is active */
+    var dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+    var dropdownLinks = document.querySelectorAll('.nav-dropdown-menu a[href^="#"]');
+    var anyDropdownActive = false;
+    dropdownLinks.forEach(function (dl) {
+      if (dl.classList.contains('nav-active')) anyDropdownActive = true;
+    });
+    if (anyDropdownActive) {
+      dropdownToggle.classList.add('nav-active');
+    } else {
+      dropdownToggle.classList.remove('nav-active');
+    }
+  }
+
+  var scrollSpyTimer;
+  window.addEventListener('scroll', function () {
+    cancelAnimationFrame(scrollSpyTimer);
+    scrollSpyTimer = requestAnimationFrame(updateScrollSpy);
+  }, { passive: true });
+  updateScrollSpy();
+
+})();
 </script>
 </body>
 </html>
