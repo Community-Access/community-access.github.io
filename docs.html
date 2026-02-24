@@ -164,6 +164,79 @@
       font-weight: 600;
     }
 
+    /* === Nav Dropdown === */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .nav-dropdown-toggle::after {
+      content: '';
+      display: inline-block;
+      width: 0.35em;
+      height: 0.35em;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 0.4em;
+      vertical-align: middle;
+      transition: transform var(--transition);
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"]::after {
+      transform: rotate(-135deg);
+    }
+
+    .nav-dropdown-toggle:hover,
+    .nav-dropdown-toggle:focus-visible {
+      background: rgba(255,255,255,0.15);
+      color: var(--ca-gray-50);
+    }
+
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 12rem;
+      background: var(--ca-indigo-dark);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.4rem 0;
+      margin-top: 0.25rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      z-index: 200;
+      list-style: none;
+    }
+
+    .nav-dropdown-menu.open {
+      display: block;
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0;
+      font-size: 0.92rem;
+    }
+
+    .nav-dropdown-menu a:hover,
+    .nav-dropdown-menu a:focus-visible {
+      background: rgba(255,255,255,0.12);
+    }
+
     /* === Docs Layout === */
     .docs-layout {
       display: grid;
@@ -636,10 +709,15 @@
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="docs.html" aria-current="page">Docs</a></li>
-        <li><a href="index.html#agents">Agents</a></li>
-        <li><a href="index.html#install">Install</a></li>
-        <li><a href="index.html#contribute">Contribute</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu" role="menu">
+            <li role="none"><a href="docs.html" role="menuitem" aria-current="page">Documentation</a></li>
+            <li role="none"><a href="index.html#agents" role="menuitem">Agents</a></li>
+            <li role="none"><a href="index.html#install" role="menuitem">Install</a></li>
+            <li role="none"><a href="index.html#contribute" role="menuitem">Contribute</a></li>
+          </ul>
+        </li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
@@ -1050,6 +1128,32 @@
 
   window.addEventListener('hashchange', handleHash);
   handleHash();
+
+  // Nav dropdown
+  var dropdown = document.querySelector('.nav-dropdown');
+  var ddToggle = dropdown.querySelector('.nav-dropdown-toggle');
+  var ddMenu = dropdown.querySelector('.nav-dropdown-menu');
+
+  ddToggle.addEventListener('click', function () {
+    var expanded = ddToggle.getAttribute('aria-expanded') === 'true';
+    ddToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    ddMenu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!dropdown.contains(e.target)) {
+      ddToggle.setAttribute('aria-expanded', 'false');
+      ddMenu.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ddMenu.classList.contains('open')) {
+      ddToggle.setAttribute('aria-expanded', 'false');
+      ddMenu.classList.remove('open');
+      ddToggle.focus();
+    }
+  });
 })();
 </script>
 
