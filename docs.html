@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentation for Accessibility Agents by Community Access. Guides, agent references, skills, tools, scanning, and prompts.">
+  <title>Documentation - Community Access</title>
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ca-indigo: #4f46e5;
+      --ca-indigo-light: #6366f1;
+      --ca-indigo-dark: #3730a3;
+      --ca-violet: #7c3aed;
+      --ca-emerald: #059669;
+      --ca-emerald-light: #34d399;
+      --ca-white: #ffffff;
+      --ca-gray-50: #f9fafb;
+      --ca-gray-100: #f3f4f6;
+      --ca-gray-200: #e5e7eb;
+      --ca-gray-700: #374151;
+      --ca-gray-800: #1f2937;
+      --ca-gray-900: #111827;
+      --ca-focus: #f59e0b;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      --max-width: 72rem;
+      --transition: 0.2s ease;
+      --sidebar-width: 18rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ca-white: #111827;
+        --ca-gray-50: #1f2937;
+        --ca-gray-100: #1f2937;
+        --ca-gray-200: #374151;
+        --ca-gray-700: #d1d5db;
+        --ca-gray-800: #e5e7eb;
+        --ca-gray-900: #f9fafb;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html { scroll-behavior: smooth; font-size: 100%; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ca-gray-800);
+      background: var(--ca-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === Focus Styles === */
+    :focus-visible {
+      outline: 3px solid var(--ca-focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* === Skip Links === */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--ca-gray-900);
+      color: var(--ca-gray-50);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+      transition: top var(--transition);
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--ca-focus);
+      outline-offset: 2px;
+    }
+
+    /* === Header === */
+    .site-header {
+      background: linear-gradient(135deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 100%);
+      color: var(--ca-gray-50);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mark {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ca-emerald-light);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .header-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .header-nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .header-nav a:hover,
+    .header-nav a:focus-visible {
+      background: rgba(255,255,255,0.15);
+      color: var(--ca-gray-50);
+    }
+
+    .header-nav a[aria-current="page"] {
+      background: rgba(255,255,255,0.2);
+      color: var(--ca-gray-50);
+      font-weight: 600;
+    }
+
+    /* === Docs Layout === */
+    .docs-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      min-height: calc(100vh - 4rem);
+    }
+
+    @media (max-width: 60rem) {
+      .docs-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* === Sidebar === */
+    .docs-sidebar {
+      background: var(--ca-gray-50);
+      border-right: 1px solid var(--ca-gray-200);
+      padding: 1.5rem 0;
+      overflow-y: auto;
+      position: sticky;
+      top: 3.75rem;
+      height: calc(100vh - 3.75rem);
+    }
+
+    @media (max-width: 60rem) {
+      .docs-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80vw;
+        max-width: 20rem;
+        height: 100vh;
+        z-index: 200;
+        transition: left var(--transition);
+        padding-top: 4rem;
+      }
+
+      .docs-sidebar.open {
+        left: 0;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+      }
+
+      .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 199;
+      }
+
+      .sidebar-backdrop.open {
+        display: block;
+      }
+    }
+
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 201;
+      background: var(--ca-indigo);
+      color: var(--ca-gray-50);
+      border: none;
+      border-radius: 50%;
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: background var(--transition);
+    }
+
+    .sidebar-toggle:hover { background: var(--ca-indigo-dark); }
+
+    @media (max-width: 60rem) {
+      .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+    }
+
+    .sidebar-section {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-heading {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ca-gray-700);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+
+    .sidebar-heading:hover { color: var(--ca-indigo); }
+
+    .sidebar-heading[aria-expanded="false"] + .sidebar-links {
+      display: none;
+    }
+
+    .sidebar-heading::after {
+      content: '';
+      display: inline-block;
+      width: 0.4em;
+      height: 0.4em;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 0.5em;
+      vertical-align: middle;
+      transition: transform var(--transition);
+    }
+
+    .sidebar-heading[aria-expanded="false"]::after {
+      transform: rotate(-45deg);
+    }
+
+    .sidebar-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-links a {
+      display: block;
+      padding: 0.4rem 1.5rem 0.4rem 2rem;
+      font-size: 0.88rem;
+      color: var(--ca-gray-700);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .sidebar-links a:hover {
+      background: var(--ca-gray-200);
+      color: var(--ca-gray-900);
+    }
+
+    .sidebar-links a[aria-current="true"] {
+      background: var(--ca-gray-200);
+      color: var(--ca-indigo);
+      border-left-color: var(--ca-indigo);
+      font-weight: 600;
+    }
+
+    /* === Content Area === */
+    .docs-content {
+      padding: 2.5rem 3rem 4rem;
+      max-width: 52rem;
+      min-width: 0;
+    }
+
+    @media (max-width: 60rem) {
+      .docs-content {
+        padding: 2rem 1.5rem 5rem;
+      }
+    }
+
+    .docs-content .loading {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--ca-gray-700);
+      font-size: 1.1rem;
+    }
+
+    .docs-content .github-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--ca-indigo-light);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .docs-content .github-link:hover {
+      color: var(--ca-indigo);
+      text-decoration: underline;
+    }
+
+    /* === Rendered Markdown === */
+    .doc-rendered h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      border-bottom: 2px solid var(--ca-gray-200);
+      padding-bottom: 0.75rem;
+    }
+
+    .doc-rendered h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .doc-rendered h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .doc-rendered h4, .doc-rendered h5, .doc-rendered h6 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ca-gray-900);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-rendered p {
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .doc-rendered ul, .doc-rendered ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .doc-rendered li {
+      margin-bottom: 0.4rem;
+      line-height: 1.7;
+    }
+
+    .doc-rendered code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--ca-gray-100);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--ca-indigo);
+    }
+
+    .doc-rendered pre {
+      background: var(--ca-gray-900);
+      color: var(--ca-gray-50);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .doc-rendered pre {
+        background: #0f172a;
+        border: 1px solid var(--ca-gray-200);
+      }
+    }
+
+    .doc-rendered pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+      font-size: 0.9rem;
+    }
+
+    .doc-rendered blockquote {
+      border-left: 4px solid var(--ca-indigo-light);
+      padding: 0.75rem 1.25rem;
+      margin: 1rem 0 1.5rem;
+      background: var(--ca-gray-50);
+      border-radius: 0 8px 8px 0;
+      color: var(--ca-gray-700);
+    }
+
+    .doc-rendered table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    .doc-rendered th, .doc-rendered td {
+      border: 1px solid var(--ca-gray-200);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    .doc-rendered th {
+      background: var(--ca-gray-100);
+      font-weight: 700;
+      color: var(--ca-gray-900);
+    }
+
+    .doc-rendered a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .doc-rendered a:hover {
+      color: var(--ca-indigo);
+    }
+
+    .doc-rendered hr {
+      border: none;
+      border-top: 1px solid var(--ca-gray-200);
+      margin: 2rem 0;
+    }
+
+    .doc-rendered img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* === Welcome State === */
+    .docs-welcome {
+      padding: 3rem 0;
+    }
+
+    .docs-welcome h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .docs-welcome p {
+      font-size: 1.1rem;
+      color: var(--ca-gray-700);
+      margin-bottom: 1.5rem;
+      max-width: 36rem;
+    }
+
+    .quick-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .quick-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .quick-links a {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 8px;
+      color: var(--ca-indigo);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .quick-links a:hover {
+      background: var(--ca-gray-100);
+      border-color: var(--ca-indigo-light);
+    }
+
+    /* === Error === */
+    .doc-error {
+      padding: 2rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      color: #991b1b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .doc-error {
+        background: #451a1a;
+        border-color: #7f1d1d;
+        color: #fecaca;
+      }
+    }
+
+    /* === Footer === */
+    .site-footer {
+      background: var(--ca-gray-900);
+      color: var(--ca-gray-50);
+      padding: 3rem 0 2rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .site-footer { background: #0f172a; border-top: 1px solid var(--ca-gray-200); }
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible { color: var(--ca-gray-50); }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-top: 2rem;
+      text-align: center;
+      max-width: var(--max-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1.5rem;
+    }
+
+    .a11y-statement {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      text-align: center;
+      max-width: 40rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* === Screen reader only === */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<a href="#docs-content" class="skip-link">Skip to documentation content</a>
+<a href="#docs-nav" class="skip-link" style="left: 14rem;">Skip to documentation navigation</a>
+
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <span class="logo-mark" aria-hidden="true">CA</span>
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="docs.html" aria-current="page">Docs</a></li>
+        <li><a href="index.html#agents">Agents</a></li>
+        <li><a href="index.html#install">Install</a></li>
+        <li><a href="index.html#contribute">Contribute</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <button class="sidebar-toggle" aria-label="Toggle documentation navigation" aria-expanded="false" id="sidebar-toggle">
+    <span aria-hidden="true">&#9776;</span>
+  </button>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <nav class="docs-sidebar" id="docs-nav" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-getting-started">Getting Started</button>
+      <ul class="sidebar-links" id="nav-getting-started">
+        <li><a href="#docs/getting-started.md" data-doc="docs/getting-started.md">Getting Started Guide</a></li>
+        <li><a href="#docs/configuration.md" data-doc="docs/configuration.md">Configuration</a></li>
+        <li><a href="#docs/architecture.md" data-doc="docs/architecture.md">Architecture</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-agents">Agents</button>
+      <ul class="sidebar-links" id="nav-agents">
+        <li><a href="#docs/agents/README.md" data-doc="docs/agents/README.md">Agent Overview</a></li>
+        <li><a href="#docs/agents/accessibility-lead.md" data-doc="docs/agents/accessibility-lead.md">Accessibility Lead</a></li>
+        <li><a href="#docs/agents/alt-text-headings.md" data-doc="docs/agents/alt-text-headings.md">Alt Text and Headings</a></li>
+        <li><a href="#docs/agents/analytics.md" data-doc="docs/agents/analytics.md">Analytics</a></li>
+        <li><a href="#docs/agents/aria-specialist.md" data-doc="docs/agents/aria-specialist.md">ARIA Specialist</a></li>
+        <li><a href="#docs/agents/cognitive-accessibility.md" data-doc="docs/agents/cognitive-accessibility.md">Cognitive Accessibility</a></li>
+        <li><a href="#docs/agents/contrast-master.md" data-doc="docs/agents/contrast-master.md">Contrast Master</a></li>
+        <li><a href="#docs/agents/contributions-hub.md" data-doc="docs/agents/contributions-hub.md">Contributions Hub</a></li>
+        <li><a href="#docs/agents/cross-document-analyzer.md" data-doc="docs/agents/cross-document-analyzer.md">Cross-Document Analyzer</a></li>
+        <li><a href="#docs/agents/cross-page-analyzer.md" data-doc="docs/agents/cross-page-analyzer.md">Cross-Page Analyzer</a></li>
+        <li><a href="#docs/agents/daily-briefing.md" data-doc="docs/agents/daily-briefing.md">Daily Briefing</a></li>
+        <li><a href="#docs/agents/design-system-auditor.md" data-doc="docs/agents/design-system-auditor.md">Design System Auditor</a></li>
+        <li><a href="#docs/agents/document-accessibility-wizard.md" data-doc="docs/agents/document-accessibility-wizard.md">Document Accessibility Wizard</a></li>
+        <li><a href="#docs/agents/document-inventory.md" data-doc="docs/agents/document-inventory.md">Document Inventory</a></li>
+        <li><a href="#docs/agents/epub-accessibility.md" data-doc="docs/agents/epub-accessibility.md">EPUB Accessibility</a></li>
+        <li><a href="#docs/agents/epub-scan-config.md" data-doc="docs/agents/epub-scan-config.md">EPUB Scan Config</a></li>
+        <li><a href="#docs/agents/excel-accessibility.md" data-doc="docs/agents/excel-accessibility.md">Excel Accessibility</a></li>
+        <li><a href="#docs/agents/forms-specialist.md" data-doc="docs/agents/forms-specialist.md">Forms Specialist</a></li>
+        <li><a href="#docs/agents/github-hub.md" data-doc="docs/agents/github-hub.md">GitHub Hub</a></li>
+        <li><a href="#docs/agents/insiders-a11y-tracker.md" data-doc="docs/agents/insiders-a11y-tracker.md">Insiders A11y Tracker</a></li>
+        <li><a href="#docs/agents/issue-tracker.md" data-doc="docs/agents/issue-tracker.md">Issue Tracker</a></li>
+        <li><a href="#docs/agents/keyboard-navigator.md" data-doc="docs/agents/keyboard-navigator.md">Keyboard Navigator</a></li>
+        <li><a href="#docs/agents/link-checker.md" data-doc="docs/agents/link-checker.md">Link Checker</a></li>
+        <li><a href="#docs/agents/live-region-controller.md" data-doc="docs/agents/live-region-controller.md">Live Region Controller</a></li>
+        <li><a href="#docs/agents/markdown-a11y-assistant.md" data-doc="docs/agents/markdown-a11y-assistant.md">Markdown A11y Assistant</a></li>
+        <li><a href="#docs/agents/markdown-fixer.md" data-doc="docs/agents/markdown-fixer.md">Markdown Fixer</a></li>
+        <li><a href="#docs/agents/markdown-scanner.md" data-doc="docs/agents/markdown-scanner.md">Markdown Scanner</a></li>
+        <li><a href="#docs/agents/mobile-accessibility.md" data-doc="docs/agents/mobile-accessibility.md">Mobile Accessibility</a></li>
+        <li><a href="#docs/agents/modal-specialist.md" data-doc="docs/agents/modal-specialist.md">Modal Specialist</a></li>
+        <li><a href="#docs/agents/office-scan-config.md" data-doc="docs/agents/office-scan-config.md">Office Scan Config</a></li>
+        <li><a href="#docs/agents/pdf-accessibility.md" data-doc="docs/agents/pdf-accessibility.md">PDF Accessibility</a></li>
+        <li><a href="#docs/agents/pdf-scan-config.md" data-doc="docs/agents/pdf-scan-config.md">PDF Scan Config</a></li>
+        <li><a href="#docs/agents/powerpoint-accessibility.md" data-doc="docs/agents/powerpoint-accessibility.md">PowerPoint Accessibility</a></li>
+        <li><a href="#docs/agents/pr-review.md" data-doc="docs/agents/pr-review.md">PR Review</a></li>
+        <li><a href="#docs/agents/repo-admin.md" data-doc="docs/agents/repo-admin.md">Repo Admin</a></li>
+        <li><a href="#docs/agents/repo-manager.md" data-doc="docs/agents/repo-manager.md">Repo Manager</a></li>
+        <li><a href="#docs/agents/tables-data-specialist.md" data-doc="docs/agents/tables-data-specialist.md">Tables and Data Specialist</a></li>
+        <li><a href="#docs/agents/team-manager.md" data-doc="docs/agents/team-manager.md">Team Manager</a></li>
+        <li><a href="#docs/agents/template-builder.md" data-doc="docs/agents/template-builder.md">Template Builder</a></li>
+        <li><a href="#docs/agents/testing-coach.md" data-doc="docs/agents/testing-coach.md">Testing Coach</a></li>
+        <li><a href="#docs/agents/wcag-guide.md" data-doc="docs/agents/wcag-guide.md">WCAG Guide</a></li>
+        <li><a href="#docs/agents/web-accessibility-wizard.md" data-doc="docs/agents/web-accessibility-wizard.md">Web Accessibility Wizard</a></li>
+        <li><a href="#docs/agents/web-issue-fixer.md" data-doc="docs/agents/web-issue-fixer.md">Web Issue Fixer</a></li>
+        <li><a href="#docs/agents/word-accessibility.md" data-doc="docs/agents/word-accessibility.md">Word Accessibility</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-skills">Skills</button>
+      <ul class="sidebar-links" id="nav-skills">
+        <li><a href="#docs/skills/accessibility-rules.md" data-doc="docs/skills/accessibility-rules.md">Accessibility Rules</a></li>
+        <li><a href="#docs/skills/cognitive-accessibility.md" data-doc="docs/skills/cognitive-accessibility.md">Cognitive Accessibility</a></li>
+        <li><a href="#docs/skills/design-system.md" data-doc="docs/skills/design-system.md">Design System</a></li>
+        <li><a href="#docs/skills/document-scanning.md" data-doc="docs/skills/document-scanning.md">Document Scanning</a></li>
+        <li><a href="#docs/skills/framework-accessibility.md" data-doc="docs/skills/framework-accessibility.md">Framework Accessibility</a></li>
+        <li><a href="#docs/skills/github-analytics-scoring.md" data-doc="docs/skills/github-analytics-scoring.md">GitHub Analytics Scoring</a></li>
+        <li><a href="#docs/skills/github-scanning.md" data-doc="docs/skills/github-scanning.md">GitHub Scanning</a></li>
+        <li><a href="#docs/skills/github-workflow-standards.md" data-doc="docs/skills/github-workflow-standards.md">GitHub Workflow Standards</a></li>
+        <li><a href="#docs/skills/markdown-accessibility.md" data-doc="docs/skills/markdown-accessibility.md">Markdown Accessibility</a></li>
+        <li><a href="#docs/skills/mobile-accessibility.md" data-doc="docs/skills/mobile-accessibility.md">Mobile Accessibility</a></li>
+        <li><a href="#docs/skills/report-generation.md" data-doc="docs/skills/report-generation.md">Report Generation</a></li>
+        <li><a href="#docs/skills/web-scanning.md" data-doc="docs/skills/web-scanning.md">Web Scanning</a></li>
+        <li><a href="#docs/skills/web-severity-scoring.md" data-doc="docs/skills/web-severity-scoring.md">Web Severity Scoring</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-tools">Tools</button>
+      <ul class="sidebar-links" id="nav-tools">
+        <li><a href="#docs/tools/axe-core-integration.md" data-doc="docs/tools/axe-core-integration.md">Axe-core Integration</a></li>
+        <li><a href="#docs/tools/mcp-tools.md" data-doc="docs/tools/mcp-tools.md">MCP Tools</a></li>
+        <li><a href="#docs/tools/vpat-generation.md" data-doc="docs/tools/vpat-generation.md">VPAT Generation</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-scanning">Scanning</button>
+      <ul class="sidebar-links" id="nav-scanning">
+        <li><a href="#docs/scanning/scan-configuration.md" data-doc="docs/scanning/scan-configuration.md">Scan Configuration</a></li>
+        <li><a href="#docs/scanning/custom-prompts.md" data-doc="docs/scanning/custom-prompts.md">Custom Prompts</a></li>
+        <li><a href="#docs/scanning/pdf-scanning.md" data-doc="docs/scanning/pdf-scanning.md">PDF Scanning</a></li>
+        <li><a href="#docs/scanning/office-scanning.md" data-doc="docs/scanning/office-scanning.md">Office Scanning</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-web">Prompts: Web</button>
+      <ul class="sidebar-links" id="nav-prompts-web">
+        <li><a href="#docs/prompts/web/quick-web-check.md" data-doc="docs/prompts/web/quick-web-check.md">Quick Web Check</a></li>
+        <li><a href="#docs/prompts/web/audit-web-page.md" data-doc="docs/prompts/web/audit-web-page.md">Audit Web Page</a></li>
+        <li><a href="#docs/prompts/web/audit-web-multi-page.md" data-doc="docs/prompts/web/audit-web-multi-page.md">Audit Multi-Page</a></li>
+        <li><a href="#docs/prompts/web/fix-web-issues.md" data-doc="docs/prompts/web/fix-web-issues.md">Fix Web Issues</a></li>
+        <li><a href="#docs/prompts/web/compare-web-audits.md" data-doc="docs/prompts/web/compare-web-audits.md">Compare Web Audits</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-docs">Prompts: Documents</button>
+      <ul class="sidebar-links" id="nav-prompts-docs">
+        <li><a href="#docs/prompts/documents/quick-document-check.md" data-doc="docs/prompts/documents/quick-document-check.md">Quick Document Check</a></li>
+        <li><a href="#docs/prompts/documents/audit-single-document.md" data-doc="docs/prompts/documents/audit-single-document.md">Audit Single Document</a></li>
+        <li><a href="#docs/prompts/documents/audit-document-folder.md" data-doc="docs/prompts/documents/audit-document-folder.md">Audit Document Folder</a></li>
+        <li><a href="#docs/prompts/documents/audit-changed-documents.md" data-doc="docs/prompts/documents/audit-changed-documents.md">Audit Changed Documents</a></li>
+        <li><a href="#docs/prompts/documents/compare-audits.md" data-doc="docs/prompts/documents/compare-audits.md">Compare Audits</a></li>
+        <li><a href="#docs/prompts/documents/create-accessible-template.md" data-doc="docs/prompts/documents/create-accessible-template.md">Create Accessible Template</a></li>
+        <li><a href="#docs/prompts/documents/generate-remediation-scripts.md" data-doc="docs/prompts/documents/generate-remediation-scripts.md">Generate Remediation Scripts</a></li>
+        <li><a href="#docs/prompts/documents/generate-vpat.md" data-doc="docs/prompts/documents/generate-vpat.md">Generate VPAT</a></li>
+        <li><a href="#docs/prompts/documents/setup-document-cicd.md" data-doc="docs/prompts/documents/setup-document-cicd.md">Setup Document CI/CD</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-github">Prompts: GitHub</button>
+      <ul class="sidebar-links" id="nav-prompts-github">
+        <li><a href="#docs/prompts/github/daily-briefing.md" data-doc="docs/prompts/github/daily-briefing.md">Daily Briefing</a></li>
+        <li><a href="#docs/prompts/github/create-issue.md" data-doc="docs/prompts/github/create-issue.md">Create Issue</a></li>
+        <li><a href="#docs/prompts/github/manage-issue.md" data-doc="docs/prompts/github/manage-issue.md">Manage Issue</a></li>
+        <li><a href="#docs/prompts/github/refine-issue.md" data-doc="docs/prompts/github/refine-issue.md">Refine Issue</a></li>
+        <li><a href="#docs/prompts/github/issue-reply.md" data-doc="docs/prompts/github/issue-reply.md">Issue Reply</a></li>
+        <li><a href="#docs/prompts/github/my-issues.md" data-doc="docs/prompts/github/my-issues.md">My Issues</a></li>
+        <li><a href="#docs/prompts/github/review-pr.md" data-doc="docs/prompts/github/review-pr.md">Review PR</a></li>
+        <li><a href="#docs/prompts/github/merge-pr.md" data-doc="docs/prompts/github/merge-pr.md">Merge PR</a></li>
+        <li><a href="#docs/prompts/github/my-prs.md" data-doc="docs/prompts/github/my-prs.md">My PRs</a></li>
+        <li><a href="#docs/prompts/github/pr-comment.md" data-doc="docs/prompts/github/pr-comment.md">PR Comment</a></li>
+        <li><a href="#docs/prompts/github/pr-report.md" data-doc="docs/prompts/github/pr-report.md">PR Report</a></li>
+        <li><a href="#docs/prompts/github/pr-author-checklist.md" data-doc="docs/prompts/github/pr-author-checklist.md">PR Author Checklist</a></li>
+        <li><a href="#docs/prompts/github/address-comments.md" data-doc="docs/prompts/github/address-comments.md">Address Comments</a></li>
+        <li><a href="#docs/prompts/github/manage-branches.md" data-doc="docs/prompts/github/manage-branches.md">Manage Branches</a></li>
+        <li><a href="#docs/prompts/github/add-collaborator.md" data-doc="docs/prompts/github/add-collaborator.md">Add Collaborator</a></li>
+        <li><a href="#docs/prompts/github/onboard-repo.md" data-doc="docs/prompts/github/onboard-repo.md">Onboard Repo</a></li>
+        <li><a href="#docs/prompts/github/build-template.md" data-doc="docs/prompts/github/build-template.md">Build Template</a></li>
+        <li><a href="#docs/prompts/github/build-a11y-template.md" data-doc="docs/prompts/github/build-a11y-template.md">Build A11y Template</a></li>
+        <li><a href="#docs/prompts/github/a11y-update.md" data-doc="docs/prompts/github/a11y-update.md">A11y Update</a></li>
+        <li><a href="#docs/prompts/github/ci-status.md" data-doc="docs/prompts/github/ci-status.md">CI Status</a></li>
+        <li><a href="#docs/prompts/github/draft-release.md" data-doc="docs/prompts/github/draft-release.md">Draft Release</a></li>
+        <li><a href="#docs/prompts/github/release-prep.md" data-doc="docs/prompts/github/release-prep.md">Release Prep</a></li>
+        <li><a href="#docs/prompts/github/my-stats.md" data-doc="docs/prompts/github/my-stats.md">My Stats</a></li>
+        <li><a href="#docs/prompts/github/project-status.md" data-doc="docs/prompts/github/project-status.md">Project Status</a></li>
+        <li><a href="#docs/prompts/github/notifications.md" data-doc="docs/prompts/github/notifications.md">Notifications</a></li>
+        <li><a href="#docs/prompts/github/explain-code.md" data-doc="docs/prompts/github/explain-code.md">Explain Code</a></li>
+        <li><a href="#docs/prompts/github/react.md" data-doc="docs/prompts/github/react.md">React</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-advanced">Advanced</button>
+      <ul class="sidebar-links" id="nav-advanced">
+        <li><a href="#docs/advanced/advanced-scanning-patterns.md" data-doc="docs/advanced/advanced-scanning-patterns.md">Advanced Scanning Patterns</a></li>
+        <li><a href="#docs/advanced/cross-platform-handoff.md" data-doc="docs/advanced/cross-platform-handoff.md">Cross-Platform Handoff</a></li>
+        <li><a href="#docs/advanced/platform-references.md" data-doc="docs/advanced/platform-references.md">Platform References</a></li>
+        <li><a href="#docs/advanced/plugin-packaging.md" data-doc="docs/advanced/plugin-packaging.md">Plugin Packaging</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-project">Project</button>
+      <ul class="sidebar-links" id="nav-project">
+        <li><a href="#README.md" data-doc="README.md">README</a></li>
+        <li><a href="#CONTRIBUTING.md" data-doc="CONTRIBUTING.md">Contributing</a></li>
+        <li><a href="#CODE_OF_CONDUCT.md" data-doc="CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        <li><a href="#ROADMAP.md" data-doc="ROADMAP.md">Roadmap</a></li>
+        <li><a href="#SECURITY.md" data-doc="SECURITY.md">Security</a></li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <main class="docs-content" id="docs-content" aria-live="polite">
+    <div class="docs-welcome" id="docs-welcome">
+      <h1>Accessibility Agents Documentation</h1>
+      <p>Browse the documentation for Community Access Accessibility Agents. Select a topic from the navigation to get started, or choose one of the quick links below.</p>
+      <ul class="quick-links">
+        <li><a href="#docs/getting-started.md" data-doc="docs/getting-started.md">Getting Started Guide</a></li>
+        <li><a href="#docs/agents/README.md" data-doc="docs/agents/README.md">Agent Overview</a></li>
+        <li><a href="#docs/configuration.md" data-doc="docs/configuration.md">Configuration</a></li>
+        <li><a href="#docs/architecture.md" data-doc="docs/architecture.md">Architecture</a></li>
+        <li><a href="#CONTRIBUTING.md" data-doc="CONTRIBUTING.md">Contributing</a></li>
+        <li><a href="#ROADMAP.md" data-doc="ROADMAP.md">Roadmap</a></li>
+      </ul>
+      <noscript>
+        <p style="margin-top:2rem; padding:1rem; background:var(--ca-gray-50); border:1px solid var(--ca-gray-200); border-radius:8px;">
+          JavaScript is required to render documentation on this page. You can read the documentation directly on
+          <a href="https://github.com/Community-Access/accessibility-agents/tree/main/docs">GitHub</a>.
+        </p>
+      </noscript>
+    </div>
+  </main>
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
+      <p style="opacity:0.7; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <ul class="footer-links">
+        <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="a11y-statement">
+    <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects
+    <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences.
+    If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
+  </div>
+  <p class="footer-copy">A community project. Licensed under MIT.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js" integrity="sha384-4wckBfoCOBDWO0MlKrQ67PBcLSCDfEhvFaul09LrA5kcGPiPBR/FrOfRF1OcqFqE" crossorigin="anonymous"></script>
+<script>
+(function () {
+  'use strict';
+
+  var REPO_RAW = 'https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/';
+  var REPO_BLOB = 'https://github.com/Community-Access/accessibility-agents/blob/main/';
+  var contentEl = document.getElementById('docs-content');
+  var welcomeEl = document.getElementById('docs-welcome');
+  var sidebarEl = document.getElementById('docs-nav');
+  var toggleBtn = document.getElementById('sidebar-toggle');
+  var backdrop = document.getElementById('sidebar-backdrop');
+  var cache = {};
+  var currentDoc = '';
+
+  // Configure marked
+  if (typeof marked !== 'undefined') {
+    marked.setOptions({
+      breaks: false,
+      gfm: true
+    });
+  }
+
+  // Sidebar toggle for mobile
+  function openSidebar() {
+    sidebarEl.classList.add('open');
+    backdrop.classList.add('open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeSidebar() {
+    sidebarEl.classList.remove('open');
+    backdrop.classList.remove('open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  toggleBtn.addEventListener('click', function () {
+    if (sidebarEl.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  });
+
+  backdrop.addEventListener('click', closeSidebar);
+
+  // Sidebar section collapse/expand
+  var headings = document.querySelectorAll('.sidebar-heading');
+  for (var i = 0; i < headings.length; i++) {
+    headings[i].addEventListener('click', function () {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  }
+
+  // Highlight active nav link
+  function setActiveLink(docPath) {
+    var links = sidebarEl.querySelectorAll('.sidebar-links a');
+    for (var j = 0; j < links.length; j++) {
+      if (links[j].getAttribute('data-doc') === docPath) {
+        links[j].setAttribute('aria-current', 'true');
+        // Expand parent section if collapsed
+        var section = links[j].closest('.sidebar-section');
+        if (section) {
+          var heading = section.querySelector('.sidebar-heading');
+          if (heading && heading.getAttribute('aria-expanded') === 'false') {
+            heading.setAttribute('aria-expanded', 'true');
+          }
+        }
+      } else {
+        links[j].removeAttribute('aria-current');
+      }
+    }
+  }
+
+  // Sanitize HTML output from marked to limit XSS risk
+  function sanitizeRenderedHTML(html) {
+    return html
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/\bon\w+\s*=\s*["'][^"']*["']/gi, '');
+  }
+
+  // Load and render a doc
+  function loadDoc(docPath) {
+    if (currentDoc === docPath) return;
+    currentDoc = docPath;
+    setActiveLink(docPath);
+
+    // Show loading state
+    contentEl.innerHTML = '<p class="loading" role="status">Loading documentation...</p>';
+
+    if (cache[docPath]) {
+      renderDoc(docPath, cache[docPath]);
+      return;
+    }
+
+    var url = REPO_RAW + encodeURI(docPath);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        cache[docPath] = xhr.responseText;
+        if (currentDoc === docPath) {
+          renderDoc(docPath, xhr.responseText);
+        }
+      } else {
+        contentEl.innerHTML =
+          '<div class="doc-error" role="alert">' +
+          '<p><strong>Could not load this document.</strong></p>' +
+          '<p>You can read it directly on <a href="' + REPO_BLOB + docPath + '">GitHub</a>.</p>' +
+          '</div>';
+      }
+    };
+    xhr.onerror = function () {
+      contentEl.innerHTML =
+        '<div class="doc-error" role="alert">' +
+        '<p><strong>Network error.</strong> Check your connection and try again.</p>' +
+        '<p>You can read this document on <a href="' + REPO_BLOB + docPath + '">GitHub</a>.</p>' +
+        '</div>';
+    };
+    xhr.send();
+  }
+
+  function renderDoc(docPath, markdown) {
+    var html = '';
+    if (typeof marked !== 'undefined') {
+      html = marked.parse(markdown);
+    } else {
+      html = '<pre style="white-space:pre-wrap;">' + markdown.replace(/</g, '&lt;') + '</pre>';
+    }
+
+    html = sanitizeRenderedHTML(html);
+
+    var githubUrl = REPO_BLOB + docPath;
+    contentEl.innerHTML =
+      '<a href="' + githubUrl + '" class="github-link" target="_blank" rel="noopener">View on GitHub</a>' +
+      '<div class="doc-rendered">' + html + '</div>';
+
+    contentEl.scrollTop = 0;
+    window.scrollTo(0, 0);
+    closeSidebar();
+  }
+
+  // Handle clicks on doc links
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[data-doc]');
+    if (link) {
+      e.preventDefault();
+      var doc = link.getAttribute('data-doc');
+      window.location.hash = doc;
+    }
+  });
+
+  // Handle hash changes
+  function handleHash() {
+    var hash = window.location.hash.slice(1);
+    if (hash) {
+      loadDoc(hash);
+      welcomeEl.style.display = 'none';
+    } else {
+      welcomeEl.style.display = '';
+      currentDoc = '';
+      setActiveLink('');
+      contentEl.innerHTML = '';
+      contentEl.appendChild(welcomeEl);
+    }
+  }
+
+  window.addEventListener('hashchange', handleHash);
+  handleHash();
+})();
+</script>
+
+</body>
+</html>
