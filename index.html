@@ -472,6 +472,7 @@
       margin: 2rem auto;
       text-align: left;
       overflow-x: auto;
+      position: relative;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -493,10 +494,39 @@
       color: var(--ca-gray-50);
       white-space: pre-wrap;
       word-break: break-all;
+      display: block;
+      padding-right: 3.5rem;
     }
 
     @media (prefers-color-scheme: dark) {
       .install-block code { color: #e2e8f0; }
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      color: var(--ca-gray-50);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      transition: background var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .copy-btn.copied {
+      background: var(--ca-emerald);
+      border-color: var(--ca-emerald);
+      color: #fff;
     }
 
     /* === Footer === */
@@ -575,7 +605,6 @@
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
-        <li><a href="docs.html">Docs</a></li>
         <li><a href="#mission">Mission</a></li>
         <li><a href="#agents">Agents</a></li>
         <li><a href="#install">Install</a></li>
@@ -735,11 +764,13 @@
     </div>
     <div class="install-block" role="region" aria-label="macOS and Linux install command">
       <div class="install-label">macOS / Linux</div>
-      <code>curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
+      <code id="cmd-mac">curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
+      <button class="copy-btn" aria-label="Copy macOS and Linux install command" data-target="cmd-mac">Copy</button>
     </div>
     <div class="install-block" role="region" aria-label="Windows PowerShell install command">
       <div class="install-label">Windows (PowerShell)</div>
-      <code>irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
+      <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
+      <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
     </div>
     <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo-light);">Read the full guide.</a></p>
   </div>
@@ -806,8 +837,33 @@
     <div class="a11y-statement">
       <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences. If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
     </div>
-    <p class="footer-copy">A community project. Licensed under MIT.</p>
+    <p class="footer-copy">Founded by Jeff Bishop and Taylor Arndt. Licensed under MIT.</p>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    var originalLabel = btn.getAttribute('aria-label');
+    btn.addEventListener('click', function() {
+      var target = document.getElementById(btn.getAttribute('data-target'));
+      var text = target ? target.textContent : '';
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        btn.setAttribute('aria-label', originalLabel.replace(/^Copy\b/, 'Copied'));
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+          btn.setAttribute('aria-label', originalLabel);
+        }, 2000);
+      }).catch(function() {
+        btn.textContent = 'Failed';
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+        }, 2000);
+      });
+    });
+  });
+</script>
 </body>
 </html>
