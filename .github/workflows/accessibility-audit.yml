@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
@@ -64,6 +64,22 @@ jobs:
           path: crawl-log.txt
           retention-days: 7
 
+      - name: Push screenshots to a11y-screenshots branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ls screenshots/*.png 1>/dev/null 2>&1; then
+            git fetch origin a11y-screenshots 2>/dev/null || git checkout --orphan a11y-screenshots
+            git checkout --orphan a11y-screenshots-new
+            git rm -rf . --quiet 2>/dev/null || true
+            cp -r screenshots .
+            git add screenshots/
+            git commit -m "Update a11y screenshots [skip ci]"
+            git push origin HEAD:a11y-screenshots --force
+            git checkout -
+          fi
+
       - name: Create or update GitHub issues for violations
         if: always()
         uses: actions/github-script@v7
@@ -72,6 +88,7 @@ jobs:
           script: |
             const fs = require('fs');
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const screenshotBase = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/a11y-screenshots/screenshots`;
 
             let report;
             try {
@@ -128,7 +145,10 @@ jobs:
 
               const elementsSection = violation.nodes
                 .map((n, i) => {
-                  return `**Element ${i + 1}:**\n\`\`\`html\n${n.html}\n\`\`\`\n**Selector:** \`${n.selector}\``;
+                  const screenshotUrl = n.screenshotFile
+                    ? `\n\n![Screenshot of violation](${screenshotBase}/${n.screenshotFile})`
+                    : '';
+                  return `**Element ${i + 1}:**\n\`\`\`html\n${n.html}\n\`\`\`\n**Selector:** \`${n.selector}\`${screenshotUrl}`;
                 })
                 .join('\n\n');
 
@@ -149,7 +169,7 @@ jobs:
                 '',
                 '---',
                 '',
-                `Screenshots and full report available in the [workflow run artifacts](${runUrl}).`,
+                `Full report and logs available in the [workflow run artifacts](${runUrl}).`,
                 '',
                 `*Last detected: ${report.auditDate}*`,
               ].join('\n');
