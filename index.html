@@ -119,7 +119,7 @@
       color: inherit;
     }
 
-    .logo-icon {
+    .logo-mark {
       width: 2.5rem;
       height: 2.5rem;
       background: rgba(255,255,255,0.15);
@@ -127,7 +127,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ca-emerald-light);
     }
 
     .logo-text {
@@ -235,20 +237,6 @@
       border-color: rgba(255,255,255,0.7);
     }
 
-    .btn-github {
-      background: var(--ca-gray-900);
-      color: var(--ca-gray-50);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .btn-github {
-        background: var(--ca-indigo);
-        color: #f9fafb;
-      }
-    }
-
-    .btn-github:hover { opacity: 0.9; }
-
     /* === Sections === */
     section { padding: 5rem 0; }
 
@@ -325,19 +313,6 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
 
-    .feature-icon {
-      width: 3.5rem;
-      height: 3.5rem;
-      background: linear-gradient(135deg, var(--ca-indigo-light), var(--ca-violet));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: white;
-    }
-
     .feature-card h3 {
       font-size: 1.2rem;
       font-weight: 700;
@@ -380,11 +355,13 @@
     }
 
     .repo-meta {
+      list-style: none;
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
       font-size: 0.9rem;
       opacity: 0.8;
+      padding: 0;
     }
 
     @media (max-width: 48rem) {
@@ -397,42 +374,25 @@
       gap: 0.75rem;
     }
 
-    /* === Agent Grid === */
-    .agent-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-      gap: 1rem;
+    /* === Agent Lists === */
+    .agent-list {
+      list-style: disc;
+      padding-left: 1.5rem;
+      columns: 2;
+      column-gap: 3rem;
     }
 
-    .agent-tag {
-      background: var(--ca-white);
-      border: 1px solid var(--ca-gray-200);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
+    @media (min-width: 48rem) {
+      .agent-list { columns: 3; }
+    }
+
+    .agent-list li {
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--ca-gray-800);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: border-color var(--transition), box-shadow var(--transition);
+      padding: 0.35rem 0;
+      break-inside: avoid;
     }
-
-    .agent-tag:hover {
-      border-color: var(--ca-indigo-light);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
-    }
-
-    .agent-dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .dot-web { background: var(--ca-indigo-light); }
-    .dot-doc { background: var(--ca-emerald); }
-    .dot-gh { background: var(--ca-violet); }
 
     /* === Contribute Section === */
     .contribute-section {
@@ -610,7 +570,7 @@
 <header class="site-header" role="banner">
   <div class="container header-inner">
     <a href="#" class="logo" aria-label="Community Access home">
-      <span class="logo-icon" aria-hidden="true">&#9851;</span>
+      <span class="logo-mark" aria-hidden="true">CA</span>
       <span class="logo-text">Community Access</span>
     </a>
     <nav class="header-nav" aria-label="Main navigation">
@@ -669,32 +629,26 @@
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#9881;</div>
         <h3>Automatic Enforcement</h3>
         <p>Agents evaluate every prompt, every response, every code suggestion. Accessibility is checked before code reaches your editor, not after deployment.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#9000;</div>
         <h3>Screen Reader First</h3>
-        <p>Built by and for the blind and low vision community. Every agent understands real-world assistive technology, NVDA, JAWS, VoiceOver, not just spec compliance.</p>
+        <p>Built by and for the blind and low vision community. Every agent understands real-world assistive technology including NVDA, JAWS, and VoiceOver, not just spec compliance.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#9889;</div>
         <h3>One-Command Install</h3>
         <p>A single command installs all agents across Claude Code, GitHub Copilot, and Claude Desktop. No configuration files to write, no YAML to edit.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#128196;</div>
         <h3>Beyond Web Code</h3>
         <p>Scan Word, Excel, PowerPoint, and PDF documents for accessibility. 46 rules for Office, 56 rules for PDF/UA, plus Markdown documentation auditing.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#128736;</div>
         <h3>GitHub Workflow Agents</h3>
         <p>10 agents that manage repos, triage issues, review PRs, run analytics, and keep your team informed, all from natural language.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#128202;</div>
         <h3>VPAT Generation</h3>
         <p>Generate VPAT 2.5 Accessibility Conformance Reports directly from agent scans. Compliance documentation from your codebase, not a spreadsheet.</p>
       </div>
@@ -709,42 +663,42 @@
       <p>Two teams, 35 specialists. Each agent owns one domain and enforces it relentlessly.</p>
     </div>
 
-    <h3 style="font-size:1.1rem; font-weight:700; color:var(--ca-gray-900); margin-bottom:1rem;">Accessibility Team</h3>
-    <div class="agent-grid" style="margin-bottom:2.5rem;">
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Accessibility Lead</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>ARIA Specialist</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Modal Specialist</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Contrast Master</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Keyboard Navigator</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Live Region Controller</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Forms Specialist</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Alt Text &amp; Headings</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Tables Specialist</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Link Checker</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Accessibility Wizard</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>Testing Coach</div>
-      <div class="agent-tag"><span class="agent-dot dot-web" aria-hidden="true"></span>WCAG Guide</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>Word Accessibility</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>Excel Accessibility</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>PowerPoint Accessibility</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>PDF Accessibility</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>Markdown Assistant</div>
-      <div class="agent-tag"><span class="agent-dot dot-doc" aria-hidden="true"></span>Document Wizard</div>
-    </div>
+    <h3 style="font-size:1.15rem; font-weight:700; color:var(--ca-gray-900); margin-bottom:1rem;">Accessibility Team</h3>
+    <ul class="agent-list" style="margin-bottom:2.5rem;">
+      <li>Accessibility Lead</li>
+      <li>ARIA Specialist</li>
+      <li>Modal Specialist</li>
+      <li>Contrast Master</li>
+      <li>Keyboard Navigator</li>
+      <li>Live Region Controller</li>
+      <li>Forms Specialist</li>
+      <li>Alt Text and Headings</li>
+      <li>Tables Specialist</li>
+      <li>Link Checker</li>
+      <li>Accessibility Wizard</li>
+      <li>Testing Coach</li>
+      <li>WCAG Guide</li>
+      <li>Word Accessibility</li>
+      <li>Excel Accessibility</li>
+      <li>PowerPoint Accessibility</li>
+      <li>PDF Accessibility</li>
+      <li>Markdown Assistant</li>
+      <li>Document Wizard</li>
+    </ul>
 
-    <h3 style="font-size:1.1rem; font-weight:700; color:var(--ca-gray-900); margin-bottom:1rem;">GitHub Workflow Team</h3>
-    <div class="agent-grid">
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>GitHub Hub</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Daily Briefing</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>PR Review</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Issue Tracker</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Analytics</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Insiders Tracker</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Repo Admin</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Team Manager</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Contributions Hub</div>
-      <div class="agent-tag"><span class="agent-dot dot-gh" aria-hidden="true"></span>Template Builder</div>
-    </div>
+    <h3 style="font-size:1.15rem; font-weight:700; color:var(--ca-gray-900); margin-bottom:1rem;">GitHub Workflow Team</h3>
+    <ul class="agent-list">
+      <li>GitHub Hub</li>
+      <li>Daily Briefing</li>
+      <li>PR Review</li>
+      <li>Issue Tracker</li>
+      <li>Analytics</li>
+      <li>Insiders Tracker</li>
+      <li>Repo Admin</li>
+      <li>Team Manager</li>
+      <li>Contributions Hub</li>
+      <li>Template Builder</li>
+    </ul>
   </div>
 </section>
 
@@ -757,12 +711,12 @@
       <div>
         <h3>Community-Access/accessibility-agents</h3>
         <p>Accessibility review agents for Claude Code, GitHub Copilot, and Claude Desktop. 35 specialists that enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
-        <div class="repo-meta">
-          <span>36 stars</span>
-          <span>3 forks</span>
-          <span>MIT License</span>
-          <span>5 contributors</span>
-        </div>
+        <ul class="repo-meta">
+          <li>36 stars</li>
+          <li>3 forks</li>
+          <li>MIT License</li>
+          <li>5 contributors</li>
+        </ul>
       </div>
       <div class="repo-actions">
         <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View Repository</a>
@@ -786,7 +740,7 @@
       <div class="install-label">Windows (PowerShell)</div>
       <code>irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
     </div>
-    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation -- your existing files are never overwritten. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo-light);">Read the full guide.</a></p>
+    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo-light);">Read the full guide.</a></p>
   </div>
 </section>
 
