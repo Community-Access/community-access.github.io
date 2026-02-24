@@ -70,10 +70,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ls screenshots/*.png 1>/dev/null 2>&1; then
-            git fetch origin a11y-screenshots 2>/dev/null || git checkout --orphan a11y-screenshots
+            cp -r screenshots /tmp/a11y-screenshots
             git checkout --orphan a11y-screenshots-new
             git rm -rf . --quiet 2>/dev/null || true
-            cp -r screenshots .
+            cp -r /tmp/a11y-screenshots ./screenshots
             git add screenshots/
             git commit -m "Update a11y screenshots [skip ci]"
             git push origin HEAD:a11y-screenshots --force
