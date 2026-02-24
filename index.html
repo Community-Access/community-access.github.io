@@ -698,6 +698,47 @@
       margin-top: 2.5rem;
     }
 
+    /* === Contributors === */
+    .contributors-section {
+      background: var(--ca-gray-50);
+      padding: 4rem 0;
+      text-align: center;
+    }
+    @media (prefers-color-scheme: dark) {
+      .contributors-section { background: var(--ca-gray-900); }
+    }
+    .contributors-section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .contributors-section > .container > p {
+      max-width: 48rem;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--ca-gray-700);
+    }
+    .contributors-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 36rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+      gap: 0.75rem 2rem;
+    }
+    .contributors-list li {
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--ca-gray-200);
+    }
+    @media (prefers-color-scheme: dark) {
+      .contributors-list li { border-bottom-color: var(--ca-gray-200); }
+      .contributors-section > .container > p { color: var(--ca-gray-400); }
+    }
+
     /* === Install Code Block === */
     .install-block {
       background: var(--ca-gray-900);
@@ -1564,6 +1605,24 @@
       <a href="https://github.com/Community-Access/accessibility-agents/issues" class="btn btn-outline">Browse Open Issues</a>
       <a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md" class="btn btn-outline">Contributing Guide</a>
     </div>
+  </div>
+</section>
+
+<section class="contributors-section">
+  <div class="container">
+    <h2>Special Thanks</h2>
+    <p>A special thanks goes out to the following contributors and to those people that have truly shaped what it means to engage with the blind and low-vision community. Thank you everyone for your partnership, mentorship, commitments, abilities, and most importantly your empathy centered around digital accessibility and inclusion. Go team!</p>
+    <ul class="contributors-list">
+      <li>Taylor Arndt</li>
+      <li>Michael Babcock</li>
+      <li>Jeff Bishop</li>
+      <li>Clint Covington</li>
+      <li>Michael Doise</li>
+      <li>Doug Geoffray</li>
+      <li>Maria Lamardo</li>
+      <li>Roberto Perez</li>
+      <li>Megan Rogge</li>
+    </ul>
   </div>
 </section>
 
