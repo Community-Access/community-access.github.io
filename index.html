@@ -272,6 +272,32 @@
       flex-wrap: wrap;
     }
 
+    /* === WIP Community Banner === */
+    .wip-banner {
+      background: linear-gradient(135deg, var(--ca-emerald) 0%, var(--ca-emerald-dark, #059669) 100%);
+      color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .wip-banner p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    .wip-banner .btn {
+      background: #fff;
+      color: var(--ca-emerald-dark, #059669);
+      font-weight: 700;
+    }
+    .wip-banner .btn:hover { opacity: 0.9; }
+
+    @media (prefers-color-scheme: dark) {
+      .wip-banner {
+        background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
+      }
+    }
+
     /* === Buttons === */
     .btn {
       display: inline-flex;
@@ -483,6 +509,71 @@
 
     .agent-table tr:last-child td {
       border-bottom: none;
+    }
+
+    .agent-table .method-row td {
+      padding: 0;
+      border-bottom: 1px solid var(--ca-gray-200);
+    }
+
+    .agent-table .method-row:last-child td {
+      border-bottom: none;
+    }
+
+    .method-detail {
+      margin: 0;
+      border: none;
+      border-radius: 0;
+      background: var(--ca-gray-50);
+    }
+
+    .method-detail summary {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ca-indigo);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .method-detail summary::-webkit-details-marker { display: none; }
+
+    .method-detail summary::before {
+      content: '▸';
+      margin-right: 0.5rem;
+      transition: transform var(--transition);
+      display: inline-block;
+    }
+
+    .method-detail[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    .method-detail .method-body {
+      padding: 0.25rem 0.75rem 0.75rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--ca-gray-700);
+      line-height: 1.6;
+    }
+
+    .method-detail .method-body ul {
+      margin: 0.25rem 0 0.5rem 1rem;
+      padding: 0;
+    }
+
+    .method-detail .method-body li {
+      margin-bottom: 0.25rem;
+    }
+
+    .method-detail .method-body strong {
+      color: var(--ca-gray-900);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .method-detail { background: var(--ca-gray-800); }
+      .method-detail summary { color: var(--ca-indigo-light); }
     }
 
     @media (max-width: 48rem) {
@@ -801,6 +892,13 @@
 
 <main id="main">
 
+<section class="wip-banner">
+  <div class="container">
+    <p><strong>This is a work in progress</strong>, built by and for the community. Come assess the work we are building, contribute your expertise, make a difference, and truly shape the future of free, open-source, and innovative accessibility tooling from an AI and agentic perspective. Every voice matters&mdash;especially yours.</p>
+    <a href="#contribute" class="btn btn-primary" style="margin-top:0.75rem;">Get Involved</a>
+  </div>
+</section>
+
 <section id="mission">
   <div class="container">
     <div class="section-header">
@@ -856,7 +954,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Meet the Agents</h2>
-      <p>47 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent and what it does.</p>
+      <p>47 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
     </div>
     <div class="accordion-group">
 
@@ -865,15 +963,85 @@
         <div class="accordion-body">
           <table class="agent-table" aria-label="Web accessibility agents">
             <tr><td>Accessibility Lead</td><td>Orchestrates the full team&mdash;routes tasks to specialists, merges results, and ensures nothing gets missed.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How the web audit works</summary>
+                <div class="method-body">
+                  <p>The lead wizard runs a <strong>multi-phase guided audit</strong> by delegating to specialist sub-agents in parallel:</p>
+                  <ul>
+                    <li><strong>Code review</strong> &mdash; Each specialist reads your source files (HTML, JSX, Vue, Svelte) and applies its rule set against WCAG 2.2 AA criteria.</li>
+                    <li><strong>axe-core scan</strong> &mdash; The <code>run_axe_scan</code> tool launches axe-core against a live URL (e.g. <code>localhost:3000</code>) via Chromium, returning violations grouped by severity with affected elements and fix suggestions.</li>
+                    <li><strong>Framework-aware fixes</strong> &mdash; Specialists suggest idiomatic fixes for React, Vue, Angular, Svelte, and Tailwind CSS rather than generic HTML.</li>
+                    <li><strong>Aggregation</strong> &mdash; Results from all specialists are merged, deduplicated, severity-scored, and compiled into a prioritized action plan.</li>
+                  </ul>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>ARIA Specialist</td><td>Makes sure interactive elements like buttons, menus, and tabs are properly announced to screen readers.</td></tr>
             <tr><td>Modal Specialist</td><td>Verifies that dialogs and modals trap focus correctly, return focus on close, and announce themselves.</td></tr>
             <tr><td>Contrast Master</td><td>Checks that text and backgrounds have enough color difference for people with low vision.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How contrast checking works</summary>
+                <div class="method-body">
+                  <p>The <code>check_contrast</code> MCP tool calculates the <strong>WCAG luminance contrast ratio</strong> between any two hex colors using the sRGB-to-linear conversion formula, then reports pass/fail for:</p>
+                  <ul>
+                    <li>Normal text: 4.5:1 minimum</li>
+                    <li>Large text (18px+ or 14px+ bold): 3:1 minimum</li>
+                    <li>UI components and focus indicators: 3:1 minimum</li>
+                  </ul>
+                  <p>The agent also scans CSS for common Tailwind failures (e.g. <code>text-gray-400</code> on white = 2.85:1 FAIL) and checks dark mode colors independently.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Keyboard Navigator</td><td>Ensures every interactive element is reachable and operable with keyboard alone&mdash;no mouse required.</td></tr>
             <tr><td>Live Region Controller</td><td>Manages dynamic content announcements so screen readers hear updates like toasts, alerts, and loading states.</td></tr>
             <tr><td>Forms Specialist</td><td>Validates that every form input has a visible label, proper autocomplete, and clear error messaging.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How form checking works</summary>
+                <div class="method-body">
+                  <p>The <code>check_form_labels</code> MCP tool parses HTML to verify every <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code> has a programmatic label via <code>&lt;label for&gt;</code>, <code>aria-label</code>, or <code>aria-labelledby</code>. Also checks:</p>
+                  <ul>
+                    <li><code>aria-labelledby</code> references point to existing IDs</li>
+                    <li>Identity fields (email, tel, password) have <code>autocomplete</code> attributes</li>
+                    <li>Radio/checkbox groups are wrapped in <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code></li>
+                  </ul>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Alt Text &amp; Headings</td><td>Checks image alt text quality and heading hierarchy so pages make sense when read linearly.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How heading analysis works</summary>
+                <div class="method-body">
+                  <p>The <code>check_heading_structure</code> MCP tool extracts every <code>&lt;h1&gt;</code>&ndash;<code>&lt;h6&gt;</code> from HTML, builds the heading outline, and flags:</p>
+                  <ul>
+                    <li>No headings at all, or no H1</li>
+                    <li>Multiple H1 elements on one page</li>
+                    <li>Skipped levels (e.g. H1 &rarr; H3 with no H2)</li>
+                    <li>Empty headings that confuse screen readers</li>
+                  </ul>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Tables Specialist</td><td>Ensures data tables have proper headers, captions, and scope attributes for screen reader navigation.</td></tr>
             <tr><td>Link Checker</td><td>Flags vague link text like &ldquo;click here&rdquo; and ensures links describe their destination.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How link checking works</summary>
+                <div class="method-body">
+                  <p>The <code>check_link_text</code> MCP tool scans every <code>&lt;a&gt;</code> in HTML and flags:</p>
+                  <ul>
+                    <li>Ambiguous text (&ldquo;click here&rdquo;, &ldquo;read more&rdquo;, &ldquo;learn more&rdquo;, etc.)</li>
+                    <li>URLs used as link text (screen readers spell out the full URL)</li>
+                    <li>Repeated identical text pointing to different destinations</li>
+                    <li>Links opening in new tabs without warning</li>
+                    <li>Links to non-HTML files (PDF, DOCX) without file type indication</li>
+                  </ul>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Web Accessibility Wizard</td><td>Interactive guided audit&mdash;walks you through a full accessibility review step by step.</td></tr>
             <tr><td>Testing Coach</td><td>Teaches you how to test with screen readers, keyboard, and browser dev tools.</td></tr>
             <tr><td>WCAG Guide</td><td>Explains any WCAG 2.2 success criterion in plain language with practical examples.</td></tr>
@@ -889,13 +1057,89 @@
         <div class="accordion-body">
           <table class="agent-table" aria-label="Document accessibility agents">
             <tr><td>Word Accessibility</td><td>Scans .docx files for heading structure, alt text, reading order, table headers, and language.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How Word analysis works</summary>
+                <div class="method-body">
+                  <p>A <code>.docx</code> file is a ZIP archive containing XML. The agent (and the <code>scan_office_document</code> MCP tool) <strong>unzips the file and reads the XML directly</strong>:</p>
+                  <ul>
+                    <li><strong>word/document.xml</strong> &mdash; Parses <code>&lt;w:pStyle w:val="Heading1"&gt;</code> to verify heading hierarchy, checks <code>&lt;wp:docPr descr="..."&gt;</code> for image alt text, scans <code>&lt;w:tblHeader&gt;</code> for table header rows, and flags <code>&lt;w:gridSpan&gt;</code>/<code>&lt;w:vMerge&gt;</code> for merged cells.</li>
+                    <li><strong>docProps/core.xml</strong> &mdash; Reads <code>&lt;dc:title&gt;</code> and <code>&lt;dc:language&gt;</code> to verify document metadata.</li>
+                    <li><strong>word/_rels/document.xml.rels</strong> &mdash; Resolves hyperlink targets so link text can be checked for ambiguity.</li>
+                  </ul>
+                  <p>Rule set: 9 errors, 6 warnings, 3 tips mapped to WCAG 2.1 AA and Microsoft Accessibility Checker rules.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Excel Accessibility</td><td>Checks spreadsheets for sheet names, table formatting, merged cells, chart alt text, and data validation.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How Excel analysis works</summary>
+                <div class="method-body">
+                  <p>An <code>.xlsx</code> file is also a ZIP of XML. The agent reads:</p>
+                  <ul>
+                    <li><strong>xl/workbook.xml</strong> &mdash; Checks <code>&lt;sheet name="..."&gt;</code> for default names like &ldquo;Sheet1&rdquo;.</li>
+                    <li><strong>xl/worksheets/sheet*.xml</strong> &mdash; Scans for <code>&lt;mergeCell&gt;</code> regions, empty sheets, conditional formatting (color-only data), and hyperlink display text.</li>
+                    <li><strong>xl/tables/table*.xml</strong> &mdash; Verifies <code>headerRowCount</code> is not &ldquo;0&rdquo;.</li>
+                    <li><strong>xl/drawings/drawing*.xml</strong> &mdash; Checks <code>&lt;xdr:cNvPr descr="..."&gt;</code> for chart and image alt text.</li>
+                  </ul>
+                  <p>Rule set: 8 errors, 5 warnings, 3 tips.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>PowerPoint Accessibility</td><td>Audits slide reading order, alt text on images, slide titles, table structure, and color contrast.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How PowerPoint analysis works</summary>
+                <div class="method-body">
+                  <p>A <code>.pptx</code> file is a ZIP of XML. The agent reads:</p>
+                  <ul>
+                    <li><strong>ppt/slides/slide*.xml</strong> &mdash; Locates <code>&lt;p:ph type="title"&gt;</code> placeholders to verify every slide has a title. Checks <code>&lt;p:cNvPr descr="..."&gt;</code> for image and shape alt text. Flags <code>gridSpan</code>/<code>rowSpan</code> in tables.</li>
+                    <li><strong>ppt/presentation.xml</strong> &mdash; Checks for <code>&lt;p:sectionLst&gt;</code> in presentations over 10 slides.</li>
+                    <li><strong>Duplicate detection</strong> &mdash; Flags slides with identical title text, which breaks screen reader slide navigation.</li>
+                    <li><strong>Media</strong> &mdash; Flags <code>&lt;p:vid&gt;</code> and <code>&lt;a:audioFile&gt;</code> elements that need captions.</li>
+                  </ul>
+                  <p>Rule set: 5 errors, 4 warnings, 4 tips.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Office Scan Config</td><td>Configures which rules to enable or disable for Office document scans.</td></tr>
             <tr><td>PDF Accessibility</td><td>Validates PDF/UA compliance using the Matterhorn Protocol&mdash;56 checkpoint rules.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How PDF analysis works</summary>
+                <div class="method-body">
+                  <p>The agent (and <code>scan_pdf_document</code> MCP tool) parses the <strong>PDF internal structure</strong> to check conformance with PDF/UA (ISO 14289-1) via the Matterhorn Protocol:</p>
+                  <ul>
+                    <li><strong>Structure tree</strong> &mdash; Verifies <code>/StructTreeRoot</code> exists and <code>/MarkInfo /Marked true</code> is set (tagged PDF).</li>
+                    <li><strong>Semantic tags</strong> &mdash; Checks that content uses standard tags (<code>/P</code>, <code>/H1</code>&ndash;<code>/H6</code>, <code>/Table</code>, <code>/Figure</code>, <code>/Link</code>, <code>/L</code>) with correct nesting.</li>
+                    <li><strong>Figures</strong> &mdash; Every <code>/Figure</code> element must have an <code>/Alt</code> text entry. Decorative images must be marked as <code>/Artifact</code>.</li>
+                    <li><strong>Tables</strong> &mdash; <code>/TH</code> cells must have <code>/Scope</code>. Complex spanning requires <code>/Headers</code> attribute.</li>
+                    <li><strong>Language</strong> &mdash; Catalog must have <code>/Lang</code> in valid BCP 47 format. Inline language switches need <code>/Span</code> tags.</li>
+                    <li><strong>Bookmarks</strong> &mdash; Documents over 20 pages must have <code>/Outlines</code> for navigation.</li>
+                  </ul>
+                  <p>Three rule layers: PDFUA (conformance), PDFBP (best practices), PDFQ (quality). Supports SARIF output for CI integration.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>PDF Scan Config</td><td>Configures which PDF/UA rules to enable or disable for PDF scans.</td></tr>
             <tr><td>Document Wizard</td><td>Interactive guided document audit&mdash;walks you through a full review step by step.</td></tr>
             <tr><td>EPUB Accessibility</td><td>Scans EPUB publications for accessibility metadata, navigation, alt text, reading order, and semantic structure.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How EPUB analysis works</summary>
+                <div class="method-body">
+                  <p>An EPUB is a ZIP containing XHTML content documents, a package OPF, and navigation files. The agent reads:</p>
+                  <ul>
+                    <li><strong>Package OPF</strong> &mdash; Checks <code>&lt;dc:title&gt;</code>, <code>&lt;dc:identifier&gt;</code>, <code>&lt;dc:language&gt;</code>, and <code>schema.org</code> accessibility metadata (<code>accessMode</code>, <code>accessibilityFeature</code>, <code>accessibilitySummary</code>).</li>
+                    <li><strong>Navigation document</strong> &mdash; Verifies <code>&lt;nav epub:type="toc"&gt;</code>, <code>page-list</code>, and <code>landmarks</code> exist.</li>
+                    <li><strong>Content documents</strong> &mdash; Scans each XHTML file for image alt text, heading hierarchy, table headers, ambiguous link text, and color-only information.</li>
+                    <li><strong>Spine</strong> &mdash; Checks <code>&lt;itemref&gt;</code> order for logical reading sequence.</li>
+                  </ul>
+                  <p>Conforms to EPUB Accessibility 1.1 mapped to WCAG 2.1 AA. Rule set: 7 errors, 6 warnings, 4 tips.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>EPUB Scan Config</td><td>Configures which rules to enable or disable for EPUB accessibility scans.</td></tr>
           </table>
         </div>
@@ -908,6 +1152,29 @@
           <table class="agent-table" aria-label="Markdown accessibility agents">
             <tr><td>Markdown Assistant</td><td>Orchestrates Markdown audits&mdash;coordinates the scanner and fixer for full documentation reviews.</td></tr>
             <tr><td>Markdown Scanner</td><td>Scans .md files for heading structure, image alt text, link quality, tables, and readability. Runs automatically.</td></tr>
+            <tr class="method-row"><td colspan="2">
+              <details class="method-detail">
+                <summary>How Markdown analysis works</summary>
+                <div class="method-body">
+                  <p>The scanner reads each <code>.md</code> file and runs two analysis passes:</p>
+                  <ul>
+                    <li><strong>markdownlint</strong> &mdash; Runs <code>npx markdownlint-cli2</code> to catch structural violations (MD001 heading hierarchy, MD025 multiple H1s, MD034 bare URLs, MD045 missing image alt text, MD055/056 table formatting).</li>
+                    <li><strong>9-domain accessibility scan</strong> &mdash; Checks each line for:
+                      <ul>
+                        <li>Descriptive links (WCAG 2.4.4) &mdash; flags &ldquo;click here&rdquo;, bare URLs, repeated identical text</li>
+                        <li>Image alt text (WCAG 1.1.1) &mdash; empty or decorative alt, oversized alt text</li>
+                        <li>Heading hierarchy (WCAG 2.4.6) &mdash; skipped levels, missing top-level heading</li>
+                        <li>Table accessibility &mdash; alignment-only headers, missing header rows</li>
+                        <li>Emoji (cognitive accessibility) &mdash; excessive or decorative emoji that confuse screen readers</li>
+                        <li>Mermaid/ASCII diagrams &mdash; no text alternative for visual diagrams</li>
+                        <li>Language markers, readability, and list structure</li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <p>Each issue gets a severity, line number, and auto-fix classification. The fixer then applies safe fixes automatically.</p>
+                </div>
+              </details>
+            </td></tr>
             <tr><td>Markdown Fixer</td><td>Applies automated fixes for accessibility issues found by the scanner. Runs automatically.</td></tr>
           </table>
         </div>
