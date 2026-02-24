@@ -1153,20 +1153,60 @@
   <div class="container">
     <div class="section-header">
       <h2>Tools &amp; Integrations</h2>
-      <p>Powerful tools that extend what agents can do, from scanning live web pages to generating compliance reports.</p>
+      <p>The MCP server exposes 11 tools and 6 prompts that Claude Desktop can call directly. Every tool runs locally&mdash;no data leaves your machine.</p>
     </div>
+
+    <div class="accordion-group" style="max-width: 52rem; margin: 0 auto 2rem;">
+
+      <details>
+        <summary>MCP Tools (11)</summary>
+        <table class="agent-table">
+          <thead><tr><th>Tool</th><th>What It Does</th></tr></thead>
+          <tbody>
+            <tr><td>check_contrast</td><td>Calculates WCAG contrast ratio between two hex colors. Reports pass/fail for normal text (4.5:1), large text (3:1), and UI components (3:1).</td></tr>
+            <tr><td>get_accessibility_guidelines</td><td>Returns WCAG AA requirements, code examples, and common mistakes for a specific component type (modal, tabs, accordion, combobox, carousel, form, live-region, navigation, or general).</td></tr>
+            <tr><td>check_heading_structure</td><td>Analyzes HTML for heading hierarchy issues&mdash;single H1, skipped levels, and empty headings.</td></tr>
+            <tr><td>check_link_text</td><td>Scans HTML for ambiguous link text like &ldquo;click here&rdquo; or &ldquo;read more&rdquo;, URLs used as link text, repeated identical text, missing new-tab warnings, and links to non-HTML resources without file type indication.</td></tr>
+            <tr><td>check_form_labels</td><td>Checks that every input, select, and textarea has a programmatic label (via &lt;label for&gt;, aria-label, or aria-labelledby). Also checks required attributes, fieldset/legend grouping, and autocomplete on identity fields.</td></tr>
+            <tr><td>run_axe_scan</td><td>Runs <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> against a live URL (e.g. localhost). Returns WCAG 2.2 AA violations grouped by severity with affected elements and fix suggestions. Optionally writes a Markdown report.</td></tr>
+            <tr><td>generate_vpat</td><td>Generates a VPAT 2.5 / Accessibility Conformance Report (ACR) in Markdown from audit findings. Outputs per-criterion conformance levels and remarks.</td></tr>
+            <tr><td>scan_office_document</td><td>Scans .docx, .xlsx, or .pptx files using Microsoft Accessibility Checker rule sets. Supports configurable rules, severity filters, and SARIF output for CI.</td></tr>
+            <tr><td>scan_pdf_document</td><td>Scans PDF files against PDF/UA (Matterhorn Protocol) with checks for tagging, structure tree, language, alt text, bookmarks, and forms. Supports SARIF output.</td></tr>
+            <tr><td>extract_document_metadata</td><td>Extracts accessibility-relevant metadata (title, author, language, page count, accessibility property health) from Office or PDF files.</td></tr>
+            <tr><td>batch_scan_documents</td><td>Scans up to 50 Office and PDF files in a single call. Returns an aggregated summary with per-file results, cross-document patterns, and an overall accessibility scorecard.</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>MCP Prompts (6)</summary>
+        <table class="agent-table">
+          <thead><tr><th>Prompt</th><th>What It Does</th></tr></thead>
+          <tbody>
+            <tr><td>accessibility-audit</td><td>Runs a comprehensive audit covering structure, ARIA, keyboard navigation, contrast, focus management, and live regions.</td></tr>
+            <tr><td>aria-review</td><td>Reviews ARIA roles, states, and properties. Enforces the first rule of ARIA: don&rsquo;t use it if native HTML works.</td></tr>
+            <tr><td>modal-review</td><td>Reviews a modal, dialog, drawer, or overlay for focus trapping, focus return, escape behavior, and heading structure.</td></tr>
+            <tr><td>contrast-review</td><td>Reviews color choices and CSS for WCAG AA contrast compliance, including dark mode and Tailwind utilities.</td></tr>
+            <tr><td>keyboard-review</td><td>Reviews keyboard accessibility: tab order, focus management, skip links, keyboard traps, and arrow-key patterns.</td></tr>
+            <tr><td>live-region-review</td><td>Reviews dynamic content for screen reader announcements: live regions, toasts, loading states, and form feedback.</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+    </div>
+
     <div class="features-grid" style="max-width: 52rem; margin: 0 auto;">
       <div class="feature-card">
-        <h3>axe-core Scanning</h3>
-        <p>Agents scan live web pages using <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a>, the industry-standard accessibility engine. Results are integrated directly into audit reports.</p>
-      </div>
-      <div class="feature-card">
-        <h3>11 MCP Tools</h3>
-        <p>Claude Desktop gets 11 dedicated tools: contrast checking, heading audits, form validation, link text analysis, axe-core scanning, Office and PDF document scanning, VPAT generation, and batch processing.</p>
+        <h3>axe-core Integration</h3>
+        <p>The <code>run_axe_scan</code> tool calls <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> against any live URL. Results feed directly into agent audit reports and VPAT generation.</p>
       </div>
       <div class="feature-card">
         <h3>VPAT 2.5 Generation</h3>
-        <p>Generate Voluntary Product Accessibility Template (VPAT 2.5) compliance documentation directly from scan results. Produce Accessibility Conformance Reports without a spreadsheet.</p>
+        <p>The <code>generate_vpat</code> tool produces Accessibility Conformance Reports in Markdown&mdash;no spreadsheet required.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Document Scanning</h3>
+        <p>Scan Office files (.docx, .xlsx, .pptx) and PDFs locally. Supports configurable rule sets, severity filters, and SARIF output for CI pipelines.</p>
       </div>
       <div class="feature-card">
         <h3>CSV Export</h3>
