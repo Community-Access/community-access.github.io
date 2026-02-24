@@ -1096,6 +1096,7 @@
       <details>
         <summary>Document Accessibility Agents (9)</summary>
         <div class="accordion-body">
+          <p>Our Word, Excel, and PowerPoint agents are built on the <strong>public-facing rules used by Microsoft Office&rsquo;s built-in accessibility checkers</strong>. We study the published documentation for these rules and map them to WCAG 2.1 AA criteria so the agents can surface the same issues&mdash;and more&mdash;directly inside your AI workflow.</p>
           <table class="agent-table" aria-label="Document accessibility agents">
             <tr><td>Word Accessibility</td><td>Scans .docx files for heading structure, alt text, reading order, table headers, and language.</td></tr>
             <tr class="method-row"><td colspan="2">
@@ -1108,7 +1109,7 @@
                     <li><strong>docProps/core.xml</strong> &mdash; Reads <code>&lt;dc:title&gt;</code> and <code>&lt;dc:language&gt;</code> to verify document metadata.</li>
                     <li><strong>word/_rels/document.xml.rels</strong> &mdash; Resolves hyperlink targets so link text can be checked for ambiguity.</li>
                   </ul>
-                  <p>Rule set: 9 errors, 6 warnings, 3 tips mapped to WCAG 2.1 AA and Microsoft Accessibility Checker rules.</p>
+                  <p>Rule set: 9 errors, 6 warnings, 3 tips&mdash;mapped to WCAG 2.1 AA and derived from the public-facing rules of <strong>Microsoft Word&rsquo;s built-in Accessibility Checker</strong>.</p>
                 </div>
               </details>
             </td></tr>
@@ -1124,7 +1125,7 @@
                     <li><strong>xl/tables/table*.xml</strong> &mdash; Verifies <code>headerRowCount</code> is not &ldquo;0&rdquo;.</li>
                     <li><strong>xl/drawings/drawing*.xml</strong> &mdash; Checks <code>&lt;xdr:cNvPr descr="..."&gt;</code> for chart and image alt text.</li>
                   </ul>
-                  <p>Rule set: 8 errors, 5 warnings, 3 tips.</p>
+                  <p>Rule set: 8 errors, 5 warnings, 3 tips&mdash;derived from the public-facing rules of <strong>Microsoft Excel&rsquo;s built-in Accessibility Checker</strong>.</p>
                 </div>
               </details>
             </td></tr>
@@ -1140,7 +1141,7 @@
                     <li><strong>Duplicate detection</strong> &mdash; Flags slides with identical title text, which breaks screen reader slide navigation.</li>
                     <li><strong>Media</strong> &mdash; Flags <code>&lt;p:vid&gt;</code> and <code>&lt;a:audioFile&gt;</code> elements that need captions.</li>
                   </ul>
-                  <p>Rule set: 5 errors, 4 warnings, 4 tips.</p>
+                  <p>Rule set: 5 errors, 4 warnings, 4 tips&mdash;derived from the public-facing rules of <strong>Microsoft PowerPoint&rsquo;s built-in Accessibility Checker</strong>.</p>
                 </div>
               </details>
             </td></tr>
