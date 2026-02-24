@@ -70,14 +70,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ls screenshots/*.png 1>/dev/null 2>&1; then
-            cp -r screenshots /tmp/a11y-screenshots
-            git checkout --orphan a11y-screenshots-new
-            git rm -rf . --quiet 2>/dev/null || true
-            cp -r /tmp/a11y-screenshots ./screenshots
+            git fetch origin a11y-screenshots 2>/dev/null || true
+            git worktree add /tmp/a11y-branch a11y-screenshots 2>/dev/null || \
+              git worktree add --orphan -b a11y-screenshots /tmp/a11y-branch
+            rm -rf /tmp/a11y-branch/screenshots
+            cp -r screenshots /tmp/a11y-branch/screenshots
+            cd /tmp/a11y-branch
             git add screenshots/
-            git commit -m "Update a11y screenshots [skip ci]"
-            git push origin HEAD:a11y-screenshots --force
-            git checkout -
+            git diff --cached --quiet || git commit -m "Update a11y screenshots [skip ci]"
+            git push origin a11y-screenshots --force
           fi
 
       - name: Create or update GitHub issues for violations
