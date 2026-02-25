@@ -11,7 +11,7 @@
 
     :root {
       --ca-indigo: #4f46e5;
-      --ca-indigo-light: #6366f1;
+      --ca-indigo-light: #4f46e5;
       --ca-indigo-dark: #3730a3;
       --ca-violet: #7c3aed;
       --ca-emerald: #059669;
@@ -39,6 +39,7 @@
         --ca-gray-700: #d1d5db;
         --ca-gray-800: #e5e7eb;
         --ca-gray-900: #f9fafb;
+        --ca-indigo-light: #818cf8;
       }
     }
 
@@ -49,7 +50,10 @@
       }
     }
 
-    html { scroll-behavior: smooth; font-size: 100%; }
+    html { font-size: 100%; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
 
     body {
       font-family: var(--font-sans);
@@ -281,8 +285,9 @@
     .footer-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color var(--transition); }
     .footer-links a:hover, .footer-links a:focus-visible { color: var(--ca-gray-50); }
-    .a11y-statement { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; text-align: center; max-width: 40rem; margin-left: auto; margin-right: auto; }
-    .footer-copy { font-size: 0.85rem; opacity: 0.6; margin-top: 2rem; text-align: center; }
+    .a11y-statement { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; color: #b0b8c4; text-align: center; max-width: 40rem; margin-left: auto; margin-right: auto; }
+    .footer-copy { font-size: 0.85rem; color: #9ca3af; margin-top: 2rem; text-align: center; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
     @media (max-width: 48rem) {
       .page-header { padding: 3rem 0 2rem; }
@@ -329,9 +334,10 @@
   </div>
 </div>
   <div class="container">
-    <div id="news-content" aria-live="polite">
+    <div id="news-content">
       <p class="loading">Loading posts...</p>
     </div>
+    <div class="sr-only" aria-live="polite" id="news-status"></div>
   </div>
 </main>
 
@@ -340,7 +346,7 @@
     <div class="footer-inner">
       <div>
         <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
-        <p style="opacity:0.7; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+        <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
       </div>
       <nav aria-label="Footer navigation">
         <ul class="footer-links">
@@ -478,6 +484,10 @@
         });
         html += '</div>';
         container.innerHTML = html;
+        var heading = container.querySelector('h2');
+        if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+        var ns = document.getElementById('news-status');
+        if (ns) ns.textContent = 'Loaded: News list';
       }
 
       function renderPost(slug) {
@@ -511,6 +521,10 @@
             html += '<div class="post-body">' + md(text) + '</div>';
             html += '</article>';
             container.innerHTML = html;
+            var heading = container.querySelector('h1');
+            if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+            var ns = document.getElementById('news-status');
+            if (ns) ns.textContent = 'Loaded: ' + title;
             window.scrollTo(0, 0);
           })
           .catch(function () {

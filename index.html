@@ -5,1105 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Community Access -- Making software accessible by default. 47 AI-powered accessibility agents for Claude Code, GitHub Copilot, and Claude Desktop.">
   <title>Community Access -- Accessible by Default</title>
-  <style>
-    /* === Reset & Base === */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ca-indigo: #4f46e5;
-      --ca-indigo-light: #6366f1;
-      --ca-indigo-dark: #3730a3;
-      --ca-violet: #7c3aed;
-      --ca-emerald: #059669;
-      --ca-emerald-light: #34d399;
-      --ca-white: #ffffff;
-      --ca-gray-50: #f9fafb;
-      --ca-gray-100: #f3f4f6;
-      --ca-gray-200: #e5e7eb;
-      --ca-gray-700: #374151;
-      --ca-gray-800: #1f2937;
-      --ca-gray-900: #111827;
-      --ca-focus: #f59e0b;
-      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
-      --max-width: 72rem;
-      --transition: 0.2s ease;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --ca-white: #111827;
-        --ca-gray-50: #1f2937;
-        --ca-gray-100: #1f2937;
-        --ca-gray-200: #374151;
-        --ca-gray-700: #d1d5db;
-        --ca-gray-800: #e5e7eb;
-        --ca-gray-900: #f9fafb;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    html { scroll-behavior: smooth; font-size: 100%; }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--ca-gray-800);
-      background: var(--ca-white);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* === Focus Styles === */
-    :focus-visible {
-      outline: 3px solid var(--ca-focus);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* === Skip Link === */
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 1rem;
-      background: var(--ca-gray-900);
-      color: var(--ca-gray-50);
-      padding: 0.75rem 1.5rem;
-      border-radius: 0 0 8px 8px;
-      font-weight: 600;
-      z-index: 1000;
-      text-decoration: none;
-      transition: top var(--transition);
-    }
-    .skip-link:focus {
-      top: 0;
-      outline: 3px solid var(--ca-focus);
-      outline-offset: 2px;
-    }
-
-    /* === Layout === */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* === Header === */
-    .site-header {
-      background: linear-gradient(135deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 100%);
-      color: var(--ca-gray-50);
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .logo-mark {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: rgba(255,255,255,0.15);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--ca-emerald-light);
-    }
-
-    .logo-text {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .header-nav > ul {
-      list-style: none;
-      display: flex;
-      gap: 0.25rem;
-      flex-wrap: wrap;
-    }
-
-    .header-nav a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    .header-nav a:hover,
-    .header-nav a:focus-visible {
-      background: rgba(255,255,255,0.15);
-      color: var(--ca-gray-50);
-    }
-
-    /* === Nav Dropdown === */
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .nav-dropdown-toggle {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.85);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    .nav-dropdown-toggle::after {
-      content: '';
-      display: inline-block;
-      width: 0.35em;
-      height: 0.35em;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg);
-      margin-left: 0.4em;
-      vertical-align: middle;
-      transition: transform var(--transition);
-    }
-
-    .nav-dropdown-toggle[aria-expanded="true"]::after {
-      transform: rotate(-135deg);
-    }
-
-    .nav-dropdown-toggle:hover,
-    .nav-dropdown-toggle:focus-visible {
-      background: rgba(255,255,255,0.15);
-      color: var(--ca-gray-50);
-    }
-
-    .header-nav .nav-dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 12rem;
-      background: var(--ca-indigo-dark);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 8px;
-      padding: 0.4rem 0;
-      margin-top: 0.25rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      z-index: 200;
-      list-style: none;
-    }
-
-    .header-nav .nav-dropdown-menu.open {
-      display: block;
-    }
-
-    .nav-dropdown-menu a {
-      display: block;
-      padding: 0.5rem 1.25rem;
-      border-radius: 0;
-      font-size: 0.92rem;
-    }
-
-    .nav-dropdown-menu a:hover,
-    .nav-dropdown-menu a:focus-visible {
-      background: rgba(255,255,255,0.12);
-    }
-
-    /* === Hero === */
-    .hero {
-      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
-      color: var(--ca-gray-50);
-      padding: 6rem 0 5rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.25rem, 5vw, 3.75rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-accent {
-      background: linear-gradient(90deg, var(--ca-emerald-light), #a5f3fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
-      max-width: 40rem;
-      margin: 0 auto 2.5rem;
-      opacity: 0.92;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* === WIP Community Banner === */
-    .wip-banner {
-      background: linear-gradient(135deg, var(--ca-emerald) 0%, var(--ca-emerald-dark, #059669) 100%);
-      color: #fff;
-      padding: 2rem 0;
-      text-align: center;
-    }
-    .wip-banner p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      max-width: 48rem;
-      margin: 0 auto;
-    }
-    .wip-banner .btn {
-      background: #fff;
-      color: var(--ca-emerald-dark, #059669);
-      font-weight: 700;
-    }
-    .wip-banner .btn:hover { opacity: 0.9; }
-
-    @media (prefers-color-scheme: dark) {
-      .wip-banner {
-        background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
-      }
-    }
-
-    /* === Buttons === */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 2rem;
-      border-radius: 10px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    .btn-primary {
-      background: #047857;
-      color: var(--ca-gray-50);
-    }
-
-    .btn-primary:hover { background: #065f46; }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--ca-gray-50);
-      border: 2px solid rgba(255,255,255,0.4);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.7);
-    }
-
-    /* === Sections === */
-    section { padding: 5rem 0; }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-header h2 {
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      color: var(--ca-gray-900);
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-
-    .section-header p {
-      font-size: 1.15rem;
-      color: var(--ca-gray-700);
-      max-width: 36rem;
-      margin: 0 auto;
-    }
-
-    .bg-alt { background: var(--ca-gray-50); }
-
-    /* === Stats Bar === */
-    .stats-bar {
-      background: var(--ca-gray-900);
-      color: var(--ca-gray-50);
-      padding: 2.5rem 0;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .stats-bar { background: #0f172a; }
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--ca-emerald-light);
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.95rem;
-      opacity: 0.8;
-      margin-top: 0.25rem;
-    }
-
-    /* === Feature Cards === */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: var(--ca-white);
-      border: 1px solid var(--ca-gray-200);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-
-    .feature-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--ca-gray-900);
-      margin-bottom: 0.75rem;
-    }
-
-    .feature-card p {
-      color: var(--ca-gray-700);
-      font-size: 0.98rem;
-    }
-
-    /* === Accordions === */
-    .accordion-group {
-      max-width: 52rem;
-      margin: 0 auto;
-    }
-
-    .accordion-group details {
-      border: 1px solid var(--ca-gray-200);
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      background: var(--ca-white);
-      overflow: hidden;
-    }
-
-    .accordion-group summary {
-      padding: 1.25rem 1.5rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--ca-gray-900);
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background var(--transition);
-    }
-
-    .accordion-group summary::-webkit-details-marker { display: none; }
-
-    .accordion-group summary::after {
-      content: '';
-      display: inline-block;
-      width: 0.5em;
-      height: 0.5em;
-      border-right: 2.5px solid currentColor;
-      border-bottom: 2.5px solid currentColor;
-      transform: rotate(45deg);
-      transition: transform var(--transition);
-      flex-shrink: 0;
-      margin-left: 1rem;
-    }
-
-    .accordion-group details[open] > summary::after {
-      transform: rotate(-135deg);
-    }
-
-    .accordion-group summary:hover {
-      background: var(--ca-gray-50);
-    }
-
-    .accordion-group .accordion-body {
-      padding: 0 1.5rem 1.5rem;
-    }
-
-    .accordion-group .accordion-body p {
-      margin-bottom: 1rem;
-      color: var(--ca-gray-700);
-      font-size: 0.95rem;
-    }
-
-    .agent-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.92rem;
-    }
-
-    .agent-table td {
-      padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--ca-gray-200);
-      vertical-align: top;
-    }
-
-    .agent-table td:first-child {
-      font-weight: 600;
-      color: var(--ca-gray-900);
-      white-space: nowrap;
-      width: 12rem;
-    }
-
-    .agent-table td:last-child {
-      color: var(--ca-gray-700);
-    }
-
-    .agent-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .agent-table .method-row td {
-      padding: 0;
-      border-bottom: 1px solid var(--ca-gray-200);
-    }
-
-    .agent-table .method-row:last-child td {
-      border-bottom: none;
-    }
-
-    .method-detail {
-      margin: 0;
-      border: none;
-      border-radius: 0;
-      background: var(--ca-gray-50);
-    }
-
-    .method-detail summary {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--ca-indigo);
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-    }
-
-    .method-detail summary::-webkit-details-marker { display: none; }
-
-    .method-detail summary::before {
-      content: '▸';
-      margin-right: 0.5rem;
-      transition: transform var(--transition);
-      display: inline-block;
-    }
-
-    .method-detail[open] > summary::before {
-      transform: rotate(90deg);
-    }
-
-    .method-detail .method-body {
-      padding: 0.25rem 0.75rem 0.75rem 1.5rem;
-      font-size: 0.85rem;
-      color: var(--ca-gray-700);
-      line-height: 1.6;
-    }
-
-    .method-detail .method-body ul {
-      margin: 0.25rem 0 0.5rem 1rem;
-      padding: 0;
-    }
-
-    .method-detail .method-body li {
-      margin-bottom: 0.25rem;
-    }
-
-    .method-detail .method-body strong {
-      color: var(--ca-gray-900);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .method-detail { background: var(--ca-gray-800); }
-      .method-detail summary { color: var(--ca-indigo-light); }
-    }
-
-    @media (max-width: 48rem) {
-      .agent-table td:first-child { width: auto; white-space: normal; }
-    }
-
-    /* === Repo Showcase === */
-    .repo-card {
-      background: linear-gradient(135deg, var(--ca-indigo-dark), var(--ca-violet));
-      border-radius: 20px;
-      padding: 3rem;
-      color: var(--ca-gray-50);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    @media (max-width: 48rem) {
-      .repo-card { grid-template-columns: 1fr; text-align: center; }
-    }
-
-    .repo-card h3 {
-      font-size: 1.75rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .repo-card p {
-      font-size: 1.05rem;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-      max-width: 36rem;
-    }
-
-    .repo-meta {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      padding: 0;
-    }
-
-    @media (max-width: 48rem) {
-      .repo-meta { justify-content: center; }
-    }
-
-    .repo-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    /* === Contribute Section === */
-    .contribute-section {
-      background: linear-gradient(160deg, var(--ca-gray-900) 0%, #1e1b4b 100%);
-      color: var(--ca-gray-50);
-      padding: 6rem 0;
-      text-align: center;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .contribute-section { background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 100%); }
-    }
-
-    .contribute-section h2 {
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-    }
-
-    .contribute-section p {
-      font-size: 1.15rem;
-      max-width: 40rem;
-      margin: 0 auto 1rem;
-      opacity: 0.9;
-    }
-
-    .contribute-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-      text-align: center;
-    }
-
-    .step {
-      padding: 1.5rem;
-    }
-
-    .step-number {
-      width: 3rem;
-      height: 3rem;
-      background: var(--ca-indigo-light);
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .step h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .step p {
-      font-size: 0.95rem;
-      opacity: 0.8;
-    }
-
-    .contribute-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2.5rem;
-    }
-
-    /* === Contributors === */
-    .contributors-section {
-      background: var(--ca-gray-50);
-      padding: 4rem 0;
-      text-align: center;
-    }
-    @media (prefers-color-scheme: dark) {
-      .contributors-section { background: var(--ca-gray-900); }
-    }
-    .contributors-section h2 {
-      font-size: clamp(1.6rem, 3vw, 2.25rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-    .contributors-section > .container > p {
-      max-width: 48rem;
-      margin: 0 auto 2rem;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--ca-gray-700);
-    }
-    .contributors-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 36rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-      gap: 0.75rem 2rem;
-    }
-    .contributors-list li {
-      font-size: 1.05rem;
-      font-weight: 600;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--ca-gray-200);
-    }
-    @media (prefers-color-scheme: dark) {
-      .contributors-list li { border-bottom-color: var(--ca-gray-200); }
-      .contributors-section > .container > p { color: var(--ca-gray-400); }
-    }
-
-    /* === Install Code Block === */
-    .install-block {
-      background: var(--ca-gray-900);
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      max-width: 44rem;
-      margin: 2rem auto;
-      text-align: left;
-      overflow-x: auto;
-      position: relative;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .install-block { background: #0f172a; border: 1px solid var(--ca-gray-200); }
-    }
-
-    .install-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ca-emerald-light);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .install-block code {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: var(--ca-gray-50);
-      white-space: pre-wrap;
-      word-break: break-all;
-      display: block;
-      padding-right: 3.5rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .install-block code { color: #e2e8f0; }
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      color: var(--ca-gray-50);
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.35rem 0.75rem;
-      transition: background var(--transition), border-color var(--transition);
-      white-space: nowrap;
-    }
-
-    .copy-btn:hover {
-      background: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.4);
-    }
-
-    .copy-btn.copied {
-      background: var(--ca-emerald);
-      border-color: var(--ca-emerald);
-      color: #fff;
-    }
-
-    /* === Footer === */
-    .site-footer {
-      background: var(--ca-gray-900);
-      color: var(--ca-gray-50);
-      padding: 3rem 0 2rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .site-footer { background: #0f172a; border-top: 1px solid var(--ca-gray-200); }
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color var(--transition);
-    }
-
-    .footer-links a:hover,
-    .footer-links a:focus-visible { color: var(--ca-gray-50); }
-
-    .footer-copy {
-      font-size: 0.85rem;
-      opacity: 0.6;
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    /* === Accessibility Statement === */
-    .a11y-statement {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      font-size: 0.85rem;
-      opacity: 0.7;
-      text-align: center;
-      max-width: 40rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* === Back to Top === */
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      border: 2px solid var(--ca-gray-200);
-      background: var(--ca-white);
-      color: var(--ca-gray-800);
-      font-size: 1.25rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition), visibility var(--transition), background var(--transition);
-      z-index: 50;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    }
-    .back-to-top.visible { opacity: 1; visibility: visible; }
-    .back-to-top:hover { background: var(--ca-gray-100); }
-    @media (prefers-reduced-motion: reduce) {
-      .back-to-top { transition: none; }
-    }
-
-    /* === Accordion Controls === */
-    .accordion-controls {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: flex-end;
-      max-width: 52rem;
-      margin: 0 auto 1rem;
-    }
-    .accordion-controls button {
-      background: var(--ca-white);
-      border: 1px solid var(--ca-gray-200);
-      border-radius: 6px;
-      padding: 0.4rem 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--ca-gray-700);
-      cursor: pointer;
-      font-family: inherit;
-      transition: background var(--transition), border-color var(--transition);
-    }
-    .accordion-controls button:hover { background: var(--ca-gray-100); border-color: var(--ca-gray-700); }
-
-    /* === Search Filter === */
-    .search-filter {
-      max-width: 52rem;
-      margin: 0 auto 1.5rem;
-    }
-    .search-filter label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--ca-gray-700);
-      margin-bottom: 0.35rem;
-    }
-    .search-filter input {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border: 2px solid var(--ca-gray-200);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: inherit;
-      color: var(--ca-gray-800);
-      background: var(--ca-white);
-      transition: border-color var(--transition);
-    }
-    .search-filter input:focus {
-      border-color: var(--ca-indigo);
-      outline: 3px solid var(--ca-focus);
-      outline-offset: 2px;
-    }
-    .search-status {
-      font-size: 0.85rem;
-      color: var(--ca-gray-700);
-      margin-top: 0.5rem;
-      min-height: 1.2em;
-    }
-
-    /* === Active Nav (Scroll Spy) === */
-    .header-nav a.nav-active,
-    .nav-dropdown-toggle.nav-active {
-      background: rgba(255,255,255,0.2);
-      color: var(--ca-gray-50);
-    }
-
-    /* === FAQ Section === */
-    .faq-section { padding: 5rem 0; }
-    .faq-list {
-      max-width: 48rem;
-      margin: 0 auto;
-    }
-    .faq-list details {
-      border: 1px solid var(--ca-gray-200);
-      border-radius: 12px;
-      margin-bottom: 0.75rem;
-      background: var(--ca-white);
-      overflow: hidden;
-    }
-    .faq-list summary {
-      padding: 1.1rem 1.5rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--ca-gray-900);
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background var(--transition);
-    }
-    .faq-list summary::-webkit-details-marker { display: none; }
-    .faq-list summary::after {
-      content: '';
-      display: inline-block;
-      width: 0.45em;
-      height: 0.45em;
-      border-right: 2.5px solid currentColor;
-      border-bottom: 2.5px solid currentColor;
-      transform: rotate(45deg);
-      transition: transform var(--transition);
-      flex-shrink: 0;
-      margin-left: 1rem;
-    }
-    .faq-list details[open] > summary::after { transform: rotate(-135deg); }
-    .faq-list summary:hover { background: var(--ca-gray-50); }
-    .faq-list .faq-body {
-      padding: 0 1.5rem 1.25rem;
-      color: var(--ca-gray-700);
-      font-size: 0.98rem;
-      line-height: 1.7;
-    }
-
-    /* === Changelog === */
-    .changelog-section { background: var(--ca-gray-50); padding: 5rem 0; }
-    @media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-900); } }
-    .changelog-list {
-      max-width: 48rem;
-      margin: 0 auto;
-      list-style: none;
-      padding: 0;
-      border-left: 3px solid var(--ca-indigo-light);
-    }
-    .changelog-item {
-      padding: 1.25rem 1.5rem;
-      position: relative;
-    }
-    .changelog-item::before {
-      content: '';
-      position: absolute;
-      left: -0.55rem;
-      top: 1.6rem;
-      width: 0.75rem;
-      height: 0.75rem;
-      background: var(--ca-indigo-light);
-      border-radius: 50%;
-      border: 2px solid var(--ca-gray-50);
-    }
-    @media (prefers-color-scheme: dark) {
-      .changelog-item::before { border-color: var(--ca-gray-900); }
-    }
-    .changelog-date {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ca-indigo-light);
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-    .changelog-item p {
-      color: var(--ca-gray-700);
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    /* === Demo Snippet === */
-    .demo-section { padding: 5rem 0; }
-    .demo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-width: 56rem;
-      margin: 0 auto;
-    }
-    @media (max-width: 48rem) { .demo-grid { grid-template-columns: 1fr; } }
-    .demo-panel {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--ca-gray-200);
-    }
-    .demo-panel-header {
-      padding: 0.75rem 1.25rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .demo-bad .demo-panel-header {
-      background: #fef2f2;
-      color: #991b1b;
-      border-bottom: 2px solid #fca5a5;
-    }
-    .demo-good .demo-panel-header {
-      background: #f0fdf4;
-      color: #166534;
-      border-bottom: 2px solid #86efac;
-    }
-    @media (prefers-color-scheme: dark) {
-      .demo-bad .demo-panel-header { background: #451a1a; color: #fca5a5; border-color: #7f1d1d; }
-      .demo-good .demo-panel-header { background: #14332a; color: #86efac; border-color: #166534; }
-    }
-    .demo-panel pre {
-      margin: 0;
-      padding: 1.25rem;
-      background: var(--ca-gray-900);
-      color: #e2e8f0;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      line-height: 1.65;
-      overflow-x: auto;
-      white-space: pre;
-    }
-    @media (prefers-color-scheme: dark) {
-      .demo-panel pre { background: #0f172a; }
-    }
-    .demo-comment { color: #94a3b8; }
-    .demo-tag { color: #7dd3fc; }
-    .demo-attr { color: #c4b5fd; }
-    .demo-val { color: #86efac; }
-    .demo-err { color: #fca5a5; }
-
-    /* === Responsive === */
-    @media (max-width: 48rem) {
-      .hero { padding: 4rem 0 3.5rem; }
-      section { padding: 3.5rem 0; }
-      .repo-card { padding: 2rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -1135,6 +37,8 @@
   </div>
 </header>
 
+<main id="main">
+
 <section class="hero">
   <div class="container">
     <h1>Accessible <span class="hero-accent">by Default</span></h1>
@@ -1146,7 +50,7 @@
   </div>
 </section>
 
-<div class="stats-bar" aria-label="Project statistics">
+<section class="stats-bar" aria-label="Project statistics">
   <div class="container">
     <div class="stats-grid">
       <div>
@@ -1167,9 +71,7 @@
       </div>
     </div>
   </div>
-</div>
-
-<main id="main">
+</section>
 
 <section class="wip-banner">
   <div class="container">
@@ -1252,6 +154,8 @@
         <summary>Web Accessibility Agents (16)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Web accessibility agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Accessibility Lead</td><td>Orchestrates the full team&mdash;routes tasks to specialists, merges results, and ensures nothing gets missed.</td></tr>
             <tr class="method-row"><td colspan="2">
               <details class="method-detail">
@@ -1338,6 +242,7 @@
             <tr><td>Cognitive Accessibility</td><td>Audits for WCAG 2.2 cognitive criteria: reading level, consistent navigation, error prevention, and timeouts.</td></tr>
             <tr><td>Mobile Accessibility</td><td>Checks touch targets, viewport scaling, orientation, and mobile screen reader patterns.</td></tr>
             <tr><td>Design System Auditor</td><td>Reviews component libraries and design tokens for accessibility patterns and consistency.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1347,6 +252,8 @@
         <div class="accordion-body">
           <p>Our Word, Excel, and PowerPoint agents are built on the <strong>public-facing rules used by Microsoft Office&rsquo;s built-in accessibility checkers</strong>. We study the published documentation for these rules and map them to WCAG 2.1 AA criteria so the agents can surface the same issues&mdash;and more&mdash;directly inside your AI workflow.</p>
           <table class="agent-table" aria-label="Document accessibility agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Word Accessibility</td><td>Scans .docx files for heading structure, alt text, reading order, table headers, and language.</td></tr>
             <tr class="method-row"><td colspan="2">
               <details class="method-detail">
@@ -1432,6 +339,7 @@
               </details>
             </td></tr>
             <tr><td>EPUB Scan Config</td><td>Configures which rules to enable or disable for EPUB accessibility scans.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1441,6 +349,8 @@
         <div class="accordion-body">
           <p>These agents audit Markdown documentation for accessibility across 9 domains.</p>
           <table class="agent-table" aria-label="Markdown accessibility agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Markdown Assistant</td><td>Orchestrates Markdown audits&mdash;coordinates the scanner and fixer for full documentation reviews.</td></tr>
             <tr><td>Markdown Scanner</td><td>Scans .md files for heading structure, image alt text, link quality, tables, and readability. Runs automatically.</td></tr>
             <tr class="method-row"><td colspan="2">
@@ -1467,6 +377,7 @@
               </details>
             </td></tr>
             <tr><td>Markdown Fixer</td><td>Applies automated fixes for accessibility issues found by the scanner. Runs automatically.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1475,6 +386,8 @@
         <summary>GitHub Workflow Agents (11)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="GitHub workflow agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>GitHub Hub</td><td>Central router for all GitHub operations&mdash;directs requests to the right specialist.</td></tr>
             <tr><td>Daily Briefing</td><td>Gives you a morning summary of what happened in your repo overnight.</td></tr>
             <tr><td>PR Review</td><td>Reviews pull requests for accessibility issues, code quality, and adherence to contribution standards.</td></tr>
@@ -1486,6 +399,7 @@
             <tr><td>Contributions Hub</td><td>Tracks contributor activity, recognitions, and community engagement.</td></tr>
             <tr><td>Template Builder</td><td>Creates issue templates, PR templates, and other repository scaffolding.</td></tr>
             <tr><td>Repo Manager</td><td>Manages repository lifecycle: creation, archival, settings, and maintenance.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1495,6 +409,8 @@
         <div class="accordion-body">
           <p>These agents run behind the scenes. You never invoke them directly&mdash;other agents call them as needed.</p>
           <table class="agent-table" aria-label="Hidden sub-agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Nexus</td><td>Top-level orchestrator that coordinates across all agent teams for complex multi-domain tasks.</td></tr>
             <tr><td>Document Inventory</td><td>Catalogs all documents in a project before a batch scan begins.</td></tr>
             <tr><td>Cross-Document Analyzer</td><td>Finds patterns and inconsistencies across multiple documents in a batch.</td></tr>
@@ -1505,6 +421,7 @@
             <tr><td>Markdown CSV Reporter</td><td>Exports Markdown audit results to CSV format for spreadsheet analysis.</td></tr>
             <tr><td>Markdown Scanner</td><td>Scans Markdown files for accessibility issues (invoked by Markdown Assistant).</td></tr>
             <tr><td>Markdown Fixer</td><td>Applies fixes to Markdown files (invoked by Markdown Assistant).</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1564,12 +481,15 @@
         <summary>Accessibility Skills (6)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Accessibility skills">
+            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Accessibility Rules</td><td>Core WCAG 2.2 AA rules shared by all accessibility agents.</td></tr>
             <tr><td>Framework Accessibility</td><td>React, Vue, Angular, Svelte, and Tailwind CSS fix templates and patterns.</td></tr>
             <tr><td>Cognitive Accessibility</td><td>WCAG 2.2 cognitive criteria: reading level, error prevention, and consistent navigation.</td></tr>
             <tr><td>Mobile Accessibility</td><td>Touch targets, orientation, viewport, and native mobile screen reader patterns.</td></tr>
             <tr><td>Design System</td><td>Component library patterns, design tokens, and accessible component guidelines.</td></tr>
             <tr><td>Web Severity Scoring</td><td>Consistent severity ratings for web accessibility issues (critical, serious, moderate, minor).</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1578,9 +498,12 @@
         <summary>Scanning Skills (3)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Scanning skills">
+            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Document Scanning</td><td>Rules and patterns for Office, PDF, and EPUB document accessibility scanning.</td></tr>
             <tr><td>Web Scanning</td><td>Patterns for axe-core integration, multi-page crawling, and result aggregation.</td></tr>
             <tr><td>Markdown Accessibility</td><td>Rules for heading structure, alt text, link quality, tables, and readability in Markdown.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1589,8 +512,11 @@
         <summary>Reporting &amp; Reference Skills (2)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Reporting and reference skills">
+            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Report Generation</td><td>Severity scoring, VPAT/ACR export, scorecards, and CSV output formatting.</td></tr>
             <tr><td>Help URL Reference</td><td>Curated links to WCAG documentation, techniques, and understanding documents.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1599,9 +525,12 @@
         <summary>GitHub Skills (3)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="GitHub skills">
+            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>GitHub Workflow Standards</td><td>PR review standards, issue management policies, and branching conventions.</td></tr>
             <tr><td>GitHub Scanning</td><td>Repository health checks, security scanning patterns, and CI/CD integration.</td></tr>
             <tr><td>GitHub Analytics Scoring</td><td>Metrics and scoring for repository health, contributor activity, and PR velocity.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1622,12 +551,15 @@
         <summary>Web Accessibility Prompts (6)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Web accessibility prompts">
+            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Audit Web Page</td><td>Full WCAG 2.2 AA audit of a single web page.</td></tr>
             <tr><td>Quick Web Check</td><td>Fast accessibility scan for the most critical issues.</td></tr>
             <tr><td>Audit Multi-Page</td><td>Crawl and audit multiple pages across a site.</td></tr>
             <tr><td>Compare Web Audits</td><td>Compare two audit results to track progress over time.</td></tr>
             <tr><td>Fix Web Issues</td><td>Automatically apply fixes for discovered accessibility issues.</td></tr>
             <tr><td>Export Web CSV</td><td>Export web audit results to a CSV spreadsheet.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1636,6 +568,8 @@
         <summary>Document Accessibility Prompts (10)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Document accessibility prompts">
+            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Audit Single Document</td><td>Full accessibility audit of one Office or PDF document.</td></tr>
             <tr><td>Audit Document Folder</td><td>Batch audit all documents in a folder with an aggregated scorecard.</td></tr>
             <tr><td>Audit Changed Documents</td><td>Audit only documents that changed since last scan.</td></tr>
@@ -1646,6 +580,7 @@
             <tr><td>Setup Document CI/CD</td><td>Configure continuous accessibility checking for documents in your CI pipeline.</td></tr>
             <tr><td>Create Accessible Template</td><td>Generate a new document template with accessibility best practices built in.</td></tr>
             <tr><td>Export Document CSV</td><td>Export document audit results to a CSV spreadsheet.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1655,6 +590,8 @@
         <div class="accordion-body">
           <p>Organized by workflow area. Each prompt invokes the right agent and gets you results in one step.</p>
           <table class="agent-table" aria-label="GitHub workflow prompts">
+            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Review PR</td><td>Accessibility-focused pull request review.</td></tr>
             <tr><td>PR Report</td><td>Summary report of a pull request.</td></tr>
             <tr><td>My PRs</td><td>List your open pull requests and their status.</td></tr>
@@ -1686,6 +623,7 @@
             <tr><td>Add Collaborator</td><td>Add a contributor to the repository.</td></tr>
             <tr><td>Build Template</td><td>Create reusable issue or PR templates.</td></tr>
             <tr><td>Build A11y Template</td><td>Create accessibility-focused issue and PR templates.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1694,11 +632,14 @@
         <summary>Markdown Accessibility Prompts (5)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Markdown accessibility prompts">
+            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
+            <tbody>
             <tr><td>Audit Markdown</td><td>Full accessibility audit of Markdown documentation.</td></tr>
             <tr><td>Quick Markdown Check</td><td>Fast scan for the most critical Markdown accessibility issues.</td></tr>
             <tr><td>Fix Markdown Issues</td><td>Automatically apply fixes for Markdown accessibility issues.</td></tr>
             <tr><td>Compare Markdown Audits</td><td>Compare before-and-after Markdown audit results.</td></tr>
             <tr><td>Export Markdown CSV</td><td>Export Markdown audit results to a CSV spreadsheet.</td></tr>
+            </tbody>
           </table>
         </div>
       </details>
@@ -1718,8 +659,8 @@
 
       <details>
         <summary>MCP Tools (11)</summary>
-        <table class="agent-table">
-          <thead><tr><th>Tool</th><th>What It Does</th></tr></thead>
+        <table class="agent-table" aria-label="MCP tools">
+          <thead><tr><th scope="col">Tool</th><th scope="col">What It Does</th></tr></thead>
           <tbody>
             <tr><td>check_contrast</td><td>Calculates WCAG contrast ratio between two hex colors. Reports pass/fail for normal text (4.5:1), large text (3:1), and UI components (3:1).</td></tr>
             <tr><td>get_accessibility_guidelines</td><td>Returns WCAG AA requirements, code examples, and common mistakes for a specific component type (modal, tabs, accordion, combobox, carousel, form, live-region, navigation, or general).</td></tr>
@@ -1738,8 +679,8 @@
 
       <details>
         <summary>MCP Prompts (6)</summary>
-        <table class="agent-table">
-          <thead><tr><th>Prompt</th><th>What It Does</th></tr></thead>
+        <table class="agent-table" aria-label="MCP prompts">
+          <thead><tr><th scope="col">Prompt</th><th scope="col">What It Does</th></tr></thead>
           <tbody>
             <tr><td>accessibility-audit</td><td>Runs a comprehensive audit covering structure, ARIA, keyboard navigation, contrast, focus management, and live regions.</td></tr>
             <tr><td>aria-review</td><td>Reviews ARIA roles, states, and properties. Enforces the first rule of ARIA: don&rsquo;t use it if native HTML works.</td></tr>
@@ -1814,7 +755,7 @@
       <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
       <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
     </div>
-    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. Auto-update support included. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:#93c5fd;">Read the full guide.</a></p>
+    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. Auto-update support included. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo);">Read the full guide.</a></p>
   </div>
 </section>
 
@@ -1847,8 +788,8 @@
       </div>
     </div>
 
-    <p style="font-size:1rem; opacity:0.85; margin-bottom:0.5rem;">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>
-    <p style="font-size:1rem; opacity:0.85;">We want your pull request.</p>
+    <p style="font-size:1rem; color:#b0b8c4; margin-bottom:0.5rem;">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>
+    <p style="font-size:1rem; color:#b0b8c4;">We want your pull request.</p>
 
     <div class="contribute-actions">
       <a href="https://github.com/Community-Access/accessibility-agents/fork" class="btn btn-primary">Fork the Repository</a>
@@ -1966,9 +907,9 @@
       <h2>Latest News</h2>
       <p>Press releases, announcements, and updates from the project.</p>
     </div>
-    <div id="latest-news" aria-label="Latest news articles">
+    <section id="latest-news" aria-label="Latest news articles">
       <p style="text-align:center; color: var(--ca-gray-700);">Loading news...</p>
-    </div>
+    </section>
     <div style="text-align:center; margin-top: 2rem;">
       <a href="news.html" class="btn btn-outline" style="color: var(--ca-gray-800); border-color: var(--ca-gray-200);">View All News</a>
     </div>
@@ -1986,7 +927,7 @@
     <div class="footer-inner">
       <div>
         <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
-        <p style="opacity:0.7; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+        <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
       </div>
       <nav aria-label="Footer navigation">
         <ul class="footer-links">
@@ -2005,306 +946,12 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  'use strict';
-  var dropdown = document.querySelector('.nav-dropdown');
-  var toggle = dropdown.querySelector('.nav-dropdown-toggle');
-  var menu = dropdown.querySelector('.nav-dropdown-menu');
-
-  function openMenu() {
-    toggle.setAttribute('aria-expanded', 'true');
-    menu.classList.add('open');
-    var first = menu.querySelector('a');
-    if (first) first.focus();
-  }
-
-  function closeMenu(returnFocus) {
-    toggle.setAttribute('aria-expanded', 'false');
-    menu.classList.remove('open');
-    if (returnFocus) toggle.focus();
-  }
-
-  toggle.addEventListener('click', function () {
-    if (toggle.getAttribute('aria-expanded') === 'true') {
-      closeMenu(true);
-    } else {
-      openMenu();
-    }
-  });
-
-  toggle.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      openMenu();
-    }
-  });
-
-  menu.addEventListener('keydown', function (e) {
-    var links = menu.querySelectorAll('a');
-    var idx = Array.prototype.indexOf.call(links, document.activeElement);
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (idx < links.length - 1) links[idx + 1].focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (idx > 0) links[idx - 1].focus();
-      else toggle.focus();
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      closeMenu(true);
-    }
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!dropdown.contains(e.target)) {
-      closeMenu(false);
-    }
-  });
-})();
-</script>
-<script>
-  document.querySelectorAll('.copy-btn').forEach(function(btn) {
-    var originalLabel = btn.getAttribute('aria-label');
-    btn.addEventListener('click', function() {
-      var target = document.getElementById(btn.getAttribute('data-target'));
-      var text = target ? target.textContent : '';
-      navigator.clipboard.writeText(text).then(function() {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        btn.setAttribute('aria-label', originalLabel.replace(/^Copy\b/, 'Copied'));
-        setTimeout(function() {
-          btn.textContent = 'Copy';
-          btn.classList.remove('copied');
-          btn.setAttribute('aria-label', originalLabel);
-        }, 2000);
-      }).catch(function() {
-        btn.textContent = 'Failed';
-        setTimeout(function() {
-          btn.textContent = 'Copy';
-        }, 2000);
-      });
-    });
-  });
-</script>
+<div class="sr-only" aria-live="polite" id="copy-status"></div>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
   <span aria-hidden="true">&uarr;</span>
 </button>
 
-<script>
-(function () {
-  'use strict';
-
-  /* === Back to Top === */
-  var btt = document.getElementById('back-to-top');
-  if (btt) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 600) {
-        btt.classList.add('visible');
-      } else {
-        btt.classList.remove('visible');
-      }
-    }, { passive: true });
-    btt.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      /* After scroll, move focus to skip link for keyboard users */
-      var skip = document.querySelector('.skip-link');
-      if (skip) {
-        setTimeout(function () { skip.focus(); }, 300);
-      }
-    });
-  }
-
-  /* === Expand / Collapse All === */
-  var expandBtn = document.getElementById('expand-all');
-  var collapseBtn = document.getElementById('collapse-all');
-
-  function getAllAccordions() {
-    return document.querySelectorAll('.accordion-group details, .faq-list details');
-  }
-
-  if (expandBtn) {
-    expandBtn.addEventListener('click', function () {
-      getAllAccordions().forEach(function (d) { d.open = true; });
-    });
-  }
-  if (collapseBtn) {
-    collapseBtn.addEventListener('click', function () {
-      getAllAccordions().forEach(function (d) { d.open = false; });
-    });
-  }
-
-  /* === Search / Filter === */
-  var searchInput = document.getElementById('agent-search');
-  var searchStatus = document.getElementById('search-status');
-
-  if (searchInput) {
-    var debounceTimer;
-    searchInput.addEventListener('input', function () {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(filterAccordions, 200);
-    });
-  }
-
-  function filterAccordions() {
-    var query = searchInput.value.trim().toLowerCase();
-    var visibleCount = 0;
-    var totalCount = 0;
-
-    /* Get all accordion-group containers (agents, skills, prompts, tools) */
-    var groups = document.querySelectorAll('.accordion-group');
-    groups.forEach(function (group) {
-      var details = group.querySelectorAll(':scope > details');
-      details.forEach(function (det) {
-        var rows = det.querySelectorAll('.agent-table tr:not(.method-row), .agent-table tbody tr:not(.method-row)');
-
-        if (!query) {
-          /* No filter: show everything, collapse */
-          det.style.display = '';
-          rows.forEach(function (r) { r.style.display = ''; });
-          return;
-        }
-
-        var groupHasMatch = false;
-        rows.forEach(function (row) {
-          var text = row.textContent.toLowerCase();
-          totalCount++;
-          if (text.indexOf(query) !== -1) {
-            row.style.display = '';
-            groupHasMatch = true;
-            visibleCount++;
-          } else {
-            row.style.display = 'none';
-          }
-        });
-
-        /* Also check the summary text */
-        var summaryText = det.querySelector('summary').textContent.toLowerCase();
-        if (summaryText.indexOf(query) !== -1) groupHasMatch = true;
-
-        /* Also check accordion-body paragraphs */
-        var bodyPs = det.querySelectorAll('.accordion-body > p');
-        bodyPs.forEach(function (p) {
-          if (p.textContent.toLowerCase().indexOf(query) !== -1) groupHasMatch = true;
-        });
-
-        if (groupHasMatch) {
-          det.style.display = '';
-          det.open = true;
-        } else {
-          det.style.display = 'none';
-        }
-      });
-    });
-
-    /* Also filter FAQ */
-    var faqs = document.querySelectorAll('.faq-list details');
-    faqs.forEach(function (faq) {
-      if (!query) {
-        faq.style.display = '';
-        return;
-      }
-      var text = faq.textContent.toLowerCase();
-      if (text.indexOf(query) !== -1) {
-        faq.style.display = '';
-      } else {
-        faq.style.display = 'none';
-      }
-    });
-
-    /* Update live region */
-    if (searchStatus) {
-      if (!query) {
-        searchStatus.textContent = '';
-      } else if (visibleCount > 0) {
-        searchStatus.textContent = visibleCount + ' result' + (visibleCount !== 1 ? 's' : '') + ' found.';
-      } else {
-        searchStatus.textContent = 'No results found for \u201C' + searchInput.value.trim() + '\u201D.';
-      }
-    }
-  }
-
-  /* === Scroll Spy === */
-  var sections = document.querySelectorAll('section[id]');
-  var navLinks = document.querySelectorAll('.header-nav a[href^="#"], .nav-dropdown-menu a[href^="#"]');
-
-  function updateScrollSpy() {
-    var scrollPos = window.scrollY + 120;
-    var currentId = '';
-
-    sections.forEach(function (section) {
-      if (section.offsetTop <= scrollPos) {
-        currentId = section.id;
-      }
-    });
-
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute('href');
-      if (href === '#' + currentId) {
-        link.classList.add('nav-active');
-        link.setAttribute('aria-current', 'true');
-      } else {
-        link.classList.remove('nav-active');
-        link.removeAttribute('aria-current');
-      }
-    });
-
-    /* Also highlight the dropdown toggle if any child section is active */
-    var dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-    var dropdownLinks = document.querySelectorAll('.nav-dropdown-menu a[href^="#"]');
-    var anyDropdownActive = false;
-    dropdownLinks.forEach(function (dl) {
-      if (dl.classList.contains('nav-active')) anyDropdownActive = true;
-    });
-    if (anyDropdownActive) {
-      dropdownToggle.classList.add('nav-active');
-    } else {
-      dropdownToggle.classList.remove('nav-active');
-    }
-  }
-
-  var scrollSpyTimer;
-  window.addEventListener('scroll', function () {
-    cancelAnimationFrame(scrollSpyTimer);
-    scrollSpyTimer = requestAnimationFrame(updateScrollSpy);
-  }, { passive: true });
-  updateScrollSpy();
-
-})();
-</script>
-<script>
-(function () {
-  'use strict';
-  function formatDate(dateStr) {
-    var d = new Date(dateStr + 'T12:00:00');
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-  }
-  fetch('posts/posts.json')
-    .then(function (r) { return r.json(); })
-    .then(function (posts) {
-      posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
-      var latest = posts.slice(0, 5);
-      var el = document.getElementById('latest-news');
-      if (!el || latest.length === 0) return;
-      var html = '<ol class="changelog-list">';
-      latest.forEach(function (post) {
-        html += '<li class="changelog-item">';
-        html += '<time class="changelog-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
-        if (post.type) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-indigo);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + post.type + '</span>';
-        html += '<p style="margin-top:0.35rem;"><a href="news.html#post/' + post.slug + '" style="color:var(--ca-gray-800);text-decoration:none;font-weight:700;">' + post.title + '</a></p>';
-        html += '<p style="margin-top:0.25rem;font-size:0.92rem;color:var(--ca-gray-700);">' + post.summary + '</p>';
-        html += '</li>';
-      });
-      html += '</ol>';
-      el.innerHTML = html;
-    })
-    .catch(function () {
-      var el = document.getElementById('latest-news');
-      if (el) el.innerHTML = '<p style="text-align:center;color:var(--ca-gray-700);">Unable to load news.</p>';
-    });
-})();
-</script>
+<script src="main.js"></script>
 </body>
 </html>
