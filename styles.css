@@ -525,6 +525,13 @@ section { padding: 5rem 0; }
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 2rem;
   text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
 }
 
 .stat-number {
@@ -532,6 +539,8 @@ section { padding: 5rem 0; }
   font-weight: 800;
   color: var(--ca-emerald-light);
   display: block;
+  order: -1;
+  margin: 0;
 }
 
 .stat-label {
