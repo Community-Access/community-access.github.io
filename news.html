@@ -179,9 +179,10 @@
     }
     .post-card h2 a {
       color: inherit;
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
-    .post-card h2 a:hover { text-decoration: underline; }
+    .post-card h2 a:hover { text-decoration-thickness: 2px; }
     .post-summary {
       color: var(--ca-gray-700);
       font-size: 1rem;
@@ -198,11 +199,11 @@
       display: inline-block;
       margin-bottom: 2rem;
       color: var(--ca-indigo-light);
-      text-decoration: none;
+      text-decoration: underline;
       font-weight: 600;
       font-size: 0.95rem;
     }
-    .post-content .post-back:hover { text-decoration: underline; }
+    .post-content .post-back:hover { text-decoration-thickness: 2px; }
     .post-content h1 {
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       font-weight: 800;
@@ -238,8 +239,8 @@
     }
     .post-body li { margin-bottom: 0.5rem; }
     .post-body strong { color: var(--ca-gray-900); }
-    .post-body a { color: var(--ca-indigo-light); }
-    .post-body a:hover { text-decoration: underline; }
+    .post-body a { color: var(--ca-indigo-light); text-decoration: underline; text-underline-offset: 2px; }
+    .post-body a:hover { text-decoration-thickness: 2px; }
     .post-body code {
       font-family: var(--font-mono);
       background: var(--ca-gray-100);
@@ -331,6 +332,8 @@
   </div>
 </header>
 
+<main id="main">
+
 <div id="page-header-region">
   <section class="page-header">
     <div class="container">
@@ -339,8 +342,6 @@
     </div>
   </section>
 </div>
-
-<main id="main">
   <div class="container">
     <div id="news-content" aria-live="polite">
       <p class="loading">Loading posts...</p>
@@ -383,7 +384,16 @@
     function openMenu() { toggle.setAttribute('aria-expanded', 'true'); menu.classList.add('open'); var first = menu.querySelector('a'); if (first) first.focus(); }
     function closeMenu(ret) { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('open'); if (ret) toggle.focus(); }
     toggle.addEventListener('click', function () { toggle.getAttribute('aria-expanded') === 'true' ? closeMenu(true) : openMenu(); });
-    menu.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(true); });
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); openMenu(); }
+    });
+    menu.addEventListener('keydown', function (e) {
+      var links = menu.querySelectorAll('a');
+      var idx = Array.prototype.indexOf.call(links, document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (idx < links.length - 1) links[idx + 1].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (idx > 0) links[idx - 1].focus(); else toggle.focus(); }
+      else if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); }
+    });
     document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) closeMenu(false); });
   }
 
