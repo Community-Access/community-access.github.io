@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="News and press releases from Community Access -- the open source accessibility agents project.">
+  <title>News -- Community Access</title>
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ca-indigo: #4f46e5;
+      --ca-indigo-light: #6366f1;
+      --ca-indigo-dark: #3730a3;
+      --ca-violet: #7c3aed;
+      --ca-emerald: #059669;
+      --ca-emerald-light: #34d399;
+      --ca-white: #ffffff;
+      --ca-gray-50: #f9fafb;
+      --ca-gray-100: #f3f4f6;
+      --ca-gray-200: #e5e7eb;
+      --ca-gray-700: #374151;
+      --ca-gray-800: #1f2937;
+      --ca-gray-900: #111827;
+      --ca-focus: #f59e0b;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      --max-width: 72rem;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ca-white: #111827;
+        --ca-gray-50: #1f2937;
+        --ca-gray-100: #1f2937;
+        --ca-gray-200: #374151;
+        --ca-gray-700: #d1d5db;
+        --ca-gray-800: #e5e7eb;
+        --ca-gray-900: #f9fafb;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html { scroll-behavior: smooth; font-size: 100%; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ca-gray-800);
+      background: var(--ca-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--ca-focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--ca-gray-900);
+      color: var(--ca-gray-50);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+      transition: top var(--transition);
+    }
+    .skip-link:focus { top: 0; outline: 3px solid var(--ca-focus); outline-offset: 2px; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* === Header === */
+    .site-header {
+      background: linear-gradient(135deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 100%);
+      color: var(--ca-gray-50);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+    .logo-mark { width: 2.5rem; height: 2.5rem; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: var(--ca-emerald-light); }
+    .logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .header-nav > ul { list-style: none; display: flex; gap: 0.25rem; flex-wrap: wrap; }
+    .header-nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.95rem; font-weight: 500; transition: background var(--transition), color var(--transition); }
+    .header-nav a:hover, .header-nav a:focus-visible { background: rgba(255,255,255,0.15); color: var(--ca-gray-50); }
+    .header-nav a[aria-current="page"] { background: rgba(255,255,255,0.2); color: var(--ca-gray-50); }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle { background: none; border: none; color: rgba(255,255,255,0.85); padding: 0.5rem 1rem; border-radius: 6px; font-family: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background var(--transition), color var(--transition); }
+    .nav-dropdown-toggle::after { content: ''; display: inline-block; width: 0.35em; height: 0.35em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-left: 0.4em; vertical-align: middle; transition: transform var(--transition); }
+    .nav-dropdown-toggle[aria-expanded="true"]::after { transform: rotate(-135deg); }
+    .nav-dropdown-toggle:hover, .nav-dropdown-toggle:focus-visible { background: rgba(255,255,255,0.15); color: var(--ca-gray-50); }
+    .header-nav .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 12rem; background: var(--ca-indigo-dark); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.4rem 0; margin-top: 0.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 200; list-style: none; }
+    .header-nav .nav-dropdown-menu.open { display: block; }
+    .nav-dropdown-menu a { display: block; padding: 0.5rem 1.25rem; border-radius: 0; font-size: 0.92rem; }
+    .nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus-visible { background: rgba(255,255,255,0.12); }
+
+    /* === Page Header === */
+    .page-header {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.15rem;
+      max-width: 36rem;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* === News List === */
+    .news-list { padding: 4rem 0; }
+    .post-card {
+      max-width: 52rem;
+      margin: 0 auto 2rem;
+      background: var(--ca-white);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .post-date {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ca-indigo-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .post-type {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--ca-indigo);
+      color: #fff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .post-card h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    .post-card h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .post-card h2 a:hover { text-decoration: underline; }
+    .post-summary {
+      color: var(--ca-gray-700);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* === Single Post === */
+    .post-content {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 3rem 0 5rem;
+    }
+    .post-content .post-back {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--ca-indigo-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .post-content .post-back:hover { text-decoration: underline; }
+    .post-content h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .post-content .post-meta { margin-bottom: 2rem; }
+    .post-body h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin: 2.5rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    .post-body h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      margin: 2rem 0 0.75rem;
+    }
+    .post-body p {
+      color: var(--ca-gray-700);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .post-body ul, .post-body ol {
+      margin: 1rem 0 1.25rem 1.5rem;
+      color: var(--ca-gray-700);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body strong { color: var(--ca-gray-900); }
+    .post-body a { color: var(--ca-indigo-light); }
+    .post-body a:hover { text-decoration: underline; }
+    .post-body code {
+      font-family: var(--font-mono);
+      background: var(--ca-gray-100);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .post-body pre {
+      background: var(--ca-gray-900);
+      color: #e2e8f0;
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 1.5rem 0;
+    }
+    .post-body pre code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      font-size: inherit;
+      color: inherit;
+    }
+    @media (prefers-color-scheme: dark) {
+      .post-body pre { background: #0f172a; border: 1px solid var(--ca-gray-200); }
+    }
+    .post-body blockquote {
+      border-left: 4px solid var(--ca-indigo-light);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      background: var(--ca-gray-50);
+      border-radius: 0 8px 8px 0;
+    }
+    .post-body blockquote p { margin-bottom: 0; }
+
+    /* === Loading === */
+    .loading {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--ca-gray-700);
+      font-size: 1.1rem;
+    }
+
+    /* === Footer === */
+    .site-footer { background: var(--ca-gray-900); color: var(--ca-gray-50); padding: 3rem 0 2rem; }
+    @media (prefers-color-scheme: dark) { .site-footer { background: #0f172a; border-top: 1px solid var(--ca-gray-200); } }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color var(--transition); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--ca-gray-50); }
+    .a11y-statement { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; text-align: center; max-width: 40rem; margin-left: auto; margin-right: auto; }
+    .footer-copy { font-size: 0.85rem; opacity: 0.6; margin-top: 2rem; text-align: center; }
+
+    @media (max-width: 48rem) {
+      .page-header { padding: 3rem 0 2rem; }
+      .post-content { padding: 2rem 0 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <span class="logo-mark" aria-hidden="true">CA</span>
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#agents">Agents</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="news.html" aria-current="page">News</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="page-header-region">
+  <section class="page-header">
+    <div class="container">
+      <h1>News</h1>
+      <p>Press releases, announcements, and updates from the Community Access project.</p>
+    </div>
+  </section>
+</div>
+
+<main id="main">
+  <div class="container">
+    <div id="news-content" aria-live="polite">
+      <p class="loading">Loading posts...</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
+        <p style="opacity:0.7; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="a11y-statement">
+      <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences. If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // Dropdown menu
+  var dropdown = document.querySelector('.nav-dropdown');
+  if (dropdown) {
+    var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    var menu = dropdown.querySelector('.nav-dropdown-menu');
+    function openMenu() { toggle.setAttribute('aria-expanded', 'true'); menu.classList.add('open'); var first = menu.querySelector('a'); if (first) first.focus(); }
+    function closeMenu(ret) { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('open'); if (ret) toggle.focus(); }
+    toggle.addEventListener('click', function () { toggle.getAttribute('aria-expanded') === 'true' ? closeMenu(true) : openMenu(); });
+    menu.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(true); });
+    document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) closeMenu(false); });
+  }
+
+  // Simple markdown to HTML converter
+  function md(text) {
+    // Remove the H1 title (first line starting with #) - we render it separately
+    var lines = text.split('\n');
+    var titleLine = -1;
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i].match(/^# /)) { titleLine = i; break; }
+    }
+    if (titleLine >= 0) lines.splice(titleLine, 1);
+    text = lines.join('\n');
+
+    var html = text
+      // Code blocks
+      .replace(/```(\w*)\n([\s\S]*?)```/g, function (m, lang, code) {
+        return '<pre><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trim() + '</code></pre>';
+      })
+      // Headers
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      // Bold
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      // Italic
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      // Links
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+      // Bare URLs
+      .replace(/(^|[^"(])((https?:\/\/)[^\s<]+)/gm, '$1<a href="$2">$2</a>')
+      // Unordered lists
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      // Inline code
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      // Paragraphs
+      .replace(/\n\n+/g, '\n\n');
+
+    // Wrap loose li elements in ul
+    html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+    // Wrap remaining text blocks in p tags
+    var blocks = html.split('\n\n');
+    html = blocks.map(function (block) {
+      block = block.trim();
+      if (!block) return '';
+      if (block.match(/^<(h[23]|ul|ol|pre|blockquote)/)) return block;
+      if (block.match(/^<li/)) return '<ul>' + block + '</ul>';
+      return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+    }).join('\n');
+
+    return html;
+  }
+
+  // Format date
+  function formatDate(dateStr) {
+    var d = new Date(dateStr + 'T12:00:00');
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+
+  // Get slug from URL hash
+  function getSlug() {
+    var hash = window.location.hash;
+    if (hash && hash.indexOf('#post/') === 0) return hash.substring(6);
+    return null;
+  }
+
+  var container = document.getElementById('news-content');
+  var headerRegion = document.getElementById('page-header-region');
+
+  // Fetch posts manifest
+  fetch('posts/posts.json')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      // Sort by date descending
+      posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
+
+      function renderList() {
+        headerRegion.querySelector('h1').textContent = 'News';
+        document.title = 'News -- Community Access';
+
+        if (posts.length === 0) {
+          container.innerHTML = '<p class="loading">No posts yet. Check back soon.</p>';
+          return;
+        }
+
+        var html = '<section class="news-list" aria-label="News articles">';
+        posts.forEach(function (post) {
+          html += '<article class="post-card">';
+          html += '<div class="post-meta">';
+          html += '<time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
+          if (post.type) html += '<span class="post-type">' + post.type + '</span>';
+          html += '</div>';
+          html += '<h2><a href="#post/' + post.slug + '">' + post.title + '</a></h2>';
+          html += '<p class="post-summary">' + post.summary + '</p>';
+          html += '</article>';
+        });
+        html += '</section>';
+        container.innerHTML = html;
+      }
+
+      function renderPost(slug) {
+        var post = null;
+        for (var i = 0; i < posts.length; i++) {
+          if (posts[i].slug === slug) { post = posts[i]; break; }
+        }
+        if (!post) {
+          container.innerHTML = '<div class="post-content"><p>Post not found. <a href="news.html">Back to News</a></p></div>';
+          return;
+        }
+
+        document.title = post.title + ' -- Community Access';
+        headerRegion.querySelector('h1').textContent = post.type || 'News';
+
+        container.innerHTML = '<div class="post-content"><p class="loading">Loading article...</p></div>';
+
+        fetch('posts/' + slug + '.md')
+          .then(function (r) { return r.text(); })
+          .then(function (text) {
+            // Extract title from first H1
+            var titleMatch = text.match(/^# (.+)$/m);
+            var title = titleMatch ? titleMatch[1] : post.title;
+
+            var html = '<article class="post-content">';
+            html += '<a href="news.html" class="post-back">Back to News</a>';
+            html += '<h1>' + title + '</h1>';
+            html += '<div class="post-meta">';
+            html += '<time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
+            if (post.type) html += '<span class="post-type">' + post.type + '</span>';
+            html += '</div>';
+            html += '<div class="post-body">' + md(text) + '</div>';
+            html += '</article>';
+            container.innerHTML = html;
+            window.scrollTo(0, 0);
+          })
+          .catch(function () {
+            container.innerHTML = '<div class="post-content"><p>Error loading article. <a href="news.html">Back to News</a></p></div>';
+          });
+      }
+
+      // Route
+      function route() {
+        var slug = getSlug();
+        if (slug) {
+          renderPost(slug);
+        } else {
+          renderList();
+        }
+      }
+
+      route();
+      window.addEventListener('hashchange', route);
+    })
+    .catch(function () {
+      container.innerHTML = '<p class="loading">Unable to load posts. Please try again later.</p>';
+    });
+})();
+</script>
+</body>
+</html>

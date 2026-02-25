@@ -1127,6 +1127,7 @@
           </ul>
         </li>
         <li><a href="#mission">Mission</a></li>
+        <li><a href="news.html">News</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
@@ -1959,34 +1960,18 @@
   </div>
 </section>
 
-<section class="changelog-section">
+<section id="news" class="changelog-section">
   <div class="container">
     <div class="section-header">
-      <h2>What&rsquo;s New</h2>
-      <p>Recent updates and milestones from the project.</p>
+      <h2>Latest News</h2>
+      <p>Press releases, announcements, and updates from the project.</p>
     </div>
-    <ol class="changelog-list" aria-label="Recent project updates">
-      <li class="changelog-item">
-        <time class="changelog-date" datetime="2026-02">February 2026</time>
-        <p><strong>47 agents, 14 skills, 52 prompts.</strong> Full coverage for web, document (Word, Excel, PowerPoint, PDF, EPUB), Markdown, and GitHub workflows.</p>
-      </li>
-      <li class="changelog-item">
-        <time class="changelog-date" datetime="2026-02">February 2026</time>
-        <p><strong>MCP server with 11 tools.</strong> Claude Desktop integration with contrast checking, axe-core scanning, document scanning, VPAT generation, and more.</p>
-      </li>
-      <li class="changelog-item">
-        <time class="changelog-date" datetime="2026-02">February 2026</time>
-        <p><strong>GitHub Copilot support.</strong> All agents now install as Copilot instructions alongside Claude Code and Desktop.</p>
-      </li>
-      <li class="changelog-item">
-        <time class="changelog-date" datetime="2026-02">February 2026</time>
-        <p><strong>Document accessibility agents.</strong> Word, Excel, PowerPoint, PDF, and EPUB scanning using Open XML parsing and Matterhorn Protocol.</p>
-      </li>
-      <li class="changelog-item">
-        <time class="changelog-date" datetime="2026-02">February 2026</time>
-        <p><strong>Initial release.</strong> Web accessibility agents for Claude Code with one-command installer.</p>
-      </li>
-    </ol>
+    <div id="latest-news" aria-label="Latest news articles">
+      <p style="text-align:center; color: var(--ca-gray-700);">Loading news...</p>
+    </div>
+    <div style="text-align:center; margin-top: 2rem;">
+      <a href="news.html" class="btn btn-outline" style="color: var(--ca-gray-800); border-color: var(--ca-gray-200);">View All News</a>
+    </div>
   </div>
 </section>
 
@@ -2007,6 +1992,7 @@
         <ul class="footer-links">
           <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="news.html">News</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
         </ul>
@@ -2285,6 +2271,39 @@
   }, { passive: true });
   updateScrollSpy();
 
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  function formatDate(dateStr) {
+    var d = new Date(dateStr + 'T12:00:00');
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  fetch('posts/posts.json')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
+      var latest = posts.slice(0, 5);
+      var el = document.getElementById('latest-news');
+      if (!el || latest.length === 0) return;
+      var html = '<ol class="changelog-list">';
+      latest.forEach(function (post) {
+        html += '<li class="changelog-item">';
+        html += '<time class="changelog-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
+        if (post.type) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-indigo);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + post.type + '</span>';
+        html += '<p style="margin-top:0.35rem;"><a href="news.html#post/' + post.slug + '" style="color:var(--ca-gray-800);text-decoration:none;font-weight:700;">' + post.title + '</a></p>';
+        html += '<p style="margin-top:0.25rem;font-size:0.92rem;color:var(--ca-gray-700);">' + post.summary + '</p>';
+        html += '</li>';
+      });
+      html += '</ol>';
+      el.innerHTML = html;
+    })
+    .catch(function () {
+      var el = document.getElementById('latest-news');
+      if (el) el.innerHTML = '<p style="text-align:center;color:var(--ca-gray-700);">Unable to load news.</p>';
+    });
 })();
 </script>
 </body>
