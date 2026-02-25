@@ -28,6 +28,7 @@
             <li><a href="#contribute">Contribute</a></li>
           </ul>
         </li>
+        <li><a href="#workshop" class="nav-workshop-link">Workshop</a></li>
         <li><a href="#mission">Mission</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -46,6 +47,36 @@
     <div class="hero-actions">
       <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View on GitHub</a>
       <a href="#install" class="btn btn-outline">Install in 30 Seconds</a>
+    </div>
+  </div>
+</section>
+
+<section id="workshop" class="workshop-banner" aria-label="Upcoming workshop">
+  <div class="container">
+    <div class="workshop-inner">
+      <div class="workshop-badge" aria-hidden="true">March 7&ndash;8, 2026</div>
+      <h2 class="workshop-title">GIT Going with GitHub</h2>
+      <p class="workshop-subtitle">A free, two-day, hands-on workshop where blind and low vision participants learn to navigate, contribute to, and build real open source projects&mdash;using a screen reader, a keyboard, and nothing else.</p>
+      <div class="workshop-details">
+        <div class="workshop-detail">
+          <span class="workshop-detail-label">When</span>
+          <span class="workshop-detail-value">March 7 &amp; 8, 2026 &middot; 12&ndash;8 PM Eastern</span>
+        </div>
+        <div class="workshop-detail">
+          <span class="workshop-detail-label">Where</span>
+          <span class="workshop-detail-value">Online via Zoom &middot; Free</span>
+        </div>
+        <div class="workshop-detail">
+          <span class="workshop-detail-label">Seats</span>
+          <span class="workshop-detail-value"><span id="workshop-reg-count">loading...</span> registered out of 75 spots</span>
+        </div>
+      </div>
+      <p class="workshop-pitch">By the end of Day 2, your name will be in the commit history of a live, public open source project. Not a sandbox. Not a simulation. <strong>The real thing.</strong></p>
+      <div class="workshop-actions">
+        <a href="https://community-access.github.io/git-going-with-github/REGISTER.html" class="btn workshop-btn-register">Register Now&mdash;It's Free</a>
+        <a href="https://community-access.github.io/git-going-with-github/" class="btn workshop-btn-details">Full Details &amp; Curriculum</a>
+      </div>
+      <p class="workshop-cta-note">No coding experience required. NVDA, JAWS, and VoiceOver instructions included for every step. Sighted participants welcome.</p>
     </div>
   </div>
 </section>
@@ -934,6 +965,7 @@
           <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
           <li><a href="news.html">News</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">GIT Going with GitHub Workshop</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
         </ul>
@@ -953,5 +985,24 @@
 </button>
 
 <script src="main.js"></script>
+<script>
+(function() {
+  var url = 'https://api.github.com/search/issues?q=repo:community-access/git-going-with-github+label:registration+is:issue+is:open';
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      try {
+        var count = JSON.parse(xhr.responseText).total_count;
+        var el = document.getElementById('workshop-reg-count');
+        if (el) el.textContent = count;
+      } catch (e) {}
+    }
+  };
+  xhr.onerror = function() {};
+  xhr.send();
+})();
+</script>
 </body>
 </html>
