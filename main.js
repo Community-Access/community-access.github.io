@@ -236,7 +236,7 @@
       var href = link.getAttribute('href');
       if (href === '#' + currentId) {
         link.classList.add('nav-active');
-        link.setAttribute('aria-current', 'true');
+        link.setAttribute('aria-current', 'location');
       } else {
         link.classList.remove('nav-active');
         link.removeAttribute('aria-current');

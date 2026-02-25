@@ -14,7 +14,7 @@
       "orientationAngle": 0,
       "orientationType": "landscape-primary"
     },
-    "timestamp": "2026-02-25T03:17:38.066Z",
+    "timestamp": "2026-02-25T03:49:16.778Z",
     "url": "https://community-access.github.io/",
     "toolOptions": {
       "runOnly": {
@@ -797,7 +797,7 @@
               }
             ],
             "impact": null,
-            "html": "<div class=\"stats-bar\" aria-label=\"Project statistics\">",
+            "html": "<section class=\"stats-bar\" aria-label=\"Project statistics\">",
             "target": [
               ".stats-bar"
             ]
@@ -1083,7 +1083,7 @@
               }
             ],
             "impact": null,
-            "html": "<div id=\"latest-news\" aria-label=\"Latest news articles\">",
+            "html": "<section id=\"latest-news\" aria-label=\"Latest news articles\">",
             "target": [
               "#latest-news"
             ]
@@ -1112,6 +1112,32 @@
             "html": "<nav aria-label=\"Footer navigation\">",
             "target": [
               "nav[aria-label=\"Footer navigation\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [
+              {
+                "id": "aria-allowed-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "ARIA attributes are used correctly for the defined role"
+              }
+            ],
+            "none": [
+              {
+                "id": "aria-unsupported-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "ARIA attribute is supported"
+              }
+            ],
+            "impact": null,
+            "html": "<div class=\"sr-only\" aria-live=\"polite\" id=\"copy-status\"></div>",
+            "target": [
+              "#copy-status"
             ]
           }
         ]
@@ -1199,7 +1225,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<div class=\"stats-bar\" aria-label=\"Project statistics\">",
+            "html": "<section class=\"stats-bar\" aria-label=\"Project statistics\">",
             "target": [
               ".stats-bar"
             ]
@@ -1397,7 +1423,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<div id=\"latest-news\" aria-label=\"Latest news articles\">",
+            "html": "<section id=\"latest-news\" aria-label=\"Latest news articles\">",
             "target": [
               "#latest-news"
             ]
@@ -1418,6 +1444,24 @@
             "html": "<nav aria-label=\"Footer navigation\">",
             "target": [
               "nav[aria-label=\"Footer navigation\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [
+              {
+                "id": "aria-conditional-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "ARIA attribute is allowed"
+              }
+            ],
+            "none": [],
+            "impact": null,
+            "html": "<div class=\"sr-only\" aria-live=\"polite\" id=\"copy-status\"></div>",
+            "target": [
+              "#copy-status"
             ]
           }
         ]
@@ -1782,7 +1826,7 @@
       },
       {
         "id": "aria-prohibited-attr",
-        "impact": "serious",
+        "impact": null,
         "tags": [
           "cat.aria",
           "wcag2a",
@@ -1848,6 +1892,24 @@
             "html": "<button class=\"nav-dropdown-toggle\" aria-expanded=\"false\">Accessibility Agents</button>",
             "target": [
               ".nav-dropdown-toggle"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "ARIA attribute is allowed"
+              }
+            ],
+            "impact": null,
+            "html": "<section class=\"stats-bar\" aria-label=\"Project statistics\">",
+            "target": [
+              ".stats-bar"
             ]
           },
           {
@@ -2043,9 +2105,45 @@
               }
             ],
             "impact": null,
+            "html": "<section id=\"latest-news\" aria-label=\"Latest news articles\">",
+            "target": [
+              "#latest-news"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "ARIA attribute is allowed"
+              }
+            ],
+            "impact": null,
             "html": "<nav aria-label=\"Footer navigation\">",
             "target": [
               "nav[aria-label=\"Footer navigation\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [],
+            "none": [
+              {
+                "id": "aria-prohibited-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "ARIA attribute is allowed"
+              }
+            ],
+            "impact": null,
+            "html": "<div class=\"sr-only\" aria-live=\"polite\" id=\"copy-status\"></div>",
+            "target": [
+              "#copy-status"
             ]
           }
         ]
@@ -2475,7 +2573,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<div class=\"stats-bar\" aria-label=\"Project statistics\">",
+            "html": "<section class=\"stats-bar\" aria-label=\"Project statistics\">",
             "target": [
               ".stats-bar"
             ]
@@ -2827,7 +2925,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<div id=\"latest-news\" aria-label=\"Latest news articles\">",
+            "html": "<section id=\"latest-news\" aria-label=\"Latest news articles\">",
             "target": [
               "#latest-news"
             ]
@@ -2862,6 +2960,38 @@
             "html": "<nav aria-label=\"Footer navigation\">",
             "target": [
               "nav[aria-label=\"Footer navigation\"]"
+            ]
+          },
+          {
+            "any": [],
+            "all": [
+              {
+                "id": "aria-valid-attr-value",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "ARIA attribute values are valid"
+              },
+              {
+                "id": "aria-errormessage",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+              },
+              {
+                "id": "aria-level",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-level values are valid"
+              }
+            ],
+            "none": [],
+            "impact": null,
+            "html": "<div class=\"sr-only\" aria-live=\"polite\" id=\"copy-status\"></div>",
+            "target": [
+              "#copy-status"
             ]
           }
         ]
@@ -2949,7 +3079,7 @@
             "all": [],
             "none": [],
             "impact": null,
-            "html": "<div class=\"stats-bar\" aria-label=\"Project statistics\">",
+            "html": "<section class=\"stats-bar\" aria-label=\"Project statistics\">",
             "target": [
               ".stats-bar"
             ]
@@ -3147,7 +3277,7 @@
             "all": [],
             "none": [],
             "impact": null,
-            "html": "<div id=\"latest-news\" aria-label=\"Latest news articles\">",
+            "html": "<section id=\"latest-news\" aria-label=\"Latest news articles\">",
             "target": [
               "#latest-news"
             ]
@@ -3168,6 +3298,24 @@
             "html": "<nav aria-label=\"Footer navigation\">",
             "target": [
               "nav[aria-label=\"Footer navigation\"]"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "aria-valid-attr",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "ARIA attribute name is valid"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<div class=\"sr-only\" aria-live=\"polite\" id=\"copy-status\"></div>",
+            "target": [
+              "#copy-status"
             ]
           }
         ]
@@ -3475,7 +3623,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:#93c5fd;\">Read the full guide.</a>",
+            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:var(--ca-indigo);\">Read the full guide.</a>",
             "target": [
               ".container > p > a"
             ]
@@ -3507,7 +3655,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<p style=\"font-size:1rem; opacity:0.85; margin-bottom:0.5rem;\">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>",
+            "html": "<p style=\"font-size:1rem; color:#b0b8c4; margin-bottom:0.5rem;\">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>",
             "target": [
               "p:nth-child(5)"
             ]
@@ -3539,7 +3687,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<p style=\"font-size:1rem; opacity:0.85;\">We want your pull request.</p>",
+            "html": "<p style=\"font-size:1rem; color:#b0b8c4;\">We want your pull request.</p>",
             "target": [
               "p:nth-child(6)"
             ]
@@ -3859,7 +4007,7 @@
             ],
             "none": [],
             "impact": null,
-            "html": "<p style=\"opacity:0.7; font-size:0.9rem; margin-top:0.25rem;\">Making software accessible by default.</p>",
+            "html": "<p style=\"color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;\">Making software accessible by default.</p>",
             "target": [
               ".footer-inner > div > p"
             ]
@@ -4373,16 +4521,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#cbcdd1",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 11.14,
+                  "contrastRatio": 8.86,
                   "fontSize": "11.4pt (15.2px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 11.14"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -4423,16 +4571,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#cbcdd1",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 11.14,
+                  "contrastRatio": 8.86,
                   "fontSize": "11.4pt (15.2px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 11.14"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -4473,16 +4621,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#cbcdd1",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 11.14,
+                  "contrastRatio": 8.86,
                   "fontSize": "11.4pt (15.2px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 11.14"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -4523,16 +4671,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#cbcdd1",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 11.14,
+                  "contrastRatio": 8.86,
                   "fontSize": "11.4pt (15.2px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 11.14"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -4541,6 +4689,31 @@
             "html": "<span class=\"stat-label\">AA Compliance</span>",
             "target": [
               "div:nth-child(4) > .stat-label"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#047857",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 5.48,
+                  "fontSize": "12.6pt (16.8px)",
+                  "fontWeight": "bold",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element has sufficient color contrast of 5.48"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<a href=\"#contribute\" class=\"btn btn-primary\" style=\"margin-top:0.75rem;\">Get Involved</a>",
+            "target": [
+              ".btn-primary.btn[href$=\"#contribute\"]"
             ]
           },
           {
@@ -4966,6 +5139,31 @@
             "html": "<p>Agents call <a href=\"https://github.com/dequelabs/axe-core\" style=\"color:var(--ca-indigo-light);\">axe-core</a> directly to scan rendered HTML for WCAG violations. Results feed back into the agent workflow so issues are detected, reported, and fixed in a single pass.</p>",
             "target": [
               ".feature-card:nth-child(7) > p"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#4f46e5",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 6.28,
+                  "fontSize": "11.8pt (15.68px)",
+                  "fontWeight": "normal",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element has sufficient color contrast of 6.28"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<a href=\"https://github.com/dequelabs/axe-core\" style=\"color:var(--ca-indigo-light);\">axe-core</a>",
+            "target": [
+              ".feature-card:nth-child(7) > p > a"
             ]
           },
           {
@@ -6123,6 +6321,31 @@
               {
                 "id": "color-contrast",
                 "data": {
+                  "fgColor": "#4f46e5",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 6.28,
+                  "fontSize": "11.8pt (15.68px)",
+                  "fontWeight": "normal",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element has sufficient color contrast of 6.28"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<a href=\"https://github.com/dequelabs/axe-core\" style=\"color:var(--ca-indigo-light);\">axe-core</a>",
+            "target": [
+              ".feature-card:nth-child(1) > p > a"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
                   "fgColor": "#111827",
                   "bgColor": "#ffffff",
                   "contrastRatio": 17.73,
@@ -6648,16 +6871,41 @@
               {
                 "id": "color-contrast",
                 "data": {
+                  "fgColor": "#4f46e5",
+                  "bgColor": "#f9fafb",
+                  "contrastRatio": 6.01,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element has sufficient color contrast of 6.01"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:var(--ca-indigo);\">Read the full guide.</a>",
+            "target": [
+              ".container > p > a"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
                   "fgColor": "#f9fafb",
-                  "bgColor": "#6366f1",
-                  "contrastRatio": 4.27,
+                  "bgColor": "#4f46e5",
+                  "contrastRatio": 6.01,
                   "fontSize": "15.0pt (20px)",
                   "fontWeight": "bold",
                   "expectedContrastRatio": "3:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 4.27"
+                "message": "Element has sufficient color contrast of 6.01"
               }
             ],
             "all": [],
@@ -6674,15 +6922,15 @@
                 "id": "color-contrast",
                 "data": {
                   "fgColor": "#f9fafb",
-                  "bgColor": "#6366f1",
-                  "contrastRatio": 4.27,
+                  "bgColor": "#4f46e5",
+                  "contrastRatio": 6.01,
                   "fontSize": "15.0pt (20px)",
                   "fontWeight": "bold",
                   "expectedContrastRatio": "3:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 4.27"
+                "message": "Element has sufficient color contrast of 6.01"
               }
             ],
             "all": [],
@@ -6699,15 +6947,15 @@
                 "id": "color-contrast",
                 "data": {
                   "fgColor": "#f9fafb",
-                  "bgColor": "#6366f1",
-                  "contrastRatio": 4.27,
+                  "bgColor": "#4f46e5",
+                  "contrastRatio": 6.01,
                   "fontSize": "15.0pt (20px)",
                   "fontWeight": "bold",
                   "expectedContrastRatio": "3:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 4.27"
+                "message": "Element has sufficient color contrast of 6.01"
               }
             ],
             "all": [],
@@ -6724,15 +6972,15 @@
                 "id": "color-contrast",
                 "data": {
                   "fgColor": "#f9fafb",
-                  "bgColor": "#6366f1",
-                  "contrastRatio": 4.27,
+                  "bgColor": "#4f46e5",
+                  "contrastRatio": 6.01,
                   "fontSize": "15.0pt (20px)",
                   "fontWeight": "bold",
                   "expectedContrastRatio": "3:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 4.27"
+                "message": "Element has sufficient color contrast of 6.01"
               }
             ],
             "all": [],
@@ -8573,6 +8821,31 @@
               {
                 "id": "color-contrast",
                 "data": {
+                  "fgColor": "#4f46e5",
+                  "bgColor": "#f9fafb",
+                  "contrastRatio": 6.01,
+                  "fontSize": "9.6pt (12.8px)",
+                  "fontWeight": "bold",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element has sufficient color contrast of 6.01"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": null,
+            "html": "<time class=\"changelog-date\" datetime=\"2026-02-25\">February 25, 2026</time>",
+            "target": [
+              "time"
+            ]
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
                   "fgColor": "#ffffff",
                   "bgColor": "#4f46e5",
                   "contrastRatio": 6.28,
@@ -8748,22 +9021,22 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#b3b6bb",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 8.72,
+                  "contrastRatio": 8.86,
                   "fontSize": "10.8pt (14.4px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 8.72"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
             "none": [],
             "impact": null,
-            "html": "<p style=\"opacity:0.7; font-size:0.9rem; margin-top:0.25rem;\">Making software accessible by default.</p>",
+            "html": "<p style=\"color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;\">Making software accessible by default.</p>",
             "target": [
               ".footer-inner > div > p"
             ]
@@ -8898,16 +9171,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#b3b6bb",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 8.72,
+                  "contrastRatio": 8.86,
                   "fontSize": "10.2pt (13.6px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 8.72"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -8923,16 +9196,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#b3b6bb",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 8.72,
+                  "contrastRatio": 8.86,
                   "fontSize": "10.2pt (13.6px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 8.72"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -8948,16 +9221,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#b3b6bb",
+                  "fgColor": "#b0b8c4",
                   "bgColor": "#111827",
-                  "contrastRatio": 8.72,
+                  "contrastRatio": 8.86,
                   "fontSize": "10.2pt (13.6px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 8.72"
+                "message": "Element has sufficient color contrast of 8.86"
               }
             ],
             "all": [],
@@ -8973,16 +9246,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#2a9b77",
+                  "fgColor": "#34d399",
                   "bgColor": "#111827",
-                  "contrastRatio": 5.11,
+                  "contrastRatio": 9.22,
                   "fontSize": "10.2pt (13.6px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 5.11"
+                "message": "Element has sufficient color contrast of 9.22"
               }
             ],
             "all": [],
@@ -8998,16 +9271,16 @@
               {
                 "id": "color-contrast",
                 "data": {
-                  "fgColor": "#9ca0a6",
+                  "fgColor": "#9ca3af",
                   "bgColor": "#111827",
-                  "contrastRatio": 6.75,
+                  "contrastRatio": 6.98,
                   "fontSize": "10.2pt (13.6px)",
                   "fontWeight": "normal",
                   "expectedContrastRatio": "4.5:1"
                 },
                 "relatedNodes": [],
                 "impact": "serious",
-                "message": "Element has sufficient color contrast of 6.75"
+                "message": "Element has sufficient color contrast of 6.98"
               }
             ],
             "all": [],
@@ -9418,20 +9691,6 @@
           {
             "any": [
               {
-                "id": "link-in-text-block",
-                "data": null,
-                "relatedNodes": [
-                  {
-                    "html": "<p style=\"text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);\">",
-                    "target": [
-                      "#install > .container > p"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Links can be distinguished from surrounding text in some way other than by color"
-              },
-              {
                 "id": "link-in-text-block-style",
                 "data": null,
                 "relatedNodes": [
@@ -9449,7 +9708,7 @@
             "all": [],
             "none": [],
             "impact": null,
-            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:#93c5fd;\">Read the full guide.</a>",
+            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:var(--ca-indigo);\">Read the full guide.</a>",
             "target": [
               ".container > p > a"
             ]
@@ -9896,7 +10155,7 @@
               }
             ],
             "impact": null,
-            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:#93c5fd;\">Read the full guide.</a>",
+            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:var(--ca-indigo);\">Read the full guide.</a>",
             "target": [
               ".container > p > a"
             ]
@@ -11817,76 +12076,6 @@
     ],
     "incomplete": [
       {
-        "id": "aria-prohibited-attr",
-        "impact": "serious",
-        "tags": [
-          "cat.aria",
-          "wcag2a",
-          "wcag412",
-          "EN-301-549",
-          "EN-9.4.1.2",
-          "RGAAv4",
-          "RGAA-7.1.1"
-        ],
-        "description": "Ensure ARIA attributes are not prohibited for an element's role",
-        "help": "Elements must only use permitted ARIA attributes",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=webdriverjs",
-        "nodes": [
-          {
-            "any": [],
-            "all": [],
-            "none": [
-              {
-                "id": "aria-prohibited-attr",
-                "data": {
-                  "role": null,
-                  "nodeName": "div",
-                  "messageKey": "noRoleSingular",
-                  "prohibited": [
-                    "aria-label"
-                  ]
-                },
-                "relatedNodes": [],
-                "impact": "serious",
-                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
-              }
-            ],
-            "impact": "serious",
-            "html": "<div class=\"stats-bar\" aria-label=\"Project statistics\">",
-            "target": [
-              ".stats-bar"
-            ],
-            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
-          },
-          {
-            "any": [],
-            "all": [],
-            "none": [
-              {
-                "id": "aria-prohibited-attr",
-                "data": {
-                  "role": null,
-                  "nodeName": "div",
-                  "messageKey": "noRoleSingular",
-                  "prohibited": [
-                    "aria-label"
-                  ]
-                },
-                "relatedNodes": [],
-                "impact": "serious",
-                "message": "aria-label attribute is not well supported on a div with no valid role attribute."
-              }
-            ],
-            "impact": "serious",
-            "html": "<div id=\"latest-news\" aria-label=\"Latest news articles\">",
-            "target": [
-              "#latest-news"
-            ],
-            "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
-          }
-        ]
-      },
-      {
         "id": "color-contrast",
         "impact": "serious",
         "tags": [
@@ -12993,7 +13182,7 @@
             "all": [],
             "none": [],
             "impact": "serious",
-            "html": "<p style=\"font-size:1rem; opacity:0.85; margin-bottom:0.5rem;\">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>",
+            "html": "<p style=\"font-size:1rem; color:#b0b8c4; margin-bottom:0.5rem;\">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>",
             "target": [
               "p:nth-child(5)"
             ],
@@ -13025,7 +13214,7 @@
             "all": [],
             "none": [],
             "impact": "serious",
-            "html": "<p style=\"font-size:1rem; opacity:0.85;\">We want your pull request.</p>",
+            "html": "<p style=\"font-size:1rem; color:#b0b8c4;\">We want your pull request.</p>",
             "target": [
               "p:nth-child(6)"
             ],
@@ -13098,198 +13287,6 @@
         ]
       }
     ],
-    "violations": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "tags": [
-          "cat.color",
-          "wcag2aa",
-          "wcag143",
-          "TTv5",
-          "TT13.c",
-          "EN-301-549",
-          "EN-9.1.4.3",
-          "ACT",
-          "RGAAv4",
-          "RGAA-3.2.1"
-        ],
-        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=webdriverjs",
-        "nodes": [
-          {
-            "any": [
-              {
-                "id": "color-contrast",
-                "data": {
-                  "fgColor": "#059669",
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 3.76,
-                  "fontSize": "12.6pt (16.8px)",
-                  "fontWeight": "bold",
-                  "messageKey": null,
-                  "expectedContrastRatio": "4.5:1"
-                },
-                "relatedNodes": [
-                  {
-                    "html": "<a href=\"#contribute\" class=\"btn btn-primary\" style=\"margin-top:0.75rem;\">Get Involved</a>",
-                    "target": [
-                      ".btn-primary.btn[href$=\"#contribute\"]"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 3.76 (foreground color: #059669, background color: #ffffff, font size: 12.6pt (16.8px), font weight: bold). Expected contrast ratio of 4.5:1"
-              }
-            ],
-            "all": [],
-            "none": [],
-            "impact": "serious",
-            "html": "<a href=\"#contribute\" class=\"btn btn-primary\" style=\"margin-top:0.75rem;\">Get Involved</a>",
-            "target": [
-              ".btn-primary.btn[href$=\"#contribute\"]"
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #059669, background color: #ffffff, font size: 12.6pt (16.8px), font weight: bold). Expected contrast ratio of 4.5:1"
-          },
-          {
-            "any": [
-              {
-                "id": "color-contrast",
-                "data": {
-                  "fgColor": "#6366f1",
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 4.46,
-                  "fontSize": "11.8pt (15.68px)",
-                  "fontWeight": "normal",
-                  "messageKey": null,
-                  "expectedContrastRatio": "4.5:1"
-                },
-                "relatedNodes": [
-                  {
-                    "html": "<div class=\"feature-card\">",
-                    "target": [
-                      ".feature-card:nth-child(7)"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 4.46 (foreground color: #6366f1, background color: #ffffff, font size: 11.8pt (15.68px), font weight: normal). Expected contrast ratio of 4.5:1"
-              }
-            ],
-            "all": [],
-            "none": [],
-            "impact": "serious",
-            "html": "<a href=\"https://github.com/dequelabs/axe-core\" style=\"color:var(--ca-indigo-light);\">axe-core</a>",
-            "target": [
-              ".feature-card:nth-child(7) > p > a"
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #6366f1, background color: #ffffff, font size: 11.8pt (15.68px), font weight: normal). Expected contrast ratio of 4.5:1"
-          },
-          {
-            "any": [
-              {
-                "id": "color-contrast",
-                "data": {
-                  "fgColor": "#6366f1",
-                  "bgColor": "#ffffff",
-                  "contrastRatio": 4.46,
-                  "fontSize": "11.8pt (15.68px)",
-                  "fontWeight": "normal",
-                  "messageKey": null,
-                  "expectedContrastRatio": "4.5:1"
-                },
-                "relatedNodes": [
-                  {
-                    "html": "<div class=\"feature-card\">",
-                    "target": [
-                      "#tools > .container > .features-grid > .feature-card:nth-child(1)"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 4.46 (foreground color: #6366f1, background color: #ffffff, font size: 11.8pt (15.68px), font weight: normal). Expected contrast ratio of 4.5:1"
-              }
-            ],
-            "all": [],
-            "none": [],
-            "impact": "serious",
-            "html": "<a href=\"https://github.com/dequelabs/axe-core\" style=\"color:var(--ca-indigo-light);\">axe-core</a>",
-            "target": [
-              ".feature-card:nth-child(1) > p > a"
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #6366f1, background color: #ffffff, font size: 11.8pt (15.68px), font weight: normal). Expected contrast ratio of 4.5:1"
-          },
-          {
-            "any": [
-              {
-                "id": "color-contrast",
-                "data": {
-                  "fgColor": "#93c5fd",
-                  "bgColor": "#f9fafb",
-                  "contrastRatio": 1.72,
-                  "fontSize": "12.0pt (16px)",
-                  "fontWeight": "normal",
-                  "messageKey": null,
-                  "expectedContrastRatio": "4.5:1"
-                },
-                "relatedNodes": [
-                  {
-                    "html": "<section id=\"install\" class=\"bg-alt\">",
-                    "target": [
-                      "#install"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 1.72 (foreground color: #93c5fd, background color: #f9fafb, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-              }
-            ],
-            "all": [],
-            "none": [],
-            "impact": "serious",
-            "html": "<a href=\"https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md\" style=\"color:#93c5fd;\">Read the full guide.</a>",
-            "target": [
-              ".container > p > a"
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.72 (foreground color: #93c5fd, background color: #f9fafb, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
-          },
-          {
-            "any": [
-              {
-                "id": "color-contrast",
-                "data": {
-                  "fgColor": "#6366f1",
-                  "bgColor": "#f9fafb",
-                  "contrastRatio": 4.27,
-                  "fontSize": "9.6pt (12.8px)",
-                  "fontWeight": "bold",
-                  "messageKey": null,
-                  "expectedContrastRatio": "4.5:1"
-                },
-                "relatedNodes": [
-                  {
-                    "html": "<section id=\"news\" class=\"changelog-section\">",
-                    "target": [
-                      "#news"
-                    ]
-                  }
-                ],
-                "impact": "serious",
-                "message": "Element has insufficient color contrast of 4.27 (foreground color: #6366f1, background color: #f9fafb, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1"
-              }
-            ],
-            "all": [],
-            "none": [],
-            "impact": "serious",
-            "html": "<time class=\"changelog-date\" datetime=\"2026-02-25\">February 25, 2026</time>",
-            "target": [
-              "time"
-            ],
-            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.27 (foreground color: #6366f1, background color: #f9fafb, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1"
-          }
-        ]
-      }
-    ]
+    "violations": []
   }
 ]
