@@ -294,7 +294,7 @@
 
 <a href="#main" class="skip-link">Skip to main content</a>
 
-<header class="site-header" role="banner">
+<header class="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Community Access home">
       <span class="logo-mark" aria-hidden="true">CA</span>
@@ -322,13 +322,11 @@
 
 <main id="main">
 
-<div id="page-header-region">
-  <section class="page-header">
-    <div class="container">
-      <h1>News</h1>
-      <p>Press releases, announcements, and updates from the Community Access project.</p>
-    </div>
-  </section>
+<div id="page-header-region" class="page-header">
+  <div class="container">
+    <h1>News</h1>
+    <p>Press releases, announcements, and updates from the Community Access project.</p>
+  </div>
 </div>
   <div class="container">
     <div id="news-content" aria-live="polite">
@@ -337,7 +335,7 @@
   </div>
 </main>
 
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer">
   <div class="container">
     <div class="footer-inner">
       <div>
@@ -468,7 +466,7 @@
           return;
         }
 
-        var html = '<section class="news-list" aria-label="News articles">';
+        var html = '<div class="news-list">';
         posts.forEach(function (post) {
           html += '<article class="post-card">';
           html += '<p class="post-meta"><time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
@@ -478,7 +476,7 @@
           html += '<p class="post-summary">' + post.summary + '</p>';
           html += '</article>';
         });
-        html += '</section>';
+        html += '</div>';
         container.innerHTML = html;
       }
 
