@@ -173,6 +173,10 @@ jobs:
                 `Full report and logs available in the [workflow run artifacts](${runUrl}).`,
                 '',
                 `*Last detected: ${report.auditDate}*`,
+                '',
+                '---',
+                '',
+                '> **Note:** This issue was created by an automated accessibility audit using axe-core. Automated tools like this can catch many common WCAG violations but they do not replace manual testing by human testers. Automated tools typically catch around 30-40% of real-world accessibility issues. Issues like unclear focus order, confusing screen reader announcements, cognitive load problems, and complex interaction patterns require hands-on testing with assistive technologies such as VoiceOver, NVDA, and keyboard-only navigation. Please treat this as a starting point, not a complete accessibility review.',
               ].join('\n');
 
               const existing = await github.rest.issues.listForRepo({

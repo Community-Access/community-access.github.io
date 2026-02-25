@@ -1,0 +1,30 @@
+name: Sync Docs Manifest
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site repo
+        uses: actions/checkout@v4
+
+      - name: Fetch manifest from accessibility-agents
+        run: |
+          curl -fsSL \
+            https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/manifest.json \
+            -o manifest.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git diff --cached --quiet || git commit -m "Sync docs manifest from accessibility-agents [skip ci]"
+          git push
