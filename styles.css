@@ -241,7 +241,8 @@ body {
 
 .nav-dropdown-menu a:hover,
 .nav-dropdown-menu a:focus-visible {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.18);
+  border-left: 3px solid rgba(255,255,255,0.5);
 }
 
 /* === Hero === */
@@ -380,7 +381,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #a78bfa;
+  color: #c4b5fd;
 }
 .workshop-detail-value {
   font-size: 1rem;
@@ -997,7 +998,11 @@ section { padding: 5rem 0; }
 }
 
 .footer-links a:hover,
-.footer-links a:focus-visible { color: var(--ca-gray-50); }
+.footer-links a:focus-visible {
+  color: var(--ca-gray-50);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .footer-copy {
   font-size: 0.85rem;

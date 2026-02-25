@@ -238,7 +238,8 @@
 
     .nav-dropdown-menu a:hover,
     .nav-dropdown-menu a:focus-visible {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.18);
+      border-left: 3px solid rgba(255,255,255,0.5);
     }
 
     /* === Docs Layout === */
@@ -660,7 +661,11 @@
     }
 
     .footer-links a:hover,
-    .footer-links a:focus-visible { color: var(--ca-gray-50); }
+    .footer-links a:focus-visible {
+      color: var(--ca-gray-50);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
 
     .footer-copy {
       font-size: 0.85rem;
@@ -795,7 +800,6 @@
         <li><a href="#docs/agents/web-accessibility-wizard.md" data-doc="docs/agents/web-accessibility-wizard.md">Web Accessibility Wizard</a></li>
         <li><a href="#docs/agents/web-issue-fixer.md" data-doc="docs/agents/web-issue-fixer.md">Web Issue Fixer</a></li>
         <li><a href="#docs/agents/word-accessibility.md" data-doc="docs/agents/word-accessibility.md">Word Accessibility</a></li>
-        <li><a href="#docs/agents/nexus.md" data-doc="docs/agents/nexus.md">Nexus</a></li>
         <li><a href="#docs/agents/document-csv-reporter.md" data-doc="docs/agents/document-csv-reporter.md">Document CSV Reporter</a></li>
         <li><a href="#docs/agents/markdown-csv-reporter.md" data-doc="docs/agents/markdown-csv-reporter.md">Markdown CSV Reporter</a></li>
         <li><a href="#docs/agents/web-csv-reporter.md" data-doc="docs/agents/web-csv-reporter.md">Web CSV Reporter</a></li>
@@ -850,6 +854,7 @@
         <li><a href="#docs/prompts/web/fix-web-issues.md" data-doc="docs/prompts/web/fix-web-issues.md">Fix Web Issues</a></li>
         <li><a href="#docs/prompts/web/compare-web-audits.md" data-doc="docs/prompts/web/compare-web-audits.md">Compare Web Audits</a></li>
         <li><a href="#docs/prompts/web/export-web-csv.md" data-doc="docs/prompts/web/export-web-csv.md">Export Web CSV</a></li>
+        <li><a href="#docs/prompts/web/export-markdown-csv.md" data-doc="docs/prompts/web/export-markdown-csv.md">Export Markdown CSV</a></li>
       </ul>
     </div>
 
@@ -906,16 +911,7 @@
       </ul>
     </div>
 
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-markdown">Prompts: Markdown</button>
-      <ul class="sidebar-links" id="nav-prompts-markdown">
-        <li><a href="#docs/prompts/markdown/audit-markdown.md" data-doc="docs/prompts/markdown/audit-markdown.md">Audit Markdown</a></li>
-        <li><a href="#docs/prompts/markdown/quick-markdown-check.md" data-doc="docs/prompts/markdown/quick-markdown-check.md">Quick Markdown Check</a></li>
-        <li><a href="#docs/prompts/markdown/fix-markdown-issues.md" data-doc="docs/prompts/markdown/fix-markdown-issues.md">Fix Markdown Issues</a></li>
-        <li><a href="#docs/prompts/markdown/compare-markdown-audits.md" data-doc="docs/prompts/markdown/compare-markdown-audits.md">Compare Markdown Audits</a></li>
-        <li><a href="#docs/prompts/markdown/export-markdown-csv.md" data-doc="docs/prompts/markdown/export-markdown-csv.md">Export Markdown CSV</a></li>
-      </ul>
-    </div>
+
 
     <div class="sidebar-section">
       <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-advanced">Advanced</button>
