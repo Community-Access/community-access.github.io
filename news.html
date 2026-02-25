@@ -158,9 +158,6 @@
     .post-type {
       color: var(--ca-gray-700);
     }
-    .post-meta-sep {
-      margin: 0 0.35rem;
-    }
     .post-card h2 {
       font-size: 1.35rem;
       font-weight: 800;
@@ -475,7 +472,7 @@
         posts.forEach(function (post) {
           html += '<article class="post-card">';
           html += '<p class="post-meta"><time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
-          if (post.type) html += ' <span class="post-meta-sep" aria-hidden="true">&mdash;</span> <span class="post-type">' + post.type + '</span>';
+          if (post.type) html += ' <span class="post-type">' + post.type + '</span>';
           html += '</p>';
           html += '<h2><a href="#post/' + post.slug + '">' + post.title + '</a></h2>';
           html += '<p class="post-summary">' + post.summary + '</p>';
@@ -511,7 +508,7 @@
             html += '<a href="news.html" class="post-back">Back to News</a>';
             html += '<h1>' + title + '</h1>';
             html += '<p class="post-meta"><time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
-            if (post.type) html += ' <span class="post-meta-sep" aria-hidden="true">&mdash;</span> <span class="post-type">' + post.type + '</span>';
+            if (post.type) html += ' <span class="post-type">' + post.type + '</span>';
             html += '</p>';
             html += '<div class="post-body">' + md(text) + '</div>';
             html += '</article>';
