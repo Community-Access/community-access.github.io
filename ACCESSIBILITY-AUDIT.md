@@ -16,9 +16,13 @@
 
 - **Initial audit score:** 82/100 (18 issues)
 - **Re-audit score:** 99/100 (all 18 issues resolved)
+- **External review score:** 97/100 (2 additional issues found by human expert)
+- **Current score:** 99/100 (all 20 issues resolved)
 - **Status:** All issues fixed and deployed
 
 This is a well-built, accessibility-conscious site. The initial audit found 18 issues across 3 pages -- primarily color contrast failures, missing table headers, live region overuse, and focus management gaps. All 18 issues were fixed in a single pass alongside a refactoring of index.html to separate concerns (external CSS and JS files).
+
+**Honest assessment:** The initial automated audit missed 2 real issues that a human accessibility expert (Ty Littlefield) identified on review. Issue #9's original fix (changing `<div>` to `<section>`) actually *created* an unnecessary region landmark. The stats grid also lacked semantic markup, causing stat labels and values to linearize into undifferentiated text for screen readers. These findings are a reminder that automated tooling is a starting point, not a replacement for expert human review.
 
 ---
 
@@ -34,6 +38,24 @@ This is a well-built, accessibility-conscious site. The initial audit found 18 i
 | **Overall** | **82/100** | **B** | **0** | **6** | **8** | **4** |
 
 ### Re-Audit (2026-02-24)
+
+| Page | Score | Grade | Critical | Serious | Moderate | Minor |
+|------|-------|-------|----------|---------|----------|-------|
+| index.html | 99/100 | A+ | 0 | 0 | 0 | 0 |
+| news.html | 99/100 | A+ | 0 | 0 | 0 | 0 |
+| docs.html | 99/100 | A+ | 0 | 0 | 0 | 0 |
+| **Overall** | **99/100** | **A+** | **0** | **0** | **0** | **0** |
+
+### External Expert Review (2026-06-22)
+
+Ty Littlefield, an accessibility professional, identified 2 issues the automated audit missed:
+
+| Page | Score | Grade | Critical | Serious | Moderate | Minor |
+|------|-------|-------|----------|---------|----------|-------|
+| index.html | 97/100 | A | 0 | 1 | 1 | 0 |
+| **Overall** | **97/100** | **A** | **0** | **1** | **1** | **0** |
+
+### Post-Expert-Fix (2026-06-22)
 
 | Page | Score | Grade | Critical | Serious | Moderate | Minor |
 |------|-------|-------|----------|---------|----------|-------|
@@ -65,7 +87,7 @@ All 18 original issues have been resolved:
 |---|-------|-------------|
 | 7 | `aria-live="polite"` on news content container | Removed from container; added separate `#news-status` live region |
 | 8 | No focus management on SPA route changes | Added `tabindex="-1"` and `.focus()` on content headings in both news.html and docs.html |
-| 9 | Stats bar `aria-label` on `<div>` without role | Changed `<div>` to `<section>` |
+| 9 | Stats bar `aria-label` on `<div>` without role | ~~Changed `<div>` to `<section>`~~ -- this fix was incorrect and created an unnecessary region landmark; see issue #19 below |
 | 10 | Latest news `aria-label` on `<div>` without role | Changed `<div>` to `<section>` |
 | 11 | Opacity used for text creates contrast issues | Replaced all opacity values with explicit colors (#9ca3af, #b0b8c4, #c4cad3) |
 | 12 | Mobile sidebar lacks Escape key support | Added Escape key handler with focus return to toggle button |
@@ -90,6 +112,32 @@ The re-audit identified two informational items, both addressed:
 1. **Gradient backgrounds flagged for manual contrast review** -- axe-core cannot compute contrast on CSS gradients automatically. Manual verification confirms all gradient sections use white/light text on dark backgrounds (#3730a3, #7c3aed, #1e1b4b) with contrast ratios well above 4.5:1. No code change needed.
 
 2. **Scroll spy uses `aria-current="true"` instead of `"location"`** -- Changed from `aria-current="true"` to `aria-current="location"` in the scroll spy code (main.js) for more semantic precision. The `"location"` token is the correct value for indicating the user's current position within a page.
+
+---
+
+## Issues Found by External Expert Review (2026-06-22)
+
+Accessibility professional Ty Littlefield reviewed the live site and identified 2 issues the automated audit missed entirely. Both have been fixed.
+
+### Serious (1) -- Fixed
+
+| # | Issue | Fix Applied |
+|---|-------|-------------|
+| 19 | Stats grid uses flat `<div>`/`<span>` markup -- screen readers linearize "47 Specialized Agents 3 Platforms 52 Ready-to-Use Prompts WCAG 2.2 AA Compliance" into one undifferentiated line with no label-value association. Issue #9's original fix (changing to `<section>`) also created an unnecessary `region` landmark. | Replaced entire stats grid with `<dl>`/`<dt>`/`<dd>` (definition list). Each stat is now a `<div class="stat-item">` wrapping `<dt class="stat-label">` and `<dd class="stat-number">`. CSS `order: -1` on `<dd>` preserves visual layout (number above label) while DOM has label first. Changed `<section>` back to `<div>` to remove the unnecessary region landmark. |
+
+### Moderate (1) -- Fixed
+
+| # | Issue | Fix Applied |
+|---|-------|-------------|
+| 20 | `<section class="stats-bar" aria-label="Project statistics">` creates a `region` landmark for decorative/statistical content that does not warrant landmark navigation. The original issue #9 fix changed `<div>` to `<section>`, which technically satisfied the "aria-label needs a role" rule but created a worse problem -- unnecessary landmark clutter. | Changed `<section>` back to `<div>`, removing the `aria-label` entirely. The stats grid's semantic `<dl>` structure provides sufficient context without a named landmark. |
+
+### Lessons Learned
+
+1. **Automated audits are a starting point, not the final word.** The original automated audit scored 99/100, but 2 real issues went undetected -- one of which the audit itself partially caused (issue #9's `<div>` to `<section>` fix was technically correct for the narrow rule it addressed but created a worse accessibility problem).
+
+2. **Semantic HTML beats ARIA workarounds.** The stats grid needed a `<dl>`/`<dt>`/`<dd>` structure all along. No amount of ARIA attributes on `<div>`/`<span>` elements would have fixed the fundamental lack of semantic association between numbers and their labels.
+
+3. **Screen reader testing catches what automated tools miss.** The linearization problem is invisible to axe-core and similar tools because the DOM technically has all the text content -- it simply lacks the semantic structure to make that content meaningful when read sequentially.
 
 ---
 
@@ -126,6 +174,7 @@ As part of the fix pass, index.html was refactored from a single ~2310-line file
 - Error states with `role="alert"` for failed document loads
 - Accessibility statement with issue reporting link on all pages
 - All 15 data tables have `<thead>`, `<th scope="col">`, and `aria-label`
+- Stats grid uses semantic `<dl>`/`<dt>`/`<dd>` for label-value association
 - Focus management on all SPA hash-based navigation
 - `document.title` updates on route changes
 - Separate live regions for status announcements (not on content containers)
