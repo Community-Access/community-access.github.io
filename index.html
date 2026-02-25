@@ -2306,5 +2306,43 @@
     });
 })();
 </script>
+
+<!-- Test Modal -->
+<div id="test-modal-backdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;" aria-hidden="true"></div>
+<div id="test-modal" role="dialog" aria-modal="true" aria-labelledby="test-modal-title" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--ca-white);border-top:3px solid var(--ca-indigo);padding:1.5rem 2rem;box-shadow:0 -4px 20px rgba(0,0,0,0.15);">
+  <div style="max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <p id="test-modal-title" style="font-family:var(--font-sans);font-size:1.1rem;font-weight:700;color:var(--ca-gray-900);">Test</p>
+    <button id="test-modal-close" style="background:var(--ca-indigo);color:#fff;border:none;padding:0.5rem 1.25rem;border-radius:6px;font-family:var(--font-sans);font-size:0.9rem;font-weight:600;cursor:pointer;">Close</button>
+  </div>
+</div>
+<script>
+(function() {
+  var backdrop = document.getElementById('test-modal-backdrop');
+  var modal = document.getElementById('test-modal');
+  var closeBtn = document.getElementById('test-modal-close');
+
+  function openModal() {
+    backdrop.style.display = 'block';
+    modal.style.display = 'block';
+    backdrop.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    backdrop.style.display = 'none';
+    modal.style.display = 'none';
+    backdrop.setAttribute('aria-hidden', 'true');
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display !== 'none') closeModal();
+  });
+
+  // Auto-open the test modal on page load
+  openModal();
+})();
+</script>
 </body>
 </html>
