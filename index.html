@@ -51,11 +51,11 @@
   </div>
 </section>
 
-<section id="workshop" class="workshop-banner" aria-labelledby="workshop-heading">
+<section id="workshop" class="workshop-banner">
   <div class="container">
     <div class="workshop-inner">
       <div class="workshop-badge" aria-hidden="true">March 7&ndash;8, 2026</div>
-      <h2 class="workshop-title" id="workshop-heading">GIT Going with GitHub</h2>
+      <h2 class="workshop-title">GIT Going with GitHub</h2>
       <p class="workshop-subtitle">A free, two-day, hands-on workshop where blind and low vision participants learn to navigate, contribute to, and build real open source projects&mdash;using a screen reader, a keyboard, and nothing else.</p>
       <div class="workshop-details">
         <div class="workshop-detail">
@@ -776,12 +776,12 @@
       <h2>Install in One Command</h2>
       <p>Works on macOS, Linux, and Windows. Installs all agents for every supported platform. Supports <code>--global</code>, <code>--project</code>, and <code>--copilot</code> flags.</p>
     </div>
-    <div class="install-block" role="region" aria-label="macOS and Linux install command">
+    <div class="install-block">
       <div class="install-label">macOS / Linux</div>
       <code id="cmd-mac">curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
       <button class="copy-btn" aria-label="Copy macOS and Linux install command" data-target="cmd-mac">Copy</button>
     </div>
-    <div class="install-block" role="region" aria-label="Windows PowerShell install command">
+    <div class="install-block">
       <div class="install-label">Windows (PowerShell)</div>
       <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
       <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
@@ -856,7 +856,7 @@
       <p>Here is a real example. An AI tool generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
     </div>
     <div class="demo-grid">
-      <div class="demo-panel demo-bad" role="region" aria-label="Inaccessible code example">
+      <div class="demo-panel demo-bad">
         <div class="demo-panel-header">Before &mdash; AI-Generated Code</div>
         <pre><code><span class="demo-comment">&lt;!-- Missing alt, generic link text,</span>
 <span class="demo-comment">     no form label, wrong heading order --&gt;</span>
@@ -866,7 +866,7 @@
 <span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span><span class="demo-err">Click here</span><span class="demo-tag">&lt;/a&gt;</span>
 <span class="demo-tag">&lt;input</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">placeholder=</span><span class="demo-val">"Email"</span><span class="demo-tag">&gt;</span></code></pre>
       </div>
-      <div class="demo-panel demo-good" role="region" aria-label="Accessible code example">
+      <div class="demo-panel demo-good">
         <div class="demo-panel-header">After &mdash; Agent-Fixed Code</div>
         <pre><code><span class="demo-comment">&lt;!-- Heading hierarchy, alt text,</span>
 <span class="demo-comment">     descriptive link, labeled input --&gt;</span>
