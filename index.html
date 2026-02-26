@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Community Access -- Making software accessible by default. 47 AI-powered accessibility agents for Claude Code, GitHub Copilot, and Claude Desktop.">
+  <meta name="description" content="Community Access -- Making software accessible by default. 49 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI.">
   <title>Community Access -- Accessible by Default</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -43,7 +43,7 @@
 <section class="hero">
   <div class="container">
     <h1>Accessible <span class="hero-accent">by Default</span></h1>
-    <p>AI coding tools forget accessibility. Our agents make sure they never do. 47 specialized agents, 14 skills, and 52 ready-to-use prompts enforce WCAG 2.2 AA compliance inside Claude Code, GitHub Copilot, and Claude Desktop&mdash;so every line of code ships inclusive.</p>
+    <p>AI coding tools forget accessibility. Our agents make sure they never do. 49 specialized agents, 16 skills, and 54 ready-to-use prompts enforce WCAG 2.2 AA compliance inside Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI&mdash;so every line of code ships inclusive.</p>
     <div class="hero-actions">
       <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View on GitHub</a>
       <a href="#install" class="btn btn-outline">Install in 30 Seconds</a>
@@ -86,15 +86,15 @@
     <dl class="stats-grid">
       <div class="stat-item">
         <dt class="stat-label">Specialized Agents</dt>
-        <dd class="stat-number">47</dd>
+        <dd class="stat-number">49</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">Platforms</dt>
-        <dd class="stat-number">3</dd>
+        <dd class="stat-number">6</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">Ready-to-Use Prompts</dt>
-        <dd class="stat-number">52</dd>
+        <dd class="stat-number">54</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">AA Compliance</dt>
@@ -128,7 +128,7 @@
       </div>
       <div class="feature-card">
         <h3>One-Command Install</h3>
-        <p>A single command installs all agents across Claude Code, GitHub Copilot, and Claude Desktop. No configuration files to write, no YAML to edit.</p>
+        <p>A single command installs all agents across Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. No configuration files to write, no YAML to edit.</p>
       </div>
       <div class="feature-card">
         <h3>Beyond Web Code</h3>
@@ -158,6 +158,14 @@
         <h3>Cognitive &amp; Mobile</h3>
         <p>Full WCAG 2.2 cognitive accessibility criteria coverage plus React Native, iOS, and Android mobile accessibility auditing.</p>
       </div>
+      <div class="feature-card">
+        <h3>Decorative Image Detection</h3>
+        <p>Agents distinguish decorative images from meaningful ones. Decorative images get <code>alt=""</code> and <code>role="presentation"</code> in HTML, or <code>/Artifact</code> marking in PDF&mdash;so screen readers skip them instead of announcing meaningless filenames.</p>
+      </div>
+      <div class="feature-card">
+        <h3>CI Scanner Integration</h3>
+        <p>Integrates with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action and Google Lighthouse CI for automated WCAG scanning in your CI/CD pipeline. Results correlate with local agent scans for unified tracking.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -166,7 +174,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Meet the Agents</h2>
-      <p>47 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
+      <p>49 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
     </div>
     <search class="search-filter">
       <label for="agent-search">Search agents, skills, prompts, and tools</label>
@@ -436,7 +444,7 @@
       </details>
 
       <details>
-        <summary>Nexus &amp; Hidden Sub-Agents (10)</summary>
+        <summary>Nexus &amp; Hidden Sub-Agents (12)</summary>
         <div class="accordion-body">
           <p>These agents run behind the scenes. You never invoke them directly&mdash;other agents call them as needed.</p>
           <table class="agent-table" aria-label="Hidden sub-agents">
@@ -447,6 +455,8 @@
             <tr><td>Cross-Document Analyzer</td><td>Finds patterns and inconsistencies across multiple documents in a batch.</td></tr>
             <tr><td>Cross-Page Analyzer</td><td>Finds accessibility patterns that span multiple web pages (navigation, headers, footers).</td></tr>
             <tr><td>Web Issue Fixer</td><td>Applies automated code fixes for web accessibility issues found during audits.</td></tr>
+            <tr><td>Scanner Bridge</td><td>Bridges GitHub Accessibility Scanner CI data into the agent ecosystem&mdash;parses scanner-created issues and correlates with local scans.</td></tr>
+            <tr><td>Lighthouse Bridge</td><td>Bridges Lighthouse CI accessibility audit data into the agent ecosystem&mdash;tracks score regressions and deduplicates against local scans.</td></tr>
             <tr><td>Web CSV Reporter</td><td>Exports web audit results to CSV format for spreadsheet analysis.</td></tr>
             <tr><td>Document CSV Reporter</td><td>Exports document audit results to CSV format for spreadsheet analysis.</td></tr>
             <tr><td>Markdown CSV Reporter</td><td>Exports Markdown audit results to CSV format for spreadsheet analysis.</td></tr>
@@ -465,7 +475,7 @@
   <div class="container">
     <div class="section-header">
       <h2>How It Works Across Platforms</h2>
-      <p>Same agents, same rules, three different platforms. Pick your editor and get started.</p>
+      <p>Same agents, same rules, six different platforms. Pick your editor and get started.</p>
     </div>
     <div class="accordion-group">
 
@@ -474,7 +484,7 @@
         <div class="accordion-body">
           <p>Agents live in <code>.claude/agents/</code> as Markdown files. Each agent has a dedicated system prompt that defines its identity and expertise.</p>
           <p>Specialists run in parallel groups for fast audits&mdash;the Accessibility Lead orchestrates the full team so you get comprehensive results from a single command.</p>
-          <p>Install with one command. The installer copies all 47 agents and configures everything automatically.</p>
+          <p>Install with one command. The installer copies all 49 agents and configures everything automatically.</p>
         </div>
       </details>
 
@@ -482,8 +492,8 @@
         <summary>GitHub Copilot (VS Code)</summary>
         <div class="accordion-body">
           <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>. Accessibility rules are injected into every Copilot chat via <code>copilot-instructions.md</code>.</p>
-          <p>Same agents, same rules, same parallel execution as Claude Code. All 52 prompts are available as <code>.prompt.md</code> files you can invoke directly in Copilot Chat.</p>
-          <p>14 skills provide shared knowledge modules that keep all agents consistent.</p>
+          <p>Same agents, same rules, same parallel execution as Claude Code. All 54 prompts are available as <code>.prompt.md</code> files you can invoke directly in Copilot Chat.</p>
+          <p>16 skills provide shared knowledge modules that keep all agents consistent.</p>
         </div>
       </details>
 
@@ -493,6 +503,31 @@
           <p>Uses MCP (Model Context Protocol) since Desktop does not have an agent system. 11 tools provide contrast checking, heading audits, form validation, axe-core scanning, document scanning, and VPAT generation.</p>
           <p>6 built-in prompts cover common accessibility reviews: full audit, ARIA review, modal review, contrast review, keyboard review, and live region review.</p>
           <p>Install by downloading the <code>.mcpb</code> extension bundle from the releases page.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Copilot CLI (GitHub Copilot in Terminal)</summary>
+        <div class="accordion-body">
+          <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>&mdash;the same files used by VS Code Copilot. Copilot CLI reads the agent definitions and applies accessibility rules directly in your terminal workflow.</p>
+          <p>All 54 prompts, 16 skills, and 49 agents work identically to the VS Code experience. The installer configures Copilot CLI support automatically alongside VS Code.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Codex CLI (OpenAI)</summary>
+        <div class="accordion-body">
+          <p>Agents are configured via <code>.codex/agents/AGENTS.md</code>, which maps agent names to their instruction files. Codex CLI reads agent definitions from the same <code>.claude/agents/</code> directory used by Claude Code.</p>
+          <p>Accessibility rules are injected into every session through <code>.codex/AGENTS.md</code> instructions. The installer creates the Codex configuration automatically.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Gemini CLI (Google)</summary>
+        <div class="accordion-body">
+          <p>Uses a Gemini extension bundle (<code>gemini-extension.json</code>) with 63 skill files that embed agent knowledge, scanning rules, and reporting templates directly into Gemini CLI sessions.</p>
+          <p>The extension covers all four teams: web accessibility, document scanning, markdown auditing, and GitHub workflows. Gemini reads the skill files from <code>.gemini/extensions/accessibility/</code>.</p>
+          <p>Install with the same one-command installer&mdash;it detects Gemini CLI and configures the extension automatically.</p>
         </div>
       </details>
 
@@ -526,7 +561,7 @@
       </details>
 
       <details>
-        <summary>Scanning Skills (3)</summary>
+        <summary>Scanning Skills (5)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Scanning skills">
             <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
@@ -534,6 +569,8 @@
             <tr><td>Document Scanning</td><td>Rules and patterns for Office, PDF, and EPUB document accessibility scanning.</td></tr>
             <tr><td>Web Scanning</td><td>Patterns for axe-core integration, multi-page crawling, and result aggregation.</td></tr>
             <tr><td>Markdown Accessibility</td><td>Rules for heading structure, alt text, link quality, tables, and readability in Markdown.</td></tr>
+            <tr><td>GitHub A11y Scanner</td><td>Integration with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action for CI-based scanning, issue parsing, and Copilot fix tracking.</td></tr>
+            <tr><td>Lighthouse Scanner</td><td>Integration with Lighthouse CI for automated accessibility scoring, weight-to-severity mapping, and score regression tracking.</td></tr>
             </tbody>
           </table>
         </div>
@@ -574,12 +611,12 @@
   <div class="container">
     <div class="section-header">
       <h2>Ready-to-Use Prompts</h2>
-      <p>Don&rsquo;t know where to start? Pick a prompt. 52 pre-built commands across four categories get you results immediately.</p>
+      <p>Don&rsquo;t know where to start? Pick a prompt. 54 pre-built commands across four categories get you results immediately.</p>
     </div>
     <div class="accordion-group">
 
       <details>
-        <summary>Web Accessibility Prompts (6)</summary>
+        <summary>Web Accessibility Prompts (8)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Web accessibility prompts">
             <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
@@ -590,6 +627,8 @@
             <tr><td>Compare Web Audits</td><td>Compare two audit results to track progress over time.</td></tr>
             <tr><td>Fix Web Issues</td><td>Automatically apply fixes for discovered accessibility issues.</td></tr>
             <tr><td>Export Web CSV</td><td>Export web audit results to a CSV spreadsheet.</td></tr>
+            <tr><td>Setup GitHub Scanner</td><td>Set up the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> in your repository with agent ecosystem integration.</td></tr>
+            <tr><td>Setup Lighthouse Scanner</td><td>Set up Lighthouse CI accessibility scanning in your repository with score tracking and regression alerts.</td></tr>
             </tbody>
           </table>
         </div>
@@ -754,12 +793,12 @@
     <div class="repo-card">
       <div>
         <h3>Community-Access/accessibility-agents</h3>
-        <p>47 accessibility agents, 14 skills, and 52 prompts for Claude Code, GitHub Copilot, and Claude Desktop. Enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
+        <p>49 accessibility agents, 16 skills, and 54 prompts for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. Enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
         <ul class="repo-meta">
           <li>MIT License</li>
-          <li>47 agents</li>
-          <li>14 skills</li>
-          <li>52 prompts</li>
+          <li>49 agents</li>
+          <li>16 skills</li>
+          <li>54 prompts</li>
         </ul>
       </div>
       <div class="repo-actions">
@@ -891,7 +930,7 @@
       <details>
         <summary>Does this work with VS Code?</summary>
         <div class="faq-body">
-          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal) and Claude Desktop (standalone app). The install command sets up all three platforms automatically.</p>
+          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal), Claude Desktop (standalone app), Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
         </div>
       </details>
       <details>
