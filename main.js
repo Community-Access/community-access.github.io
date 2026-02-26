@@ -42,6 +42,12 @@
       e.preventDefault();
       if (idx > 0) links[idx - 1].focus();
       else toggle.focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      links[0].focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      links[links.length - 1].focus();
     } else if (e.key === 'Escape') {
       e.preventDefault();
       closeMenu(true);

@@ -958,6 +958,7 @@ section { padding: 5rem 0; }
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
+  min-height: 1.5rem;
   transition: background var(--transition), border-color var(--transition);
   white-space: nowrap;
 }
