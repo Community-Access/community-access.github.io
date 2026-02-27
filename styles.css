@@ -1361,16 +1361,15 @@ section { padding: 5rem 0; }
 .demo-err { color: #fca5a5; }
 
 /* === Feedback Form === */
-.feedback-section {
-  padding: 5rem 0;
-  background: var(--ca-gray-50);
-}
-@media (prefers-color-scheme: dark) {
-  .feedback-section { background: var(--ca-gray-900); }
-}
+.feedback-section { padding: 5rem 0; }
 .feedback-form {
-  max-width: 36rem;
+  max-width: 40rem;
   margin: 0 auto;
+}
+.feedback-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 .feedback-field {
   margin-bottom: 1.25rem;
@@ -1402,6 +1401,14 @@ section { padding: 5rem 0; }
   outline: 3px solid var(--ca-focus);
   outline-offset: 2px;
 }
+.feedback-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
 .feedback-field textarea {
   resize: vertical;
   min-height: 6rem;
@@ -1415,6 +1422,7 @@ section { padding: 5rem 0; }
   margin-bottom: 1.25rem;
 }
 .feedback-note {
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
   font-size: 0.85rem;
   color: var(--ca-gray-700);
@@ -1440,6 +1448,9 @@ section { padding: 5rem 0; }
   }
   .feedback-error {
     color: #fca5a5;
+  }
+  .feedback-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23d1d5db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 }
 
@@ -1482,7 +1493,7 @@ section { padding: 5rem 0; }
   align-items: center;
   gap: 0.35rem;
   background: var(--ca-white);
-  border: 2px solid var(--ca-gray-200);
+  border: 2px solid #6b7280;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
@@ -1498,108 +1509,51 @@ section { padding: 5rem 0; }
   border-color: var(--ca-gray-700);
 }
 
-.cal-grid {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+/* --- Agenda list --- */
+.cal-agenda {
   margin-bottom: 2rem;
 }
 
-.cal-grid th {
-  padding: 0.75rem 0.25rem;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 700;
+.cal-agenda-empty {
+  padding: 3rem 1rem;
+  font-size: 1rem;
   color: var(--ca-gray-700);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.cal-day-group {
+  margin-bottom: 2rem;
+}
+
+.cal-day-group:last-child {
+  margin-bottom: 0;
+}
+
+.cal-day-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ca-gray-900);
+  padding-bottom: 0.75rem;
+  margin: 0 0 1rem;
   border-bottom: 2px solid var(--ca-gray-200);
 }
 
-.cal-grid td {
-  padding: 0.25rem;
-  text-align: center;
-  vertical-align: top;
-  height: 3.5rem;
+.cal-day-heading--today {
+  border-bottom-color: var(--ca-emerald);
 }
 
-.cal-day {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  background: var(--ca-white);
-  color: var(--ca-gray-800);
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background var(--transition), border-color var(--transition), color var(--transition);
-}
-
-.cal-day:hover {
-  background: var(--ca-gray-100);
-  border-color: var(--ca-gray-700);
-}
-
-.cal-day--today {
-  border-color: var(--ca-emerald);
-  font-weight: 800;
-}
-
-.cal-day[aria-selected="true"] {
-  background: var(--ca-indigo);
-  color: #fff;
-  border-color: var(--ca-indigo);
-}
-
-.cal-day[aria-selected="true"]:hover {
-  background: var(--ca-indigo-dark);
-  border-color: var(--ca-indigo-dark);
-}
-
-.cal-day--outside {
-  color: var(--ca-gray-200);
-  cursor: default;
-}
-
-.cal-day--outside:hover {
-  background: var(--ca-white);
-  border-color: transparent;
-}
-
-.cal-dot {
-  position: absolute;
-  bottom: 0.15rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 50%;
-  background: var(--ca-indigo);
-}
-
-.cal-day[aria-selected="true"] .cal-dot {
-  background: #fff;
-}
-
-.cal-events {
-  border: 1px solid var(--ca-gray-200);
-  border-radius: 16px;
-  padding: 1.5rem;
-  background: var(--ca-white);
-  min-height: 6rem;
-}
-
-.cal-events-heading {
-  font-size: 1.15rem;
+.cal-today-badge {
+  display: inline-block;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: var(--ca-gray-900);
-  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--ca-emerald);
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .cal-event-card {
@@ -1672,11 +1626,11 @@ section { padding: 5rem 0; }
 .cal-event-type--conference { background: #2563eb; }
 .cal-event-type--custom { background: var(--ca-gray-700); }
 
-.cal-export-actions {
+.cal-export-all {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  justify-content: center;
 }
 
 .cal-export-btn {
@@ -1684,7 +1638,7 @@ section { padding: 5rem 0; }
   align-items: center;
   gap: 0.4rem;
   background: var(--ca-white);
-  border: 2px solid var(--ca-gray-200);
+  border: 2px solid #6b7280;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
@@ -1704,14 +1658,11 @@ section { padding: 5rem 0; }
   .cal-countdown {
     background: linear-gradient(135deg, #312e81 0%, #4c1d95 100%);
   }
-  .cal-day--outside {
-    color: var(--ca-gray-700);
-  }
   .cal-event-card {
     background: var(--ca-gray-100);
   }
-  .cal-dot {
-    background: var(--ca-indigo-light);
+  .cal-event-type--custom {
+    background: #6b7280;
   }
 }
 
@@ -1720,14 +1671,6 @@ section { padding: 5rem 0; }
   .hero { padding: 4rem 0 3.5rem; }
   section { padding: 3.5rem 0; }
   .repo-card { padding: 2rem; }
-  .cal-day {
-    width: 2.75rem;
-    height: 2.75rem;
-    font-size: 0.85rem;
-  }
-  .cal-grid td {
-    height: 3.25rem;
-  }
   .cal-nav-btn {
     padding: 0.45rem 0.75rem;
     font-size: 0.85rem;
