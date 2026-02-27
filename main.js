@@ -270,6 +270,69 @@
   updateScrollSpy();
 })();
 
+/* === Contributors from GitHub API === */
+(function () {
+  'use strict';
+  var ORG = 'Community-Access';
+  var BOTS = ['github-actions[bot]', 'actions-user', 'Copilot', 'opencode-agent[bot]', 'dependabot[bot]'];
+  var grid = document.getElementById('contributors-grid');
+  if (!grid) return;
+
+  fetch('https://api.github.com/orgs/' + ORG + '/repos?per_page=100')
+    .then(function (r) { return r.json(); })
+    .then(function (repos) {
+      // Exclude forks — only count contributions to repos the org owns
+      var ownRepos = repos.filter(function (repo) { return !repo.fork; });
+      var fetches = ownRepos.map(function (repo) {
+        return fetch('https://api.github.com/repos/' + repo.full_name + '/contributors?per_page=100')
+          .then(function (r) { return r.json(); })
+          .catch(function () { return []; });
+      });
+      return Promise.all(fetches);
+    })
+    .then(function (results) {
+      var map = {};
+      results.forEach(function (contributors) {
+        if (!Array.isArray(contributors)) return;
+        contributors.forEach(function (c) {
+          if (!c.login || BOTS.indexOf(c.login) !== -1) return;
+          if (c.type && c.type !== 'User') return;
+          if (map[c.login]) {
+            map[c.login].contributions += c.contributions;
+          } else {
+            map[c.login] = {
+              login: c.login,
+              avatar: c.avatar_url,
+              url: c.html_url,
+              contributions: c.contributions
+            };
+          }
+        });
+      });
+
+      var list = Object.keys(map).map(function (k) { return map[k]; });
+      list.sort(function (a, b) { return b.contributions - a.contributions; });
+
+      if (list.length === 0) {
+        grid.innerHTML = '<p class="contributors-loading">No contributors found.</p>';
+        return;
+      }
+
+      var html = '';
+      list.forEach(function (c) {
+        html += '<a href="' + c.url + '" class="contributor-card" role="listitem" target="_blank" rel="noopener noreferrer">';
+        html += '<img class="contributor-avatar" src="' + c.avatar + '&s=128" alt="" width="64" height="64" loading="lazy">';
+        html += '<span class="contributor-name">' + c.login + '</span>';
+        html += '<span class="contributor-contributions">' + c.contributions + ' contribution' + (c.contributions !== 1 ? 's' : '') + '</span>';
+        html += '</a>';
+      });
+      grid.innerHTML = html;
+    })
+    .catch(function () {
+      grid.innerHTML = '<p class="contributors-loading">Unable to load contributors.</p>';
+    });
+})();
+
 /* === Latest News Feed === */
 (function () {
   'use strict';
