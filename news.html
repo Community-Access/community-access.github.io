@@ -270,6 +270,76 @@
     }
     .post-body blockquote p { margin-bottom: 0; }
 
+    /* === Pagination === */
+    .pagination {
+      max-width: 52rem;
+      margin: 0 auto 3rem;
+      padding-top: 1rem;
+    }
+    .pagination-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .pagination-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.75rem;
+      height: 2.75rem;
+      padding: 0.5rem 0.85rem;
+      border: 2px solid var(--ca-gray-200);
+      border-radius: 8px;
+      background: var(--ca-white);
+      color: var(--ca-gray-800);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .pagination-btn:hover {
+      background: var(--ca-gray-100);
+      border-color: var(--ca-indigo-light);
+      color: var(--ca-indigo-light);
+    }
+    .pagination-btn[aria-current="page"] {
+      background: var(--ca-indigo);
+      border-color: var(--ca-indigo);
+      color: var(--ca-gray-50);
+      cursor: default;
+    }
+    @media (prefers-color-scheme: dark) {
+      .pagination-btn[aria-current="page"] {
+        background: var(--ca-indigo-light);
+        border-color: var(--ca-indigo-light);
+        color: #1e1b4b;
+      }
+    }
+    .pagination-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .pagination-btn:disabled:hover {
+      background: var(--ca-white);
+      border-color: var(--ca-gray-200);
+      color: var(--ca-gray-800);
+    }
+    .pagination-ellipsis {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      height: 2.75rem;
+      color: var(--ca-gray-700);
+      font-weight: 600;
+      user-select: none;
+    }
+
     /* === Loading === */
     .loading {
       text-align: center;
@@ -455,6 +525,44 @@
 
   var container = document.getElementById('news-content');
   var headerRegion = document.getElementById('page-header-region');
+  var POSTS_PER_PAGE = 6;
+
+  // Get current page from URL query parameter
+  function getCurrentPage() {
+    var params = new URLSearchParams(window.location.search);
+    var p = parseInt(params.get('page'), 10);
+    return (p && p > 0) ? p : 1;
+  }
+
+  // Update URL without full reload
+  function setPageURL(page) {
+    var url = new URL(window.location);
+    if (page <= 1) {
+      url.searchParams.delete('page');
+    } else {
+      url.searchParams.set('page', page);
+    }
+    // Remove hash when on list view
+    url.hash = '';
+    history.pushState(null, '', url);
+  }
+
+  // Build pagination range with ellipsis
+  function getPageRange(current, total) {
+    if (total <= 7) {
+      var arr = [];
+      for (var i = 1; i <= total; i++) arr.push(i);
+      return arr;
+    }
+    var pages = [1];
+    var start = Math.max(2, current - 1);
+    var end = Math.min(total - 1, current + 1);
+    if (start > 2) pages.push('...');
+    for (var j = start; j <= end; j++) pages.push(j);
+    if (end < total - 1) pages.push('...');
+    pages.push(total);
+    return pages;
+  }
 
   // Fetch posts manifest
   fetch('posts/posts.json')
@@ -472,8 +580,14 @@
           return;
         }
 
+        var currentPage = getCurrentPage();
+        var totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+        if (currentPage > totalPages) currentPage = totalPages;
+        var startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+        var pagePosts = posts.slice(startIdx, startIdx + POSTS_PER_PAGE);
+
         var html = '<div class="news-list">';
-        posts.forEach(function (post) {
+        pagePosts.forEach(function (post) {
           html += '<article class="post-card">';
           html += '<p class="post-meta"><time class="post-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
           if (post.type) html += ' <span class="post-type">' + post.type + '</span>';
@@ -483,11 +597,47 @@
           html += '</article>';
         });
         html += '</div>';
+
+        // Pagination controls
+        if (totalPages > 1) {
+          html += '<nav class="pagination" aria-label="News pagination">';
+          html += '<ul class="pagination-list">';
+          html += '<li><button class="pagination-btn" data-page="' + (currentPage - 1) + '"' + (currentPage === 1 ? ' disabled' : '') + ' aria-label="Previous page">Previous</button></li>';
+          var range = getPageRange(currentPage, totalPages);
+          range.forEach(function (p) {
+            if (p === '...') {
+              html += '<li><span class="pagination-ellipsis" aria-hidden="true">&hellip;</span></li>';
+            } else {
+              html += '<li><button class="pagination-btn" data-page="' + p + '"';
+              if (p === currentPage) html += ' aria-current="page"';
+              html += ' aria-label="Page ' + p + '">' + p + '</button></li>';
+            }
+          });
+          html += '<li><button class="pagination-btn" data-page="' + (currentPage + 1) + '"' + (currentPage === totalPages ? ' disabled' : '') + ' aria-label="Next page">Next</button></li>';
+          html += '</ul>';
+          html += '</nav>';
+        }
+
         container.innerHTML = html;
-        var heading = container.querySelector('h2');
-        if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+
+        // Bind pagination clicks
+        var buttons = container.querySelectorAll('.pagination-btn[data-page]');
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (btn.disabled) return;
+            var page = parseInt(btn.getAttribute('data-page'), 10);
+            if (page === currentPage) return;
+            setPageURL(page);
+            renderList();
+            window.scrollTo(0, 0);
+            // Focus the newly active page button in the pagination
+            var active = container.querySelector('.pagination-btn[aria-current="page"]');
+            if (active) { active.focus(); }
+          });
+        });
+
         var ns = document.getElementById('news-status');
-        if (ns) ns.textContent = 'Loaded: News list';
+        if (ns) ns.textContent = 'Page ' + currentPage + ' of ' + totalPages + ', showing ' + pagePosts.length + ' articles';
       }
 
       function renderPost(slug) {
@@ -544,6 +694,9 @@
 
       route();
       window.addEventListener('hashchange', route);
+      window.addEventListener('popstate', function () {
+        if (!getSlug()) renderList();
+      });
     })
     .catch(function () {
       container.innerHTML = '<p class="loading">Unable to load posts. Please try again later.</p>';
