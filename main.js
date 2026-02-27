@@ -289,7 +289,7 @@
       '<img class="contributor-avatar" src="' + c.avatar + '&s=128" alt="" width="64" height="64" loading="lazy">' +
       '<span class="contributor-name">' + c.login + '</span>' +
       '<span class="contributor-contributions">' + label + '</span>' +
-      '<span class="sr-only">(opens in new tab)</span></a></div>';
+      '<span class="sr-only">, GitHub profile (opens in new tab)</span></a></div>';
   }
 
   // Fetch code contributors from non-fork repos

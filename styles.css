@@ -882,7 +882,7 @@ section { padding: 5rem 0; }
   color: var(--ca-gray-700);
 }
 @media (prefers-color-scheme: dark) {
-  .contributors-section > .container > p { color: var(--ca-gray-400); }
+  .contributors-section > .container > p { color: var(--ca-gray-700); }
 }
 .contributors-grid {
   display: flex;
@@ -965,6 +965,11 @@ section { padding: 5rem 0; }
   font-weight: 600;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--ca-gray-200);
+}
+.community-pillars-list a {
+  color: var(--ca-indigo-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* === Install Code Block === */
