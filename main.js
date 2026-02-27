@@ -888,5 +888,6 @@
 
     window.open(url, '_blank', 'noopener,noreferrer');
     form.reset();
+    if (errorsRegion) errorsRegion.textContent = 'Your feedback has been opened in a new GitHub tab. If the tab did not open, check your popup blocker.';
   });
 })();

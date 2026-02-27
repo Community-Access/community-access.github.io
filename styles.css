@@ -1431,14 +1431,14 @@ section { padding: 5rem 0; }
 .feedback-error {
   display: block;
   font-size: 0.85rem;
-  color: #dc2626;
+  color: #b91c1c;
   margin-top: 0.35rem;
   min-height: 1.2em;
 }
 .feedback-field input[aria-invalid="true"],
 .feedback-field textarea[aria-invalid="true"],
 .feedback-field select[aria-invalid="true"] {
-  border-color: #dc2626;
+  border-color: #b91c1c;
 }
 @media (prefers-color-scheme: dark) {
   .feedback-field input[aria-invalid="true"],
