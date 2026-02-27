@@ -275,16 +275,70 @@
   'use strict';
   var ORG = 'Community-Access';
   var BOTS = ['github-actions[bot]', 'actions-user', 'Copilot', 'opencode-agent[bot]', 'dependabot[bot]'];
+  var ISSUE_REPOS = ['accessibility-agents', 'community-access.github.io', 'git-going-with-github'];
   var grid = document.getElementById('contributors-grid');
-  if (!grid) return;
+  var thanksGrid = document.getElementById('thanks-grid');
 
-  fetch('https://api.github.com/orgs/' + ORG + '/repos?per_page=100')
+  function isBotLogin(login) {
+    return BOTS.indexOf(login) !== -1 || login.indexOf('[bot]') !== -1;
+  }
+
+  function renderCard(c, label) {
+    return '<a href="' + c.url + '" class="contributor-card" role="listitem" target="_blank" rel="noopener noreferrer">' +
+      '<img class="contributor-avatar" src="' + c.avatar + '&s=128" alt="" width="64" height="64" loading="lazy">' +
+      '<span class="contributor-name">' + c.login + '</span>' +
+      '<span class="contributor-contributions">' + label + '</span></a>';
+  }
+
+  // Fetch code contributors from non-fork repos
+  var codeContributorLogins = {};
+  var codePromise = grid ? fetch('https://api.github.com/orgs/' + ORG + '/repos?per_page=100')
     .then(function (r) { return r.json(); })
     .then(function (repos) {
-      // Exclude forks — only count contributions to repos the org owns
       var ownRepos = repos.filter(function (repo) { return !repo.fork; });
-      var fetches = ownRepos.map(function (repo) {
+      return Promise.all(ownRepos.map(function (repo) {
         return fetch('https://api.github.com/repos/' + repo.full_name + '/contributors?per_page=100')
+          .then(function (r) { return r.json(); })
+          .catch(function () { return []; });
+      }));
+    })
+    .then(function (results) {
+      var map = {};
+      results.forEach(function (contributors) {
+        if (!Array.isArray(contributors)) return;
+        contributors.forEach(function (c) {
+          if (!c.login || isBotLogin(c.login)) return;
+          if (c.type && c.type !== 'User') return;
+          if (map[c.login]) {
+            map[c.login].contributions += c.contributions;
+          } else {
+            map[c.login] = { login: c.login, avatar: c.avatar_url, url: c.html_url, contributions: c.contributions };
+          }
+        });
+      });
+      var list = Object.keys(map).map(function (k) { return map[k]; });
+      list.sort(function (a, b) { return b.contributions - a.contributions; });
+      list.forEach(function (c) { codeContributorLogins[c.login] = true; });
+
+      if (list.length === 0) {
+        grid.innerHTML = '<p class="contributors-loading">No contributors found.</p>';
+      } else {
+        var html = '';
+        list.forEach(function (c) {
+          html += renderCard(c, c.contributions + ' contribution' + (c.contributions !== 1 ? 's' : ''));
+        });
+        grid.innerHTML = html;
+      }
+    })
+    .catch(function () {
+      grid.innerHTML = '<p class="contributors-loading">Unable to load contributors.</p>';
+    }) : Promise.resolve();
+
+  // Fetch issue creators from specific repos
+  if (thanksGrid) {
+    codePromise.then(function () {
+      var fetches = ISSUE_REPOS.map(function (repo) {
+        return fetch('https://api.github.com/repos/' + ORG + '/' + repo + '/issues?state=all&per_page=100')
           .then(function (r) { return r.json(); })
           .catch(function () { return []; });
       });
@@ -292,45 +346,36 @@
     })
     .then(function (results) {
       var map = {};
-      results.forEach(function (contributors) {
-        if (!Array.isArray(contributors)) return;
-        contributors.forEach(function (c) {
-          if (!c.login || BOTS.indexOf(c.login) !== -1) return;
-          if (c.type && c.type !== 'User') return;
-          if (map[c.login]) {
-            map[c.login].contributions += c.contributions;
+      results.forEach(function (issues) {
+        if (!Array.isArray(issues)) return;
+        issues.forEach(function (issue) {
+          var u = issue.user;
+          if (!u || !u.login || isBotLogin(u.login)) return;
+          if (codeContributorLogins[u.login]) return;
+          if (map[u.login]) {
+            map[u.login].issues += 1;
           } else {
-            map[c.login] = {
-              login: c.login,
-              avatar: c.avatar_url,
-              url: c.html_url,
-              contributions: c.contributions
-            };
+            map[u.login] = { login: u.login, avatar: u.avatar_url, url: u.html_url, issues: 1 };
           }
         });
       });
-
       var list = Object.keys(map).map(function (k) { return map[k]; });
-      list.sort(function (a, b) { return b.contributions - a.contributions; });
+      list.sort(function (a, b) { return b.issues - a.issues; });
 
       if (list.length === 0) {
-        grid.innerHTML = '<p class="contributors-loading">No contributors found.</p>';
-        return;
+        thanksGrid.innerHTML = '<p class="contributors-loading">No issue contributors found.</p>';
+      } else {
+        var html = '';
+        list.forEach(function (c) {
+          html += renderCard(c, c.issues + ' issue' + (c.issues !== 1 ? 's' : ''));
+        });
+        thanksGrid.innerHTML = html;
       }
-
-      var html = '';
-      list.forEach(function (c) {
-        html += '<a href="' + c.url + '" class="contributor-card" role="listitem" target="_blank" rel="noopener noreferrer">';
-        html += '<img class="contributor-avatar" src="' + c.avatar + '&s=128" alt="" width="64" height="64" loading="lazy">';
-        html += '<span class="contributor-name">' + c.login + '</span>';
-        html += '<span class="contributor-contributions">' + c.contributions + ' contribution' + (c.contributions !== 1 ? 's' : '') + '</span>';
-        html += '</a>';
-      });
-      grid.innerHTML = html;
     })
     .catch(function () {
-      grid.innerHTML = '<p class="contributors-loading">Unable to load contributors.</p>';
+      thanksGrid.innerHTML = '<p class="contributors-loading">Unable to load issue contributors.</p>';
     });
+  }
 })();
 
 /* === Latest News Feed === */

@@ -943,6 +943,20 @@ section { padding: 5rem 0; }
 @media (prefers-color-scheme: dark) {
   .contributor-card:hover { background: var(--ca-gray-50); }
 }
+.special-thanks-heading {
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+}
+.thanks-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin: 1.5rem auto 0;
+}
 
 /* === Install Code Block === */
 .install-block {
