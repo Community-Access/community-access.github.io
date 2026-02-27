@@ -1,5 +1,12 @@
 [
   {
+    "slug": "building-the-community-calendar",
+    "title": "Building an Accessible Calendar with AI -- and Letting the Agents Review Their Own Work",
+    "date": "2026-02-27",
+    "summary": "A walkthrough of building the Community Access calendar with Claude Code, running our own accessibility agents against it, and why the grid pattern got thrown out for an agenda list.",
+    "type": "Case Study"
+  },
+  {
     "slug": "accessibility-agents-v2-launch",
     "title": "Blind Developers Launch Open Source AI Agent Teams to Fix Accessibility Gap in AI Coding Tools",
     "date": "2026-02-25",
