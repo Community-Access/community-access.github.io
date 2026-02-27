@@ -957,6 +957,21 @@ section { padding: 5rem 0; }
   max-width: 56rem;
   margin: 1.5rem auto 0;
 }
+.community-pillars-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem auto 0;
+  max-width: 36rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.5rem 2rem;
+}
+.community-pillars-list li {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ca-gray-200);
+}
 
 /* === Install Code Block === */
 .install-block {
