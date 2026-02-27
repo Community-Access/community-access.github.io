@@ -31,6 +31,7 @@
         <li><a href="#workshop" class="nav-workshop-link">Workshop</a></li>
         <li><a href="#mission">Mission</a></li>
         <li><a href="news.html">News</a></li>
+        <li><a href="#calendar">Calendar</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#feedback">Feedback</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
@@ -183,6 +184,59 @@
     <div style="text-align:center; margin-top: 2rem;">
       <a href="news.html" class="btn btn-outline" style="color: var(--ca-gray-800); border-color: var(--ca-gray-200);">View All News</a>
     </div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="container">
+    <div class="section-header">
+      <h2>Community Calendar</h2>
+      <p>Upcoming meetings, workshops, streams, and deadlines for the Community Access project.</p>
+    </div>
+
+    <div id="cal-countdown" class="cal-countdown" aria-live="polite" hidden>
+      <span id="cal-countdown-text"></span>
+    </div>
+
+    <div class="cal-wrapper">
+      <div class="cal-nav">
+        <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+          <span aria-hidden="true">&larr;</span> Previous
+        </button>
+        <h3 id="cal-month-label" aria-live="polite" class="cal-month-heading"></h3>
+        <button type="button" class="cal-nav-btn" id="cal-next" aria-label="Next month">
+          Next <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+
+      <table class="cal-grid" role="grid" aria-labelledby="cal-month-label">
+        <thead>
+          <tr>
+            <th scope="col" abbr="Sunday">Sun</th>
+            <th scope="col" abbr="Monday">Mon</th>
+            <th scope="col" abbr="Tuesday">Tue</th>
+            <th scope="col" abbr="Wednesday">Wed</th>
+            <th scope="col" abbr="Thursday">Thu</th>
+            <th scope="col" abbr="Friday">Fri</th>
+            <th scope="col" abbr="Saturday">Sat</th>
+          </tr>
+        </thead>
+        <tbody id="cal-body">
+        </tbody>
+      </table>
+
+      <div id="cal-events" class="cal-events" aria-live="polite">
+        <h3 id="cal-events-heading" class="cal-events-heading" tabindex="-1">Select a day to view events</h3>
+        <div id="cal-events-list"></div>
+      </div>
+    </div>
+
+    <noscript>
+      <p style="text-align:center; padding:2rem; color:var(--ca-gray-700);">
+        The interactive calendar requires JavaScript. View our upcoming events on
+        <a href="https://github.com/Community-Access">our GitHub page</a>.
+      </p>
+    </noscript>
   </div>
 </section>
 
@@ -1058,6 +1112,7 @@
           <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
           <li><a href="news.html">News</a></li>
+          <li><a href="#calendar">Calendar</a></li>
           <li><a href="https://community-access.github.io/git-going-with-github/">GIT Going with GitHub Workshop</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/RESEARCH-SOURCES.md">Research Sources</a></li>
