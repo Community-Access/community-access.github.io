@@ -132,14 +132,8 @@ body {
 .logo-mark {
   width: 2.5rem;
   height: 2.5rem;
-  background: rgba(255,255,255,0.15);
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--ca-emerald-light);
+  object-fit: cover;
 }
 
 .logo-text {
