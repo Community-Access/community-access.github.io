@@ -410,11 +410,54 @@
     return pages;
   }
 
-  // Fetch posts manifest
-  fetch('posts/posts.json')
+  var ORG = 'Community-Access';
+
+  // Fetch manual posts from posts.json
+  var postsPromise = fetch('posts/posts.json')
     .then(function (r) { return r.json(); })
     .then(function (posts) {
-      // Sort by date descending
+      return posts.map(function (p) {
+        return { date: p.date, title: p.title, summary: p.summary, type: p.type || '', repo: '', slug: p.slug, url: '#post/' + p.slug };
+      });
+    })
+    .catch(function () { return []; });
+
+  // Fetch releases from all org repos
+  var releasesPromise = fetch('https://api.github.com/orgs/' + ORG + '/repos?type=sources&per_page=100', {
+      headers: { 'Accept': 'application/vnd.github+json' }
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (repos) {
+      if (!Array.isArray(repos)) return [];
+      var fetches = repos
+        .filter(function (r) { return !r.fork; })
+        .map(function (repo) {
+          return fetch('https://api.github.com/repos/' + repo.full_name + '/releases?per_page=5', {
+            headers: { 'Accept': 'application/vnd.github+json' }
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (releases) {
+            if (!Array.isArray(releases)) return [];
+            return releases.map(function (rel) {
+              var date = rel.published_at ? rel.published_at.slice(0, 10) : rel.created_at.slice(0, 10);
+              var body = rel.body || '';
+              var summary = body.length > 150 ? body.slice(0, 150) + '...' : body;
+              summary = summary.replace(/[#*_`\[\]]/g, '').replace(/\n/g, ' ').trim();
+              return { date: date, title: rel.name || rel.tag_name, summary: summary || 'New release published.', type: 'Release', repo: repo.name, slug: null, url: rel.html_url };
+            });
+          })
+          .catch(function () { return []; });
+        });
+      return Promise.all(fetches).then(function (results) {
+        return results.reduce(function (acc, arr) { return acc.concat(arr); }, []);
+      });
+    })
+    .catch(function () { return []; });
+
+  // Combine posts + releases
+  Promise.all([postsPromise, releasesPromise])
+    .then(function (results) {
+      var posts = results[0].concat(results[1]);
       posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
 
       function renderList() {
@@ -438,8 +481,9 @@
           html += '<div class="news-card-meta">';
           html += '<time class="news-card-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
           if (post.type) html += '<span class="news-badge news-badge-type">' + post.type + '</span>';
+          if (post.repo) html += '<span class="news-badge news-badge-repo">' + post.repo + '</span>';
           html += '</div>';
-          html += '<h2 class="news-card-title"><a href="#post/' + post.slug + '">' + post.title + '</a></h2>';
+          html += '<h2 class="news-card-title"><a href="' + post.url + '">' + post.title + '</a></h2>';
           html += '<p class="news-card-summary">' + post.summary + '</p>';
           html += '</article>';
         });
@@ -490,7 +534,7 @@
       function renderPost(slug) {
         var post = null;
         for (var i = 0; i < posts.length; i++) {
-          if (posts[i].slug === slug) { post = posts[i]; break; }
+          if (posts[i].slug && posts[i].slug === slug) { post = posts[i]; break; }
         }
         if (!post) {
           container.innerHTML = '<div class="post-content"><p>Post not found. <a href="news.html">Back to News</a></p></div>';
