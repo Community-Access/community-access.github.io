@@ -383,29 +383,80 @@
 /* === Latest News Feed === */
 (function () {
   'use strict';
+  var ORG = 'Community-Access';
+
   function formatDate(dateStr) {
     var d = new Date(dateStr + 'T12:00:00');
     var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
   }
-  fetch('posts/posts.json')
+
+  function renderNews(items) {
+    var el = document.getElementById('latest-news');
+    if (!el || items.length === 0) {
+      if (el) el.innerHTML = '<p style="text-align:center;color:var(--ca-gray-700);">No news yet.</p>';
+      return;
+    }
+    var html = '<ol class="changelog-list">';
+    items.forEach(function (item) {
+      html += '<li class="changelog-item">';
+      html += '<time class="changelog-date" datetime="' + item.date + '">' + formatDate(item.date) + '</time>';
+      if (item.type) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-indigo);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + item.type + '</span>';
+      if (item.repo) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-emerald);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + item.repo + '</span>';
+      html += '<p style="margin-top:0.35rem;"><a href="' + item.url + '" style="color:var(--ca-gray-800);text-decoration:none;font-weight:700;">' + item.title + '</a></p>';
+      html += '<p style="margin-top:0.25rem;font-size:0.92rem;color:var(--ca-gray-700);">' + item.summary + '</p>';
+      html += '</li>';
+    });
+    html += '</ol>';
+    el.innerHTML = html;
+  }
+
+  // Fetch manual posts from posts.json
+  var postsPromise = fetch('posts/posts.json')
     .then(function (r) { return r.json(); })
     .then(function (posts) {
-      posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
-      var latest = posts.slice(0, 5);
-      var el = document.getElementById('latest-news');
-      if (!el || latest.length === 0) return;
-      var html = '<ol class="changelog-list">';
-      latest.forEach(function (post) {
-        html += '<li class="changelog-item">';
-        html += '<time class="changelog-date" datetime="' + post.date + '">' + formatDate(post.date) + '</time>';
-        if (post.type) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-indigo);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + post.type + '</span>';
-        html += '<p style="margin-top:0.35rem;"><a href="news.html#post/' + post.slug + '" style="color:var(--ca-gray-800);text-decoration:none;font-weight:700;">' + post.title + '</a></p>';
-        html += '<p style="margin-top:0.25rem;font-size:0.92rem;color:var(--ca-gray-700);">' + post.summary + '</p>';
-        html += '</li>';
+      return posts.map(function (p) {
+        return { date: p.date, title: p.title, summary: p.summary, type: p.type || '', repo: '', url: 'news.html#post/' + p.slug };
       });
-      html += '</ol>';
-      el.innerHTML = html;
+    })
+    .catch(function () { return []; });
+
+  // Fetch releases from all org repos
+  var releasesPromise = fetch('https://api.github.com/orgs/' + ORG + '/repos?type=sources&per_page=100', {
+      headers: { 'Accept': 'application/vnd.github+json' }
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (repos) {
+      var fetches = repos
+        .filter(function (r) { return !r.fork; })
+        .map(function (repo) {
+          return fetch('https://api.github.com/repos/' + repo.full_name + '/releases?per_page=5', {
+            headers: { 'Accept': 'application/vnd.github+json' }
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (releases) {
+            if (!Array.isArray(releases)) return [];
+            return releases.map(function (rel) {
+              var date = rel.published_at ? rel.published_at.slice(0, 10) : rel.created_at.slice(0, 10);
+              var body = rel.body || '';
+              var summary = body.length > 150 ? body.slice(0, 150) + '...' : body;
+              summary = summary.replace(/[#*_`\[\]]/g, '').replace(/\n/g, ' ').trim();
+              return { date: date, title: rel.name || rel.tag_name, summary: summary || 'New release published.', type: 'Release', repo: repo.name, url: rel.html_url };
+            });
+          })
+          .catch(function () { return []; });
+        });
+      return Promise.all(fetches).then(function (results) {
+        return results.reduce(function (acc, arr) { return acc.concat(arr); }, []);
+      });
+    })
+    .catch(function () { return []; });
+
+  Promise.all([postsPromise, releasesPromise])
+    .then(function (results) {
+      var all = results[0].concat(results[1]);
+      all.sort(function (a, b) { return b.date.localeCompare(a.date); });
+      renderNews(all.slice(0, 8));
     })
     .catch(function () {
       var el = document.getElementById('latest-news');
