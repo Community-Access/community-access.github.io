@@ -1,6 +1,6 @@
 # Building an Accessible Calendar with AI -- and Letting the Agents Review Their Own Work
 
-It is Thursday night. February 27th. I just shipped a community calendar for the Community Access website. The whole thing was built with Claude Code in one session. But the interesting part is not that AI wrote the code. The interesting part is what happened after.
+It is Friday. I just shipped a community calendar for the Community Access website. The whole thing was built with Claude Code in one session. But the interesting part is not that AI wrote the code. The interesting part is what happened after.
 
 I let our own accessibility agents review the calendar. And they found problems.
 
@@ -70,7 +70,9 @@ Event cards had the type badge and time before the title. So a screen reader wou
 
 The button borders used a light gray that had roughly 1.2:1 contrast against the white background. Buttons need visible boundaries. The agents recommended `#6b7280` for roughly 4.6:1.
 
-Fixed all of it. Shipped it.
+Fixed all of it. Then I tested the whole thing with VoiceOver myself. That is not optional. The agents catch code-level issues but they do not replace actually using a screen reader. I navigated the months, read through the event headings, downloaded the ICS files, and confirmed that everything worked the way a real screen reader user would expect.
+
+Then I shipped it.
 
 ## What This Actually Demonstrates
 
