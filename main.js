@@ -771,6 +771,29 @@
   }
 
   /* --- Countdown --- */
+  function parseEventDate(ev) {
+    // Convert "date + startTime in ev.timezone" to an absolute UTC timestamp
+    var iso = ev.date + 'T' + ev.startTime + ':00';
+    try {
+      var refUTC = new Date(iso + 'Z');
+      var fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone: ev.timezone,
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false
+      });
+      var p = {};
+      fmt.formatToParts(refUTC).forEach(function (part) {
+        if (part.type !== 'literal') p[part.type] = parseInt(part.value, 10);
+      });
+      var tzAsUTC = Date.UTC(p.year, p.month - 1, p.day, p.hour === 24 ? 0 : p.hour, p.minute, p.second || 0);
+      var offsetMs = tzAsUTC - refUTC.getTime();
+      return new Date(refUTC.getTime() - offsetMs);
+    } catch (e) {
+      return new Date(iso);
+    }
+  }
+
   function updateCountdown() {
     if (!countdownEl || !countdownText) return;
 
@@ -780,10 +803,7 @@
     var nearestTime = Infinity;
 
     allEvents.forEach(function (ev) {
-      var parts = ev.date.split('-');
-      var timeParts = ev.startTime.split(':');
-      var evDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10),
-        parseInt(timeParts[0], 10), parseInt(timeParts[1], 10));
+      var evDate = parseEventDate(ev);
 
       if (evDate > now && evDate <= weekFromNow) {
         var diff = evDate.getTime() - now.getTime();

@@ -1,17 +1,17 @@
 [
   {
     "uid": "ca-2026-02-27-stream-a11y-agents",
-    "title": "Talking Accessibility Agents",
+    "title": "Taylor Talks Accessibility Agents with Jeff",
     "date": "2026-02-27",
     "startTime": "15:00",
     "endTime": "17:00",
     "timezone": "America/Chicago",
     "type": "stream",
     "description": "Live stream on Taylor's YouTube channel talking about accessibility agents in Claude Code.",
-    "location": "https://youtube.com/@TaylorArndt",
+    "location": "https://www.youtube.com/watch?v=GX9hUWvNFmk",
     "locationType": "virtual",
     "recurrence": null,
-    "url": "https://youtube.com/@TaylorArndt"
+    "url": "https://www.youtube.com/watch?v=GX9hUWvNFmk"
   },
   {
     "uid": "ca-2026-03-07-workshop-git-day1",

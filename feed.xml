@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Community Access</title>
+    <link>https://community-access.org</link>
+    <description>News and press releases from Community Access -- making software accessible by default with AI-powered accessibility agents.</description>
+    <language>en-us</language>
+    <atom:link href="https://community-access.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Blind Developers Launch Open Source AI Agent Teams to Fix Accessibility Gap in AI Coding Tools</title>
+      <link>https://community-access.org/news.html#post/accessibility-agents-v2-launch</link>
+      <guid isPermaLink="true">https://community-access.org/news.html#post/accessibility-agents-v2-launch</guid>
+      <pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate>
+      <description>Community Access announces the public launch of Accessibility Agents -- 47 specialized AI agents, 14 knowledge modules, and 52 pre-built prompts across Claude Code, GitHub Copilot, and Claude Desktop.</description>
+      <category>Press Release</category>
+    </item>
+  </channel>
+</rss>
