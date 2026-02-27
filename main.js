@@ -648,8 +648,8 @@
         html += '</div>';
         html += '<p class="cal-event-description">' + ev.description + '</p>';
         html += '<div class="cal-event-subscribe">';
-        html += '<a href="' + buildGoogleCalUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Google Calendar">Add to Google Calendar</a>';
-        html += '<a href="' + buildOutlookUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Outlook">Add to Outlook</a>';
+        html += '<a href="' + buildGoogleCalUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Google Calendar (opens in new tab)">Add to Google Calendar</a>';
+        html += '<a href="' + buildOutlookUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Outlook (opens in new tab)">Add to Outlook</a>';
         html += '</div>';
         html += '</article>';
       });

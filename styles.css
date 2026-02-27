@@ -1618,13 +1618,13 @@ section { padding: 5rem 0; }
 .cal-subscribe-link {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--ca-indigo);
+  color: var(--ca-indigo-light);
   text-decoration: underline;
   padding: 0.25rem 0;
 }
 
 .cal-subscribe-link:hover,
-.cal-subscribe-link:focus {
+.cal-subscribe-link:focus-visible {
   color: var(--ca-violet);
 }
 
