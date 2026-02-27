@@ -1608,6 +1608,26 @@ section { padding: 5rem 0; }
   line-height: 1.6;
 }
 
+.cal-event-subscribe {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cal-subscribe-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ca-indigo);
+  text-decoration: underline;
+  padding: 0.25rem 0;
+}
+
+.cal-subscribe-link:hover,
+.cal-subscribe-link:focus {
+  color: var(--ca-violet);
+}
+
 .cal-event-type {
   display: inline-block;
   font-size: 0.7rem;

@@ -647,6 +647,10 @@
         }
         html += '</div>';
         html += '<p class="cal-event-description">' + ev.description + '</p>';
+        html += '<div class="cal-event-subscribe">';
+        html += '<a href="' + buildGoogleCalUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Google Calendar">Add to Google Calendar</a>';
+        html += '<a href="' + buildOutlookUrl(ev) + '" target="_blank" rel="noopener noreferrer" class="cal-subscribe-link" aria-label="Add ' + ev.title + ' to Outlook">Add to Outlook</a>';
+        html += '</div>';
         html += '</article>';
       });
 
@@ -657,6 +661,33 @@
 
     if (exportAllEl) exportAllEl.hidden = false;
     if (moveFocus) monthLabel.focus();
+  }
+
+  /* --- Subscribe URL builders --- */
+  function toGoogleDate(ds, timeStr) {
+    return ds.replace(/-/g, '') + 'T' + timeStr.replace(':', '') + '00';
+  }
+
+  function buildGoogleCalUrl(ev) {
+    var start = toGoogleDate(ev.date, ev.startTime);
+    var end = toGoogleDate(ev.date, ev.endTime);
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(ev.title) +
+      '&dates=' + start + '/' + end +
+      '&ctz=' + encodeURIComponent(ev.timezone) +
+      '&details=' + encodeURIComponent(ev.description) +
+      (ev.location ? '&location=' + encodeURIComponent(ev.location) : '');
+  }
+
+  function buildOutlookUrl(ev) {
+    var start = ev.date + 'T' + ev.startTime + ':00';
+    var end = ev.date + 'T' + ev.endTime + ':00';
+    return 'https://outlook.live.com/calendar/0/action/compose?rru=addevent' +
+      '&subject=' + encodeURIComponent(ev.title) +
+      '&startdt=' + encodeURIComponent(start) +
+      '&enddt=' + encodeURIComponent(end) +
+      '&body=' + encodeURIComponent(ev.description) +
+      (ev.location ? '&location=' + encodeURIComponent(ev.location) : '');
   }
 
   /* --- ICS generation --- */

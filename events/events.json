@@ -1,5 +1,19 @@
 [
   {
+    "uid": "ca-2026-02-27-stream-a11y-agents",
+    "title": "Talking Accessibility Agents",
+    "date": "2026-02-27",
+    "startTime": "15:00",
+    "endTime": "17:00",
+    "timezone": "America/Chicago",
+    "type": "stream",
+    "description": "Live stream on Taylor's YouTube channel talking about accessibility agents in Claude Code.",
+    "location": "https://youtube.com/@TaylorArndt",
+    "locationType": "virtual",
+    "recurrence": null,
+    "url": "https://youtube.com/@TaylorArndt"
+  },
+  {
     "uid": "ca-2026-03-07-workshop-git-day1",
     "title": "GIT Going with GitHub: Day 1",
     "date": "2026-03-07",
@@ -26,37 +40,5 @@
     "locationType": "virtual",
     "recurrence": null,
     "url": "https://community-access.github.io/git-going-with-github/"
-  },
-  {
-    "uid": "ca-2026-03-15-community-meeting",
-    "title": "Community Access Monthly Meeting",
-    "date": "2026-03-15",
-    "startTime": "11:00",
-    "endTime": "12:00",
-    "timezone": "America/Chicago",
-    "type": "meeting",
-    "description": "Monthly community sync to discuss project updates, new agents, and open issues.",
-    "location": "https://meet.google.com/community-access",
-    "locationType": "virtual",
-    "recurrence": {
-      "frequency": "monthly",
-      "interval": 1,
-      "until": "2027-03-15"
-    },
-    "url": "https://github.com/Community-Access"
-  },
-  {
-    "uid": "ca-2026-03-22-a11y-stream",
-    "title": "Live Coding: Accessibility Agent Development",
-    "date": "2026-03-22",
-    "startTime": "15:00",
-    "endTime": "17:00",
-    "timezone": "America/Chicago",
-    "type": "stream",
-    "description": "Live stream building and testing accessibility agents in Claude Code.",
-    "location": "https://youtube.com/@CommunityAccess",
-    "locationType": "virtual",
-    "recurrence": null,
-    "url": "https://youtube.com/@CommunityAccess"
   }
 ]
