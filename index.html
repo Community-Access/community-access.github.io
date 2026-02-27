@@ -32,6 +32,7 @@
         <li><a href="#mission">Mission</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><a href="#feedback">Feedback</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
@@ -1004,6 +1005,33 @@
   <p style="max-width: 48rem; margin: 0 auto;"><strong>AI and automated tools are not perfect.</strong> They miss things, make mistakes, and cannot replace testing with real screen readers and assistive technology. Always verify with VoiceOver, NVDA, JAWS, and keyboard-only navigation. This tooling is a helpful starting point, not a substitute for real accessibility testing.</p>
 </div>
 
+<section id="feedback" class="feedback-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Send Feedback</h2>
+      <p>Have a question, suggestion, or found a bug? Fill out this form and it will open a GitHub issue so we can follow up.</p>
+    </div>
+    <form id="feedback-form" class="feedback-form" novalidate>
+      <div class="feedback-field">
+        <label for="feedback-name">Your Name</label>
+        <input type="text" id="feedback-name" name="name" autocomplete="name" required>
+      </div>
+      <div class="feedback-field">
+        <label for="feedback-subject">Subject</label>
+        <input type="text" id="feedback-subject" name="subject" required>
+      </div>
+      <div class="feedback-field">
+        <label for="feedback-message">Message</label>
+        <textarea id="feedback-message" name="message" rows="5" required></textarea>
+      </div>
+      <div class="feedback-actions">
+        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+      </div>
+      <p class="feedback-note">Submitting opens a pre-filled GitHub issue in a new tab. A GitHub account is required.</p>
+    </form>
+  </div>
+</section>
+
 </main>
 
 <footer class="site-footer">
@@ -1022,6 +1050,7 @@
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/RESEARCH-SOURCES.md">Research Sources</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+          <li><a href="#feedback">Feedback</a></li>
         </ul>
       </nav>
     </div>
@@ -1056,6 +1085,23 @@
   };
   xhr.onerror = function() {};
   xhr.send();
+})();
+</script>
+<script>
+(function() {
+  var form = document.getElementById('feedback-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var name = document.getElementById('feedback-name').value.trim();
+    var subject = document.getElementById('feedback-subject').value.trim();
+    var message = document.getElementById('feedback-message').value.trim();
+    if (!name || !subject || !message) return;
+    var title = encodeURIComponent('[Feedback] ' + subject);
+    var body = encodeURIComponent('**From:** ' + name + '\n\n' + message);
+    var url = 'https://github.com/Community-Access/community-access.github.io/issues/new?title=' + title + '&body=' + body + '&labels=feedback';
+    window.open(url, '_blank', 'noopener');
+  });
 })();
 </script>
 </body>

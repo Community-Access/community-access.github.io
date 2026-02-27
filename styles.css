@@ -1336,6 +1336,60 @@ section { padding: 5rem 0; }
 .demo-val { color: #86efac; }
 .demo-err { color: #fca5a5; }
 
+/* === Feedback Form === */
+.feedback-section {
+  padding: 5rem 0;
+  background: var(--ca-gray-50);
+}
+@media (prefers-color-scheme: dark) {
+  .feedback-section { background: var(--ca-gray-900); }
+}
+.feedback-form {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.feedback-field {
+  margin-bottom: 1.25rem;
+}
+.feedback-field label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ca-gray-800);
+  margin-bottom: 0.35rem;
+}
+.feedback-field input,
+.feedback-field textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--ca-gray-200);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ca-gray-800);
+  background: var(--ca-white);
+  transition: border-color var(--transition);
+}
+.feedback-field input:focus,
+.feedback-field textarea:focus {
+  border-color: var(--ca-indigo);
+  outline: 3px solid var(--ca-focus);
+  outline-offset: 2px;
+}
+.feedback-field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+.feedback-actions {
+  margin-top: 1.5rem;
+}
+.feedback-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ca-gray-700);
+  text-align: center;
+}
+
 /* === Responsive === */
 @media (max-width: 48rem) {
   .hero { padding: 4rem 0 3.5rem; }
