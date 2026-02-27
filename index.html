@@ -1008,26 +1008,38 @@
 <section id="feedback" class="feedback-section">
   <div class="container">
     <div class="section-header">
-      <h2>Send Feedback</h2>
+      <h2 id="feedback-heading">Send Feedback</h2>
       <p>Have a question, suggestion, or found a bug? Fill out this form and it will open a GitHub issue so we can follow up.</p>
     </div>
-    <form id="feedback-form" class="feedback-form" novalidate>
+    <form id="feedback-form" class="feedback-form" novalidate aria-labelledby="feedback-heading">
+      <p class="feedback-required-note">All fields are required.</p>
       <div class="feedback-field">
-        <label for="feedback-name">Your Name</label>
-        <input type="text" id="feedback-name" name="name" autocomplete="name" required>
+        <label for="feedback-repo">Repository <span aria-hidden="true">*</span></label>
+        <select id="feedback-repo" name="repo" required aria-describedby="feedback-repo-error">
+          <option value="">Loading repositories...</option>
+        </select>
+        <span class="feedback-error" id="feedback-repo-error" role="alert"></span>
       </div>
       <div class="feedback-field">
-        <label for="feedback-subject">Subject</label>
-        <input type="text" id="feedback-subject" name="subject" required>
+        <label for="feedback-name">Your Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="feedback-name" name="name" autocomplete="name" required aria-describedby="feedback-name-error">
+        <span class="feedback-error" id="feedback-name-error" role="alert"></span>
       </div>
       <div class="feedback-field">
-        <label for="feedback-message">Message</label>
-        <textarea id="feedback-message" name="message" rows="5" required></textarea>
+        <label for="feedback-subject">Subject <span aria-hidden="true">*</span></label>
+        <input type="text" id="feedback-subject" name="subject" required aria-describedby="feedback-subject-error">
+        <span class="feedback-error" id="feedback-subject-error" role="alert"></span>
       </div>
+      <div class="feedback-field">
+        <label for="feedback-message">Message <span aria-hidden="true">*</span></label>
+        <textarea id="feedback-message" name="message" rows="5" required aria-describedby="feedback-message-error"></textarea>
+        <span class="feedback-error" id="feedback-message-error" role="alert"></span>
+      </div>
+      <p class="feedback-note" id="feedback-submit-hint">Submitting opens a pre-filled GitHub issue in a new tab. A GitHub account is required.</p>
       <div class="feedback-actions">
-        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        <button type="submit" class="btn btn-primary" aria-describedby="feedback-submit-hint">Submit Feedback</button>
       </div>
-      <p class="feedback-note">Submitting opens a pre-filled GitHub issue in a new tab. A GitHub account is required.</p>
+      <div id="feedback-status" role="status" aria-live="polite" class="sr-only"></div>
     </form>
   </div>
 </section>
@@ -1091,16 +1103,105 @@
 (function() {
   var form = document.getElementById('feedback-form');
   if (!form) return;
+  var repoSelect = document.getElementById('feedback-repo');
+  var repoLoadFailed = false;
+  var statusEl = document.getElementById('feedback-status');
+
+  function announceStatus(msg, delay) {
+    statusEl.textContent = msg;
+    setTimeout(function() { if (statusEl.textContent === msg) statusEl.textContent = ''; }, delay || 3000);
+  }
+
+  function handleRepoLoadError() {
+    repoLoadFailed = true;
+    repoSelect.innerHTML = '<option value="">Could not load repositories</option>';
+    repoSelect.disabled = true;
+    announceStatus('Could not load repositories.', 5000);
+  }
+
+  // Fetch org repos (exclude forks)
+  var repoUrl = 'https://api.github.com/orgs/Community-Access/repos?type=sources&per_page=100';
+  var repoXhr = new XMLHttpRequest();
+  repoXhr.open('GET', repoUrl);
+  repoXhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  repoXhr.onload = function() {
+    if (repoXhr.status === 200) {
+      try {
+        var repos = JSON.parse(repoXhr.responseText);
+        repos.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        repoSelect.innerHTML = '<option value="">Select a repository</option>';
+        repos.forEach(function(repo) {
+          if (repo.fork) return;
+          var opt = document.createElement('option');
+          opt.value = repo.full_name;
+          opt.textContent = repo.name + (repo.description ? ' — ' + repo.description : '');
+          repoSelect.appendChild(opt);
+        });
+        announceStatus('Repositories loaded.');
+      } catch (e) {
+        handleRepoLoadError();
+      }
+    } else {
+      handleRepoLoadError();
+    }
+  };
+  repoXhr.onerror = function() {
+    handleRepoLoadError();
+  };
+  repoXhr.send();
+
+  function showError(input, errorId, msg) {
+    input.setAttribute('aria-invalid', 'true');
+    document.getElementById(errorId).textContent = msg;
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.feedback-error').forEach(function(el) { el.textContent = ''; });
+    form.querySelectorAll('[aria-invalid]').forEach(function(el) { el.removeAttribute('aria-invalid'); });
+    document.getElementById('feedback-status').textContent = '';
+  }
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    var name = document.getElementById('feedback-name').value.trim();
-    var subject = document.getElementById('feedback-subject').value.trim();
-    var message = document.getElementById('feedback-message').value.trim();
-    if (!name || !subject || !message) return;
+    clearErrors();
+
+    var repoInput = document.getElementById('feedback-repo');
+    var nameInput = document.getElementById('feedback-name');
+    var subjectInput = document.getElementById('feedback-subject');
+    var messageInput = document.getElementById('feedback-message');
+    var repo = repoInput.value;
+    var name = nameInput.value.trim();
+    var subject = subjectInput.value.trim();
+    var message = messageInput.value.trim();
+    var firstInvalid = null;
+
+    if (!repo) {
+      showError(repoInput, 'feedback-repo-error', repoLoadFailed ? 'Repositories could not be loaded. Please reload the page and try again.' : 'Please select a repository.');
+      firstInvalid = firstInvalid || repoInput;
+    }
+    if (!name) {
+      showError(nameInput, 'feedback-name-error', 'Please enter your name.');
+      firstInvalid = firstInvalid || nameInput;
+    }
+    if (!subject) {
+      showError(subjectInput, 'feedback-subject-error', 'Please enter a subject.');
+      firstInvalid = firstInvalid || subjectInput;
+    }
+    if (!message) {
+      showError(messageInput, 'feedback-message-error', 'Please enter a message.');
+      firstInvalid = firstInvalid || messageInput;
+    }
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
     var title = encodeURIComponent('[Feedback] ' + subject);
     var body = encodeURIComponent('**From:** ' + name + '\n\n' + message);
-    var url = 'https://github.com/Community-Access/community-access.github.io/issues/new?title=' + title + '&body=' + body + '&labels=feedback';
+    var url = 'https://github.com/' + repo + '/issues/new?title=' + title + '&body=' + body + '&labels=feedback';
     window.open(url, '_blank', 'noopener');
+    document.getElementById('feedback-status').textContent = 'Your feedback has been opened in a new GitHub tab. If the tab did not open, please check your popup blocker.';
+    form.reset();
   });
 })();
 </script>

@@ -1359,7 +1359,8 @@ section { padding: 5rem 0; }
   margin-bottom: 0.35rem;
 }
 .feedback-field input,
-.feedback-field textarea {
+.feedback-field textarea,
+.feedback-field select {
   width: 100%;
   padding: 0.7rem 1rem;
   border: 2px solid var(--ca-gray-200);
@@ -1371,7 +1372,8 @@ section { padding: 5rem 0; }
   transition: border-color var(--transition);
 }
 .feedback-field input:focus,
-.feedback-field textarea:focus {
+.feedback-field textarea:focus,
+.feedback-field select:focus {
   border-color: var(--ca-indigo);
   outline: 3px solid var(--ca-focus);
   outline-offset: 2px;
@@ -1383,11 +1385,38 @@ section { padding: 5rem 0; }
 .feedback-actions {
   margin-top: 1.5rem;
 }
+.feedback-required-note {
+  font-size: 0.9rem;
+  color: var(--ca-gray-700);
+  margin-bottom: 1.25rem;
+}
 .feedback-note {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 0.85rem;
   color: var(--ca-gray-700);
   text-align: center;
+}
+.feedback-error {
+  display: block;
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin-top: 0.35rem;
+  min-height: 1.2em;
+}
+.feedback-field input[aria-invalid="true"],
+.feedback-field textarea[aria-invalid="true"],
+.feedback-field select[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+@media (prefers-color-scheme: dark) {
+  .feedback-field input[aria-invalid="true"],
+  .feedback-field textarea[aria-invalid="true"],
+  .feedback-field select[aria-invalid="true"] {
+    border-color: #f87171;
+  }
+  .feedback-error {
+    color: #fca5a5;
+  }
 }
 
 /* === Responsive === */
