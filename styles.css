@@ -1239,47 +1239,71 @@ section { padding: 5rem 0; }
   line-height: 1.7;
 }
 
-/* === Changelog === */
+/* === News === */
 .changelog-section { background: var(--ca-gray-50); padding: 5rem 0; }
 @media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-900); } }
-.changelog-list {
-  max-width: 48rem;
-  margin: 0 auto;
-  list-style: none;
-  padding: 0;
-  border-left: 3px solid var(--ca-indigo-light);
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
 }
-.changelog-item {
-  padding: 1.25rem 1.5rem;
-  position: relative;
+.news-card {
+  background: var(--ca-white);
+  border: 1px solid var(--ca-gray-200);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
-.changelog-item::before {
-  content: '';
-  position: absolute;
-  left: -0.55rem;
-  top: 1.6rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  background: var(--ca-indigo-light);
-  border-radius: 50%;
-  border: 2px solid var(--ca-gray-50);
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
 }
-@media (prefers-color-scheme: dark) {
-  .changelog-item::before { border-color: var(--ca-gray-900); }
+.news-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
-.changelog-date {
+.news-card-date {
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--ca-indigo-light);
-  display: block;
-  margin-bottom: 0.25rem;
 }
-.changelog-item p {
+.news-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+}
+.news-badge-type { background: var(--ca-indigo); }
+.news-badge-repo { background: var(--ca-emerald); }
+.news-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ca-gray-900);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+.news-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.news-card-title a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.news-card-summary {
   color: var(--ca-gray-700);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   margin: 0;
+  line-height: 1.6;
 }
 
 /* === Demo Snippet === */

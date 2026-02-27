@@ -397,17 +397,19 @@
       if (el) el.innerHTML = '<p style="text-align:center;color:var(--ca-gray-700);">No news yet.</p>';
       return;
     }
-    var html = '<ol class="changelog-list">';
+    var html = '<div class="news-grid">';
     items.forEach(function (item) {
-      html += '<li class="changelog-item">';
-      html += '<time class="changelog-date" datetime="' + item.date + '">' + formatDate(item.date) + '</time>';
-      if (item.type) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-indigo);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + item.type + '</span>';
-      if (item.repo) html += '<span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:var(--ca-emerald);color:#fff;padding:0.15rem 0.5rem;border-radius:3px;margin-left:0.5rem;vertical-align:middle;">' + item.repo + '</span>';
-      html += '<p style="margin-top:0.35rem;"><a href="' + item.url + '" style="color:var(--ca-gray-800);text-decoration:none;font-weight:700;">' + item.title + '</a></p>';
-      html += '<p style="margin-top:0.25rem;font-size:0.92rem;color:var(--ca-gray-700);">' + item.summary + '</p>';
-      html += '</li>';
+      html += '<article class="news-card">';
+      html += '<div class="news-card-meta">';
+      html += '<time class="news-card-date" datetime="' + item.date + '">' + formatDate(item.date) + '</time>';
+      if (item.type) html += '<span class="news-badge news-badge-type">' + item.type + '</span>';
+      if (item.repo) html += '<span class="news-badge news-badge-repo">' + item.repo + '</span>';
+      html += '</div>';
+      html += '<h3 class="news-card-title"><a href="' + item.url + '">' + item.title + '</a></h3>';
+      html += '<p class="news-card-summary">' + item.summary + '</p>';
+      html += '</article>';
     });
-    html += '</ol>';
+    html += '</div>';
     el.innerHTML = html;
   }
 
