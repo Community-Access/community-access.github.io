@@ -1104,7 +1104,6 @@
   var form = document.getElementById('feedback-form');
   if (!form) return;
   var repoSelect = document.getElementById('feedback-repo');
-  var repoLoadFailed = false;
   var statusEl = document.getElementById('feedback-status');
 
   function announceStatus(msg, delay) {
@@ -1112,14 +1111,31 @@
     setTimeout(function() { if (statusEl.textContent === msg) statusEl.textContent = ''; }, delay || 3000);
   }
 
-  function handleRepoLoadError() {
-    repoLoadFailed = true;
-    repoSelect.innerHTML = '<option value="">Could not load repositories</option>';
-    repoSelect.disabled = true;
-    announceStatus('Could not load repositories.', 5000);
+  // Fallback repos in case GitHub API is rate-limited
+  var fallbackRepos = [
+    { full_name: 'Community-Access/accessibility-agents', name: 'accessibility-agents' },
+    { full_name: 'Community-Access/community-access.github.io', name: 'community-access.github.io' },
+    { full_name: 'Community-Access/.github', name: '.github' },
+    { full_name: 'Community-Access/git-going-with-github', name: 'git-going-with-github' },
+    { full_name: 'Community-Access/Tell_me_Color', name: 'Tell_me_Color' }
+  ];
+
+  function populateRepos(repos) {
+    repoSelect.innerHTML = '<option value="">Select a repository</option>';
+    repos.forEach(function(repo) {
+      var opt = document.createElement('option');
+      opt.value = repo.full_name;
+      opt.textContent = repo.name + (repo.description ? ' — ' + repo.description : '');
+      repoSelect.appendChild(opt);
+    });
   }
 
-  // Fetch org repos (exclude forks)
+  function handleRepoLoadError() {
+    populateRepos(fallbackRepos);
+    announceStatus('Repositories loaded.');
+  }
+
+  // Fetch org repos (exclude forks), fall back to static list on failure
   var repoUrl = 'https://api.github.com/orgs/Community-Access/repos?type=sources&per_page=100';
   var repoXhr = new XMLHttpRequest();
   repoXhr.open('GET', repoUrl);
@@ -1128,15 +1144,9 @@
     if (repoXhr.status === 200) {
       try {
         var repos = JSON.parse(repoXhr.responseText);
+        repos = repos.filter(function(r) { return !r.fork; });
         repos.sort(function(a, b) { return a.name.localeCompare(b.name); });
-        repoSelect.innerHTML = '<option value="">Select a repository</option>';
-        repos.forEach(function(repo) {
-          if (repo.fork) return;
-          var opt = document.createElement('option');
-          opt.value = repo.full_name;
-          opt.textContent = repo.name + (repo.description ? ' — ' + repo.description : '');
-          repoSelect.appendChild(opt);
-        });
+        populateRepos(repos);
         announceStatus('Repositories loaded.');
       } catch (e) {
         handleRepoLoadError();
@@ -1176,7 +1186,7 @@
     var firstInvalid = null;
 
     if (!repo) {
-      showError(repoInput, 'feedback-repo-error', repoLoadFailed ? 'Repositories could not be loaded. Please reload the page and try again.' : 'Please select a repository.');
+      showError(repoInput, 'feedback-repo-error', 'Please select a repository.');
       firstInvalid = firstInvalid || repoInput;
     }
     if (!name) {
