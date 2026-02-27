@@ -625,20 +625,20 @@
       var dateLabel = formatFullDate(y, m, d);
 
       html += '<div class="cal-day-group">';
-      html += '<h3 class="cal-day-heading' + (isToday ? ' cal-day-heading--today' : '') + '">';
+      html += '<h4 class="cal-day-heading' + (isToday ? ' cal-day-heading--today' : '') + '">';
       html += dateLabel;
       if (isToday) html += '<span class="cal-today-badge">Today</span>';
-      html += '</h3>';
+      html += '</h4>';
 
       events.forEach(function (ev) {
         html += '<article class="cal-event-card">';
-        html += '<h4>';
+        html += '<h5>';
         if (ev.url) {
-          html += '<a href="' + ev.url + '" aria-label="' + ev.title + ', ' + dateLabel + '">' + ev.title + '</a>';
+          html += '<a href="' + ev.url + '">' + ev.title + '</a>';
         } else {
           html += ev.title;
         }
-        html += '</h4>';
+        html += '</h5>';
         html += '<div class="cal-event-meta">';
         html += '<span class="cal-event-type cal-event-type--' + ev.type + '">' + ev.type + '</span>';
         html += '<span>' + formatTime(ev.startTime) + ' – ' + formatTime(ev.endTime) + '</span>';

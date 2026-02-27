@@ -201,12 +201,12 @@
 
     <div class="cal-wrapper">
       <div class="cal-nav">
-        <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">
+        <button type="button" class="cal-nav-btn" id="cal-prev">
           <span aria-hidden="true">&larr;</span> Previous month
         </button>
         <div id="cal-month-announce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-        <p id="cal-month-label" class="cal-month-heading" tabindex="-1"></p>
-        <button type="button" class="cal-nav-btn" id="cal-next" aria-label="Next month">
+        <h3 id="cal-month-label" class="cal-month-heading" tabindex="-1"></h3>
+        <button type="button" class="cal-nav-btn" id="cal-next">
           Next month <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
@@ -216,10 +216,10 @@
       </div>
 
       <div class="cal-export-all" id="cal-export-all" hidden>
-        <button type="button" class="cal-export-btn" id="cal-export-ics" aria-label="Download all events this month as iCal file">
+        <button type="button" class="cal-export-btn" id="cal-export-ics" aria-describedby="cal-month-label">
           Download .ics
         </button>
-        <button type="button" class="cal-export-btn" id="cal-export-outlook" aria-label="Download all events this month for Outlook">
+        <button type="button" class="cal-export-btn" id="cal-export-outlook" aria-describedby="cal-month-label">
           Add to Outlook
         </button>
       </div>

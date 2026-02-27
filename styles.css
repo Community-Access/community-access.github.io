@@ -1574,20 +1574,20 @@ section { padding: 5rem 0; }
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
-.cal-event-card h4 {
+.cal-event-card h5 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--ca-gray-900);
   margin: 0 0 0.5rem;
 }
 
-.cal-event-card h4 a {
+.cal-event-card h5 a {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.cal-event-card h4 a:hover {
+.cal-event-card h5 a:hover {
   text-decoration-thickness: 2px;
 }
 
