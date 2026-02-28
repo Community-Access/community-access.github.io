@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Public repositories from the Community Access GitHub organization -- accessibility tools, workshops, and open source projects.">
+  <title>Repositories -- Community Access</title>
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ca-indigo: #4f46e5;
+      --ca-indigo-light: #4f46e5;
+      --ca-indigo-dark: #3730a3;
+      --ca-violet: #7c3aed;
+      --ca-emerald: #059669;
+      --ca-emerald-light: #34d399;
+      --ca-white: #ffffff;
+      --ca-gray-50: #f9fafb;
+      --ca-gray-100: #f3f4f6;
+      --ca-gray-200: #e5e7eb;
+      --ca-gray-700: #374151;
+      --ca-gray-800: #1f2937;
+      --ca-gray-900: #111827;
+      --ca-focus: #f59e0b;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      --max-width: 72rem;
+      --transition: 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ca-white: #111827;
+        --ca-gray-50: #1f2937;
+        --ca-gray-100: #1f2937;
+        --ca-gray-200: #374151;
+        --ca-gray-700: #d1d5db;
+        --ca-gray-800: #e5e7eb;
+        --ca-gray-900: #f9fafb;
+        --ca-indigo-light: #818cf8;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html { font-size: 100%; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ca-gray-800);
+      background: var(--ca-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--ca-focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--ca-gray-900);
+      color: var(--ca-gray-50);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+      transition: top var(--transition);
+    }
+    .skip-link:focus { top: 0; outline: 3px solid var(--ca-focus); outline-offset: 2px; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* === Header === */
+    .site-header {
+      background: linear-gradient(135deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 100%);
+      color: var(--ca-gray-50);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+    .logo-mark { width: 2.5rem; height: 2.5rem; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: var(--ca-emerald-light); }
+    .logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .header-nav > ul { list-style: none; display: flex; gap: 0.25rem; flex-wrap: wrap; }
+    .header-nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.95rem; font-weight: 500; transition: background var(--transition), color var(--transition); }
+    .header-nav a:hover, .header-nav a:focus-visible { background: rgba(255,255,255,0.15); color: var(--ca-gray-50); }
+    .header-nav a[aria-current="page"] { background: rgba(255,255,255,0.2); color: var(--ca-gray-50); }
+
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle { background: none; border: none; color: rgba(255,255,255,0.85); padding: 0.5rem 1rem; border-radius: 6px; font-family: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background var(--transition), color var(--transition); }
+    .nav-dropdown-toggle::after { content: ''; display: inline-block; width: 0.35em; height: 0.35em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-left: 0.4em; vertical-align: middle; transition: transform var(--transition); }
+    .nav-dropdown-toggle[aria-expanded="true"]::after { transform: rotate(-135deg); }
+    .nav-dropdown-toggle:hover, .nav-dropdown-toggle:focus-visible { background: rgba(255,255,255,0.15); color: var(--ca-gray-50); }
+    .header-nav .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 12rem; background: var(--ca-indigo-dark); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.4rem 0; margin-top: 0.25rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 200; list-style: none; }
+    .header-nav .nav-dropdown-menu.open { display: block; }
+    .nav-dropdown-menu a { display: block; padding: 0.5rem 1.25rem; border-radius: 0; font-size: 0.92rem; }
+    .nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus-visible { background: rgba(255,255,255,0.18); border-left: 3px solid rgba(255,255,255,0.5); }
+
+    /* === Page Header === */
+    .page-header {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.15rem;
+      max-width: 36rem;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* === Repo Cards === */
+    .repos-section { padding: 4rem 0; }
+    .repo-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 1.5rem; max-width: 64rem; margin: 0 auto; }
+    .repo-card {
+      background: var(--ca-white);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .repo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .repo-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .repo-name a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .repo-name a:hover { text-decoration-thickness: 2px; }
+    .repo-desc {
+      color: var(--ca-gray-700);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--ca-gray-700);
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .repo-meta span { display: inline-flex; align-items: center; gap: 0.25rem; }
+    .lang-dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .repo-topics { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+    .topic-tag { background: var(--ca-gray-100); color: var(--ca-indigo-light); padding: 0.125rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 500; }
+
+    /* === Loading / Error === */
+    .loading {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--ca-gray-700);
+      font-size: 1.1rem;
+    }
+    .error {
+      text-align: center;
+      padding: 4rem 0;
+      color: #b91c1c;
+      font-size: 1.1rem;
+    }
+
+    /* === Footer === */
+    .site-footer { background: var(--ca-gray-900); color: var(--ca-gray-50); padding: 3rem 0 2rem; }
+    @media (prefers-color-scheme: dark) { .site-footer { background: #0f172a; border-top: 1px solid var(--ca-gray-200); } }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color var(--transition); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--ca-gray-50); text-decoration: underline; text-underline-offset: 2px; }
+    .a11y-statement { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; color: #b0b8c4; text-align: center; max-width: 40rem; margin-left: auto; margin-right: auto; }
+    .footer-copy { font-size: 0.85rem; color: #9ca3af; margin-top: 2rem; text-align: center; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 48rem) {
+      .page-header { padding: 3rem 0 2rem; }
+      .repo-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <span class="logo-mark" aria-hidden="true">CA</span>
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#agents">Agents</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="repos.html" aria-current="page">Repositories</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="page-header">
+  <div class="container">
+    <h1>Repositories</h1>
+    <p>Open source projects from the Community Access organization on GitHub.</p>
+  </div>
+</div>
+
+<section class="repos-section">
+  <div class="container">
+    <div id="repo-container" aria-live="polite">
+      <p class="loading" role="status">Loading repositories&hellip;</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
+        <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="repos.html">Repositories</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">GIT Going with GitHub Workshop</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="a11y-statement">
+      <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences. If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var ORG = "Community-Access";
+  var API_URL = "https://api.github.com/orgs/" + encodeURIComponent(ORG) + "/repos?type=public&sort=updated&per_page=100";
+
+  var LANG_COLORS = {
+    JavaScript: "#f1e05a",
+    TypeScript: "#3178c6",
+    Python: "#3572a5",
+    HTML: "#e34c26",
+    CSS: "#563d7c",
+    Shell: "#89e051",
+    Ruby: "#701516",
+    Go: "#00add8",
+    Rust: "#dea584"
+  };
+
+  function escapeHTML(str) {
+    if (!str) return "";
+    var div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function renderRepos(repos) {
+    var container = document.getElementById("repo-container");
+
+    var publicRepos = repos.filter(function (r) {
+      return !r.private && !r.archived;
+    });
+
+    if (publicRepos.length === 0) {
+      container.innerHTML = '<p class="error" role="alert">No public repositories found.</p>';
+      return;
+    }
+
+    publicRepos.sort(function (a, b) {
+      if (b.stargazers_count !== a.stargazers_count) {
+        return b.stargazers_count - a.stargazers_count;
+      }
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
+
+    var status = document.createElement("p");
+    status.setAttribute("role", "status");
+    status.className = "sr-only";
+    status.textContent = publicRepos.length + " public repositories loaded.";
+
+    var list = document.createElement("ul");
+    list.className = "repo-list";
+    list.setAttribute("aria-label", "Public repositories");
+
+    publicRepos.forEach(function (repo) {
+      var li = document.createElement("li");
+      li.className = "repo-card";
+
+      var name = '<h2 class="repo-name"><a href="' + escapeHTML(repo.html_url) + '">' + escapeHTML(repo.name) + '</a></h2>';
+
+      var desc = repo.description
+        ? '<p class="repo-desc">' + escapeHTML(repo.description) + '</p>'
+        : '<p class="repo-desc" style="font-style:italic;opacity:0.6;">No description provided.</p>';
+
+      var meta = '<div class="repo-meta">';
+
+      if (repo.language) {
+        var color = LANG_COLORS[repo.language] || "#888";
+        meta += '<span><span class="lang-dot" style="background:' + escapeHTML(color) + '" aria-hidden="true"></span> ' + escapeHTML(repo.language) + '</span>';
+      }
+
+      meta += '<span aria-label="' + repo.stargazers_count + ' stars">&#9733; ' + repo.stargazers_count + '</span>';
+      meta += '<span aria-label="' + repo.forks_count + ' forks">&#9906; ' + repo.forks_count + '</span>';
+
+      if (repo.license && repo.license.spdx_id && repo.license.spdx_id !== "NOASSERTION") {
+        meta += '<span aria-label="License: ' + escapeHTML(repo.license.spdx_id) + '">&#9878; ' + escapeHTML(repo.license.spdx_id) + '</span>';
+      }
+
+      meta += '</div>';
+
+      var topics = '';
+      if (repo.topics && repo.topics.length > 0) {
+        topics = '<div class="repo-topics" aria-label="Topics">';
+        repo.topics.forEach(function (t) {
+          topics += '<span class="topic-tag">' + escapeHTML(t) + '</span>';
+        });
+        topics += '</div>';
+      }
+
+      li.innerHTML = name + desc + meta + topics;
+      list.appendChild(li);
+    });
+
+    container.innerHTML = "";
+    container.appendChild(status);
+    container.appendChild(list);
+  }
+
+  function showError(message) {
+    var container = document.getElementById("repo-container");
+    container.innerHTML = '<p class="error" role="alert">' + escapeHTML(message) + '</p>';
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", API_URL);
+  xhr.setRequestHeader("Accept", "application/vnd.github.mercy-preview+json");
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      try {
+        var data = JSON.parse(xhr.responseText);
+        renderRepos(data);
+      } catch (e) {
+        showError("Failed to parse repository data.");
+      }
+    } else if (xhr.status === 403) {
+      showError("GitHub API rate limit reached. Please try again later.");
+    } else {
+      showError("Failed to load repositories (HTTP " + xhr.status + ").");
+    }
+  };
+  xhr.onerror = function () {
+    showError("Network error. Could not reach GitHub.");
+  };
+  xhr.send();
+})();
+</script>
+</body>
+</html>
