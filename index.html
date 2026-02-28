@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Community Access — 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
+  <meta name="description" content="Community Access — 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
   <title>Community Access — Accessible by Default</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
@@ -213,7 +213,7 @@
       </div>
       <div class="stat-item">
         <dt class="stat-label">Platforms</dt>
-        <dd class="stat-number">6</dd>
+        <dd class="stat-number">5</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">Prompts</dt>
@@ -317,14 +317,13 @@
 <section id="install">
   <div class="container">
     <div class="section-header">
-      <h2>Six Platforms, One Command</h2>
+      <h2>Five Platforms, One Command</h2>
       <p>Same agents, same rules, every major AI coding environment.</p>
     </div>
     <div class="platform-grid">
       <div class="platform-badge">Claude Code<span>CLI</span></div>
       <div class="platform-badge">GitHub Copilot<span>VS Code</span></div>
       <div class="platform-badge">Claude Desktop<span>MCP</span></div>
-      <div class="platform-badge">Copilot CLI<span>Terminal</span></div>
       <div class="platform-badge">Codex CLI<span>OpenAI</span></div>
       <div class="platform-badge">Gemini CLI<span>Google</span></div>
     </div>
@@ -366,7 +365,7 @@
       <details>
         <summary>Does this work with VS Code?</summary>
         <div class="faq-body">
-          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
+          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code, Claude Desktop, Codex CLI, and Gemini CLI. The install command sets up all five platforms automatically.</p>
         </div>
       </details>
       <details>
@@ -454,6 +453,18 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var el = document.getElementById('workshop-reg-count');
+  if (!el) return;
+  fetch('https://api.github.com/search/issues?q=repo:community-access/git-going-with-github+label:registration+is:issue+is:open', {
+    headers: { 'Accept': 'application/vnd.github+json' }
+  })
+  .then(function (r) { return r.json(); })
+  .then(function (data) { if (data.total_count !== undefined) el.textContent = data.total_count; })
+  .catch(function () {});
+})();
+</script>
 <script src="main.js"></script>
 
 </body>

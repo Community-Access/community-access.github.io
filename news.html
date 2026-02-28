@@ -455,10 +455,17 @@
     })
     .catch(function () { return []; });
 
-  // Combine posts + releases
+  // Combine posts + releases (deduplicate releases covered by manual posts)
   Promise.all([postsPromise, releasesPromise])
     .then(function (results) {
-      var posts = results[0].concat(results[1]);
+      var manualPosts = results[0];
+      var releases = results[1];
+      var postTitlesLower = manualPosts.map(function (p) { return p.title.toLowerCase(); });
+      releases = releases.filter(function (rel) {
+        var t = rel.title.toLowerCase();
+        return !postTitlesLower.some(function (pt) { return pt.indexOf(t) !== -1; });
+      });
+      var posts = manualPosts.concat(releases);
       posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
 
       function renderList() {

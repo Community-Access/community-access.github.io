@@ -456,7 +456,14 @@
 
   Promise.all([postsPromise, releasesPromise])
     .then(function (results) {
-      var all = results[0].concat(results[1]);
+      var posts = results[0];
+      var releases = results[1];
+      var postTitlesLower = posts.map(function (p) { return p.title.toLowerCase(); });
+      releases = releases.filter(function (rel) {
+        var t = rel.title.toLowerCase();
+        return !postTitlesLower.some(function (pt) { return pt.indexOf(t) !== -1; });
+      });
+      var all = posts.concat(releases);
       all.sort(function (a, b) { return b.date.localeCompare(a.date); });
       renderNews(all.slice(0, 8));
     })
