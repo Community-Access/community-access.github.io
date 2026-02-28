@@ -3,10 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Community Access -- Making software accessible by default. 49 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI.">
+  <meta name="description" content="Community Access -- Making software accessible by default. 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI.">
   <title>Community Access -- Accessible by Default</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <style>
+    .team-card { display: flex; flex-direction: column; }
+    .team-card .team-count {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--ca-indigo);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .team-card .team-count span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ca-gray-700);
+    }
+    .team-card .team-link {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .team-card .team-link:hover { text-decoration-thickness: 2px; }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+      gap: 0.75rem;
+      margin: 2rem auto 2.5rem;
+      max-width: 44rem;
+    }
+    .platform-badge {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ca-gray-800);
+    }
+    .platform-badge span {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--ca-gray-700);
+      margin-top: 0.15rem;
+    }
+    .sub-agent-note {
+      text-align: center;
+      color: var(--ca-gray-700);
+      font-size: 0.92rem;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -46,7 +102,7 @@
 <section class="hero">
   <div class="container">
     <h1>Accessible <span class="hero-accent">by Default</span></h1>
-    <p>AI coding tools forget accessibility. Our agents make sure they never do. 49 specialized agents, 16 skills, and 54 ready-to-use prompts enforce WCAG 2.2 AA compliance inside Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI&mdash;so every line of code ships inclusive.</p>
+    <p>AI coding tools forget accessibility. Our agents make sure they never do. 55 specialized agents, 17 skills, and 54 ready-to-use prompts enforce WCAG 2.2 AA compliance inside Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI&mdash;so every line of code ships inclusive.</p>
     <div class="hero-actions">
       <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View on GitHub</a>
       <a href="#install" class="btn btn-outline">Install in 30 Seconds</a>
@@ -89,7 +145,7 @@
     <dl class="stats-grid">
       <div class="stat-item">
         <dt class="stat-label">Specialized Agents</dt>
-        <dd class="stat-number">49</dd>
+        <dd class="stat-number">55</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">Platforms</dt>
@@ -107,13 +163,6 @@
   </div>
 </div>
 
-<section class="wip-banner">
-  <div class="container">
-    <p><strong>This is a work in progress</strong>, built by and for the community. Come assess the work we are building, contribute your expertise, make a difference, and truly shape the future of free, open-source, and innovative accessibility tooling from an AI and agentic perspective. Every voice matters&mdash;especially yours.</p>
-    <a href="#contribute" class="btn btn-primary" style="margin-top:0.75rem;">Get Involved</a>
-  </div>
-</section>
-
 <section id="mission">
   <div class="container">
     <div class="section-header">
@@ -130,46 +179,141 @@
         <p>Built by and for the blind and low vision community. Every agent understands real-world assistive technology including NVDA, JAWS, and VoiceOver, not just spec compliance.</p>
       </div>
       <div class="feature-card">
-        <h3>One-Command Install</h3>
-        <p>A single command installs all agents across Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. No configuration files to write, no YAML to edit.</p>
+        <h3>Beyond Web Code</h3>
+        <p>Scan Word, Excel, PowerPoint, PDF, EPUB, and Markdown documents for accessibility. 46 rules for Office, 56 for PDF/UA, and 9 domains for Markdown auditing.</p>
       </div>
       <div class="feature-card">
-        <h3>Beyond Web Code</h3>
-        <p>Scan Word, Excel, PowerPoint, PDF, EPUB, and Markdown documents for accessibility. 46 rules for Office, 56 rules for PDF/UA, plus full documentation auditing.</p>
+        <h3>Desktop &amp; Python Development</h3>
+        <p>Six agents for Python, wxPython, and desktop app accessibility. Structured audit rules for wxPython controls and platform APIs across Windows, macOS, and Linux.</p>
       </div>
       <div class="feature-card">
         <h3>GitHub Workflow Agents</h3>
         <p>11 agents that manage repos, triage issues, review PRs, run analytics, and keep your team informed&mdash;all from natural language.</p>
       </div>
       <div class="feature-card">
-        <h3>VPAT Generation</h3>
-        <p>Generate VPAT 2.5 Accessibility Conformance Reports directly from agent scans. Compliance documentation from your codebase, not a spreadsheet.</p>
-      </div>
-      <div class="feature-card">
         <h3><a href="https://github.com/dequelabs/axe-core" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">axe-core</a> Integration</h3>
-        <p>Agents call <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> directly to scan rendered HTML for WCAG violations. Results feed back into the agent workflow so issues are detected, reported, and fixed in a single pass.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Markdown Documentation</h3>
-        <p>Agents audit Markdown files across 9 accessibility domains: heading structure, image alt text, link quality, language, tables, lists, readability, and more.</p>
+        <p>Agents call <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> directly to scan rendered HTML for WCAG violations. Issues are detected, reported, and fixed in a single pass.</p>
       </div>
       <div class="feature-card">
         <h3>Framework-Aware</h3>
         <p>Built-in fix templates for React, Vue, Angular, Svelte, and Tailwind CSS. Agents suggest idiomatic fixes in your framework, not generic HTML.</p>
       </div>
       <div class="feature-card">
-        <h3>Cognitive &amp; Mobile</h3>
-        <p>Full WCAG 2.2 cognitive accessibility criteria coverage plus React Native, iOS, and Android mobile accessibility auditing.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Decorative Image Detection</h3>
-        <p>Agents distinguish decorative images from meaningful ones. Decorative images get <code>alt=""</code> and <code>role="presentation"</code> in HTML, or <code>/Artifact</code> marking in PDF&mdash;so screen readers skip them instead of announcing meaningless filenames.</p>
+        <h3>VPAT Generation</h3>
+        <p>Generate VPAT 2.5 Accessibility Conformance Reports directly from agent scans. Compliance documentation from your codebase, not a spreadsheet.</p>
       </div>
       <div class="feature-card">
         <h3>CI Scanner Integration</h3>
-        <p>Integrates with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action and Google Lighthouse CI for automated WCAG scanning in your CI/CD pipeline. Results correlate with local agent scans for unified tracking.</p>
+        <p>Integrates with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action and Google Lighthouse CI for automated WCAG scanning in your pipeline.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="demo" class="demo-section bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>See It in Action</h2>
+      <p>Here is a real example. An AI tool generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-panel demo-bad">
+        <div class="demo-panel-header">Before &mdash; AI-Generated Code</div>
+        <pre><code><span class="demo-comment">&lt;!-- Missing alt, generic link text,</span>
+<span class="demo-comment">     no form label, wrong heading order --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h3&gt;</span>Our Team<span class="demo-tag">&lt;/h3&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span><span class="demo-err">Click here</span><span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">placeholder=</span><span class="demo-val">"Email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+      <div class="demo-panel demo-good">
+        <div class="demo-panel-header">After &mdash; Agent-Fixed Code</div>
+        <pre><code><span class="demo-comment">&lt;!-- Heading hierarchy, alt text,</span>
+<span class="demo-comment">     descriptive link, labeled input --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h2&gt;</span>Our Team<span class="demo-tag">&lt;/h2&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span> <span class="demo-attr">alt=</span><span class="demo-val">"Our team at the 2025 summit"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span>Learn about our team<span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;label</span> <span class="demo-attr">for=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span>Email<span class="demo-tag">&lt;/label&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">id=</span><span class="demo-val">"email"</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">autocomplete=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="container">
+    <div class="section-header">
+      <h2>Meet the Agent Teams</h2>
+      <p>55 specialists across five teams. Each agent owns one domain and enforces it relentlessly. <a href="docs.html" style="color: var(--ca-indigo-light); text-decoration: underline; text-underline-offset: 2px;">View the full documentation</a> for detailed descriptions, rule sets, and how each agent analyzes your content.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card team-card">
+        <h3>Web Accessibility</h3>
+        <p class="team-count">16 <span>agents</span></p>
+        <p>ARIA, modals, contrast, keyboard navigation, forms, headings, data tables, links, live regions, cognitive accessibility, mobile, design systems, and full guided audits with axe-core scanning.</p>
+        <a href="docs.html" class="team-link">View web agents &rarr;</a>
+      </div>
+      <div class="feature-card team-card">
+        <h3>Document Scanning</h3>
+        <p class="team-count">9 <span>agents</span></p>
+        <p>Word, Excel, PowerPoint, PDF, and EPUB accessibility scanning with 46 rules for Office, 56 for PDF/UA, and full EPUB Accessibility 1.1 conformance. VPAT generation and CSV export included.</p>
+        <a href="docs.html" class="team-link">View document agents &rarr;</a>
+      </div>
+      <div class="feature-card team-card">
+        <h3>Markdown Accessibility</h3>
+        <p class="team-count">3 <span>agents</span></p>
+        <p>Audit Markdown documentation across 9 domains: heading structure, image alt text, link quality, tables, emoji, Mermaid diagrams, language, readability, and anchor validation.</p>
+        <a href="docs.html" class="team-link">View markdown agents &rarr;</a>
+      </div>
+      <div class="feature-card team-card">
+        <h3>GitHub Workflows</h3>
+        <p class="team-count">11 <span>agents</span></p>
+        <p>Central hub, daily briefings, PR review, issue triage, analytics, VS Code Insiders tracking, repo administration, team management, community engagement, and template building.</p>
+        <a href="docs.html" class="team-link">View workflow agents &rarr;</a>
+      </div>
+      <div class="feature-card team-card">
+        <h3>Developer Tools</h3>
+        <p class="team-count">6 <span>agents</span></p>
+        <p>Python debugging and packaging, wxPython GUI development with 12 audit rules, desktop accessibility across platform APIs, screen reader testing workflows, and accessibility tool building.</p>
+        <a href="docs.html" class="team-link">View developer agents &rarr;</a>
+      </div>
+      <div class="feature-card team-card">
+        <h3>Hidden Sub-Agents</h3>
+        <p class="team-count">10+ <span>agents</span></p>
+        <p>Cross-document analysis, cross-page pattern detection, batch scanning, CSV export, automated web fixes, CI scanner bridges, and reporting. Invoked automatically by other agents.</p>
+        <a href="docs.html" class="team-link">View sub-agents &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>Six Platforms, One Command</h2>
+      <p>Same agents, same rules, every major AI coding environment. Pick your editor and get started.</p>
+    </div>
+    <div class="platform-grid">
+      <div class="platform-badge">Claude Code<span>CLI</span></div>
+      <div class="platform-badge">GitHub Copilot<span>VS Code</span></div>
+      <div class="platform-badge">Claude Desktop<span>MCP Extension</span></div>
+      <div class="platform-badge">Copilot CLI<span>Terminal</span></div>
+      <div class="platform-badge">Codex CLI<span>OpenAI</span></div>
+      <div class="platform-badge">Gemini CLI<span>Google</span></div>
+    </div>
+    <div class="install-block">
+      <div class="install-label">macOS / Linux</div>
+      <code id="cmd-mac">curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
+      <button class="copy-btn" aria-label="Copy macOS and Linux install command" data-target="cmd-mac">Copy</button>
+    </div>
+    <div class="install-block">
+      <div class="install-label">Windows (PowerShell)</div>
+      <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
+      <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
+    </div>
+    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. Auto-update support included. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo);">Read the full guide.</a></p>
   </div>
 </section>
 
@@ -234,663 +378,49 @@
   </div>
 </section>
 
-<section id="agents" class="bg-alt">
+<section id="faq" class="faq-section">
   <div class="container">
     <div class="section-header">
-      <h2>Meet the Agents</h2>
-      <p>49 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
+      <h2>Frequently Asked Questions</h2>
     </div>
-    <search class="search-filter">
-      <label for="agent-search">Search agents, skills, prompts, and tools</label>
-      <input type="search" id="agent-search" placeholder="Type to filter… e.g. contrast, PDF, heading" autocomplete="off">
-      <div class="search-status" aria-live="polite" id="search-status"></div>
-    </search>
-
-    <div class="accordion-controls" role="group" aria-label="Accordion controls">
-      <button type="button" id="expand-all" aria-label="Expand all sections">Expand All</button>
-      <button type="button" id="collapse-all" aria-label="Collapse all sections">Collapse All</button>
+    <div class="faq-list">
+      <details>
+        <summary>Does this work with VS Code?</summary>
+        <div class="faq-body">
+          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal), Claude Desktop (standalone app), Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Does any data leave my machine?</summary>
+        <div class="faq-body">
+          <p>The MCP tools all run locally. Document scanning, contrast checking, heading analysis, and axe-core scans happen entirely on your machine. The only network calls are the ones your AI platform already makes to its own API.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I use only some agents?</summary>
+        <div class="faq-body">
+          <p>Yes. Each agent is independent Markdown. You can delete any agent file you do not need, or use the <code>--project</code> flag to install only at the project level. You can also disable individual agents in your platform settings.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What WCAG version do the agents target?</summary>
+        <div class="faq-body">
+          <p>All web agents target WCAG 2.2 Level AA. Document agents map to WCAG 2.1 AA plus Microsoft Office Accessibility Checker rules. PDF agents follow PDF/UA (ISO 14289-1) via the Matterhorn Protocol.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Does this replace manual accessibility testing?</summary>
+        <div class="faq-body">
+          <p>No. Automated tools catch many issues but cannot replace testing with actual screen readers (NVDA, JAWS, VoiceOver) and keyboard-only navigation. These agents are a powerful first pass, not a substitute for real-world testing with assistive technology.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is this free?</summary>
+        <div class="faq-body">
+          <p>Yes. Community Access is open source and licensed under MIT. Every agent, skill, prompt, and tool is free to use, modify, and distribute.</p>
+        </div>
+      </details>
     </div>
-
-    <div class="accordion-group">
-
-      <details>
-        <summary>Web Accessibility Agents (16)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Web accessibility agents">
-            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Accessibility Lead</td><td>Orchestrates the full team&mdash;routes tasks to specialists, merges results, and ensures nothing gets missed.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How the web audit works</summary>
-                <div class="method-body">
-                  <p>The lead wizard runs a <strong>multi-phase guided audit</strong> by delegating to specialist sub-agents in parallel:</p>
-                  <ul>
-                    <li><strong>Code review</strong> &mdash; Each specialist reads your source files (HTML, JSX, Vue, Svelte) and applies its rule set against WCAG 2.2 AA criteria.</li>
-                    <li><strong>axe-core scan</strong> &mdash; The <code>run_axe_scan</code> tool launches axe-core against a live URL (e.g. <code>localhost:3000</code>) via Chromium, returning violations grouped by severity with affected elements and fix suggestions.</li>
-                    <li><strong>Framework-aware fixes</strong> &mdash; Specialists suggest idiomatic fixes for React, Vue, Angular, Svelte, and Tailwind CSS rather than generic HTML.</li>
-                    <li><strong>Aggregation</strong> &mdash; Results from all specialists are merged, deduplicated, severity-scored, and compiled into a prioritized action plan.</li>
-                  </ul>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>ARIA Specialist</td><td>Makes sure interactive elements like buttons, menus, and tabs are properly announced to screen readers.</td></tr>
-            <tr><td>Modal Specialist</td><td>Verifies that dialogs and modals trap focus correctly, return focus on close, and announce themselves.</td></tr>
-            <tr><td>Contrast Master</td><td>Checks that text and backgrounds have enough color difference for people with low vision.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How contrast checking works</summary>
-                <div class="method-body">
-                  <p>The <code>check_contrast</code> MCP tool calculates the <strong>WCAG luminance contrast ratio</strong> between any two hex colors using the sRGB-to-linear conversion formula, then reports pass/fail for:</p>
-                  <ul>
-                    <li>Normal text: 4.5:1 minimum</li>
-                    <li>Large text (18px+ or 14px+ bold): 3:1 minimum</li>
-                    <li>UI components and focus indicators: 3:1 minimum</li>
-                  </ul>
-                  <p>The agent also scans CSS for common Tailwind failures (e.g. <code>text-gray-400</code> on white = 2.85:1 FAIL) and checks dark mode colors independently.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Keyboard Navigator</td><td>Ensures every interactive element is reachable and operable with keyboard alone&mdash;no mouse required.</td></tr>
-            <tr><td>Live Region Controller</td><td>Manages dynamic content announcements so screen readers hear updates like toasts, alerts, and loading states.</td></tr>
-            <tr><td>Forms Specialist</td><td>Validates that every form input has a visible label, proper autocomplete, and clear error messaging.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How form checking works</summary>
-                <div class="method-body">
-                  <p>The <code>check_form_labels</code> MCP tool parses HTML to verify every <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code> has a programmatic label via <code>&lt;label for&gt;</code>, <code>aria-label</code>, or <code>aria-labelledby</code>. Also checks:</p>
-                  <ul>
-                    <li><code>aria-labelledby</code> references point to existing IDs</li>
-                    <li>Identity fields (email, tel, password) have <code>autocomplete</code> attributes</li>
-                    <li>Radio/checkbox groups are wrapped in <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code></li>
-                  </ul>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Alt Text &amp; Headings</td><td>Checks image alt text quality and heading hierarchy so pages make sense when read linearly.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How heading analysis works</summary>
-                <div class="method-body">
-                  <p>The <code>check_heading_structure</code> MCP tool extracts every <code>&lt;h1&gt;</code>&ndash;<code>&lt;h6&gt;</code> from HTML, builds the heading outline, and flags:</p>
-                  <ul>
-                    <li>No headings at all, or no H1</li>
-                    <li>Multiple H1 elements on one page</li>
-                    <li>Skipped levels (e.g. H1 &rarr; H3 with no H2)</li>
-                    <li>Empty headings that confuse screen readers</li>
-                  </ul>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Tables Specialist</td><td>Ensures data tables have proper headers, captions, and scope attributes for screen reader navigation.</td></tr>
-            <tr><td>Link Checker</td><td>Flags vague link text like &ldquo;click here&rdquo; and ensures links describe their destination.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How link checking works</summary>
-                <div class="method-body">
-                  <p>The <code>check_link_text</code> MCP tool scans every <code>&lt;a&gt;</code> in HTML and flags:</p>
-                  <ul>
-                    <li>Ambiguous text (&ldquo;click here&rdquo;, &ldquo;read more&rdquo;, &ldquo;learn more&rdquo;, etc.)</li>
-                    <li>URLs used as link text (screen readers spell out the full URL)</li>
-                    <li>Repeated identical text pointing to different destinations</li>
-                    <li>Links opening in new tabs without warning</li>
-                    <li>Links to non-HTML files (PDF, DOCX) without file type indication</li>
-                  </ul>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Web Accessibility Wizard</td><td>Interactive guided audit&mdash;walks you through a full accessibility review step by step.</td></tr>
-            <tr><td>Testing Coach</td><td>Teaches you how to test with screen readers, keyboard, and browser dev tools.</td></tr>
-            <tr><td>WCAG Guide</td><td>Explains any WCAG 2.2 success criterion in plain language with practical examples.</td></tr>
-            <tr><td>Cognitive Accessibility</td><td>Audits for WCAG 2.2 cognitive criteria: reading level, consistent navigation, error prevention, and timeouts.</td></tr>
-            <tr><td>Mobile Accessibility</td><td>Checks touch targets, viewport scaling, orientation, and mobile screen reader patterns.</td></tr>
-            <tr><td>Design System Auditor</td><td>Reviews component libraries and design tokens for accessibility patterns and consistency.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Document Accessibility Agents (9)</summary>
-        <div class="accordion-body">
-          <p>Our Word, Excel, and PowerPoint agents are built on the <strong>public-facing rules used by Microsoft Office&rsquo;s built-in accessibility checkers</strong>. We study the published documentation for these rules and map them to WCAG 2.1 AA criteria so the agents can surface the same issues&mdash;and more&mdash;directly inside your AI workflow.</p>
-          <table class="agent-table" aria-label="Document accessibility agents">
-            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Word Accessibility</td><td>Scans .docx files for heading structure, alt text, reading order, table headers, and language.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How Word analysis works</summary>
-                <div class="method-body">
-                  <p>A <code>.docx</code> file is a ZIP archive containing XML. The agent (and the <code>scan_office_document</code> MCP tool) <strong>unzips the file and reads the XML directly</strong>:</p>
-                  <ul>
-                    <li><strong>word/document.xml</strong> &mdash; Parses <code>&lt;w:pStyle w:val="Heading1"&gt;</code> to verify heading hierarchy, checks <code>&lt;wp:docPr descr="..."&gt;</code> for image alt text, scans <code>&lt;w:tblHeader&gt;</code> for table header rows, and flags <code>&lt;w:gridSpan&gt;</code>/<code>&lt;w:vMerge&gt;</code> for merged cells.</li>
-                    <li><strong>docProps/core.xml</strong> &mdash; Reads <code>&lt;dc:title&gt;</code> and <code>&lt;dc:language&gt;</code> to verify document metadata.</li>
-                    <li><strong>word/_rels/document.xml.rels</strong> &mdash; Resolves hyperlink targets so link text can be checked for ambiguity.</li>
-                  </ul>
-                  <p>Rule set: 9 errors, 6 warnings, 3 tips&mdash;mapped to WCAG 2.1 AA and derived from the public-facing rules of <strong>Microsoft Word&rsquo;s built-in Accessibility Checker</strong>.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Excel Accessibility</td><td>Checks spreadsheets for sheet names, table formatting, merged cells, chart alt text, and data validation.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How Excel analysis works</summary>
-                <div class="method-body">
-                  <p>An <code>.xlsx</code> file is also a ZIP of XML. The agent reads:</p>
-                  <ul>
-                    <li><strong>xl/workbook.xml</strong> &mdash; Checks <code>&lt;sheet name="..."&gt;</code> for default names like &ldquo;Sheet1&rdquo;.</li>
-                    <li><strong>xl/worksheets/sheet*.xml</strong> &mdash; Scans for <code>&lt;mergeCell&gt;</code> regions, empty sheets, conditional formatting (color-only data), and hyperlink display text.</li>
-                    <li><strong>xl/tables/table*.xml</strong> &mdash; Verifies <code>headerRowCount</code> is not &ldquo;0&rdquo;.</li>
-                    <li><strong>xl/drawings/drawing*.xml</strong> &mdash; Checks <code>&lt;xdr:cNvPr descr="..."&gt;</code> for chart and image alt text.</li>
-                  </ul>
-                  <p>Rule set: 8 errors, 5 warnings, 3 tips&mdash;derived from the public-facing rules of <strong>Microsoft Excel&rsquo;s built-in Accessibility Checker</strong>.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>PowerPoint Accessibility</td><td>Audits slide reading order, alt text on images, slide titles, table structure, and color contrast.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How PowerPoint analysis works</summary>
-                <div class="method-body">
-                  <p>A <code>.pptx</code> file is a ZIP of XML. The agent reads:</p>
-                  <ul>
-                    <li><strong>ppt/slides/slide*.xml</strong> &mdash; Locates <code>&lt;p:ph type="title"&gt;</code> placeholders to verify every slide has a title. Checks <code>&lt;p:cNvPr descr="..."&gt;</code> for image and shape alt text. Flags <code>gridSpan</code>/<code>rowSpan</code> in tables.</li>
-                    <li><strong>ppt/presentation.xml</strong> &mdash; Checks for <code>&lt;p:sectionLst&gt;</code> in presentations over 10 slides.</li>
-                    <li><strong>Duplicate detection</strong> &mdash; Flags slides with identical title text, which breaks screen reader slide navigation.</li>
-                    <li><strong>Media</strong> &mdash; Flags <code>&lt;p:vid&gt;</code> and <code>&lt;a:audioFile&gt;</code> elements that need captions.</li>
-                  </ul>
-                  <p>Rule set: 5 errors, 4 warnings, 4 tips&mdash;derived from the public-facing rules of <strong>Microsoft PowerPoint&rsquo;s built-in Accessibility Checker</strong>.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Office Scan Config</td><td>Configures which rules to enable or disable for Office document scans.</td></tr>
-            <tr><td>PDF Accessibility</td><td>Validates PDF/UA compliance using the Matterhorn Protocol&mdash;56 checkpoint rules.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How PDF analysis works</summary>
-                <div class="method-body">
-                  <p>The agent (and <code>scan_pdf_document</code> MCP tool) parses the <strong>PDF internal structure</strong> to check conformance with PDF/UA (ISO 14289-1) via the Matterhorn Protocol:</p>
-                  <ul>
-                    <li><strong>Structure tree</strong> &mdash; Verifies <code>/StructTreeRoot</code> exists and <code>/MarkInfo /Marked true</code> is set (tagged PDF).</li>
-                    <li><strong>Semantic tags</strong> &mdash; Checks that content uses standard tags (<code>/P</code>, <code>/H1</code>&ndash;<code>/H6</code>, <code>/Table</code>, <code>/Figure</code>, <code>/Link</code>, <code>/L</code>) with correct nesting.</li>
-                    <li><strong>Figures</strong> &mdash; Every <code>/Figure</code> element must have an <code>/Alt</code> text entry. Decorative images must be marked as <code>/Artifact</code>.</li>
-                    <li><strong>Tables</strong> &mdash; <code>/TH</code> cells must have <code>/Scope</code>. Complex spanning requires <code>/Headers</code> attribute.</li>
-                    <li><strong>Language</strong> &mdash; Catalog must have <code>/Lang</code> in valid BCP 47 format. Inline language switches need <code>/Span</code> tags.</li>
-                    <li><strong>Bookmarks</strong> &mdash; Documents over 20 pages must have <code>/Outlines</code> for navigation.</li>
-                  </ul>
-                  <p>Three rule layers: PDFUA (conformance), PDFBP (best practices), PDFQ (quality). Supports SARIF output for CI integration.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>PDF Scan Config</td><td>Configures which PDF/UA rules to enable or disable for PDF scans.</td></tr>
-            <tr><td>Document Wizard</td><td>Interactive guided document audit&mdash;walks you through a full review step by step.</td></tr>
-            <tr><td>EPUB Accessibility</td><td>Scans EPUB publications for accessibility metadata, navigation, alt text, reading order, and semantic structure.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How EPUB analysis works</summary>
-                <div class="method-body">
-                  <p>An EPUB is a ZIP containing XHTML content documents, a package OPF, and navigation files. The agent reads:</p>
-                  <ul>
-                    <li><strong>Package OPF</strong> &mdash; Checks <code>&lt;dc:title&gt;</code>, <code>&lt;dc:identifier&gt;</code>, <code>&lt;dc:language&gt;</code>, and <code>schema.org</code> accessibility metadata (<code>accessMode</code>, <code>accessibilityFeature</code>, <code>accessibilitySummary</code>).</li>
-                    <li><strong>Navigation document</strong> &mdash; Verifies <code>&lt;nav epub:type="toc"&gt;</code>, <code>page-list</code>, and <code>landmarks</code> exist.</li>
-                    <li><strong>Content documents</strong> &mdash; Scans each XHTML file for image alt text, heading hierarchy, table headers, ambiguous link text, and color-only information.</li>
-                    <li><strong>Spine</strong> &mdash; Checks <code>&lt;itemref&gt;</code> order for logical reading sequence.</li>
-                  </ul>
-                  <p>Conforms to EPUB Accessibility 1.1 mapped to WCAG 2.1 AA. Rule set: 7 errors, 6 warnings, 4 tips.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>EPUB Scan Config</td><td>Configures which rules to enable or disable for EPUB accessibility scans.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Markdown Accessibility Agents (3)</summary>
-        <div class="accordion-body">
-          <p>These agents audit Markdown documentation for accessibility across 9 domains.</p>
-          <table class="agent-table" aria-label="Markdown accessibility agents">
-            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Markdown Assistant</td><td>Orchestrates Markdown audits&mdash;coordinates the scanner and fixer for full documentation reviews.</td></tr>
-            <tr><td>Markdown Scanner</td><td>Scans .md files for heading structure, image alt text, link quality, tables, and readability. Runs automatically.</td></tr>
-            <tr class="method-row"><td colspan="2">
-              <details class="method-detail">
-                <summary>How Markdown analysis works</summary>
-                <div class="method-body">
-                  <p>The scanner reads each <code>.md</code> file and runs two analysis passes:</p>
-                  <ul>
-                    <li><strong>markdownlint</strong> &mdash; Runs <code>npx markdownlint-cli2</code> to catch structural violations (MD001 heading hierarchy, MD025 multiple H1s, MD034 bare URLs, MD045 missing image alt text, MD055/056 table formatting).</li>
-                    <li><strong>9-domain accessibility scan</strong> &mdash; Checks each line for:
-                      <ul>
-                        <li>Descriptive links (WCAG 2.4.4) &mdash; flags &ldquo;click here&rdquo;, bare URLs, repeated identical text</li>
-                        <li>Image alt text (WCAG 1.1.1) &mdash; empty or decorative alt, oversized alt text</li>
-                        <li>Heading hierarchy (WCAG 2.4.6) &mdash; skipped levels, missing top-level heading</li>
-                        <li>Table accessibility &mdash; alignment-only headers, missing header rows</li>
-                        <li>Emoji (cognitive accessibility) &mdash; excessive or decorative emoji that confuse screen readers</li>
-                        <li>Mermaid/ASCII diagrams &mdash; no text alternative for visual diagrams</li>
-                        <li>Language markers, readability, and list structure</li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <p>Each issue gets a severity, line number, and auto-fix classification. The fixer then applies safe fixes automatically.</p>
-                </div>
-              </details>
-            </td></tr>
-            <tr><td>Markdown Fixer</td><td>Applies automated fixes for accessibility issues found by the scanner. Runs automatically.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>GitHub Workflow Agents (11)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="GitHub workflow agents">
-            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>GitHub Hub</td><td>Central router for all GitHub operations&mdash;directs requests to the right specialist.</td></tr>
-            <tr><td>Daily Briefing</td><td>Gives you a morning summary of what happened in your repo overnight.</td></tr>
-            <tr><td>PR Review</td><td>Reviews pull requests for accessibility issues, code quality, and adherence to contribution standards.</td></tr>
-            <tr><td>Issue Tracker</td><td>Manages issue triage, labeling, assignment, and status tracking.</td></tr>
-            <tr><td>Analytics</td><td>Generates repository health reports: PR velocity, issue resolution time, contributor activity.</td></tr>
-            <tr><td>Insiders Tracker</td><td>Tracks VS Code Insiders accessibility issues and cross-references with your project.</td></tr>
-            <tr><td>Repo Admin</td><td>Handles repository settings, branch protection, and administrative tasks.</td></tr>
-            <tr><td>Team Manager</td><td>Manages team members, permissions, and collaboration workflows.</td></tr>
-            <tr><td>Contributions Hub</td><td>Tracks contributor activity, recognitions, and community engagement.</td></tr>
-            <tr><td>Template Builder</td><td>Creates issue templates, PR templates, and other repository scaffolding.</td></tr>
-            <tr><td>Repo Manager</td><td>Manages repository lifecycle: creation, archival, settings, and maintenance.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Nexus &amp; Hidden Sub-Agents (12)</summary>
-        <div class="accordion-body">
-          <p>These agents run behind the scenes. You never invoke them directly&mdash;other agents call them as needed.</p>
-          <table class="agent-table" aria-label="Hidden sub-agents">
-            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Nexus</td><td>Top-level orchestrator that coordinates across all agent teams for complex multi-domain tasks.</td></tr>
-            <tr><td>Document Inventory</td><td>Catalogs all documents in a project before a batch scan begins.</td></tr>
-            <tr><td>Cross-Document Analyzer</td><td>Finds patterns and inconsistencies across multiple documents in a batch.</td></tr>
-            <tr><td>Cross-Page Analyzer</td><td>Finds accessibility patterns that span multiple web pages (navigation, headers, footers).</td></tr>
-            <tr><td>Web Issue Fixer</td><td>Applies automated code fixes for web accessibility issues found during audits.</td></tr>
-            <tr><td>Scanner Bridge</td><td>Bridges GitHub Accessibility Scanner CI data into the agent ecosystem&mdash;parses scanner-created issues and correlates with local scans.</td></tr>
-            <tr><td>Lighthouse Bridge</td><td>Bridges Lighthouse CI accessibility audit data into the agent ecosystem&mdash;tracks score regressions and deduplicates against local scans.</td></tr>
-            <tr><td>Web CSV Reporter</td><td>Exports web audit results to CSV format for spreadsheet analysis.</td></tr>
-            <tr><td>Document CSV Reporter</td><td>Exports document audit results to CSV format for spreadsheet analysis.</td></tr>
-            <tr><td>Markdown CSV Reporter</td><td>Exports Markdown audit results to CSV format for spreadsheet analysis.</td></tr>
-            <tr><td>Markdown Scanner</td><td>Scans Markdown files for accessibility issues (invoked by Markdown Assistant).</td></tr>
-            <tr><td>Markdown Fixer</td><td>Applies fixes to Markdown files (invoked by Markdown Assistant).</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<section id="platforms">
-  <div class="container">
-    <div class="section-header">
-      <h2>How It Works Across Platforms</h2>
-      <p>Same agents, same rules, six different platforms. Pick your editor and get started.</p>
-    </div>
-    <div class="accordion-group">
-
-      <details open>
-        <summary>Claude Code (CLI)</summary>
-        <div class="accordion-body">
-          <p>Agents live in <code>.claude/agents/</code> as Markdown files. Each agent has a dedicated system prompt that defines its identity and expertise.</p>
-          <p>Specialists run in parallel groups for fast audits&mdash;the Accessibility Lead orchestrates the full team so you get comprehensive results from a single command.</p>
-          <p>Install with one command. The installer copies all 49 agents and configures everything automatically.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>GitHub Copilot (VS Code)</summary>
-        <div class="accordion-body">
-          <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>. Accessibility rules are injected into every Copilot chat via <code>copilot-instructions.md</code>.</p>
-          <p>Same agents, same rules, same parallel execution as Claude Code. All 54 prompts are available as <code>.prompt.md</code> files you can invoke directly in Copilot Chat.</p>
-          <p>16 skills provide shared knowledge modules that keep all agents consistent.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Claude Desktop (Standalone App)</summary>
-        <div class="accordion-body">
-          <p>Uses MCP (Model Context Protocol) since Desktop does not have an agent system. 11 tools provide contrast checking, heading audits, form validation, axe-core scanning, document scanning, and VPAT generation.</p>
-          <p>6 built-in prompts cover common accessibility reviews: full audit, ARIA review, modal review, contrast review, keyboard review, and live region review.</p>
-          <p>Install by downloading the <code>.mcpb</code> extension bundle from the releases page.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Copilot CLI (GitHub Copilot in Terminal)</summary>
-        <div class="accordion-body">
-          <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>&mdash;the same files used by VS Code Copilot. Copilot CLI reads the agent definitions and applies accessibility rules directly in your terminal workflow.</p>
-          <p>All 54 prompts, 16 skills, and 49 agents work identically to the VS Code experience. The installer configures Copilot CLI support automatically alongside VS Code.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Codex CLI (OpenAI)</summary>
-        <div class="accordion-body">
-          <p>Agents are configured via <code>.codex/agents/AGENTS.md</code>, which maps agent names to their instruction files. Codex CLI reads agent definitions from the same <code>.claude/agents/</code> directory used by Claude Code.</p>
-          <p>Accessibility rules are injected into every session through <code>.codex/AGENTS.md</code> instructions. The installer creates the Codex configuration automatically.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Gemini CLI (Google)</summary>
-        <div class="accordion-body">
-          <p>Uses a Gemini extension bundle (<code>gemini-extension.json</code>) with 63 skill files that embed agent knowledge, scanning rules, and reporting templates directly into Gemini CLI sessions.</p>
-          <p>The extension covers all four teams: web accessibility, document scanning, markdown auditing, and GitHub workflows. Gemini reads the skill files from <code>.gemini/extensions/accessibility/</code>.</p>
-          <p>Install with the same one-command installer&mdash;it detects Gemini CLI and configures the extension automatically.</p>
-        </div>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="bg-alt">
-  <div class="container">
-    <div class="section-header">
-      <h2>Skills &mdash; Shared Knowledge Modules</h2>
-      <p>Skills are reusable knowledge packs that multiple agents draw from. They ensure consistency&mdash;every agent that checks contrast uses the same rules.</p>
-    </div>
-    <div class="accordion-group">
-
-      <details>
-        <summary>Accessibility Skills (6)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Accessibility skills">
-            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Accessibility Rules</td><td>Core WCAG 2.2 AA rules shared by all accessibility agents.</td></tr>
-            <tr><td>Framework Accessibility</td><td>React, Vue, Angular, Svelte, and Tailwind CSS fix templates and patterns.</td></tr>
-            <tr><td>Cognitive Accessibility</td><td>WCAG 2.2 cognitive criteria: reading level, error prevention, and consistent navigation.</td></tr>
-            <tr><td>Mobile Accessibility</td><td>Touch targets, orientation, viewport, and native mobile screen reader patterns.</td></tr>
-            <tr><td>Design System</td><td>Component library patterns, design tokens, and accessible component guidelines.</td></tr>
-            <tr><td>Web Severity Scoring</td><td>Consistent severity ratings for web accessibility issues (critical, serious, moderate, minor).</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Scanning Skills (5)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Scanning skills">
-            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Document Scanning</td><td>Rules and patterns for Office, PDF, and EPUB document accessibility scanning.</td></tr>
-            <tr><td>Web Scanning</td><td>Patterns for axe-core integration, multi-page crawling, and result aggregation.</td></tr>
-            <tr><td>Markdown Accessibility</td><td>Rules for heading structure, alt text, link quality, tables, and readability in Markdown.</td></tr>
-            <tr><td>GitHub A11y Scanner</td><td>Integration with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action for CI-based scanning, issue parsing, and Copilot fix tracking.</td></tr>
-            <tr><td>Lighthouse Scanner</td><td>Integration with Lighthouse CI for automated accessibility scoring, weight-to-severity mapping, and score regression tracking.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Reporting &amp; Reference Skills (2)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Reporting and reference skills">
-            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Report Generation</td><td>Severity scoring, VPAT/ACR export, scorecards, and CSV output formatting.</td></tr>
-            <tr><td>Help URL Reference</td><td>Curated links to WCAG documentation, techniques, and understanding documents.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>GitHub Skills (3)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="GitHub skills">
-            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>GitHub Workflow Standards</td><td>PR review standards, issue management policies, and branching conventions.</td></tr>
-            <tr><td>GitHub Scanning</td><td>Repository health checks, security scanning patterns, and CI/CD integration.</td></tr>
-            <tr><td>GitHub Analytics Scoring</td><td>Metrics and scoring for repository health, contributor activity, and PR velocity.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<section id="prompts">
-  <div class="container">
-    <div class="section-header">
-      <h2>Ready-to-Use Prompts</h2>
-      <p>Don&rsquo;t know where to start? Pick a prompt. 54 pre-built commands across four categories get you results immediately.</p>
-    </div>
-    <div class="accordion-group">
-
-      <details>
-        <summary>Web Accessibility Prompts (8)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Web accessibility prompts">
-            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Audit Web Page</td><td>Full WCAG 2.2 AA audit of a single web page.</td></tr>
-            <tr><td>Quick Web Check</td><td>Fast accessibility scan for the most critical issues.</td></tr>
-            <tr><td>Audit Multi-Page</td><td>Crawl and audit multiple pages across a site.</td></tr>
-            <tr><td>Compare Web Audits</td><td>Compare two audit results to track progress over time.</td></tr>
-            <tr><td>Fix Web Issues</td><td>Automatically apply fixes for discovered accessibility issues.</td></tr>
-            <tr><td>Export Web CSV</td><td>Export web audit results to a CSV spreadsheet.</td></tr>
-            <tr><td>Setup GitHub Scanner</td><td>Set up the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> in your repository with agent ecosystem integration.</td></tr>
-            <tr><td>Setup Lighthouse Scanner</td><td>Set up Lighthouse CI accessibility scanning in your repository with score tracking and regression alerts.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Document Accessibility Prompts (10)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Document accessibility prompts">
-            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Audit Single Document</td><td>Full accessibility audit of one Office or PDF document.</td></tr>
-            <tr><td>Audit Document Folder</td><td>Batch audit all documents in a folder with an aggregated scorecard.</td></tr>
-            <tr><td>Audit Changed Documents</td><td>Audit only documents that changed since last scan.</td></tr>
-            <tr><td>Quick Document Check</td><td>Fast scan for the most critical document accessibility issues.</td></tr>
-            <tr><td>Generate VPAT</td><td>Create a VPAT 2.5 Accessibility Conformance Report from audit results.</td></tr>
-            <tr><td>Generate Remediation Scripts</td><td>Generate automated fix scripts for discovered document issues.</td></tr>
-            <tr><td>Compare Audits</td><td>Compare before-and-after document audit results.</td></tr>
-            <tr><td>Setup Document CI/CD</td><td>Configure continuous accessibility checking for documents in your CI pipeline.</td></tr>
-            <tr><td>Create Accessible Template</td><td>Generate a new document template with accessibility best practices built in.</td></tr>
-            <tr><td>Export Document CSV</td><td>Export document audit results to a CSV spreadsheet.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>GitHub Workflow Prompts (31)</summary>
-        <div class="accordion-body">
-          <p>Organized by workflow area. Each prompt invokes the right agent and gets you results in one step.</p>
-          <table class="agent-table" aria-label="GitHub workflow prompts">
-            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Review PR</td><td>Accessibility-focused pull request review.</td></tr>
-            <tr><td>PR Report</td><td>Summary report of a pull request.</td></tr>
-            <tr><td>My PRs</td><td>List your open pull requests and their status.</td></tr>
-            <tr><td>PR Author Checklist</td><td>Pre-submission checklist for PR authors.</td></tr>
-            <tr><td>PR Comment</td><td>Add a formatted comment to a pull request.</td></tr>
-            <tr><td>Address Comments</td><td>Address review comments on your PR.</td></tr>
-            <tr><td>Manage Branches</td><td>List, create, or delete branches.</td></tr>
-            <tr><td>Merge PR</td><td>Merge a pull request with proper checks.</td></tr>
-            <tr><td>Explain Code</td><td>Get a plain-language explanation of code.</td></tr>
-            <tr><td>My Issues</td><td>List issues assigned to you.</td></tr>
-            <tr><td>Create Issue</td><td>Create a well-structured issue from a description.</td></tr>
-            <tr><td>Triage</td><td>Triage and label incoming issues.</td></tr>
-            <tr><td>Issue Reply</td><td>Draft a response to an issue comment.</td></tr>
-            <tr><td>Manage Issue</td><td>Update labels, assignees, and milestones on issues.</td></tr>
-            <tr><td>Refine Issue</td><td>Improve issue descriptions and acceptance criteria.</td></tr>
-            <tr><td>Project Status</td><td>Overview of project health and progress.</td></tr>
-            <tr><td>React</td><td>Add emoji reactions to issues or PRs.</td></tr>
-            <tr><td>Daily Briefing</td><td>Morning summary of overnight repo activity.</td></tr>
-            <tr><td>CI Status</td><td>Check CI pipeline status and recent failures.</td></tr>
-            <tr><td>Notifications</td><td>Review and manage your GitHub notifications.</td></tr>
-            <tr><td>Security Dashboard</td><td>Overview of security alerts and vulnerabilities.</td></tr>
-            <tr><td>Onboard Repo</td><td>Set up a new repository with best practices.</td></tr>
-            <tr><td>Draft Release</td><td>Create a release draft with changelog.</td></tr>
-            <tr><td>Release Prep</td><td>Pre-release checklist and preparation steps.</td></tr>
-            <tr><td>My Stats</td><td>Your personal contribution statistics.</td></tr>
-            <tr><td>Team Dashboard</td><td>Team-wide activity and performance metrics.</td></tr>
-            <tr><td>Sprint Review</td><td>Sprint retrospective and metrics summary.</td></tr>
-            <tr><td>A11y Update</td><td>Accessibility-specific project status update.</td></tr>
-            <tr><td>Add Collaborator</td><td>Add a contributor to the repository.</td></tr>
-            <tr><td>Build Template</td><td>Create reusable issue or PR templates.</td></tr>
-            <tr><td>Build A11y Template</td><td>Create accessibility-focused issue and PR templates.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <details>
-        <summary>Markdown Accessibility Prompts (5)</summary>
-        <div class="accordion-body">
-          <table class="agent-table" aria-label="Markdown accessibility prompts">
-            <thead><tr><th scope="col">Prompt</th><th scope="col">Description</th></tr></thead>
-            <tbody>
-            <tr><td>Audit Markdown</td><td>Full accessibility audit of Markdown documentation.</td></tr>
-            <tr><td>Quick Markdown Check</td><td>Fast scan for the most critical Markdown accessibility issues.</td></tr>
-            <tr><td>Fix Markdown Issues</td><td>Automatically apply fixes for Markdown accessibility issues.</td></tr>
-            <tr><td>Compare Markdown Audits</td><td>Compare before-and-after Markdown audit results.</td></tr>
-            <tr><td>Export Markdown CSV</td><td>Export Markdown audit results to a CSV spreadsheet.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<section id="tools" class="bg-alt">
-  <div class="container">
-    <div class="section-header">
-      <h2>Tools &amp; Integrations</h2>
-      <p>The MCP server exposes 11 tools and 6 prompts that Claude Desktop can call directly. Every tool runs locally&mdash;no data leaves your machine.</p>
-    </div>
-
-    <div class="accordion-group" style="max-width: 52rem; margin: 0 auto 2rem;">
-
-      <details>
-        <summary>MCP Tools (11)</summary>
-        <table class="agent-table" aria-label="MCP tools">
-          <thead><tr><th scope="col">Tool</th><th scope="col">What It Does</th></tr></thead>
-          <tbody>
-            <tr><td>check_contrast</td><td>Calculates WCAG contrast ratio between two hex colors. Reports pass/fail for normal text (4.5:1), large text (3:1), and UI components (3:1).</td></tr>
-            <tr><td>get_accessibility_guidelines</td><td>Returns WCAG AA requirements, code examples, and common mistakes for a specific component type (modal, tabs, accordion, combobox, carousel, form, live-region, navigation, or general).</td></tr>
-            <tr><td>check_heading_structure</td><td>Analyzes HTML for heading hierarchy issues&mdash;single H1, skipped levels, and empty headings.</td></tr>
-            <tr><td>check_link_text</td><td>Scans HTML for ambiguous link text like &ldquo;click here&rdquo; or &ldquo;read more&rdquo;, URLs used as link text, repeated identical text, missing new-tab warnings, and links to non-HTML resources without file type indication.</td></tr>
-            <tr><td>check_form_labels</td><td>Checks that every input, select, and textarea has a programmatic label (via &lt;label for&gt;, aria-label, or aria-labelledby). Also checks required attributes, fieldset/legend grouping, and autocomplete on identity fields.</td></tr>
-            <tr><td>run_axe_scan</td><td>Runs <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> against a live URL (e.g. localhost). Returns WCAG 2.2 AA violations grouped by severity with affected elements and fix suggestions. Optionally writes a Markdown report.</td></tr>
-            <tr><td>generate_vpat</td><td>Generates a VPAT 2.5 / Accessibility Conformance Report (ACR) in Markdown from audit findings. Outputs per-criterion conformance levels and remarks.</td></tr>
-            <tr><td>scan_office_document</td><td>Scans .docx, .xlsx, or .pptx files using Microsoft Accessibility Checker rule sets. Supports configurable rules, severity filters, and SARIF output for CI.</td></tr>
-            <tr><td>scan_pdf_document</td><td>Scans PDF files against PDF/UA (Matterhorn Protocol) with checks for tagging, structure tree, language, alt text, bookmarks, and forms. Supports SARIF output.</td></tr>
-            <tr><td>extract_document_metadata</td><td>Extracts accessibility-relevant metadata (title, author, language, page count, accessibility property health) from Office or PDF files.</td></tr>
-            <tr><td>batch_scan_documents</td><td>Scans up to 50 Office and PDF files in a single call. Returns an aggregated summary with per-file results, cross-document patterns, and an overall accessibility scorecard.</td></tr>
-          </tbody>
-        </table>
-      </details>
-
-      <details>
-        <summary>MCP Prompts (6)</summary>
-        <table class="agent-table" aria-label="MCP prompts">
-          <thead><tr><th scope="col">Prompt</th><th scope="col">What It Does</th></tr></thead>
-          <tbody>
-            <tr><td>accessibility-audit</td><td>Runs a comprehensive audit covering structure, ARIA, keyboard navigation, contrast, focus management, and live regions.</td></tr>
-            <tr><td>aria-review</td><td>Reviews ARIA roles, states, and properties. Enforces the first rule of ARIA: don&rsquo;t use it if native HTML works.</td></tr>
-            <tr><td>modal-review</td><td>Reviews a modal, dialog, drawer, or overlay for focus trapping, focus return, escape behavior, and heading structure.</td></tr>
-            <tr><td>contrast-review</td><td>Reviews color choices and CSS for WCAG AA contrast compliance, including dark mode and Tailwind utilities.</td></tr>
-            <tr><td>keyboard-review</td><td>Reviews keyboard accessibility: tab order, focus management, skip links, keyboard traps, and arrow-key patterns.</td></tr>
-            <tr><td>live-region-review</td><td>Reviews dynamic content for screen reader announcements: live regions, toasts, loading states, and form feedback.</td></tr>
-          </tbody>
-        </table>
-      </details>
-
-    </div>
-
-    <div class="features-grid" style="max-width: 52rem; margin: 0 auto;">
-      <div class="feature-card">
-        <h3>axe-core Integration</h3>
-        <p>The <code>run_axe_scan</code> tool calls <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> against any live URL. Results feed directly into agent audit reports and VPAT generation.</p>
-      </div>
-      <div class="feature-card">
-        <h3>VPAT 2.5 Generation</h3>
-        <p>The <code>generate_vpat</code> tool produces Accessibility Conformance Reports in Markdown&mdash;no spreadsheet required.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Document Scanning</h3>
-        <p>Scan Office files (.docx, .xlsx, .pptx) and PDFs locally. Supports configurable rule sets, severity filters, and SARIF output for CI pipelines.</p>
-      </div>
-      <div class="feature-card">
-        <h3>CSV Export</h3>
-        <p>Export audit results from web, document, and Markdown scans to CSV for analysis in Excel, Google Sheets, or any data tool.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="repo">
-  <div class="container">
-    <div class="section-header">
-      <h2>The Repository</h2>
-    </div>
-    <div class="repo-card">
-      <div>
-        <h3>Community-Access/accessibility-agents</h3>
-        <p>49 accessibility agents, 16 skills, and 54 prompts for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. Enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
-        <ul class="repo-meta">
-          <li>MIT License</li>
-          <li>49 agents</li>
-          <li>16 skills</li>
-          <li>54 prompts</li>
-        </ul>
-      </div>
-      <div class="repo-actions">
-        <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View Repository</a>
-        <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" class="btn btn-outline">Getting Started</a>
-        <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/RESEARCH-SOURCES.md" class="btn btn-outline">Research Sources</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="install" class="bg-alt">
-  <div class="container">
-    <div class="section-header">
-      <h2>Install in One Command</h2>
-      <p>Works on macOS, Linux, and Windows. Installs all agents for every supported platform. Supports <code>--global</code>, <code>--project</code>, and <code>--copilot</code> flags.</p>
-    </div>
-    <div class="install-block">
-      <div class="install-label">macOS / Linux</div>
-      <code id="cmd-mac">curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
-      <button class="copy-btn" aria-label="Copy macOS and Linux install command" data-target="cmd-mac">Copy</button>
-    </div>
-    <div class="install-block">
-      <div class="install-label">Windows (PowerShell)</div>
-      <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
-      <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
-    </div>
-    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. Auto-update support included. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo);">Read the full guide.</a></p>
   </div>
 </section>
 
@@ -962,90 +492,6 @@
       <li>Roberto Perez</li>
       <li>Megan Rogge</li>
     </ul>
-  </div>
-</section>
-
-<section id="demo" class="demo-section bg-alt">
-  <div class="container">
-    <div class="section-header">
-      <h2>See It in Action</h2>
-      <p>Here is a real example. An AI tool generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
-    </div>
-    <div class="demo-grid">
-      <div class="demo-panel demo-bad">
-        <div class="demo-panel-header">Before &mdash; AI-Generated Code</div>
-        <pre><code><span class="demo-comment">&lt;!-- Missing alt, generic link text,</span>
-<span class="demo-comment">     no form label, wrong heading order --&gt;</span>
-<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
-<span class="demo-tag">&lt;h3&gt;</span>Our Team<span class="demo-tag">&lt;/h3&gt;</span>
-<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span><span class="demo-tag">&gt;</span>
-<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span><span class="demo-err">Click here</span><span class="demo-tag">&lt;/a&gt;</span>
-<span class="demo-tag">&lt;input</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">placeholder=</span><span class="demo-val">"Email"</span><span class="demo-tag">&gt;</span></code></pre>
-      </div>
-      <div class="demo-panel demo-good">
-        <div class="demo-panel-header">After &mdash; Agent-Fixed Code</div>
-        <pre><code><span class="demo-comment">&lt;!-- Heading hierarchy, alt text,</span>
-<span class="demo-comment">     descriptive link, labeled input --&gt;</span>
-<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
-<span class="demo-tag">&lt;h2&gt;</span>Our Team<span class="demo-tag">&lt;/h2&gt;</span>
-<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span> <span class="demo-attr">alt=</span><span class="demo-val">"Our team at the 2025 summit"</span><span class="demo-tag">&gt;</span>
-<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span>Learn about our team<span class="demo-tag">&lt;/a&gt;</span>
-<span class="demo-tag">&lt;label</span> <span class="demo-attr">for=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span>Email<span class="demo-tag">&lt;/label&gt;</span>
-<span class="demo-tag">&lt;input</span> <span class="demo-attr">id=</span><span class="demo-val">"email"</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">autocomplete=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span></code></pre>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" class="faq-section">
-  <div class="container">
-    <div class="section-header">
-      <h2>Frequently Asked Questions</h2>
-    </div>
-    <div class="faq-list">
-      <details>
-        <summary>Does this work with VS Code?</summary>
-        <div class="faq-body">
-          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal), Claude Desktop (standalone app), Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Does any data leave my machine?</summary>
-        <div class="faq-body">
-          <p>The MCP tools all run locally. Document scanning, contrast checking, heading analysis, and axe-core scans happen entirely on your machine. The only network calls are the ones your AI platform already makes to its own API.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Can I use only some agents?</summary>
-        <div class="faq-body">
-          <p>Yes. Each agent is independent Markdown. You can delete any agent file you do not need, or use the <code>--project</code> flag to install only at the project level. You can also disable individual agents in your platform settings.</p>
-        </div>
-      </details>
-      <details>
-        <summary>How do I update?</summary>
-        <div class="faq-body">
-          <p>Run the same install command again. It will pull the latest agents, skills, and prompts. Your existing configuration is never overwritten. You can also enable auto-update during installation.</p>
-        </div>
-      </details>
-      <details>
-        <summary>What WCAG version do the agents target?</summary>
-        <div class="faq-body">
-          <p>All web agents target WCAG 2.2 Level AA. Document agents map to WCAG 2.1 AA plus Microsoft Office Accessibility Checker rules. PDF agents follow PDF/UA (ISO 14289-1) via the Matterhorn Protocol.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Does this replace manual accessibility testing?</summary>
-        <div class="faq-body">
-          <p>No. Automated tools catch many issues but cannot replace testing with actual screen readers (NVDA, JAWS, VoiceOver) and keyboard-only navigation. These agents are a powerful first pass, not a substitute for real-world testing with assistive technology.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Is this free?</summary>
-        <div class="faq-body">
-          <p>Yes. Community Access is open source and licensed under MIT. Every agent, skill, prompt, and tool is free to use, modify, and distribute.</p>
-        </div>
-      </details>
-    </div>
   </div>
 </section>
 
