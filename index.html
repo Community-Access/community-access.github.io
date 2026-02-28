@@ -3,35 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Community Access -- Making software accessible by default. 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI.">
-  <title>Community Access -- Accessible by Default</title>
+  <meta name="description" content="Community Access — 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
+  <title>Community Access — Accessible by Default</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
   <style>
-    .team-card { display: flex; flex-direction: column; }
-    .team-card .team-count {
-      font-size: 1.75rem;
+    /* === Nav CTA === */
+    .nav-cta {
+      background: rgba(5,150,105,0.85) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: rgba(5,150,105,1) !important; }
+
+    /* === Limit news to 3 visible cards on home page === */
+    #latest-news .news-card:nth-child(n+4) { display: none; }
+
+    /* === Teams Overview === */
+    .teams-overview {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--ca-gray-200);
+    }
+    .teams-overview h3 {
+      font-size: 1.35rem;
       font-weight: 800;
-      color: var(--ca-indigo);
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
+      color: var(--ca-gray-900);
+      margin-bottom: 1.25rem;
     }
-    .team-card .team-count span {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ca-gray-700);
+    .teams-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
     }
-    .team-card .team-link {
-      margin-top: auto;
-      padding-top: 0.75rem;
-      display: inline-block;
+    .team-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 100px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      color: var(--ca-gray-800);
+      text-decoration: none;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .team-badge:hover {
+      border-color: var(--ca-indigo-light);
+      background: var(--ca-gray-100);
+    }
+    .team-badge span {
+      background: var(--ca-indigo);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      min-width: 1.5rem;
+      text-align: center;
+    }
+    .team-badge-sub span { background: var(--ca-gray-700); }
+    .teams-overview > p { margin-top: 1rem; }
+    .teams-overview > p a {
       color: var(--ca-indigo-light);
       text-decoration: underline;
       text-underline-offset: 2px;
+      font-weight: 600;
     }
-    .team-card .team-link:hover { text-decoration-thickness: 2px; }
+    .teams-overview > p a:hover { text-decoration-thickness: 2px; }
+
+    /* === Platform Grid === */
     .platform-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
@@ -56,11 +102,64 @@
       color: var(--ca-gray-700);
       margin-top: 0.15rem;
     }
-    .sub-agent-note {
-      text-align: center;
-      color: var(--ca-gray-700);
-      font-size: 0.92rem;
+
+    /* === Compact Workshop === */
+    .workshop-compact { padding: 3.5rem 0; }
+    .workshop-compact .workshop-inner { max-width: 44rem; }
+    .workshop-compact .workshop-title {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      margin-bottom: 0.75rem;
+    }
+    .workshop-reg-note {
+      font-size: 0.85rem;
+      opacity: 0.6;
       margin-top: 1rem;
+    }
+
+    /* === Footer Grid === */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 48rem) {
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ca-gray-50);
+    }
+    .footer-tagline {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+    .footer-column h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .footer-column .footer-links {
+      list-style: none;
+    }
+    .footer-column .footer-links li {
+      margin-bottom: 0.4rem;
+    }
+    .footer-column .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .footer-column .footer-links a:hover {
+      color: var(--ca-emerald-light);
     }
   </style>
 </head>
@@ -70,7 +169,7 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#" class="logo" aria-label="Community Access home">
+    <a href="index.html" class="logo" aria-label="Community Access home">
       <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
       <span class="logo-text">Community Access</span>
     </a>
@@ -80,17 +179,12 @@
           <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
             <li><a href="docs.html">Documentation</a></li>
-            <li><a href="#agents">Agents</a></li>
             <li><a href="#install">Install</a></li>
             <li><a href="#contribute">Contribute</a></li>
           </ul>
         </li>
-        <li><a href="#workshop" class="nav-workshop-link">Workshop</a></li>
-        <li><a href="#mission">Mission</a></li>
         <li><a href="news.html">News</a></li>
-        <li><a href="#calendar">Calendar</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="https://community-access.github.io/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
@@ -102,40 +196,10 @@
 <section class="hero">
   <div class="container">
     <h1>Accessible <span class="hero-accent">by Default</span></h1>
-    <p>AI coding tools forget accessibility. Our agents make sure they never do. 55 specialized agents, 17 skills, and 54 ready-to-use prompts enforce WCAG 2.2 AA compliance inside Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI&mdash;so every line of code ships inclusive.</p>
+    <p>AI coding tools forget accessibility. Our 55 agents make sure they never do&mdash;enforcing WCAG 2.2 AA inside your favorite AI coding environment so every line of code ships inclusive.</p>
     <div class="hero-actions">
-      <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-primary">View on GitHub</a>
-      <a href="#install" class="btn btn-outline">Install in 30 Seconds</a>
-    </div>
-  </div>
-</section>
-
-<section id="workshop" class="workshop-banner">
-  <div class="container">
-    <div class="workshop-inner">
-      <div class="workshop-badge" aria-hidden="true"><time datetime="2026-03-07">March 7</time>&ndash;<time datetime="2026-03-08">8, 2026</time></div>
-      <h2 class="workshop-title">GIT Going with GitHub</h2>
-      <p class="workshop-subtitle">A free, two-day, hands-on workshop where blind and low vision participants learn to navigate, contribute to, and build real open source projects&mdash;using a screen reader, a keyboard, and nothing else.</p>
-      <div class="workshop-details">
-        <div class="workshop-detail">
-          <span class="workshop-detail-label">When</span>
-          <span class="workshop-detail-value"><time datetime="2026-03-07T12:00:00-05:00">March 7</time> &amp; <time datetime="2026-03-08T12:00:00-05:00">8, 2026</time> &middot; 12&ndash;8 PM Eastern</span>
-        </div>
-        <div class="workshop-detail">
-          <span class="workshop-detail-label">Where</span>
-          <span class="workshop-detail-value">Online via Zoom &middot; Free</span>
-        </div>
-        <div class="workshop-detail">
-          <span class="workshop-detail-label">Seats</span>
-          <span class="workshop-detail-value"><span id="workshop-reg-count">loading...</span> registered out of 75 spots</span>
-        </div>
-      </div>
-      <p class="workshop-pitch">By the end of Day 2, your name will be in the commit history of a live, public open source project. Not a sandbox. Not a simulation. <strong>The real thing.</strong></p>
-      <div class="workshop-actions">
-        <a href="https://community-access.github.io/git-going-with-github/REGISTER.html" class="btn workshop-btn-register">Register Now&mdash;It's Free</a>
-        <a href="https://community-access.github.io/git-going-with-github/" class="btn workshop-btn-details">Full Details &amp; Curriculum</a>
-      </div>
-      <p class="workshop-cta-note">No coding experience required. NVDA, JAWS, and VoiceOver instructions included for every step. Sighted participants welcome.</p>
+      <a href="#install" class="btn btn-primary">Install in 30 Seconds</a>
+      <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-outline">View on GitHub</a>
     </div>
   </div>
 </section>
@@ -144,7 +208,7 @@
   <div class="container">
     <dl class="stats-grid">
       <div class="stat-item">
-        <dt class="stat-label">Specialized Agents</dt>
+        <dt class="stat-label">Agents</dt>
         <dd class="stat-number">55</dd>
       </div>
       <div class="stat-item">
@@ -152,60 +216,68 @@
         <dd class="stat-number">6</dd>
       </div>
       <div class="stat-item">
-        <dt class="stat-label">Ready-to-Use Prompts</dt>
+        <dt class="stat-label">Prompts</dt>
         <dd class="stat-number">54</dd>
       </div>
       <div class="stat-item">
-        <dt class="stat-label">AA Compliance</dt>
+        <dt class="stat-label">Compliance</dt>
         <dd class="stat-number">WCAG 2.2</dd>
       </div>
     </dl>
   </div>
 </div>
 
+<section id="news" class="changelog-section bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest from the Project</h2>
+      <p>News, releases, and updates from the team.</p>
+    </div>
+    <div id="latest-news">
+      <p style="text-align:center; color: var(--ca-gray-700);">Loading news&hellip;</p>
+    </div>
+    <div style="text-align:center; margin-top: 2rem;">
+      <a href="news.html" class="btn btn-outline" style="color: var(--ca-gray-800); border-color: var(--ca-gray-200);">View All News &rarr;</a>
+    </div>
+  </div>
+</section>
+
 <section id="mission">
   <div class="container">
     <div class="section-header">
-      <h2>The Problem We Solve</h2>
-      <p>AI coding tools generate inaccessible code by default. ARIA gets misused, keyboard navigation gets skipped, contrast fails silently, and modals trap screen reader users.</p>
+      <h2>Why It Matters</h2>
+      <p>ARIA gets misused. Keyboard navigation gets skipped. Contrast fails silently. Our agents fix this at the source&mdash;before code reaches your editor.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
         <h3>Automatic Enforcement</h3>
-        <p>Agents evaluate every prompt, every response, every code suggestion. Accessibility is checked before code reaches your editor, not after deployment.</p>
+        <p>Every prompt, every response, every code suggestion is checked for accessibility before it reaches your editor&mdash;not after deployment.</p>
       </div>
       <div class="feature-card">
         <h3>Screen Reader First</h3>
-        <p>Built by and for the blind and low vision community. Every agent understands real-world assistive technology including NVDA, JAWS, and VoiceOver, not just spec compliance.</p>
+        <p>Built by and for the blind and low vision community. Every agent understands real-world assistive technology&mdash;NVDA, JAWS, VoiceOver&mdash;not just spec compliance.</p>
       </div>
       <div class="feature-card">
         <h3>Beyond Web Code</h3>
-        <p>Scan Word, Excel, PowerPoint, PDF, EPUB, and Markdown documents for accessibility. 46 rules for Office, 56 for PDF/UA, and 9 domains for Markdown auditing.</p>
+        <p>Scan Word, Excel, PowerPoint, PDF, EPUB, and Markdown for accessibility. 46 rules for Office, 56 for PDF/UA, 9 domains for Markdown.</p>
       </div>
       <div class="feature-card">
-        <h3>Desktop &amp; Python Development</h3>
-        <p>Six agents for Python, wxPython, and desktop app accessibility. Structured audit rules for wxPython controls and platform APIs across Windows, macOS, and Linux.</p>
+        <h3>CI/CD Ready</h3>
+        <p>Integrates with <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a>, the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a>, and Lighthouse CI. Generate VPAT 2.5 reports from your pipeline.</p>
       </div>
-      <div class="feature-card">
-        <h3>GitHub Workflow Agents</h3>
-        <p>11 agents that manage repos, triage issues, review PRs, run analytics, and keep your team informed&mdash;all from natural language.</p>
+    </div>
+
+    <div class="teams-overview">
+      <h3>55 Agents Across 5 Teams</h3>
+      <div class="teams-grid">
+        <a href="docs.html" class="team-badge">Web Accessibility <span>16</span></a>
+        <a href="docs.html" class="team-badge">Document Scanning <span>9</span></a>
+        <a href="docs.html" class="team-badge">Markdown <span>3</span></a>
+        <a href="docs.html" class="team-badge">GitHub Workflows <span>11</span></a>
+        <a href="docs.html" class="team-badge">Developer Tools <span>6</span></a>
+        <a href="docs.html" class="team-badge team-badge-sub">Sub-Agents <span>10+</span></a>
       </div>
-      <div class="feature-card">
-        <h3><a href="https://github.com/dequelabs/axe-core" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">axe-core</a> Integration</h3>
-        <p>Agents call <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a> directly to scan rendered HTML for WCAG violations. Issues are detected, reported, and fixed in a single pass.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Framework-Aware</h3>
-        <p>Built-in fix templates for React, Vue, Angular, Svelte, and Tailwind CSS. Agents suggest idiomatic fixes in your framework, not generic HTML.</p>
-      </div>
-      <div class="feature-card">
-        <h3>VPAT Generation</h3>
-        <p>Generate VPAT 2.5 Accessibility Conformance Reports directly from agent scans. Compliance documentation from your codebase, not a spreadsheet.</p>
-      </div>
-      <div class="feature-card">
-        <h3>CI Scanner Integration</h3>
-        <p>Integrates with the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a> Action and Google Lighthouse CI for automated WCAG scanning in your pipeline.</p>
-      </div>
+      <p><a href="docs.html">Explore all agents, skills, and prompts in the documentation &rarr;</a></p>
     </div>
   </div>
 </section>
@@ -214,7 +286,7 @@
   <div class="container">
     <div class="section-header">
       <h2>See It in Action</h2>
-      <p>Here is a real example. An AI tool generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
+      <p>A real example. AI generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
     </div>
     <div class="demo-grid">
       <div class="demo-panel demo-bad">
@@ -242,63 +314,16 @@
   </div>
 </section>
 
-<section id="agents">
-  <div class="container">
-    <div class="section-header">
-      <h2>Meet the Agent Teams</h2>
-      <p>55 specialists across five teams. Each agent owns one domain and enforces it relentlessly. <a href="docs.html" style="color: var(--ca-indigo-light); text-decoration: underline; text-underline-offset: 2px;">View the full documentation</a> for detailed descriptions, rule sets, and how each agent analyzes your content.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card team-card">
-        <h3>Web Accessibility</h3>
-        <p class="team-count">16 <span>agents</span></p>
-        <p>ARIA, modals, contrast, keyboard navigation, forms, headings, data tables, links, live regions, cognitive accessibility, mobile, design systems, and full guided audits with axe-core scanning.</p>
-        <a href="docs.html" class="team-link">View web agents &rarr;</a>
-      </div>
-      <div class="feature-card team-card">
-        <h3>Document Scanning</h3>
-        <p class="team-count">9 <span>agents</span></p>
-        <p>Word, Excel, PowerPoint, PDF, and EPUB accessibility scanning with 46 rules for Office, 56 for PDF/UA, and full EPUB Accessibility 1.1 conformance. VPAT generation and CSV export included.</p>
-        <a href="docs.html" class="team-link">View document agents &rarr;</a>
-      </div>
-      <div class="feature-card team-card">
-        <h3>Markdown Accessibility</h3>
-        <p class="team-count">3 <span>agents</span></p>
-        <p>Audit Markdown documentation across 9 domains: heading structure, image alt text, link quality, tables, emoji, Mermaid diagrams, language, readability, and anchor validation.</p>
-        <a href="docs.html" class="team-link">View markdown agents &rarr;</a>
-      </div>
-      <div class="feature-card team-card">
-        <h3>GitHub Workflows</h3>
-        <p class="team-count">11 <span>agents</span></p>
-        <p>Central hub, daily briefings, PR review, issue triage, analytics, VS Code Insiders tracking, repo administration, team management, community engagement, and template building.</p>
-        <a href="docs.html" class="team-link">View workflow agents &rarr;</a>
-      </div>
-      <div class="feature-card team-card">
-        <h3>Developer Tools</h3>
-        <p class="team-count">6 <span>agents</span></p>
-        <p>Python debugging and packaging, wxPython GUI development with 12 audit rules, desktop accessibility across platform APIs, screen reader testing workflows, and accessibility tool building.</p>
-        <a href="docs.html" class="team-link">View developer agents &rarr;</a>
-      </div>
-      <div class="feature-card team-card">
-        <h3>Hidden Sub-Agents</h3>
-        <p class="team-count">10+ <span>agents</span></p>
-        <p>Cross-document analysis, cross-page pattern detection, batch scanning, CSV export, automated web fixes, CI scanner bridges, and reporting. Invoked automatically by other agents.</p>
-        <a href="docs.html" class="team-link">View sub-agents &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="install" class="bg-alt">
+<section id="install">
   <div class="container">
     <div class="section-header">
       <h2>Six Platforms, One Command</h2>
-      <p>Same agents, same rules, every major AI coding environment. Pick your editor and get started.</p>
+      <p>Same agents, same rules, every major AI coding environment.</p>
     </div>
     <div class="platform-grid">
       <div class="platform-badge">Claude Code<span>CLI</span></div>
       <div class="platform-badge">GitHub Copilot<span>VS Code</span></div>
-      <div class="platform-badge">Claude Desktop<span>MCP Extension</span></div>
+      <div class="platform-badge">Claude Desktop<span>MCP</span></div>
       <div class="platform-badge">Copilot CLI<span>Terminal</span></div>
       <div class="platform-badge">Codex CLI<span>OpenAI</span></div>
       <div class="platform-badge">Gemini CLI<span>Google</span></div>
@@ -313,68 +338,22 @@
       <code id="cmd-win">irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
       <button class="copy-btn" aria-label="Copy Windows PowerShell install command" data-target="cmd-win">Copy</button>
     </div>
-    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700);">Safe, additive installation. Your existing files are never overwritten. Auto-update support included. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo);">Read the full guide.</a></p>
+    <div id="copy-status" class="sr-only" aria-live="polite"></div>
+    <p style="text-align:center; margin-top:1.5rem; color:var(--ca-gray-700); font-size:0.95rem;">Safe, additive installation. Your existing files are never overwritten. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/getting-started.md" style="color:var(--ca-indigo-light);">Read the full guide.</a></p>
   </div>
 </section>
 
-<section id="news" class="changelog-section">
+<section id="workshop" class="workshop-banner workshop-compact">
   <div class="container">
-    <div class="section-header">
-      <h2>Latest News</h2>
-      <p>Press releases, announcements, and updates from the project.</p>
-    </div>
-    <div id="latest-news">
-      <p style="text-align:center; color: var(--ca-gray-700);">Loading news...</p>
-    </div>
-    <div style="text-align:center; margin-top: 2rem;">
-      <a href="news.html" class="btn btn-outline" style="color: var(--ca-gray-800); border-color: var(--ca-gray-200);">View All News</a>
-    </div>
-  </div>
-</section>
-
-<section id="calendar" aria-labelledby="cal-section-heading">
-  <div class="container">
-    <div class="section-header">
-      <h2 id="cal-section-heading">Community Calendar</h2>
-      <p>Upcoming meetings, workshops, streams, and deadlines for the Community Access project.</p>
-    </div>
-
-    <div id="cal-countdown" class="cal-countdown" hidden>
-      <span id="cal-countdown-text"></span>
-    </div>
-
-    <div class="cal-wrapper">
-      <div class="cal-nav">
-        <button type="button" class="cal-nav-btn" id="cal-prev">
-          <span aria-hidden="true">&larr;</span> Previous month
-        </button>
-        <div id="cal-month-announce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-        <h3 id="cal-month-label" class="cal-month-heading" tabindex="-1"></h3>
-        <button type="button" class="cal-nav-btn" id="cal-next">
-          Next month <span aria-hidden="true">&rarr;</span>
-        </button>
+    <div class="workshop-inner">
+      <h2 class="workshop-title">GIT Going with GitHub</h2>
+      <p style="font-size:1.05rem; margin-bottom:1.5rem; opacity:0.9;">A free, two-day workshop where blind and low vision participants learn open source contribution&mdash;using a screen reader, a keyboard, and nothing else. <strong><time datetime="2026-03-07">March 7</time> &amp; <time datetime="2026-03-08">8, 2026</time>.</strong></p>
+      <div class="workshop-actions">
+        <a href="https://community-access.github.io/git-going-with-github/REGISTER.html" class="btn workshop-btn-register" style="font-size:1.05rem; padding:0.85rem 2rem;">Register Now&mdash;It's Free</a>
+        <a href="https://community-access.github.io/git-going-with-github/" class="btn workshop-btn-details">Full Details &amp; Curriculum</a>
       </div>
-
-      <div id="cal-agenda" class="cal-agenda">
-        <p class="cal-agenda-empty">Loading events...</p>
-      </div>
-
-      <div class="cal-export-all" id="cal-export-all" hidden>
-        <button type="button" class="cal-export-btn" id="cal-export-ics" aria-describedby="cal-month-label">
-          Download .ics
-        </button>
-        <button type="button" class="cal-export-btn" id="cal-export-outlook" aria-describedby="cal-month-label">
-          Add to Outlook
-        </button>
-      </div>
+      <p class="workshop-reg-note"><span id="workshop-reg-count">loading...</span> registered out of 75 spots. No coding experience required.</p>
     </div>
-
-    <noscript>
-      <p style="text-align:center; padding:2rem; color:var(--ca-gray-700);">
-        The interactive calendar requires JavaScript. View our upcoming events on
-        <a href="https://github.com/Community-Access">our GitHub page</a>.
-      </p>
-    </noscript>
   </div>
 </section>
 
@@ -387,7 +366,7 @@
       <details>
         <summary>Does this work with VS Code?</summary>
         <div class="faq-body">
-          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code (terminal), Claude Desktop (standalone app), Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
+          <p>Yes. The agents work inside GitHub Copilot in VS Code and VS Code Insiders. They also work in Claude Code, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. The install command sets up all six platforms automatically.</p>
         </div>
       </details>
       <details>
@@ -399,19 +378,19 @@
       <details>
         <summary>Can I use only some agents?</summary>
         <div class="faq-body">
-          <p>Yes. Each agent is independent Markdown. You can delete any agent file you do not need, or use the <code>--project</code> flag to install only at the project level. You can also disable individual agents in your platform settings.</p>
+          <p>Yes. Each agent is independent Markdown. You can delete any agent file you do not need, or use the <code>--project</code> flag to install only at the project level.</p>
         </div>
       </details>
       <details>
         <summary>What WCAG version do the agents target?</summary>
         <div class="faq-body">
-          <p>All web agents target WCAG 2.2 Level AA. Document agents map to WCAG 2.1 AA plus Microsoft Office Accessibility Checker rules. PDF agents follow PDF/UA (ISO 14289-1) via the Matterhorn Protocol.</p>
+          <p>All web agents target WCAG 2.2 Level AA. Document agents map to WCAG 2.1 AA plus Microsoft Accessibility Checker rules. PDF agents follow PDF/UA (ISO 14289-1) via the Matterhorn Protocol.</p>
         </div>
       </details>
       <details>
         <summary>Does this replace manual accessibility testing?</summary>
         <div class="faq-body">
-          <p>No. Automated tools catch many issues but cannot replace testing with actual screen readers (NVDA, JAWS, VoiceOver) and keyboard-only navigation. These agents are a powerful first pass, not a substitute for real-world testing with assistive technology.</p>
+          <p>No. Automated tools catch many issues but cannot replace testing with actual screen readers and keyboard-only navigation. These agents are a powerful first pass, not a substitute for real-world testing.</p>
         </div>
       </details>
       <details>
@@ -427,36 +406,8 @@
 <section id="contribute" class="contribute-section">
   <div class="container">
     <h2>Build With Us</h2>
-    <p>Community Access is a community project. The more perspectives, lived experiences, and domain knowledge that go into it, the better it serves the blind and low vision community.</p>
-    <p>Every contribution ships as a pull request. Fork the repo, make your change, open a PR. Agents, skills, and prompts are all plain Markdown&mdash;no special tooling required.</p>
-
-    <div class="contribute-steps">
-      <div class="step">
-        <div class="step-number" aria-hidden="true">1</div>
-        <h3>Fork the Repo</h3>
-        <p>Fork <strong>accessibility-agents</strong> to your GitHub account. Clone it locally or use github.dev.</p>
-      </div>
-      <div class="step">
-        <div class="step-number" aria-hidden="true">2</div>
-        <h3>Make Your Change</h3>
-        <p>Fix an agent gap, add a new rule, improve docs, or build an entirely new specialist. Everything is Markdown.</p>
-      </div>
-      <div class="step">
-        <div class="step-number" aria-hidden="true">3</div>
-        <h3>Open a Pull Request</h3>
-        <p>Submit your PR against <code>main</code>. The team reviews every submission and provides feedback.</p>
-      </div>
-      <div class="step">
-        <div class="step-number" aria-hidden="true">4</div>
-        <h3>Ship It</h3>
-        <p>Once merged, your contribution is available to every user on next install or update. You are now a contributor.</p>
-      </div>
-    </div>
-
-    <p style="font-size:1rem; color:#b0b8c4; margin-bottom:0.5rem;">Found an agent gap? Know a pattern we should catch? Have lived experience with assistive technology?</p>
-    <p style="font-size:1rem; color:#b0b8c4;">We want your pull request.</p>
-
-    <div class="contribute-actions">
+    <p>Community Access is open source and community-driven. Fork the repo, fix an agent gap, add a new rule, or build a new specialist. Everything is Markdown&mdash;no special tooling required.</p>
+    <div class="contribute-actions" style="margin-top:2rem;">
       <a href="https://github.com/Community-Access/accessibility-agents/fork" class="btn btn-primary">Fork the Repository</a>
       <a href="https://github.com/Community-Access/accessibility-agents/issues" class="btn btn-outline">Browse Open Issues</a>
       <a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md" class="btn btn-outline">Contributing Guide</a>
@@ -464,136 +415,46 @@
   </div>
 </section>
 
-<section id="contributors" class="contributors-section">
-  <div class="container">
-    <h2>Contributors</h2>
-    <p>Community Access is built by real people who care about digital accessibility and inclusion. These contributors have shaped what we are building across every repo in the organization. Thank you for your partnership, mentorship, and empathy. Go team!</p>
-    <div id="contributors-grid" class="contributors-grid" role="list" aria-label="Organization contributors">
-      <p class="contributors-loading">Loading contributors&hellip;</p>
-    </div>
-
-    <h3 class="special-thanks-heading">Special Thanks</h3>
-    <p>A special thanks to everyone who has opened issues, reported bugs, requested features, and shaped our direction. Every voice matters.</p>
-    <div id="thanks-grid" class="thanks-grid" role="list" aria-label="Issue contributors">
-      <p class="contributors-loading">Loading&hellip;</p>
-    </div>
-
-    <h3 class="special-thanks-heading">Community Pillars</h3>
-    <p>These people have truly shaped what it means to engage with the blind and low-vision community. Thank you for your partnership, mentorship, and empathy centered around digital accessibility and inclusion.</p>
-    <ul class="community-pillars-list" role="list">
-      <li><a href="https://github.com/taylorarndt" target="_blank" rel="noopener noreferrer">Taylor Arndt<span class="sr-only">, GitHub profile (opens in new tab)</span></a></li>
-      <li>Michael Babcock</li>
-      <li><a href="https://github.com/accesswatch" target="_blank" rel="noopener noreferrer">Jeff Bishop<span class="sr-only">, GitHub profile (opens in new tab)</span></a></li>
-      <li>Clint Covington</li>
-      <li><a href="https://github.com/mikedoise" target="_blank" rel="noopener noreferrer">Michael Doise<span class="sr-only">, GitHub profile (opens in new tab)</span></a></li>
-      <li>Doug Geoffray</li>
-      <li>Maria Lamardo</li>
-      <li>Ty Littlefield</li>
-      <li>Roberto Perez</li>
-      <li>Megan Rogge</li>
-    </ul>
-  </div>
-</section>
-
-<div style="text-align:center; padding: 2rem 1.5rem; background: var(--ca-gray-100); color: var(--ca-gray-700); font-size: 0.9rem;">
-  <p style="max-width: 48rem; margin: 0 auto;"><strong>AI and automated tools are not perfect.</strong> They miss things, make mistakes, and cannot replace testing with real screen readers and assistive technology. Always verify with VoiceOver, NVDA, JAWS, and keyboard-only navigation. This tooling is a helpful starting point, not a substitute for real accessibility testing.</p>
-</div>
-
-<section id="feedback" class="feedback-section bg-alt">
-  <div class="container">
-    <div class="section-header">
-      <h2 id="feedback-heading">Send Us Feedback</h2>
-      <p>Found a bug, have a feature idea, or hit an accessibility barrier? Let us know.</p>
-    </div>
-    <form id="feedback-form" class="feedback-form" novalidate>
-      <fieldset>
-        <legend class="sr-only">Feedback form</legend>
-        <p class="feedback-required-note">Fields marked with <span aria-hidden="true">*</span><span class="sr-only">an asterisk</span> are required.</p>
-        <div class="feedback-field">
-          <label for="feedback-name">Name</label>
-          <input type="text" id="feedback-name" name="name" autocomplete="name">
-        </div>
-        <div class="feedback-field">
-          <label for="feedback-type">Feedback Type <span aria-hidden="true">*</span></label>
-          <select id="feedback-type" name="type" required aria-describedby="feedback-type-error">
-            <option value="">Select a type</option>
-            <option value="bug">Bug Report</option>
-            <option value="enhancement">Feature Request</option>
-            <option value="accessibility">Accessibility Issue</option>
-            <option value="feedback">General Feedback</option>
-          </select>
-          <span class="feedback-error" id="feedback-type-error"></span>
-        </div>
-        <div class="feedback-field">
-          <label for="feedback-message">Message <span aria-hidden="true">*</span></label>
-          <textarea id="feedback-message" name="message" rows="5" required maxlength="2000" aria-describedby="feedback-message-error"></textarea>
-          <span class="feedback-error" id="feedback-message-error"></span>
-        </div>
-        <div id="feedback-errors" role="alert" aria-live="assertive" class="sr-only"></div>
-        <p class="feedback-note" id="feedback-submit-hint">Clicking the button opens a pre-filled GitHub issue in a new tab. You will need a GitHub account to submit.</p>
-        <div class="feedback-actions">
-          <button type="submit" class="btn btn-primary" aria-describedby="feedback-submit-hint">Continue to GitHub</button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section>
-
 </main>
+
+<div style="text-align:center; padding:1.25rem 1.5rem; background:var(--ca-gray-100); color:var(--ca-gray-700); font-size:0.88rem;">
+  <p style="max-width:48rem; margin:0 auto;"><strong>AI and automated tools are not perfect.</strong> They miss things, make mistakes, and cannot replace testing with real screen readers and assistive technology. Always verify with VoiceOver, NVDA, JAWS, and keyboard-only navigation.</p>
+</div>
 
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-inner">
-      <div>
-        <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
-        <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Making software accessible by default.</p>
       </div>
-      <nav aria-label="Footer navigation">
+      <div class="footer-column">
+        <h3>Project</h3>
         <ul class="footer-links">
-          <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
           <li><a href="news.html">News</a></li>
-          <li><a href="#calendar">Calendar</a></li>
-          <li><a href="https://community-access.github.io/git-going-with-github/">GIT Going with GitHub Workshop</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/docs/RESEARCH-SOURCES.md">Research Sources</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
-          <li><a href="#feedback">Feedback</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
+          <li><a href="feed.xml">RSS Feed</a></li>
         </ul>
-      </nav>
+      </div>
+      <div class="footer-column">
+        <h3>Community</h3>
+        <ul class="footer-links">
+          <li><a href="https://community-access.github.io/git-going-with-github/">Workshop</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </div>
     </div>
     <div class="a11y-statement">
-      <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences. If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
+      <p>This site meets WCAG 2.2 Level AA. Semantic HTML, visible focus indicators, sufficient contrast, responsive layout, <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> support. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
     </div>
     <p class="footer-copy">A community project. Licensed under MIT.</p>
   </div>
 </footer>
 
-<div class="sr-only" aria-live="polite" id="copy-status"></div>
-
-<button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
-  <span aria-hidden="true">&uarr;</span>
-</button>
-
 <script src="main.js"></script>
-<script>
-(function() {
-  var url = 'https://api.github.com/search/issues?q=repo:community-access/git-going-with-github+label:registration+is:issue+is:open';
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      try {
-        var count = JSON.parse(xhr.responseText).total_count;
-        var el = document.getElementById('workshop-reg-count');
-        if (el) el.textContent = count;
-      } catch (e) {}
-    }
-  };
-  xhr.onerror = function() {};
-  xhr.send();
-})();
-</script>
+
 </body>
 </html>
