@@ -1,5 +1,12 @@
 [
   {
+    "slug": "accessibility-agents-v2.1-release",
+    "title": "Accessibility Agents v2.1: Developer Tools Team, 5 Platforms, and 55 Agents",
+    "date": "2026-02-28",
+    "summary": "v2.1 brings a complete Developer Tools team with 6 new agents for Python, wxPython, desktop accessibility, and tool building. Plus CI/CD scanner integration, 3 structured audit rule sets, and platform support expanded to Codex CLI and Gemini CLI.",
+    "type": "Release"
+  },
+  {
     "slug": "building-the-community-calendar",
     "title": "Building an Accessible Calendar with AI -- and Letting the Agents Review Their Own Work",
     "date": "2026-02-27",
