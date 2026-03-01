@@ -452,7 +452,7 @@
     .then(function (r) { return r.json(); })
     .then(function (posts) {
       return posts.map(function (p) {
-        return { date: p.date, title: p.title, summary: p.summary, type: p.type || '', repo: '', url: 'news.html#post/' + p.slug };
+        return { date: p.date, sortKey: p.date, title: p.title, summary: p.summary, type: p.type || '', repo: '', url: 'news.html#post/' + p.slug };
       });
     })
     .catch(function () { return []; });
@@ -473,11 +473,12 @@
           .then(function (releases) {
             if (!Array.isArray(releases)) return [];
             return releases.map(function (rel) {
-              var date = rel.published_at ? rel.published_at.slice(0, 10) : rel.created_at.slice(0, 10);
+              var sortKey = rel.published_at || rel.created_at;
+              var date = sortKey.slice(0, 10);
               var body = rel.body || '';
               var summary = body.length > 150 ? body.slice(0, 150) + '...' : body;
               summary = summary.replace(/[#*_`\[\]]/g, '').replace(/\n/g, ' ').trim();
-              return { date: date, title: rel.name || rel.tag_name, summary: summary || 'New release published.', type: 'Release', repo: repo.name, url: rel.html_url };
+              return { date: date, sortKey: sortKey, title: rel.name || rel.tag_name, summary: summary || 'New release published.', type: 'Release', repo: repo.name, url: rel.html_url };
             });
           })
           .catch(function () { return []; });
@@ -498,7 +499,7 @@
         return !postTitlesLower.some(function (pt) { return pt.indexOf(t) !== -1; });
       });
       var all = posts.concat(releases);
-      all.sort(function (a, b) { return b.date.localeCompare(a.date); });
+      all.sort(function (a, b) { return b.sortKey.localeCompare(a.sortKey); });
       renderNews(all.slice(0, 8));
     })
     .catch(function () {
