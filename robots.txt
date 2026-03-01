@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://community-access.github.io/sitemap.xml

@@ -1,3 +1,37 @@
+/* === Theme Toggle === */
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'ca-theme';
+  var saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+
+    function isDark() {
+      var dt = document.documentElement.getAttribute('data-theme');
+      if (dt === 'dark') return true;
+      if (dt === 'light') return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function updateLabel() {
+      btn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+
+    btn.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem(STORAGE_KEY, next);
+      updateLabel();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLabel);
+  });
+})();
+
 (function () {
   'use strict';
   var dropdown = document.querySelector('.nav-dropdown');

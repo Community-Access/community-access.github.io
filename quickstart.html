@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get started with Community Access in 5 minutes — install the accessibility agents and run your first audit.">
+  <title>Quick Start — Community Access</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
+  <meta property="og:title" content="Quick Start — Community Access">
+  <meta property="og:description" content="Install 55 accessibility agents and run your first audit in 5 minutes.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
+  <meta property="og:url" content="https://community-access.github.io/quickstart.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <style>
+    .page-hero {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 40rem;
+      margin: 0 auto;
+      opacity: 0.92;
+      line-height: 1.7;
+    }
+    .quickstart-content {
+      padding: 4rem 0 5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    .quickstart-content h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin: 3rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .quickstart-content h2:first-child { margin-top: 0; }
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: linear-gradient(135deg, var(--ca-indigo) 0%, var(--ca-violet) 100%);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .quickstart-content p, .quickstart-content li {
+      font-size: 1.05rem;
+      color: var(--ca-gray-700);
+      line-height: 1.8;
+    }
+    .quickstart-content p {
+      margin-bottom: 1rem;
+    }
+    .quickstart-content ul {
+      margin: 0.5rem 0 1.5rem 1.5rem;
+    }
+    .quickstart-content li {
+      margin-bottom: 0.35rem;
+    }
+    .quickstart-content a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .quickstart-content a:hover { text-decoration-thickness: 2px; }
+    .quickstart-content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--ca-gray-100);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--ca-gray-800);
+    }
+    .qs-install-block {
+      background: var(--ca-gray-900);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 1rem 0 1.5rem;
+      overflow-x: auto;
+      position: relative;
+    }
+    @media (prefers-color-scheme: dark) {
+      .qs-install-block { background: #0f172a; border: 1px solid var(--ca-gray-200); }
+    }
+    .qs-install-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ca-emerald-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .qs-install-block code {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--ca-gray-50);
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: block;
+      background: none;
+      padding: 0;
+    }
+    .qs-example {
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+    .qs-example-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ca-indigo-light);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .qs-example p {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .qs-example code {
+      font-size: 0.85em;
+    }
+    .qs-platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .qs-platform {
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+    }
+    .qs-platform strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--ca-gray-900);
+      margin-bottom: 0.25rem;
+    }
+    .qs-platform span {
+      font-size: 0.85rem;
+      color: var(--ca-gray-700);
+    }
+    .qs-next {
+      background: linear-gradient(135deg, var(--ca-indigo-dark), var(--ca-violet));
+      border-radius: 16px;
+      padding: 2rem;
+      color: var(--ca-gray-50);
+      margin-top: 2rem;
+    }
+    .qs-next h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .qs-next ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .qs-next li {
+      color: #c4cad3;
+      margin-bottom: 0.5rem;
+    }
+    .qs-next a {
+      color: var(--ca-emerald-light);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 48rem) {
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ca-gray-50);
+    }
+    .footer-tagline {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+    .footer-column h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .footer-column .footer-links { list-style: none; }
+    .footer-column .footer-links li { margin-bottom: 0.4rem; }
+    .footer-column .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .footer-column .footer-links a:hover { color: var(--ca-emerald-light); }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="repos.html">Repositories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://community-access.github.io/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <span class="icon-sun" aria-hidden="true">&#9728;&#65039;</span>
+      <span class="icon-moon" aria-hidden="true">&#9790;&#65039;</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Quick Start</h1>
+    <p>Go from zero to your first accessibility audit in under 5 minutes. One command installs everything.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="quickstart-content">
+
+    <h2><span class="step-badge" aria-hidden="true">1</span> Install the agents</h2>
+    <p>Run one command to install all 55 agents across every supported platform. The installer auto-detects which AI tools you have installed.</p>
+
+    <div class="qs-install-block">
+      <div class="qs-install-label">macOS / Linux</div>
+      <code>curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
+    </div>
+    <div class="qs-install-block">
+      <div class="qs-install-label">Windows (PowerShell)</div>
+      <code>irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
+    </div>
+
+    <p>The installer is safe and additive &mdash; it never overwrites existing files. It sets up auto-updates so you always have the latest agents.</p>
+
+    <div class="qs-platforms">
+      <div class="qs-platform"><strong>Claude Code</strong><span>CLI</span></div>
+      <div class="qs-platform"><strong>GitHub Copilot</strong><span>VS Code</span></div>
+      <div class="qs-platform"><strong>Claude Desktop</strong><span>MCP</span></div>
+      <div class="qs-platform"><strong>Codex CLI</strong><span>OpenAI</span></div>
+      <div class="qs-platform"><strong>Gemini CLI</strong><span>Google</span></div>
+    </div>
+
+    <h2><span class="step-badge" aria-hidden="true">2</span> Open your AI coding tool</h2>
+    <p>Open any project in your preferred AI coding environment. The agents are loaded automatically &mdash; no configuration needed.</p>
+    <ul>
+      <li><strong>Claude Code</strong> &mdash; Launch the Claude Code CLI in your project directory</li>
+      <li><strong>GitHub Copilot</strong> &mdash; Open VS Code with Copilot Chat</li>
+      <li><strong>Claude Desktop</strong> &mdash; Open the Claude Desktop app</li>
+    </ul>
+
+    <h2><span class="step-badge" aria-hidden="true">3</span> Run your first audit</h2>
+    <p>Ask the accessibility wizard to audit your project. The wizard walks you through 11 accessibility domains step by step.</p>
+
+    <div class="qs-example">
+      <div class="qs-example-label">GitHub Copilot</div>
+      <p>In Copilot Chat, select the <strong>Web Accessibility Wizard</strong> agent and type:</p>
+      <p><code>run a full audit on this project</code></p>
+    </div>
+
+    <div class="qs-example">
+      <div class="qs-example-label">Claude Code</div>
+      <p>In your terminal, invoke the agent directly:</p>
+      <p><code>/accessibility-wizard run a full audit on this project</code></p>
+    </div>
+
+    <p>The wizard asks a few questions about your project scope, then reviews your code for heading structure, keyboard navigation, forms, color contrast, ARIA usage, data tables, link text, and more.</p>
+
+    <h2><span class="step-badge" aria-hidden="true">4</span> Review findings</h2>
+    <p>The wizard produces a prioritized report grouped by severity (Critical, Serious, Moderate, Minor) with each finding linked to the relevant WCAG criterion. It tells you exactly what to fix and in what order.</p>
+
+    <h2><span class="step-badge" aria-hidden="true">5</span> Try a specialist</h2>
+    <p>For targeted checks, invoke a specialist directly. Some examples:</p>
+
+    <div class="qs-example">
+      <div class="qs-example-label">Check a specific domain</div>
+      <p><code>@contrast-master</code> &mdash; Check all color contrast ratios</p>
+      <p><code>@keyboard-navigator</code> &mdash; Verify tab order and focus management</p>
+      <p><code>@forms-specialist</code> &mdash; Audit form labels and validation</p>
+      <p><code>@alt-text-headings</code> &mdash; Review images and heading hierarchy</p>
+    </div>
+
+    <div class="qs-example">
+      <div class="qs-example-label">Audit documents</div>
+      <p><code>@document-accessibility-wizard</code> &mdash; Scan Word, Excel, PowerPoint, and PDF files</p>
+    </div>
+
+    <div class="qs-next">
+      <h3>What's next?</h3>
+      <ul>
+        <li><a href="docs.html">Full documentation</a> &mdash; Browse all 55 agents, 17 skills, and 54 prompts</li>
+        <li><a href="blog.html">Blog</a> &mdash; In-depth articles on AI accessibility auditing</li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a> &mdash; Fix an agent gap, add a rule, or build a new specialist</li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub</a> &mdash; Star the repo and follow for updates</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Making software accessible by default.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Project</h3>
+        <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="repos.html">Repositories</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
+          <li><a href="feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Community</h3>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">Workshop</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="a11y-statement">
+      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>

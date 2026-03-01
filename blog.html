@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog posts from the Community Access project — articles on AI accessibility, open source development, and assistive technology.">
+  <title>Blog — Community Access</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
+  <meta property="og:title" content="Blog — Community Access">
+  <meta property="og:description" content="Articles on AI accessibility, open source development, and assistive technology.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
+  <meta property="og:url" content="https://community-access.github.io/blog.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <style>
+    .page-hero {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 40rem;
+      margin: 0 auto;
+      opacity: 0.92;
+      line-height: 1.7;
+    }
+
+    /* Blog index cards */
+    .blog-index { padding: 4rem 0; }
+    .blog-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 2rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    .blog-card {
+      background: var(--ca-white);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .blog-card-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ca-indigo-light);
+      margin-bottom: 0.5rem;
+    }
+    .blog-card h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .blog-card h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .blog-card h2 a:hover {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .blog-card-author {
+      font-size: 0.9rem;
+      color: var(--ca-gray-700);
+      margin-bottom: 0.75rem;
+    }
+    .blog-card-excerpt {
+      font-size: 0.95rem;
+      color: var(--ca-gray-700);
+      line-height: 1.7;
+    }
+    .blog-card-read {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .blog-card-read:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    /* Full article view */
+    .blog-article {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    .blog-article .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .blog-article .back-link:hover { text-decoration-thickness: 2px; }
+    .blog-article .article-meta {
+      font-size: 0.9rem;
+      color: var(--ca-gray-700);
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ca-gray-200);
+    }
+    .blog-article h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .blog-article h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin: 2.5rem 0 1rem;
+    }
+    .blog-article h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      margin: 2rem 0 0.75rem;
+    }
+    .blog-article h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      margin: 1.5rem 0 0.5rem;
+    }
+    .blog-article p {
+      font-size: 1.05rem;
+      color: var(--ca-gray-700);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .blog-article ul, .blog-article ol {
+      margin: 0.5rem 0 1.5rem 1.5rem;
+    }
+    .blog-article li {
+      font-size: 1.05rem;
+      color: var(--ca-gray-700);
+      line-height: 1.7;
+      margin-bottom: 0.35rem;
+    }
+    .blog-article a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .blog-article a:hover { text-decoration-thickness: 2px; }
+    .blog-article strong { color: var(--ca-gray-900); }
+    .blog-article code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--ca-gray-100);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--ca-gray-800);
+    }
+    .blog-article pre {
+      background: var(--ca-gray-900);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem;
+    }
+    .blog-article pre code {
+      background: none;
+      color: var(--ca-gray-50);
+      padding: 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    @media (prefers-color-scheme: dark) {
+      .blog-article pre { background: #0f172a; border: 1px solid var(--ca-gray-200); }
+    }
+    .blog-article table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.95rem;
+    }
+    .blog-article th, .blog-article td {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--ca-gray-200);
+      color: var(--ca-gray-700);
+    }
+    .blog-article th {
+      background: var(--ca-gray-50);
+      font-weight: 700;
+      color: var(--ca-gray-900);
+    }
+    .blog-article details {
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      background: var(--ca-white);
+      overflow: hidden;
+    }
+    .blog-article summary {
+      padding: 1rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ca-gray-900);
+      cursor: pointer;
+      list-style: none;
+    }
+    .blog-article summary::-webkit-details-marker { display: none; }
+    .blog-article details > :not(summary) {
+      padding: 0 1.5rem 1rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 48rem) {
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ca-gray-50);
+    }
+    .footer-tagline {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+    .footer-column h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .footer-column .footer-links { list-style: none; }
+    .footer-column .footer-links li { margin-bottom: 0.4rem; }
+    .footer-column .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .footer-column .footer-links a:hover { color: var(--ca-emerald-light); }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="repos.html">Repositories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://community-access.github.io/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <span class="icon-sun" aria-hidden="true">&#9728;&#65039;</span>
+      <span class="icon-moon" aria-hidden="true">&#9790;&#65039;</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ====== Blog Index View ====== -->
+<section class="page-hero" id="blog-hero">
+  <div class="container">
+    <h1>Blog</h1>
+    <p>Articles, insights, and updates from the Community Access team on AI accessibility, open source development, and assistive technology.</p>
+  </div>
+</section>
+
+<section class="blog-index" id="blog-index">
+  <div class="container">
+    <div class="blog-cards">
+
+      <article class="blog-card">
+        <div class="blog-card-date"><time datetime="2026-02-22">February 22, 2026</time></div>
+        <h2><a href="#post-ai-accessibility-universities" onclick="showPost('post-ai-accessibility-universities'); return false;">AI-Powered Accessibility Auditing for Universities</a></h2>
+        <p class="blog-card-author">By Taylor Arndt, COO at Techopolis</p>
+        <p class="blog-card-excerpt">A deep dive into how AI accessibility agents can audit university documents and web properties at scale, covering the document accessibility wizard, web accessibility wizard, and CI/CD integration.</p>
+        <a href="#post-ai-accessibility-universities" class="blog-card-read" onclick="showPost('post-ai-accessibility-universities'); return false;">Read article</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====== Full Article: AI-Powered Accessibility Auditing ====== -->
+<article class="blog-article" id="post-ai-accessibility-universities" hidden>
+  <a href="#blog-index" class="back-link" onclick="showIndex(); return false;">Back to all posts</a>
+
+  <h1>AI-Powered Accessibility Auditing for Universities: Document and Web Agents</h1>
+  <div class="article-meta">
+    <time datetime="2026-02-22">February 22, 2026</time> &middot; Taylor Arndt, COO at Techopolis
+  </div>
+
+  <h2>The Problem Universities Face</h2>
+  <p>Higher education institutions are among the largest publishers of digital content in the world. A mid-sized university might maintain hundreds of web pages, publish thousands of PDFs each semester, distribute faculty syllabi in Word, share research in PowerPoint, and post financial aid data in Excel &mdash; all of it subject to Section 508, the ADA, and WCAG 2.1 AA.</p>
+  <p>The tooling has not kept up. Manual audits are slow, expensive, and inconsistent. Automated scanners catch only the most obvious violations. And now that faculty and staff are generating content with AI coding assistants, inaccessible output is accelerating: screen reader traps, missing alt text, presentations without reading order, PDFs with no tagging structure.</p>
+  <p><strong>Community Access</strong> is a suite of specialized AI agents built to close that gap &mdash; on both the web and document sides &mdash; with no scanner or subscription required.</p>
+
+  <details>
+    <summary>How It Works: Agents, Not Instructions</summary>
+    <div>
+      <p>Most AI accessibility tooling works by giving a language model a long list of WCAG rules and hoping it remembers them. The problem: studies of production AI coding sessions show that skill activation rates without explicit agent enforcement hover around <strong>20%</strong>. The model forgets, deprioritizes, or skips accessibility context entirely under token pressure.</p>
+      <p>Community Access takes a different approach. Each specialist runs in its own dedicated context window with a system prompt that <em>is</em> the accessibility domain. The rules are not suggestions layered on top of a general-purpose assistant &mdash; they are the agent's entire identity.</p>
+      <table>
+        <caption>Platform support overview</caption>
+        <thead>
+          <tr><th scope="col">Platform</th><th scope="col">How Agents Work</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claude Code</td><td>Agents invoked via <code>/agent-name</code> for accessibility evaluation on demand</td></tr>
+          <tr><td>GitHub Copilot</td><td>Agents invoked via <code>@agent-name</code> in Chat, guided by workspace instructions</td></tr>
+          <tr><td>Claude Desktop</td><td>MCP extension with 11 static analysis tools and 6 guided audit prompts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Document Accessibility Wizard: Office and PDF Auditing at Scale</summary>
+    <div>
+      <h3>What It Covers</h3>
+      <p>The document-accessibility-wizard is a seven-phase, guided audit agent for DOCX, XLSX, PPTX, and PDF files. It is purpose-built for the kind of content universities produce every day: syllabi, research reports, budget spreadsheets, presentations, and official publications.</p>
+
+      <h3>The Seven Phases</h3>
+      <table>
+        <caption>Document wizard audit phases</caption>
+        <thead>
+          <tr><th scope="col">Phase</th><th scope="col">What Happens</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0 &mdash; Discovery</td><td>Sets scope, format preferences, and scan profile (strict / moderate / minimal)</td></tr>
+          <tr><td>1 &mdash; File Discovery</td><td>Recursively finds all documents, shows inventory by type and count</td></tr>
+          <tr><td>2 &mdash; Scanning</td><td>Runs per-file scans with severity scoring and confidence levels</td></tr>
+          <tr><td>3 &mdash; Cross-Document Analysis</td><td>Identifies patterns, systemic issues, and template-originated problems</td></tr>
+          <tr><td>4 &mdash; Report Generation</td><td>Produces a prioritized report with a metadata dashboard</td></tr>
+          <tr><td>5 &mdash; Follow-Up</td><td>Offers remediation scripts, VPAT/ACR export, and template guidance</td></tr>
+          <tr><td>6 &mdash; CI/CD Integration</td><td>Generates pipeline configs for automated scanning on commit or publish</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Rule Coverage</h3>
+      <p>The agent applies <strong>46 built-in rules for Office documents</strong> and <strong>56 built-in rules for PDFs</strong>, mapped to WCAG 2.1/2.2 success criteria.</p>
+
+      <h4>Word (DOCX)</h4>
+      <ul>
+        <li>Missing document title metadata</li>
+        <li>Body text not using Heading styles</li>
+        <li>Images without alt text</li>
+        <li>Tables used for layout rather than data</li>
+        <li>Missing language declaration</li>
+        <li>Color used as the only means of conveying information</li>
+      </ul>
+
+      <h4>Excel (XLSX)</h4>
+      <ul>
+        <li>Sheets without descriptive tab names</li>
+        <li>Charts without alt text or data table fallbacks</li>
+        <li>Merged cells that break screen reader reading order</li>
+        <li>Missing header row markup</li>
+      </ul>
+
+      <h4>PowerPoint (PPTX)</h4>
+      <ul>
+        <li>Slides missing titles</li>
+        <li>Reading order not defined</li>
+        <li>Decorative images not marked as decorative</li>
+        <li>Embedded video without captions</li>
+      </ul>
+
+      <h4>PDF</h4>
+      <ul>
+        <li>Untagged PDF (no structure tree)</li>
+        <li>Missing document language</li>
+        <li>Form fields without accessible names</li>
+        <li>Figures without <code>/Alt</code> attribute</li>
+        <li>Tables without <code>TH</code> scope headers</li>
+        <li>Matterhorn Protocol conformance checkpoints</li>
+      </ul>
+
+      <h3>Delta Scanning</h3>
+      <p>For departments that publish weekly, the agent supports delta scanning &mdash; it uses <code>git diff</code> to identify only files changed since the last commit, scans those, and merges findings with the previous baseline.</p>
+
+      <h3>Template Analysis</h3>
+      <p>Many university accessibility problems originate from shared templates: the university letterhead, the standard syllabus format, the official slide deck. The agent detects when the same violation appears across multiple files and flags it as a template-originated issue, so the fix is applied once to the source.</p>
+
+      <h3>VPAT / ACR Export</h3>
+      <p>For departments that need to demonstrate compliance, the agent generates a VPAT 2.5 / ACR compliance report by mapping all findings to WCAG success criteria, suitable for procurement processes or ADA coordinator review.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Web Accessibility Wizard: Guided Eleven-Phase Web Auditing</summary>
+    <div>
+      <h3>The Eleven Phases</h3>
+      <table>
+        <caption>Web wizard audit phases</caption>
+        <thead>
+          <tr><th scope="col">Phase</th><th scope="col">Domain</th><th scope="col">Specialist Invoked</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Project discovery and scope</td><td>&mdash;</td></tr>
+          <tr><td>2</td><td>Document structure and semantics</td><td>alt-text-headings</td></tr>
+          <tr><td>3</td><td>Keyboard navigation and focus</td><td>keyboard-navigator</td></tr>
+          <tr><td>4</td><td>Forms and input accessibility</td><td>forms-specialist</td></tr>
+          <tr><td>5</td><td>Color and visual accessibility</td><td>contrast-master</td></tr>
+          <tr><td>6</td><td>Dynamic content and live regions</td><td>live-region-controller</td></tr>
+          <tr><td>7</td><td>ARIA usage review</td><td>aria-specialist</td></tr>
+          <tr><td>8</td><td>Data tables and grids</td><td>tables-data-specialist</td></tr>
+          <tr><td>9</td><td>Link text and navigation</td><td>link-checker</td></tr>
+          <tr><td>10</td><td>Document accessibility</td><td>word/excel/powerpoint/pdf-accessibility</td></tr>
+          <tr><td>11</td><td>Testing strategy and tools</td><td>testing-coach</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Common Issues Found in University Sites</h3>
+      <ul>
+        <li><strong>Heading structure breaks</strong> &mdash; Navigation menus starting at H3, skipping H1 on inner pages</li>
+        <li><strong>"Click here" links</strong> &mdash; Ambiguous link text meaningless to screen reader users</li>
+        <li><strong>Form label mismatches</strong> &mdash; Labels not programmatically associated with inputs</li>
+        <li><strong>Missing focus indicators</strong> &mdash; <code>outline: none</code> with no custom replacement</li>
+        <li><strong>Contrast failures</strong> &mdash; Light gray text on white backgrounds</li>
+        <li><strong>Modal focus not trapped</strong> &mdash; Keyboard focus escaping to content behind dialogs</li>
+        <li><strong>Data tables without headers</strong> &mdash; Missing <code>&lt;th scope&gt;</code> markup</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>The Supporting Specialist Agents</summary>
+    <div>
+      <h3>Web Specialists</h3>
+      <table>
+        <caption>Web specialist agents and their responsibilities</caption>
+        <thead>
+          <tr><th scope="col">Agent</th><th scope="col">What It Enforces</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>aria-specialist</td><td>ARIA roles, states, properties, widget patterns</td></tr>
+          <tr><td>modal-specialist</td><td>Focus trapping in dialogs, drawers, and overlays</td></tr>
+          <tr><td>contrast-master</td><td>Text and UI component contrast ratios, dark mode</td></tr>
+          <tr><td>keyboard-navigator</td><td>Tab order, skip links, SPA focus management</td></tr>
+          <tr><td>live-region-controller</td><td>aria-live regions, toasts, loading states</td></tr>
+          <tr><td>forms-specialist</td><td>Label/input association, error messages, validation</td></tr>
+          <tr><td>alt-text-headings</td><td>Alt text quality, heading hierarchy, landmarks</td></tr>
+          <tr><td>tables-data-specialist</td><td>Table headers, captions, sortable column announcements</td></tr>
+          <tr><td>link-checker</td><td>"Click here" detection, new-tab warnings, duplicate links</td></tr>
+          <tr><td>testing-coach</td><td>Screen reader testing, keyboard testing, axe-core CI setup</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Document Specialists</h3>
+      <table>
+        <caption>Document specialist agents and their responsibilities</caption>
+        <thead>
+          <tr><th scope="col">Agent</th><th scope="col">What It Enforces</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>word-accessibility</td><td>DOCX headings, alt text, language, table structure</td></tr>
+          <tr><td>excel-accessibility</td><td>XLSX sheet names, chart alt text, merged cells, headers</td></tr>
+          <tr><td>powerpoint-accessibility</td><td>PPTX slide titles, reading order, decorative image marking</td></tr>
+          <tr><td>pdf-accessibility</td><td>PDF/UA tagging, Matterhorn Protocol, form labeling</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CI/CD Integration: Shift Accessibility Left</summary>
+    <div>
+      <h3>Web: axe-core in GitHub Actions</h3>
+      <p>The testing-coach agent can generate a GitHub Actions workflow that installs <code>@axe-core/cli</code>, scans a list of URLs against WCAG 2.1 AA tags, outputs a SARIF 2.1.0 report, and uploads findings to the GitHub Security tab. Violations block the merge.</p>
+
+      <h3>Documents: Pre-Commit Scanning</h3>
+      <p>The document wizard generates a CI workflow that detects changed documents in the diff, runs the appropriate scanner, and fails the build on Critical or Major findings.</p>
+
+      <h3>Scan Profiles</h3>
+      <table>
+        <caption>Scan profile strictness levels</caption>
+        <thead>
+          <tr><th scope="col">Profile</th><th scope="col">What Gets Flagged</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>strict</td><td>All rules, all severities (Critical, Major, Minor)</td></tr>
+          <tr><td>moderate</td><td>All rules, errors and warnings only</td></tr>
+          <tr><td>minimal</td><td>Errors only &mdash; suitable for CI gates</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Installation</summary>
+    <div>
+      <h3>One-liner (recommended)</h3>
+      <p><strong>macOS / Linux:</strong></p>
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/community-access/accessibility-agents/main/install.sh | bash</code></pre>
+      <p><strong>Windows (PowerShell):</strong></p>
+      <pre><code>irm https://raw.githubusercontent.com/community-access/accessibility-agents/main/install.ps1 | iex</code></pre>
+      <p>The installer detects which AI platforms are present and installs the appropriate agent files. It also sets up auto-updates.</p>
+
+      <table>
+        <caption>Installed files by platform</caption>
+        <thead>
+          <tr><th scope="col">Platform</th><th scope="col">Location</th><th scope="col">What</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claude Code</td><td><code>~/.claude/agents/</code></td><td>22 agent files</td></tr>
+          <tr><td>GitHub Copilot</td><td><code>.github/agents/</code></td><td>22 agent files + copilot-instructions.md</td></tr>
+          <tr><td>Claude Desktop</td><td>System extension path</td><td>MCP extension with 11 tools + 6 prompts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <h2>Summary</h2>
+  <table>
+    <caption>Comparison of document and web accessibility wizards</caption>
+    <thead>
+      <tr><th scope="col">Capability</th><th scope="col">Document Wizard</th><th scope="col">Web Wizard</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>File formats</td><td>DOCX, XLSX, PPTX, PDF</td><td>HTML, JSX, TSX, Vue, Svelte</td></tr>
+      <tr><td>Rule count</td><td>46 Office + 56 PDF</td><td>All WCAG 2.1/2.2 AA criteria</td></tr>
+      <tr><td>Phase-based guidance</td><td>7 phases</td><td>11 phases</td></tr>
+      <tr><td>Delta scanning</td><td>Yes (git diff)</td><td>Via axe-core CI</td></tr>
+      <tr><td>Cross-file pattern detection</td><td>Yes (template analysis)</td><td>Yes (cross-page analyzer)</td></tr>
+      <tr><td>VPAT / ACR export</td><td>Yes</td><td>Via accessibility-wizard report</td></tr>
+      <tr><td>CI/CD integration</td><td>Pipeline configs</td><td>GitHub Actions + SARIF output</td></tr>
+      <tr><td>One-click prompts</td><td>9 prompts</td><td>5 prompts</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 2rem;"><strong>Repository:</strong> <a href="https://github.com/community-access/accessibility-agents">github.com/community-access/accessibility-agents</a><br>
+  <strong>License:</strong> MIT</p>
+
+</article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Making software accessible by default.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Project</h3>
+        <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
+          <li><a href="repos.html">Repositories</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="quickstart.html">Quick Start</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
+          <li><a href="feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Community</h3>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">Workshop</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="a11y-statement">
+      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function showPost(id) {
+    document.getElementById('blog-index').hidden = true;
+    document.getElementById('blog-hero').hidden = true;
+    var post = document.getElementById(id);
+    post.hidden = false;
+    post.focus();
+    window.scrollTo(0, 0);
+    history.pushState(null, '', '#' + id);
+  }
+
+  function showIndex() {
+    var articles = document.querySelectorAll('.blog-article');
+    for (var i = 0; i < articles.length; i++) articles[i].hidden = true;
+    document.getElementById('blog-index').hidden = false;
+    document.getElementById('blog-hero').hidden = false;
+    window.scrollTo(0, 0);
+    history.pushState(null, '', 'blog.html');
+  }
+
+  // Expose for onclick handlers
+  window.showPost = showPost;
+  window.showIndex = showIndex;
+
+  // Handle direct link to article
+  if (window.location.hash) {
+    var target = document.getElementById(window.location.hash.slice(1));
+    if (target && target.classList.contains('blog-article')) {
+      showPost(window.location.hash.slice(1));
+    }
+  }
+
+  // Handle back/forward
+  window.addEventListener('popstate', function () {
+    if (window.location.hash) {
+      var target = document.getElementById(window.location.hash.slice(1));
+      if (target && target.classList.contains('blog-article')) {
+        showPost(window.location.hash.slice(1));
+        return;
+      }
+    }
+    showIndex();
+  });
+})();
+</script>
+<script src="main.js"></script>
+
+</body>
+</html>

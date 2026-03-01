@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accessibility statement for the Community Access website — WCAG 2.2 AA conformance, testing methodology, and how to report barriers.">
+  <title>Accessibility Statement — Community Access</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
+  <meta property="og:title" content="Accessibility Statement — Community Access">
+  <meta property="og:description" content="WCAG 2.2 AA conformance details, testing methodology, and how to report accessibility barriers.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
+  <meta property="og:url" content="https://community-access.github.io/accessibility.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <style>
+    .page-hero {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 40rem;
+      margin: 0 auto;
+      opacity: 0.92;
+      line-height: 1.7;
+    }
+    .a11y-content {
+      padding: 4rem 0 5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    .a11y-content h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin: 2.5rem 0 1rem;
+    }
+    .a11y-content h2:first-child {
+      margin-top: 0;
+    }
+    .a11y-content p, .a11y-content li {
+      font-size: 1.05rem;
+      color: var(--ca-gray-700);
+      line-height: 1.8;
+    }
+    .a11y-content p {
+      margin-bottom: 1rem;
+    }
+    .a11y-content ul {
+      margin: 0.5rem 0 1.5rem 1.5rem;
+    }
+    .a11y-content li {
+      margin-bottom: 0.4rem;
+    }
+    .a11y-content a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .a11y-content a:hover {
+      text-decoration-thickness: 2px;
+    }
+    .a11y-content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--ca-gray-100);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--ca-gray-800);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 48rem) {
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ca-gray-50);
+    }
+    .footer-tagline {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+    .footer-column h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .footer-column .footer-links {
+      list-style: none;
+    }
+    .footer-column .footer-links li {
+      margin-bottom: 0.4rem;
+    }
+    .footer-column .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .footer-column .footer-links a:hover {
+      color: var(--ca-emerald-light);
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="repos.html">Repositories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://community-access.github.io/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <span class="icon-sun" aria-hidden="true">&#9728;&#65039;</span>
+      <span class="icon-moon" aria-hidden="true">&#9790;&#65039;</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Accessibility Statement</h1>
+    <p>Community Access is committed to ensuring digital accessibility for people of all abilities. This page describes our conformance status and how to report barriers.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="a11y-content">
+
+    <h2>Conformance Status</h2>
+    <p>This website aims to conform to the <strong>Web Content Accessibility Guidelines (WCAG) 2.2 Level AA</strong>. WCAG defines requirements for designers and developers to improve accessibility for people with disabilities.</p>
+    <p>We believe this site fully conforms to WCAG 2.2 Level AA. If you experience any accessibility barriers, please let us know.</p>
+
+    <h2>Technical Specifications</h2>
+    <p>Accessibility of this website relies on the following technologies:</p>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>WAI-ARIA</li>
+    </ul>
+    <p>These technologies are relied upon for conformance with the accessibility standards used.</p>
+
+    <h2>What We Do</h2>
+    <ul>
+      <li><strong>Semantic HTML</strong> - We use proper heading hierarchy, landmarks, lists, and native elements before ARIA. Buttons are <code>&lt;button&gt;</code>, not <code>&lt;div role="button"&gt;</code>.</li>
+      <li><strong>Keyboard navigation</strong> - Every interactive element is reachable and operable by keyboard. Tab order follows visual order. Focus indicators are always visible.</li>
+      <li><strong>Color contrast</strong> - All text meets WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text and UI components).</li>
+      <li><strong>Responsive design</strong> - The site works at all viewport sizes and zoom levels up to 400%.</li>
+      <li><strong>Reduced motion</strong> - We honor <code>prefers-reduced-motion</code> by eliminating animations and transitions when this preference is set.</li>
+      <li><strong>Dark mode</strong> - We support <code>prefers-color-scheme: dark</code> with maintained contrast ratios.</li>
+      <li><strong>Focus management</strong> - Skip links, visible focus rings using a high-contrast amber indicator, and proper focus management on dynamic content.</li>
+      <li><strong>Alternative text</strong> - Decorative images use empty alt attributes. Meaningful images have descriptive alt text.</li>
+      <li><strong>Link purpose</strong> - All links have descriptive text that makes sense out of context. Links that open in new tabs are indicated.</li>
+    </ul>
+
+    <h2>Testing</h2>
+    <p>This site has been tested with:</p>
+    <ul>
+      <li>NVDA screen reader with Firefox</li>
+      <li>VoiceOver with Safari on macOS</li>
+      <li>Keyboard-only navigation (Tab, Shift+Tab, Enter, Escape, Arrow keys)</li>
+      <li>axe-core automated accessibility scanner</li>
+      <li>Browser developer tools accessibility inspector</li>
+      <li>High contrast mode on Windows</li>
+      <li>200% and 400% zoom levels</li>
+    </ul>
+
+    <h2>Known Limitations</h2>
+    <ul>
+      <li><strong>Dynamic GitHub API content</strong> - Some content (contributor lists, repository data, news feed) is loaded from the GitHub API. While we use loading states and descriptive structures, screen reader users may need to refresh the region after content loads.</li>
+      <li><strong>External links</strong> - Links to GitHub, the workshop site, and other external resources follow those sites' accessibility practices, which we do not control.</li>
+    </ul>
+
+    <h2>Feedback</h2>
+    <p>We welcome your feedback on the accessibility of this website. If you encounter accessibility barriers, please let us know:</p>
+    <ul>
+      <li><strong>GitHub Issues</strong> - <a href="https://github.com/Community-Access/community-access.github.io/issues">Open an accessibility issue</a></li>
+      <li><strong>Email</strong> - <a href="mailto:accessibility@community-access.org">accessibility@community-access.org</a></li>
+    </ul>
+    <p>We try to respond to accessibility feedback within 3 business days.</p>
+
+    <h2>Compatibility</h2>
+    <p>This website is designed to be compatible with:</p>
+    <ul>
+      <li>Recent versions of Chrome, Firefox, Safari, and Edge</li>
+      <li>NVDA, JAWS, VoiceOver, Narrator, and Orca screen readers</li>
+      <li>Speech recognition software</li>
+      <li>Screen magnification tools</li>
+      <li>Operating system accessibility features (high contrast, reduced motion, dark mode)</li>
+    </ul>
+
+    <h2>Assessment Approach</h2>
+    <p>Community Access assesses the accessibility of this website through the following approaches:</p>
+    <ul>
+      <li>Self-evaluation by developers who use assistive technology daily</li>
+      <li>Use of our own accessibility agent tools during development</li>
+      <li>Automated testing with axe-core</li>
+      <li>Manual keyboard and screen reader testing</li>
+    </ul>
+
+    <p style="margin-top: 2.5rem; color: var(--ca-gray-700); font-size: 0.9rem;">This statement was last updated on <time datetime="2026-02-26">February 26, 2026</time>.</p>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Making software accessible by default.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Project</h3>
+        <ul class="footer-links">
+          <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="repos.html">Repositories</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="quickstart.html">Quick Start</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
+          <li><a href="feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Community</h3>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html" aria-current="page">Accessibility</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">Workshop</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="a11y-statement">
+      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Full accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>

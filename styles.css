@@ -1699,3 +1699,84 @@ section { padding: 5rem 0; }
     font-size: 1.1rem;
   }
 }
+
+/* === Dark Mode Toggle === */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background var(--transition), border-color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
+}
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--ca-focus);
+  outline-offset: 2px;
+}
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon { display: none; }
+
+/* Default (no data-theme): show based on OS; fallback to moon */
+.theme-toggle .icon-moon { display: inline; }
+.theme-toggle .icon-sun { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: inline; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .theme-toggle .icon-sun { display: inline; }
+  .theme-toggle .icon-moon { display: none; }
+}
+
+/* Force dark mode via toggle */
+html[data-theme="dark"] {
+  --ca-white: #111827;
+  --ca-gray-50: #1f2937;
+  --ca-gray-100: #1f2937;
+  --ca-gray-200: #374151;
+  --ca-gray-700: #d1d5db;
+  --ca-gray-800: #e5e7eb;
+  --ca-gray-900: #f9fafb;
+  --ca-indigo-light: #818cf8;
+}
+html[data-theme="dark"] .stats-bar { background: #0f172a; }
+html[data-theme="dark"] .install-block { background: #0f172a; border: 1px solid var(--ca-gray-200); }
+html[data-theme="dark"] .wip-banner { background: linear-gradient(135deg, #065f46, #064e3b); }
+html[data-theme="dark"] .workshop-banner { background: linear-gradient(160deg, #0f0d2e, #1e1b4b 40%, #2e1065); }
+html[data-theme="dark"] .contribute-section { background: linear-gradient(160deg, #0f172a, #1e1b4b); }
+html[data-theme="dark"] .method-detail { background: var(--ca-gray-800); }
+html[data-theme="dark"] .method-detail summary { color: var(--ca-indigo-light); }
+html[data-theme="dark"] .contributors-section { background: var(--ca-gray-900); }
+html[data-theme="dark"] .contributor-card:hover { background: var(--ca-gray-50); }
+
+/* Force light mode via toggle (overrides OS dark preference) */
+html[data-theme="light"] {
+  --ca-white: #ffffff;
+  --ca-gray-50: #f9fafb;
+  --ca-gray-100: #f3f4f6;
+  --ca-gray-200: #e5e7eb;
+  --ca-gray-700: #374151;
+  --ca-gray-800: #1f2937;
+  --ca-gray-900: #111827;
+  --ca-indigo-light: #4f46e5;
+}
+html[data-theme="light"] .stats-bar { background: var(--ca-gray-900); }
+html[data-theme="light"] .install-block { background: var(--ca-gray-900); border: none; }
+html[data-theme="light"] .wip-banner { background: linear-gradient(135deg, var(--ca-emerald), #047857); }
+html[data-theme="light"] .workshop-banner { background: linear-gradient(160deg, #1e1b4b, #312e81 40%, #4c1d95); }
+html[data-theme="light"] .contribute-section { background: linear-gradient(160deg, var(--ca-gray-900), #1e1b4b); }
+html[data-theme="light"] .method-detail { background: var(--ca-gray-50); }
+html[data-theme="light"] .method-detail summary { color: var(--ca-indigo); }
+html[data-theme="light"] .contributors-section { background: inherit; }
+html[data-theme="light"] .contributor-card:hover { background: var(--ca-gray-100); }

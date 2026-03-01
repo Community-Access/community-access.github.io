@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Public repositories from the Community Access GitHub organization -- accessibility tools, workshops, and open source projects.">
   <title>Repositories -- Community Access</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
+  <meta property="og:title" content="Repositories — Community Access">
+  <meta property="og:description" content="Public repositories from the Community Access GitHub organization — accessibility tools, workshops, and open source projects.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
+  <meta property="og:url" content="https://community-access.github.io/repos.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <style>
     /* === Reset & Base === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -216,6 +224,42 @@
       .page-header { padding: 3rem 0 2rem; }
       .repo-list { grid-template-columns: 1fr; }
     }
+    .theme-toggle {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      padding: 0.35rem 0.5rem;
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+    .theme-toggle:focus-visible { outline: 3px solid var(--ca-focus); outline-offset: 2px; }
+    .theme-toggle .icon-sun, .theme-toggle .icon-moon { display: none; }
+    .theme-toggle .icon-moon { display: inline; }
+    html[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+    html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    html[data-theme="light"] .theme-toggle .icon-moon { display: inline; }
+    html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .theme-toggle .icon-sun { display: inline; }
+      .theme-toggle .icon-moon { display: none; }
+    }
+    html[data-theme="dark"] {
+      --ca-white: #111827; --ca-gray-50: #1f2937; --ca-gray-100: #1f2937;
+      --ca-gray-200: #374151; --ca-gray-700: #d1d5db; --ca-gray-800: #e5e7eb;
+      --ca-gray-900: #f9fafb; --ca-indigo-light: #818cf8;
+    }
+    html[data-theme="light"] {
+      --ca-white: #ffffff; --ca-gray-50: #f9fafb; --ca-gray-100: #f3f4f6;
+      --ca-gray-200: #e5e7eb; --ca-gray-700: #374151; --ca-gray-800: #1f2937;
+      --ca-gray-900: #111827; --ca-indigo-light: #4f46e5;
+    }
   </style>
 </head>
 <body>
@@ -246,6 +290,10 @@
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <span class="icon-sun" aria-hidden="true">&#9728;&#65039;</span>
+      <span class="icon-moon" aria-hidden="true">&#9790;&#65039;</span>
+    </button>
   </div>
 </header>
 
@@ -280,15 +328,20 @@
           <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
           <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="repos.html">Repositories</a></li>
-          <li><a href="https://community-access.github.io/git-going-with-github/">GIT Going with GitHub Workshop</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="quickstart.html">Quick Start</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://community-access.github.io/git-going-with-github/">Workshop</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
         </ul>
       </nav>
     </div>
     <div class="a11y-statement">
-      <p>This site is built to meet WCAG 2.2 Level AA. It uses semantic HTML, visible focus indicators, sufficient color contrast, responsive layout, and respects <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code> preferences. If you encounter an accessibility barrier, please <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">open an issue</a>.</p>
+      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
     </div>
     <p class="footer-copy">A community project. Licensed under MIT.</p>
   </div>
