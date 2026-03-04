@@ -135,6 +135,28 @@
       border-radius: 0 8px 8px 0;
     }
     .post-body blockquote p { margin-bottom: 0; }
+    .post-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .post-body th, .post-body td {
+      border: 1px solid var(--ca-gray-200);
+      padding: 0.6rem 1rem;
+      text-align: left;
+    }
+    .post-body thead th {
+      background: var(--ca-gray-50);
+      font-weight: 600;
+      color: var(--ca-gray-900);
+    }
+    .post-body tbody tr:nth-child(even) { background: var(--ca-gray-50); }
+    .post-body hr {
+      border: none;
+      border-top: 1px solid var(--ca-gray-200);
+      margin: 2rem 0;
+    }
 
     /* === Pagination === */
     .pagination {
@@ -338,11 +360,36 @@
     if (titleLine >= 0) lines.splice(titleLine, 1);
     text = lines.join('\n');
 
+    // Parse markdown tables into HTML
+    function mdTables(src) {
+      return src.replace(/(?:^|\n)(\|.+\|\n\|[\s:|-]+\|\n(?:\|.+\|\n?)+)/g, function (m, tbl) {
+        var rows = tbl.trim().split('\n');
+        if (rows.length < 2) return m;
+        var headCells = rows[0].split('|').filter(function (c) { return c.trim() !== ''; });
+        var out = '<table><thead><tr>';
+        headCells.forEach(function (c) { out += '<th>' + c.trim() + '</th>'; });
+        out += '</tr></thead><tbody>';
+        for (var r = 2; r < rows.length; r++) {
+          var cells = rows[r].split('|').filter(function (c) { return c.trim() !== ''; });
+          out += '<tr>';
+          cells.forEach(function (c) { out += '<td>' + c.trim() + '</td>'; });
+          out += '</tr>';
+        }
+        out += '</tbody></table>';
+        return out;
+      });
+    }
+
+    // Convert tables first (before inline formatting mangles the pipes)
+    text = mdTables(text);
+
     var html = text
       // Code blocks
       .replace(/```(\w*)\n([\s\S]*?)```/g, function (m, lang, code) {
         return '<pre><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trim() + '</code></pre>';
       })
+      // Horizontal rules
+      .replace(/^---+$/gm, '<hr>')
       // Headers
       .replace(/^### (.+)$/gm, '<h3>$1</h3>')
       .replace(/^## (.+)$/gm, '<h2>$1</h2>')
@@ -369,7 +416,7 @@
     html = blocks.map(function (block) {
       block = block.trim();
       if (!block) return '';
-      if (block.match(/^<(h[23]|ul|ol|pre|blockquote)/)) return block;
+      if (block.match(/^<(h[23]|ul|ol|pre|blockquote|table|hr)/)) return block;
       if (block.match(/^<li/)) return '<ul>' + block + '</ul>';
       return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
     }).join('\n');
