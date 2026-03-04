@@ -496,7 +496,12 @@
       var postTitlesLower = posts.map(function (p) { return p.title.toLowerCase(); });
       releases = releases.filter(function (rel) {
         var t = rel.title.toLowerCase();
-        return !postTitlesLower.some(function (pt) { return pt.indexOf(t) !== -1; });
+        // Extract version like "v2.5" from release title for fuzzy dedup
+        var verMatch = t.match(/v\d+\.\d+/);
+        var ver = verMatch ? verMatch[0] : null;
+        return !postTitlesLower.some(function (pt) {
+          return pt.indexOf(t) !== -1 || (ver && pt.indexOf(ver) !== -1);
+        });
       });
       var all = posts.concat(releases);
       all.sort(function (a, b) { return b.sortKey.localeCompare(a.sortKey); });
