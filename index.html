@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Community Access — 55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
+  <meta name="description" content="Community Access — 57 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
   <title>Community Access — Accessible by Default</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
   <meta property="og:title" content="Community Access — Accessible by Default">
-  <meta property="og:description" content="55 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
+  <meta property="og:description" content="57 AI-powered accessibility agents for Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. WCAG 2.2 AA compliance, enforced by default.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
   <meta property="og:url" content="https://community-access.github.io/">
   <meta property="og:type" content="website">
@@ -210,7 +210,7 @@
 <section class="hero">
   <div class="container">
     <h1>Accessible <span class="hero-accent">by Default</span></h1>
-    <p>AI coding tools forget accessibility. Our 55 agents make sure they never do&mdash;enforcing WCAG 2.2 AA inside your favorite AI coding environment so every line of code ships inclusive.</p>
+    <p>AI coding tools forget accessibility. Our 57 agents make sure they never do&mdash;enforcing WCAG 2.2 AA inside your favorite AI coding environment so every line of code ships inclusive.</p>
     <div class="hero-actions">
       <a href="#install" class="btn btn-primary">Install in 30 Seconds</a>
       <a href="https://github.com/Community-Access/accessibility-agents" class="btn btn-outline">View on GitHub</a>
@@ -223,7 +223,7 @@
     <dl class="stats-grid" id="live-stats">
       <div class="stat-item">
         <dt class="stat-label">Agents</dt>
-        <dd class="stat-number" id="stat-agents">55</dd>
+        <dd class="stat-number" id="stat-agents">57</dd>
       </div>
       <div class="stat-item">
         <dt class="stat-label">Platforms</dt>
@@ -287,6 +287,14 @@
         <h3>CI/CD Ready</h3>
         <p>Integrates with <a href="https://github.com/dequelabs/axe-core" style="color:var(--ca-indigo-light);">axe-core</a>, the <a href="https://github.com/github/accessibility-scanner" style="color:var(--ca-indigo-light);">GitHub Accessibility Scanner</a>, and Lighthouse CI. Generate VPAT 2.5 reports from your pipeline.</p>
       </div>
+      <div class="feature-card">
+        <h3>Cited &amp; Trustworthy</h3>
+        <p>Every agent follows a <a href="https://github.com/Community-Access/accessibility-agents/blob/main/.github/agents/CITATION_POLICY.md" style="color:var(--ca-indigo-light);">source citation policy</a> with a six-tier authority hierarchy. Claims link to WCAG specs, ARIA APG, and vendor docs&mdash;not hallucinated advice. A weekly automation checks sources for staleness.</p>
+      </div>
+      <div class="feature-card">
+        <h3>NVDA Addon Development</h3>
+        <p>Build, debug, package, and publish NVDA screen reader addons with an expert agent grounded in the <a href="https://github.com/nvaccess/nvda" style="color:var(--ca-indigo-light);">official NVDA source code</a>. Covers globalPlugins, appModules, synthDrivers, braille tables, and Add-on Store submission.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -295,7 +303,7 @@
   <div class="container">
     <div class="section-header">
       <h2>Meet the Agents</h2>
-      <p>49 specialists across four teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
+      <p>57 specialists across five teams. Each agent owns one domain and enforces it relentlessly. Expand any group to see every agent, and look for <em>&ldquo;How it works&rdquo;</em> to see exactly how each one analyzes your content.</p>
     </div>
     <search class="search-filter">
       <label for="agent-search">Search agents, skills, prompts, and tools</label>
@@ -311,7 +319,7 @@
     <div class="accordion-group">
 
       <details>
-        <summary>Web Accessibility Agents (16)</summary>
+        <summary>Web Accessibility Agents (17)</summary>
         <div class="accordion-body">
           <table class="agent-table" aria-label="Web accessibility agents">
             <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
@@ -402,6 +410,7 @@
             <tr><td>Cognitive Accessibility</td><td>Audits for WCAG 2.2 cognitive criteria: reading level, consistent navigation, error prevention, and timeouts.</td></tr>
             <tr><td>Mobile Accessibility</td><td>Checks touch targets, viewport scaling, orientation, and mobile screen reader patterns.</td></tr>
             <tr><td>Design System Auditor</td><td>Reviews component libraries and design tokens for accessibility patterns and consistency.</td></tr>
+            <tr><td>Text Quality Reviewer</td><td>Catches low-quality alt text, template variables in aria-labels, placeholder text used as labels, and duplicate control names.</td></tr>
             </tbody>
           </table>
         </div>
@@ -565,6 +574,25 @@
       </details>
 
       <details>
+        <summary>Developer Tools Agents (7)</summary>
+        <div class="accordion-body">
+          <p>The developer tools team helps you build, debug, package, and test Python desktop applications and NVDA screen reader addons with accessibility built in from the start.</p>
+          <table class="agent-table" aria-label="Developer tools agents">
+            <thead><tr><th scope="col">Agent</th><th scope="col">Description</th></tr></thead>
+            <tbody>
+            <tr><td>Developer Hub</td><td>Command center for all developer tasks&mdash;routes to the right specialist based on what you need.</td></tr>
+            <tr><td>Python Specialist</td><td>Debugging, packaging (PyInstaller/Nuitka/cx_Freeze), testing, type checking, async patterns, and optimization.</td></tr>
+            <tr><td>wxPython Specialist</td><td>Sizer layouts, event handling, AUI framework, custom controls, threading, and desktop accessibility.</td></tr>
+            <tr><td>Desktop A11y Specialist</td><td>Platform accessibility APIs (UI Automation, MSAA, ATK/AT-SPI, NSAccessibility), screen reader interaction, and focus management.</td></tr>
+            <tr><td>Desktop A11y Testing Coach</td><td>Testing with NVDA, JAWS, Narrator, VoiceOver, and Orca. Automated UIA testing and keyboard-only testing flows.</td></tr>
+            <tr><td>A11y Tool Builder</td><td>Building accessibility scanning tools, rule engines, document parsers, report generators, and audit automation.</td></tr>
+            <tr><td>NVDA Addon Specialist</td><td>NVDA screen reader addon development&mdash;globalPlugins, appModules, synthDrivers, brailleDisplayDrivers, addon packaging, and Add-on Store submission. Grounded in the official NVDA source code.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details>
         <summary>Nexus &amp; Hidden Sub-Agents (12)</summary>
         <div class="accordion-body">
           <p>These agents run behind the scenes. You never invoke them directly&mdash;other agents call them as needed.</p>
@@ -605,7 +633,7 @@
         <div class="accordion-body">
           <p>Agents live in <code>.claude/agents/</code> as Markdown files. Each agent has a dedicated system prompt that defines its identity and expertise.</p>
           <p>Specialists run in parallel groups for fast audits&mdash;the Accessibility Lead orchestrates the full team so you get comprehensive results from a single command.</p>
-          <p>Install with one command. The installer copies all 49 agents and configures everything automatically.</p>
+          <p>Install with one command. The installer copies all 57 agents and configures everything automatically.</p>
         </div>
       </details>
 
@@ -614,7 +642,7 @@
         <div class="accordion-body">
           <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>. Accessibility rules are injected into every Copilot chat via <code>copilot-instructions.md</code>.</p>
           <p>Same agents, same rules, same parallel execution as Claude Code. All 54 prompts are available as <code>.prompt.md</code> files you can invoke directly in Copilot Chat.</p>
-          <p>16 skills provide shared knowledge modules that keep all agents consistent.</p>
+          <p>17 skills provide shared knowledge modules that keep all agents consistent.</p>
         </div>
       </details>
 
@@ -631,7 +659,7 @@
         <summary>Copilot CLI (GitHub Copilot in Terminal)</summary>
         <div class="accordion-body">
           <p>Agents load as <code>.agent.md</code> files in <code>.github/agents/</code>&mdash;the same files used by VS Code Copilot. Copilot CLI reads the agent definitions and applies accessibility rules directly in your terminal workflow.</p>
-          <p>All 54 prompts, 16 skills, and 49 agents work identically to the VS Code experience. The installer configures Copilot CLI support automatically alongside VS Code.</p>
+          <p>All 54 prompts, 17 skills, and 57 agents work identically to the VS Code experience. The installer configures Copilot CLI support automatically alongside VS Code.</p>
         </div>
       </details>
 
@@ -719,6 +747,18 @@
             <tr><td>GitHub Workflow Standards</td><td>PR review standards, issue management policies, and branching conventions.</td></tr>
             <tr><td>GitHub Scanning</td><td>Repository health checks, security scanning patterns, and CI/CD integration.</td></tr>
             <tr><td>GitHub Analytics Scoring</td><td>Metrics and scoring for repository health, contributor activity, and PR velocity.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Developer Skills (1)</summary>
+        <div class="accordion-body">
+          <table class="agent-table" aria-label="Developer skills">
+            <thead><tr><th scope="col">Skill</th><th scope="col">Description</th></tr></thead>
+            <tbody>
+            <tr><td>Python Development</td><td>Python and wxPython patterns, packaging (PyInstaller/Nuitka/cx_Freeze), testing, wxPython sizers/events/threading, and cross-platform paths.</td></tr>
             </tbody>
           </table>
         </div>
@@ -915,11 +955,11 @@
     <div class="repo-card">
       <div>
         <h3>Community-Access/accessibility-agents</h3>
-        <p>49 accessibility agents, 16 skills, and 54 prompts for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. Enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
+        <p>57 accessibility agents, 17 skills, and 54 prompts for Claude Code, GitHub Copilot, Claude Desktop, Copilot CLI, Codex CLI, and Gemini CLI. Enforce WCAG 2.2 AA compliance so AI coding tools stop generating inaccessible code.</p>
         <ul class="repo-meta">
           <li>MIT License</li>
-          <li>49 agents</li>
-          <li>16 skills</li>
+          <li>57 agents</li>
+          <li>17 skills</li>
           <li>54 prompts</li>
         </ul>
       </div>
@@ -985,13 +1025,13 @@
     </div>
 
     <div class="teams-overview">
-      <h3>55 Agents Across 5 Teams</h3>
+      <h3>57 Agents Across 5 Teams</h3>
       <div class="teams-grid">
         <a href="docs.html" class="team-badge">Web Accessibility <span>16</span></a>
         <a href="docs.html" class="team-badge">Document Scanning <span>9</span></a>
         <a href="docs.html" class="team-badge">Markdown <span>3</span></a>
         <a href="docs.html" class="team-badge">GitHub Workflows <span>11</span></a>
-        <a href="docs.html" class="team-badge">Developer Tools <span>6</span></a>
+        <a href="docs.html" class="team-badge">Developer Tools <span>7</span></a>
         <a href="docs.html" class="team-badge team-badge-sub">Sub-Agents <span>10+</span></a>
       </div>
       <p><a href="docs.html">Explore all agents, skills, and prompts in the documentation &rarr;</a></p>

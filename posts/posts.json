@@ -1,5 +1,12 @@
 [
   {
+    "slug": "accessibility-agents-v2.2-release",
+    "title": "Accessibility Agents v2.2: NVDA Addon Specialist, Citation Policy, and 57 Agents",
+    "date": "2026-03-04",
+    "summary": "v2.2 adds the NVDA Addon Development Specialist, Text Quality Reviewer, a source citation policy with six-tier authority hierarchy, and automated source freshness checks. 57 agents across 5 platforms.",
+    "type": "Release"
+  },
+  {
     "slug": "accessibility-agents-v2.1-release",
     "title": "Accessibility Agents v2.1: Developer Tools Team, 5 Platforms, and 55 Agents",
     "date": "2026-02-28",
