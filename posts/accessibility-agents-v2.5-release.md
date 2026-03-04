@@ -6,7 +6,7 @@
 
 This one is special.
 
-Every feature in **Accessibility Agents v2.5** exists because someone in the community asked for it, argued for it, or built it. This is not a routine point release. It is the moment this project stopped being "two developers and a dream" and became something the community owns. 57 agents. 17 skills. 54 prompts. Five platforms. And every single recommendation now comes with a citation you can verify.
+Every feature in **Accessibility Agents v2.5** exists because someone in the community asked for it, argued for it, or built it. This is not a routine point release. It is the moment this project stopped being "two developers and a dream" and became something the community owns. 57 agents. 17 skills. 60 prompts. Five platforms. And every single recommendation now comes with a citation you can verify.
 
 We are calling v2.5 our **Community Milestone Release** because it reflects what happens when blind and low vision developers, accessibility engineers, assistive technology users, and open source contributors come together around one idea: AI coding tools should ship accessible code by default.
 
@@ -82,7 +82,7 @@ A community member building a wxPython desktop app discovered a nasty cross-plat
 | Web accessibility agents | 16 | 17 | +1 |
 | Developer tools agents | 6 | 7 | +1 |
 | Skills | 16 | 17 | +1 |
-| Prompts | 54 | 54 | -- |
+| Prompts | 54 | 60 | +6 |
 | Platforms | 5 | 5 | -- |
 | Source citations enforced | No | Yes | New |
 | Automated freshness checks | No | Yes | New |
@@ -91,7 +91,7 @@ A community member building a wxPython desktop app discovered a nasty cross-plat
 
 Previous releases added agents, skills, and platforms. v2.5 adds **accountability**. Every recommendation can be traced to a real source. Every agent knows its limits and says so. The citation policy and source registry are not features -- they are a promise.
 
-And every major feature in this release -- the NVDA Addon Specialist, the Text Quality Reviewer, the citation policy, the wxPython screen reader documentation -- started as a community conversation. Not a roadmap item. Not a sprint goal. A real person saying "this is what I need." That is how accessibility tooling should be built.
+And every major feature in this release -- the NVDA Addon Specialist, the Text Quality Reviewer, the citation policy, the wxPython screen reader documentation, the six new Developer Tools prompts (scaffold-nvda-addon, audit-desktop-a11y, test-desktop-a11y, review-text-quality, scaffold-wxpython-app, package-python-app) -- started as a community conversation. Not a roadmap item. Not a sprint goal. A real person saying "this is what I need." That is how accessibility tooling should be built.
 
 ## Install or Update
 
