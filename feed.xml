@@ -7,11 +7,11 @@
     <language>en-us</language>
     <atom:link href="https://community-access.org/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Accessibility Agents v2.2: NVDA Addon Specialist, Citation Policy, and 57 Agents</title>
-      <link>https://community-access.org/news.html#post/accessibility-agents-v2.2-release</link>
-      <guid isPermaLink="true">https://community-access.org/news.html#post/accessibility-agents-v2.2-release</guid>
+      <title>Accessibility Agents v2.5: By the Community, For the Community</title>
+      <link>https://community-access.org/news.html#post/accessibility-agents-v2.5-release</link>
+      <guid isPermaLink="true">https://community-access.org/news.html#post/accessibility-agents-v2.5-release</guid>
       <pubDate>Wed, 04 Mar 2026 00:00:00 GMT</pubDate>
-      <description>v2.2 adds the NVDA Addon Development Specialist, Text Quality Reviewer, a source citation policy with six-tier authority hierarchy, and automated source freshness checks. 57 agents across 5 platforms.</description>
+      <description>The Community Milestone Release. Every feature in v2.5 was requested, debated, or built by the community: NVDA Addon Specialist, Text Quality Reviewer, source citation policy with verifiable authority, and automated freshness checks. 57 agents, 17 skills, 5 platforms.</description>
       <category>Release</category>
     </item>
     <item>
