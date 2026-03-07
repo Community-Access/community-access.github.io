@@ -1106,10 +1106,10 @@
       <h2 class="workshop-title">GIT Going with GitHub</h2>
       <p style="font-size:1.05rem; margin-bottom:1.5rem; opacity:0.9;">A free, two-day workshop where blind and low vision participants learn open source contribution&mdash;using a screen reader, a keyboard, and nothing else. <strong><time datetime="2026-03-07">March 7</time> &amp; <time datetime="2026-03-08">8, 2026</time>.</strong></p>
       <div class="workshop-actions">
-        <a href="https://community-access.org/git-going-with-github/REGISTER.html" class="btn workshop-btn-register" style="font-size:1.05rem; padding:0.85rem 2rem;">Register Now&mdash;It's Free</a>
-        <a href="https://community-access.org/git-going-with-github/" class="btn workshop-btn-details">Full Details &amp; Curriculum</a>
+        <a href="https://community-access.org/git-going-with-github/" class="btn workshop-btn-register" style="font-size:1.05rem; padding:0.85rem 2rem;">Full Details &amp; Curriculum</a>
+        <a href="https://community-access.org/git-going-with-github/docs/00-pre-workshop-setup.html" class="btn workshop-btn-details">Pre-Workshop Setup Guide</a>
       </div>
-      <p class="workshop-reg-note"><span id="workshop-reg-count">loading...</span> registered out of 75 spots. No coding experience required.</p>
+      <p class="workshop-reg-note">Registration is closed. Thank you to everyone who registered! No coding experience required.</p>
     </div>
   </div>
 </section>
@@ -1262,18 +1262,7 @@
     }).catch(function () {});
 })();
 </script>
-<script>
-(function () {
-  var el = document.getElementById('workshop-reg-count');
-  if (!el) return;
-  fetch('https://api.github.com/search/issues?q=repo:community-access/git-going-with-github+label:registration+is:issue+is:open', {
-    headers: { 'Accept': 'application/vnd.github+json' }
-  })
-  .then(function (r) { return r.json(); })
-  .then(function (data) { if (data.total_count !== undefined) el.textContent = data.total_count; })
-  .catch(function () {});
-})();
-</script>
+
 <script src="main.js"></script>
 
 </body>
