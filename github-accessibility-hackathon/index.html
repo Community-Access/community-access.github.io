@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub Accessibility Hackathon Signup | Community Access</title>
+  <meta name="description" content="Private cohort signup page for the GitHub Accessibility Hackathon.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="canonical" href="https://community-access.org/github-accessibility-hackathon/">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    :root {
+      --surface: #f7fbff;
+      --panel: #ffffff;
+      --ink: #14213d;
+      --accent: #005fcc;
+      --accent-2: #003e8a;
+      --muted: #4f5d75;
+      --border: #c9d7ea;
+      --ok: #0a7d31;
+    }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top right, #dff0ff 0%, #f7fbff 45%, #ffffff 100%);
+      color: var(--ink);
+    }
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 8px;
+      background: #fff;
+      color: #000;
+      padding: 8px 12px;
+      border: 2px solid #000;
+      z-index: 1000;
+    }
+    .skip-link:focus {
+      top: 8px;
+    }
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(20, 33, 61, 0.08);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .status {
+      display: inline-block;
+      margin: 12px 0 0;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e8f7ee;
+      color: var(--ok);
+      font-weight: 600;
+      border: 1px solid #b8e7c8;
+    }
+    .card-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+    ol, ul {
+      margin-bottom: 0;
+    }
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 12px 16px;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--accent-2);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--accent-2);
+      border-color: var(--accent-2);
+    }
+    .btn:focus-visible {
+      outline: 3px solid #111;
+      outline-offset: 2px;
+    }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .hero,
+      .card {
+        padding: 16px;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" class="page" tabindex="-1">
+    <header class="hero">
+      <h1>GitHub Accessibility Hackathon Signup</h1>
+      <p class="lead">This page is for registered workshop attendees at GitHub HQ. Start here after signing in to your GitHub account.</p>
+      <p class="status" aria-live="polite">Signup is open for the current cohort</p>
+      <div class="actions" aria-label="Primary actions">
+        <a class="btn btn-primary" href="https://github.com/login">Sign in to GitHub</a>
+        <a class="btn btn-secondary" href="https://github.com/Community-Access/git-going-with-github/issues/new?template=classroom-enrollment.yml&title=%5BENROLL%5D+GIT+Going+with+GitHub+Classroom">Open Enrollment Form</a>
+      </div>
+    </header>
+
+    <section class="card-grid" aria-labelledby="steps-heading">
+      <article class="card" aria-labelledby="steps-heading">
+        <h2 id="steps-heading">What to do right now</h2>
+        <ol>
+          <li>Sign in to GitHub with your personal account.</li>
+          <li>Open the enrollment form and submit all required fields.</li>
+          <li>Wait for the automation reply on your issue with Day 1 instructions.</li>
+          <li>Open your Day 1 assignment link and reply <strong>ack</strong> on your enrollment issue.</li>
+        </ol>
+      </article>
+
+      <article class="card" aria-labelledby="replies-heading">
+        <h2 id="replies-heading">Where you will see replies</h2>
+        <ul>
+          <li>GitHub notification bell (top-right in GitHub).</li>
+          <li>Email notifications for the enrollment issue thread.</li>
+        </ul>
+        <p>If you do not see a reply within a few minutes, ask an instructor on-site and show your enrollment issue URL.</p>
+      </article>
+
+      <article class="card" aria-labelledby="day2-heading">
+        <h2 id="day2-heading">Day 2 release</h2>
+        <p>Day 2 assignment links are released after Day 1 milestone completion. You do not need to request Day 2 manually.</p>
+      </article>
+    </section>
+
+    <footer>
+      <p>Need help? Open support at <a href="https://github.com/Community-Access/support/issues">Community-Access/support</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>
