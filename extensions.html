@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accessibility Agents Extension Marketplace by Community Access. Discover built-in and community-reviewed accessibility agent extensions.">
+  <title>Accessibility Agents Extension Marketplace - Community Access</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&amp;s=80" alt="" width="40" height="40" loading="eager">
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#agents">Agents</a></li>
+            <li><a href="extensions.html" aria-current="page">Extensions</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="index.html#contribute">Contribute</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#workshop" class="nav-workshop-link">Workshop</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="index.html#calendar">Calendar</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents-marketplace">Marketplace Repo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="marketplace-hero">
+    <div class="container">
+      <p class="eyebrow">Community Access</p>
+      <h1>Accessibility Agents Extension Marketplace</h1>
+      <p>Discover built-in and community-reviewed extensions that add company standards, framework rules, document workflows, markdown review, GitHub automation, desktop accessibility, and more to Accessibility Agents.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/Community-Access/accessibility-agents-marketplace" class="btn btn-primary">Submit an Extension</a>
+        <a href="https://github.com/Community-Access/accessibility-agents-marketplace/blob/main/docs/extension-format.md" class="btn btn-outline">Extension Format</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="marketplace-section" aria-labelledby="marketplace-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="marketplace-heading">Find Extensions</h2>
+        <p>Filter by domain or status. Select an extension to view its details, source repository, manifest, and review status.</p>
+      </div>
+
+      <div class="marketplace-controls" aria-describedby="extension-results-status">
+        <div class="marketplace-field">
+          <label for="extension-search">Search extensions</label>
+          <input id="extension-search" type="search" autocomplete="off" placeholder="Search by name, author, domain, or description">
+        </div>
+        <div class="marketplace-field">
+          <label for="domain-filter">Domain</label>
+          <select id="domain-filter">
+            <option value="all">All domains</option>
+          </select>
+        </div>
+        <div class="marketplace-field">
+          <label for="status-filter">Status</label>
+          <select id="status-filter">
+            <option value="all">All statuses</option>
+          </select>
+        </div>
+      </div>
+
+      <p id="extension-results-status" class="marketplace-status" aria-live="polite">Loading extensions...</p>
+
+      <div class="marketplace-layout">
+        <div id="extensions-list" class="extension-grid" aria-label="Marketplace extensions"></div>
+        <aside id="extension-detail" class="extension-detail" aria-labelledby="extension-detail-heading" tabindex="-1">
+          <h3 id="extension-detail-heading">Extension Details</h3>
+          <p>Select an extension to view its metadata, source links, and review status.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="marketplace-section marketplace-review" aria-labelledby="review-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="review-heading">How Review Works</h2>
+        <p>Community extensions are submitted through pull requests and reviewed before they are listed for public use.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Submit a PR</h3>
+          <p>Add an extension folder under <code>extensions/community/</code>, update <code>marketplace.json</code>, and include docs that explain when to use it.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Automated Checks</h3>
+          <p>CI validates manifest shape, author metadata, duplicate names, referenced files, links, and repository content rules.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Human Review</h3>
+          <p>Reviewers check quality, safety, scope, and whether company-specific rules are labeled separately from public accessibility standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
+        <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents-marketplace">Extension Marketplace</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="index.html#feedback">Feedback</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="footer-copy">A community project. Licensed under MIT.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="extensions.js?v=20260615"></script>
+</body>
+</html>
