@@ -118,7 +118,7 @@
     }).join('');
     return '<article class="extension-card' + (selected ? ' selected' : '') + '">' +
       '<div class="extension-card-header">' +
-        '<h3><button type="button" class="extension-select" data-extension="' + escapeHtml(extension.name) + '">' + escapeHtml(extension.displayName || extension.name) + '</button></h3>' +
+        '<h3><a class="extension-select" href="#extension=' + encodeURIComponent(extension.name) + '" data-extension="' + escapeHtml(extension.name) + '">' + escapeHtml(extension.displayName || extension.name) + '</a></h3>' +
         '<span class="extension-status">' + escapeHtml(extension.status || 'community') + '</span>' +
       '</div>' +
       '<p>' + escapeHtml(extension.description || 'No description provided.') + '</p>' +
@@ -126,7 +126,7 @@
         '<div><dt>Author</dt><dd>' + escapeHtml(extension.author || 'Unknown') + '</dd></div>' +
         '<div><dt>Visibility</dt><dd>' + escapeHtml(extension.visibility || 'public') + '</dd></div>' +
       '</dl>' +
-      '<div class="extension-chips" aria-label="Domains">' + domains + '</div>' +
+      '<div class="extension-chips">' + domains + '</div>' +
     '</article>';
   }
 
@@ -165,7 +165,7 @@
         '<div><dt>Visibility</dt><dd>' + escapeHtml(extension.visibility || 'public') + '</dd></div>' +
         (agentCount === null ? '' : '<div><dt>Agents</dt><dd>' + agentCount + '</dd></div>') +
       '</dl>' +
-      '<div class="extension-chips" aria-label="Domains">' + domains + '</div>' +
+      '<div class="extension-chips">' + domains + '</div>' +
       '<div class="extension-actions">' +
         (repo ? '<a class="btn btn-outline" href="' + escapeHtml(repo) + '">GitHub Repository</a>' : '') +
         (manifestLink ? '<a class="btn btn-outline" href="' + escapeHtml(manifestLink) + '">View Manifest</a>' : '') +
@@ -201,11 +201,10 @@
     if (moveFocus) detail.focus();
   }
 
-  function bindListClicks() {
-    list.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-extension]');
-      if (!button) return;
-      selectExtension(button.getAttribute('data-extension'), true);
+  function bindHashChanges() {
+    window.addEventListener('hashchange', function () {
+      var name = initialSelection();
+      if (name) selectExtension(name, true);
     });
   }
 
@@ -251,7 +250,7 @@
     });
   }
 
-  bindListClicks();
+  bindHashChanges();
   bindFilters();
   loadMarketplace();
 })();
