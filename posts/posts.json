@@ -1,5 +1,12 @@
 [
   {
+    "slug": "accessibility-agents-7-release",
+    "title": "Accessibility Agents 7: One Package, Every Agent, Accessible by Default",
+    "date": "2026-10-28",
+    "summary": "Rebuilt from the ground up as one package of Agent Skills for Claude Code, GitHub Copilot, Codex, Gemini CLI and Antigravity. Up to 93 percent less always-on context, six entry points with 61 specialists behind them, an edit gate on every client, and the MCP server on npm and the MCP Registry.",
+    "type": "Release"
+  },
+  {
     "slug": "accessibility-agents-v2.5-release",
     "title": "Accessibility Agents v2.5: By the Community, For the Community",
     "date": "2026-03-04",
