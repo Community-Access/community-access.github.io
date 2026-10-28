@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A plain-language guide to installing Accessibility Agents in Claude, GitHub Copilot, VS Code, Codex, Gemini CLI or Antigravity, for people new to AI coding tools.">
+  <title>Start here: Accessibility Agents for beginners - Community Access</title>
+  
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
+  <meta property="og:title" content="Start here: Accessibility Agents for beginners">
+  <meta property="og:description" content="A plain-language guide to installing Accessibility Agents in Claude, GitHub Copilot, VS Code, Codex, Gemini CLI or Antigravity, for people new to AI coding tools.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
+  <meta property="og:url" content="https://community-access.org/start.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <style>
+    .page-hero {
+      background: linear-gradient(160deg, var(--ca-indigo-dark) 0%, var(--ca-violet) 50%, var(--ca-indigo) 100%);
+      color: var(--ca-gray-50);
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 40rem;
+      margin: 0 auto;
+      opacity: 0.92;
+      line-height: 1.7;
+    }
+    .quickstart-content {
+      padding: 4rem 0 5rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+    .quickstart-content h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ca-gray-900);
+      margin: 3rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .quickstart-content h2:first-child { margin-top: 0; }
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: linear-gradient(135deg, var(--ca-indigo) 0%, var(--ca-violet) 100%);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .quickstart-content p, .quickstart-content li {
+      font-size: 1.05rem;
+      color: var(--ca-gray-700);
+      line-height: 1.8;
+    }
+    .quickstart-content p {
+      margin-bottom: 1rem;
+    }
+    .quickstart-content ul {
+      margin: 0.5rem 0 1.5rem 1.5rem;
+    }
+    .quickstart-content li {
+      margin-bottom: 0.35rem;
+    }
+    .quickstart-content a {
+      color: var(--ca-indigo-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .quickstart-content a:hover { text-decoration-thickness: 2px; }
+    .quickstart-content code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--ca-gray-100);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--ca-gray-800);
+    }
+    .qs-install-block {
+      background: var(--ca-gray-900);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 1rem 0 1.5rem;
+      overflow-x: auto;
+      position: relative;
+    }
+    @media (prefers-color-scheme: dark) {
+      .qs-install-block { background: #0f172a; border: 1px solid var(--ca-gray-200); }
+    }
+    .qs-install-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ca-emerald-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .qs-install-block code {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: #f9fafb;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: block;
+      background: none;
+      padding: 0;
+    }
+    .qs-example {
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+    .qs-example-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ca-indigo-light);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .qs-example p {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .qs-example code {
+      font-size: 0.85em;
+    }
+    .qs-platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .qs-platform {
+      background: var(--ca-gray-50);
+      border: 1px solid var(--ca-gray-200);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+    }
+    .qs-platform strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--ca-gray-900);
+      margin-bottom: 0.25rem;
+    }
+    .qs-platform span {
+      font-size: 0.85rem;
+      color: var(--ca-gray-700);
+    }
+    .qs-next {
+      background: linear-gradient(135deg, var(--ca-indigo-dark), var(--ca-violet));
+      border-radius: 16px;
+      padding: 2rem;
+      color: var(--ca-gray-50);
+      margin-top: 2rem;
+    }
+    .qs-next h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .qs-next ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .qs-next li {
+      color: #c4cad3;
+      margin-bottom: 0.5rem;
+    }
+    .qs-next a {
+      color: var(--ca-emerald-light);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 48rem) {
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ca-gray-50);
+    }
+    .footer-tagline {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+    .footer-column h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .footer-column .footer-links { list-style: none; }
+    .footer-column .footer-links li { margin-bottom: 0.4rem; }
+    .footer-column .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .footer-column .footer-links a:hover { color: var(--ca-emerald-light); }
+    .qs-install-block code { white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+    .qs-caveat { margin-top: 2rem; color: var(--ca-gray-700); }
+    .start-content ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .start-content ol > li { margin-bottom: 0.9rem; line-height: 1.7; }
+    .start-content ol .qs-install-block, .start-content .accordion-body .qs-install-block { margin: 0.6rem 0; }
+    .start-table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .start-table { width: 100%; border-collapse: collapse; }
+    .start-table th, .start-table td { text-align: left; padding: 0.7rem 0.75rem; border-bottom: 1px solid var(--ca-gray-200); vertical-align: top; color: var(--ca-gray-800); }
+    .start-table thead th { color: var(--ca-gray-900); border-bottom-width: 2px; }
+    .start-table tbody th { font-weight: 700; }
+    .start-note { background: var(--ca-gray-50); border-left: 5px solid var(--ca-indigo-light); padding: 0.9rem 1.1rem; border-radius: 6px; }
+    .start-group { margin: 1rem 0 2rem; }
+    .start-group details { border: 1px solid var(--ca-gray-200); border-radius: 10px; margin-bottom: 0.6rem; background: var(--ca-white); }
+    .start-group summary { cursor: pointer; padding: 0.9rem 1.1rem; font-weight: 700; font-size: 1.1rem; color: var(--ca-gray-900); }
+    .start-group summary:focus-visible { outline: 3px solid var(--ca-focus); outline-offset: 3px; border-radius: 10px; }
+    .start-group .accordion-body { padding: 0 1.1rem 1rem; }
+    .start-group details:target { border-color: var(--ca-indigo-light); }
+    .start-glossary dt { font-weight: 700; color: var(--ca-gray-900); margin-top: 0.75rem; }
+    .start-glossary dd { margin: 0.2rem 0 0; color: var(--ca-gray-800); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  </style>
+  <link rel="stylesheet" href="site-chrome.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Community Access home">
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
+      <span class="logo-text">Community Access</span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="start.html" aria-current="page">Start here</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
+            <li><a href="index.html#install">Install</a></li>
+            <li><a href="quickstart.html">Quick start</a></li>
+            <li><a href="docs.html">Documentation</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="repos.html">Repositories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://community-access.org/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
+        <li><a href="https://github.com/Community-Access">GitHub</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <span class="icon-sun" aria-hidden="true">&#9728;&#65039;</span>
+      <span class="icon-moon" aria-hidden="true">&#9790;&#65039;</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Start here</h1>
+    <p>New to AI coding tools? This page assumes nothing. Pick the app you use, follow the steps, and Accessibility Agents will check your work for accessibility as you build.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="quickstart-content start-content">
+
+    <h2 id="what-it-is">What Accessibility Agents is, in one paragraph</h2>
+    <p>Accessibility Agents is a free add-on for AI coding apps. Once it is installed, the AI knows the WCAG 2.2 accessibility rules and checks its own work against them. When it changes a web page, it calls in a specialist for each concern (headings, forms, color contrast, keyboard use, screen readers and more). In most apps it also <strong>stops the AI from editing a web page until that review is done</strong>. It can also scan Word, Excel, PowerPoint, PDF and ePub files. It is not a separate program you open: it works inside the AI app you already use.</p>
+
+    <h2 id="what-you-need">What you need</h2>
+    <ul>
+      <li><strong>One AI coding app</strong> from the list below, and an account for it. Most need a paid plan. Each section below says which.</li>
+      <li><strong>A folder with your project in it</strong>, such as a website, an app, or a folder of documents.</li>
+      <li><strong>Node.js 22 or later</strong> for the apps marked &ldquo;terminal&rdquo;. Download it from <a href="https://nodejs.org/">nodejs.org</a> and take the LTS version. The desktop apps do not need it.</li>
+    </ul>
+
+    <h2 id="choose">Which app do you use?</h2>
+    <p>Full support means the specialists, the edit check and the document scanners. Partial support is explained in the last column.</p>
+    <div class="start-table-wrap">
+      <table class="start-table">
+        <caption class="sr-only">AI apps, whether they can run Accessibility Agents, and how much of it</caption>
+        <thead>
+          <tr><th scope="col">App</th><th scope="col">Works?</th><th scope="col">What you get</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><a href="#claude-code">Claude Code</a> (terminal)</th><td>Yes</td><td>Everything</td></tr>
+          <tr><th scope="row"><a href="#claude-desktop">Claude desktop app</a>, Code tab</th><td>Yes</td><td>Everything, once it is installed for your account</td></tr>
+          <tr><th scope="row"><a href="#claude-chat">Claude chat</a> (claude.ai and the desktop chat)</th><td>No</td><td>Use the Code tab of the desktop app instead</td></tr>
+          <tr><th scope="row"><a href="#copilot-cli">GitHub Copilot CLI</a> (terminal)</th><td>Yes</td><td>Everything</td></tr>
+          <tr><th scope="row"><a href="#copilot-app">GitHub Copilot app</a> (desktop)</th><td>Yes</td><td>The specialists and scanners, as a plugin</td></tr>
+          <tr><th scope="row"><a href="#vscode">VS Code</a> with GitHub Copilot</th><td>Yes</td><td>Everything, as an agent plugin</td></tr>
+          <tr><th scope="row"><a href="#copilot-web">Copilot on github.com</a></th><td>Partly</td><td>The cloud agent can use it; Copilot Chat on the website cannot</td></tr>
+          <tr><th scope="row"><a href="#codex">Codex</a> (app, terminal or VS Code)</th><td>Yes</td><td>The specialists and scanners; the edit check needs one extra step</td></tr>
+          <tr><th scope="row"><a href="#chatgpt">ChatGPT</a> (website and desktop chat)</th><td>No</td><td>Use Codex, which comes with paid ChatGPT plans</td></tr>
+          <tr><th scope="row"><a href="#gemini">Gemini CLI</a> (terminal)</th><td>Yes</td><td>Everything</td></tr>
+          <tr><th scope="row"><a href="#antigravity">Antigravity</a></th><td>Yes</td><td>Everything, from a copy of the project</td></tr>
+          <tr><th scope="row"><a href="#other">Other apps</a> (Cursor, Windsurf and others)</th><td>Partly</td><td>The scanners, through MCP</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="start-note">Not sure? If you have a ChatGPT plan, start with <a href="#codex">Codex</a>. If you have GitHub Copilot, start with <a href="#vscode">VS Code</a>. If you have a Claude plan, start with the <a href="#claude-desktop">Claude desktop app</a>.</p>
+
+    <h2 id="setup">Set up your app</h2>
+    <p>Each section opens to show its steps. A <strong>terminal</strong> is the text window where you type commands: Terminal on a Mac, and PowerShell or Windows Terminal on Windows. Type or paste each command and press Enter.</p>
+
+    <div class="accordion-group start-group">
+
+      <details id="claude-code">
+        <summary>Claude Code (terminal)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> a Claude Pro, Max, Team or Enterprise plan, or a Claude Console account. The free plan does not include Claude Code.</p>
+          <ol>
+            <li>Install Claude Code. On a Mac or Linux, run:
+              <div class="qs-install-block"><code>curl -fsSL https://claude.ai/install.sh | bash</code></div>
+              On Windows, in PowerShell, run:
+              <div class="qs-install-block"><code>irm https://claude.ai/install.ps1 | iex</code></div>
+              On Windows, also install <a href="https://git-scm.com/downloads/win">Git for Windows</a>.</li>
+            <li>Close the terminal and open a new one. Go to your project folder (for example <code>cd Documents/my-site</code>) and run <code>claude</code>. Sign in when your browser opens.</li>
+            <li>In Claude Code, type these two lines, one at a time:
+              <div class="qs-install-block"><code>/plugin marketplace add Community-Access/accessibility-agents
+/plugin install accessibility-agents@community-access</code></div></li>
+            <li>When it asks where to install, choose your <strong>user</strong> account, so it works in every project.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="claude-desktop">
+        <summary>Claude desktop app (Code tab)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> the Claude desktop app for Mac or Windows from <a href="https://claude.ai/download">claude.ai/download</a>, and a Claude Pro, Max, Team or Enterprise plan.</p>
+          <ol>
+            <li>Open the app, sign in, and switch to <strong>Code</strong>. Choose your project folder as a local session. Cloud sessions cannot load plugins.</li>
+            <li>The desktop plugin browser installs plugins from marketplaces it already knows, and it has no button to add a new one yet. So add Accessibility Agents once from a terminal with Claude Code (the <a href="#claude-code">Claude Code steps</a>), choosing your <strong>user</strong> account. The app&rsquo;s local sessions use the same Claude Code settings.</li>
+            <li>Back in the app, select <strong>+</strong> next to the message box, then <strong>Plugins</strong>, then <strong>Manage plugins</strong>, and check that Accessibility Agents is turned on.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="claude-chat">
+        <summary>Claude chat (claude.ai and the desktop chat)</summary>
+        <div class="accordion-body">
+          <p>Not supported. Chat cannot read the files in your project folder the way a coding app does, it does not run the edit check, and it does not start a local MCP server like ours. Use the <strong>Code</strong> tab of the <a href="#claude-desktop">Claude desktop app</a>, or <a href="#claude-code">Claude Code</a> in a terminal, with the same Claude account.</p>
+        </div>
+      </details>
+
+      <details id="copilot-cli">
+        <summary>GitHub Copilot CLI (terminal)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> a GitHub account with any Copilot plan, including Copilot Free. If your Copilot comes from your work, your organization must allow the CLI.</p>
+          <ol>
+            <li>Install the Copilot CLI. With Node.js installed (see <a href="#what-you-need">What you need</a>), run:
+              <div class="qs-install-block"><code>npm install -g @github/copilot</code></div>
+              On Windows you can use <code>winget install GitHub.Copilot</code> instead, and on a Mac <code>brew install --cask copilot-cli</code>. Details are in <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/install-copilot-cli">GitHub&rsquo;s install guide</a>.</li>
+            <li>Go to your project folder and run <code>copilot</code>. Sign in to GitHub when it asks.</li>
+            <li>In another terminal, or after you leave Copilot, run:
+              <div class="qs-install-block"><code>copilot plugin marketplace add Community-Access/accessibility-agents
+copilot plugin install accessibility-agents@community-access</code></div></li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="copilot-app">
+        <summary>GitHub Copilot app (desktop)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> any Copilot plan, Git installed, and the app from <a href="https://github.com/features/ai/github-app">github.com/features/ai/github-app</a>.</p>
+          <ol>
+            <li>Open the app, select <strong>Sign in to GitHub</strong>, and add your project folder or repository when it asks.</li>
+            <li>In the sidebar, open <strong>Customize</strong>, then <strong>Plugins</strong>.</li>
+            <li>Select the button next to the marketplace list to add a marketplace, and enter <code>Community-Access/accessibility-agents</code>.</li>
+            <li>Find <strong>accessibility-agents</strong> in the list and select <strong>Install</strong>.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="vscode">
+        <summary>VS Code with GitHub Copilot</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> <a href="https://code.visualstudio.com/">VS Code</a>, signed in to GitHub with any Copilot plan, including Copilot Free.</p>
+          <ol>
+            <li>Open Settings (Ctrl+Comma, or Cmd+Comma on a Mac), search for <code>chat.plugins.enabled</code>, and turn it on.</li>
+            <li>Open the Command Palette (Ctrl+Shift+P, or Cmd+Shift+P on a Mac) and run <strong>Chat: Install Plugin from Source</strong>.</li>
+            <li>Enter <code>https://github.com/Community-Access/accessibility-agents</code> and confirm that you trust it.</li>
+            <li>Open Copilot Chat. Type <code>/</code> and you will see the Accessibility Agents entry points in the list.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="copilot-web">
+        <summary>GitHub Copilot on github.com</summary>
+        <div class="accordion-body">
+          <p><strong>Copilot cloud agent</strong> (the agent you assign issues to, on paid Copilot plans) can use Accessibility Agents if your repository turns the plugin on in <code>.github/copilot/settings.json</code>. GitHub explains how in <a href="https://docs.github.com/en/copilot/concepts/agents/about-plugins">About plugins</a>. Ask whoever manages the repository to set it up.</p>
+          <p><strong>Copilot Chat on the github.com website</strong> does not load plugins or skills. Use VS Code, the Copilot app or the Copilot CLI for that.</p>
+        </div>
+      </details>
+
+      <details id="codex">
+        <summary>Codex (app, terminal or VS Code)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> a ChatGPT Plus, Pro, Business, Edu or Enterprise plan. Codex comes with it.</p>
+          <ol>
+            <li>Install Codex. In a terminal, run:
+              <div class="qs-install-block"><code>npm install -g @openai/codex</code></div>
+              On a Mac you can use <code>brew install --cask codex</code> instead. The desktop app opens with <code>codex app</code>, or download it from <a href="https://chatgpt.com/codex">chatgpt.com/codex</a>.</li>
+            <li>Run <code>codex</code> and choose <strong>Sign in with ChatGPT</strong>.</li>
+            <li>Add Accessibility Agents:
+              <div class="qs-install-block"><code>codex plugin marketplace add Community-Access/accessibility-agents
+codex plugin add accessibility-agents@community-access</code></div>
+              Codex plugins work in the Codex app, the CLI and the Codex extension for VS Code.</li>
+            <li>Optional, for the edit check: Codex plugins cannot install it. Follow the <a href="#antigravity">steps from a copy of the project</a>, which add it for Codex too.</li>
+            <li>To call the lead reviewer by name in Codex, type <code>$accessibility-lead</code>.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="chatgpt">
+        <summary>ChatGPT (website and desktop chat)</summary>
+        <div class="accordion-body">
+          <p>Not supported. ChatGPT can only connect to MCP servers that run on the internet, and Accessibility Agents runs on your own computer so your files stay with you. ChatGPT also cannot open your project folder. Use <a href="#codex">Codex</a>, which is included with paid ChatGPT plans and is OpenAI&rsquo;s app for working on code.</p>
+        </div>
+      </details>
+
+      <details id="gemini">
+        <summary>Gemini CLI (terminal)</summary>
+        <div class="accordion-body">
+          <p><strong>You need:</strong> a Google account.</p>
+          <ol>
+            <li>Install Gemini CLI:
+              <div class="qs-install-block"><code>npm install -g @google/gemini-cli</code></div></li>
+            <li>Run <code>gemini</code> and sign in with Google.</li>
+            <li>Add Accessibility Agents:
+              <div class="qs-install-block"><code>gemini extensions install https://github.com/Community-Access/accessibility-agents</code></div></li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="antigravity">
+        <summary>Antigravity, or from a copy of the project</summary>
+        <div class="accordion-body">
+          <p>This route works for Antigravity and adds the edit check for Codex. You need <a href="https://git-scm.com/">Git</a> and Node.js.</p>
+          <ol>
+            <li>Download the project and set it up:
+              <div class="qs-install-block"><code>git clone https://github.com/Community-Access/accessibility-agents
+cd accessibility-agents
+npm install
+npm run setup -- --dry-run
+npm run setup</code></div></li>
+            <li>The <code>--dry-run</code> line shows what it will do and changes nothing. The last line does it. It never overwrites a file you have changed.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details id="other">
+        <summary>Other apps (Cursor, Windsurf and others): the scanners only</summary>
+        <div class="accordion-body">
+          <p>Any app that can run a local MCP server can use the 39 scanning tools. It will not get the specialists or the edit check. In the app&rsquo;s MCP settings, add a server with this command:</p>
+          <div class="qs-install-block"><code>npx -y @community-access/accessibility-agents-mcp</code></div>
+        </div>
+      </details>
+
+    </div>
+
+    <h2 id="try-it">Try it</h2>
+    <p>Open your project in your app and ask in plain words. You do not need special commands:</p>
+    <ul>
+      <li>&ldquo;Review this page for accessibility.&rdquo;</li>
+      <li>&ldquo;Audit the whole site and write a report.&rdquo;</li>
+      <li>&ldquo;Check these PDFs for accessibility.&rdquo;</li>
+      <li>&ldquo;Fix the accessibility problems in the Markdown files in docs.&rdquo;</li>
+    </ul>
+    <p>If the AI tries to change a web page and is told an accessibility review is required first, <strong>that means it is working</strong>. Let the review finish and the edit goes through.</p>
+
+    <h2 id="words">Words you will see</h2>
+    <dl class="start-glossary">
+      <dt>Plugin or extension</dt><dd>An add-on that an AI app installs. Accessibility Agents is one.</dd>
+      <dt>Skill</dt><dd>A set of instructions the AI reads when it needs them. Accessibility Agents has 113: six entry points and the specialists they call.</dd>
+      <dt>MCP server</dt><dd>A small program that gives the AI extra tools. Ours runs on your computer and provides the scanners.</dd>
+      <dt>Edit check</dt><dd>A rule that stops the AI from editing a web page until the accessibility review is finished.</dd>
+      <dt>Terminal</dt><dd>The text window where you type commands.</dd>
+    </dl>
+
+    <div class="qs-next">
+      <h3>Stuck?</h3>
+      <ul>
+        <li><a href="quickstart.html">Quick start</a>: the short version, for people who already use these apps</li>
+        <li><a href="docs.html#docs/guides/troubleshooting.md">Troubleshooting</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/issues/new/choose">Ask for help or report a problem</a></li>
+        <li>Email <a href="mailto:support@community-access.org">support@community-access.org</a></li>
+      </ul>
+    </div>
+
+    <p class="qs-caveat">Product names, plans and menus belong to their makers and change often. This page was checked against each maker&rsquo;s documentation on October 28, 2026.</p>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
+      </div>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="start.html">Start here</a></li>
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="a11y-statement">
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* Opening "#codex" and the like opens that app's steps. */
+(function () {
+  function openTarget() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.open = true; var s = el.querySelector('summary'); if (s) s.focus(); }
+  }
+  window.addEventListener('hashchange', openTarget);
+  openTarget();
+})();
+</script>
+
+</body>
+</html>
