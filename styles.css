@@ -462,14 +462,14 @@ body {
 
 .btn-primary {
   background: #047857;
-  color: var(--ca-gray-50);
+  color: #ffffff;
 }
 
 .btn-primary:hover { background: #065f46; }
 
 .btn-outline {
   background: transparent;
-  color: var(--ca-gray-50);
+  color: #ffffff;
   border: 2px solid rgba(255,255,255,0.4);
 }
 
@@ -1000,7 +1000,7 @@ section { padding: 5rem 0; }
 .install-block code {
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  color: var(--ca-gray-50);
+  color: #f9fafb;
   white-space: pre-wrap;
   word-break: break-all;
   display: block;
@@ -1018,7 +1018,7 @@ section { padding: 5rem 0; }
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 6px;
-  color: var(--ca-gray-50);
+  color: #f9fafb;
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 600;
@@ -1241,7 +1241,7 @@ section { padding: 5rem 0; }
 
 /* === News === */
 .changelog-section { background: var(--ca-gray-50); padding: 5rem 0; }
-@media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-900); } }
+@media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-50); } }
 
 .news-grid {
   display: grid;

@@ -417,6 +417,8 @@
 /* === Latest News Feed === */
 (function () {
   'use strict';
+  // Only pages with a news list fetch it; each load costs one API call per repository.
+  if (!document.getElementById('latest-news')) return;
   var ORG = 'Community-Access';
 
   function formatDate(dateStr) {
