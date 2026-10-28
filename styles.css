@@ -462,14 +462,14 @@ body {
 
 .btn-primary {
   background: #047857;
-  color: var(--ca-gray-50);
+  color: #ffffff;
 }
 
 .btn-primary:hover { background: #065f46; }
 
 .btn-outline {
   background: transparent;
-  color: var(--ca-gray-50);
+  color: #ffffff;
   border: 2px solid rgba(255,255,255,0.4);
 }
 
@@ -867,7 +867,7 @@ section { padding: 5rem 0; }
   text-align: center;
 }
 @media (prefers-color-scheme: dark) {
-  .contributors-section { background: var(--ca-gray-900); }
+  .contributors-section { background: var(--ca-white); }
 }
 .contributors-section h2 {
   font-size: clamp(1.6rem, 3vw, 2.25rem);
@@ -1000,7 +1000,7 @@ section { padding: 5rem 0; }
 .install-block code {
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  color: var(--ca-gray-50);
+  color: #f9fafb;
   white-space: pre-wrap;
   word-break: break-all;
   display: block;
@@ -1018,7 +1018,7 @@ section { padding: 5rem 0; }
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 6px;
-  color: var(--ca-gray-50);
+  color: #f9fafb;
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 600;
@@ -1241,7 +1241,7 @@ section { padding: 5rem 0; }
 
 /* === News === */
 .changelog-section { background: var(--ca-gray-50); padding: 5rem 0; }
-@media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-900); } }
+@media (prefers-color-scheme: dark) { .changelog-section { background: var(--ca-gray-50); } }
 
 .news-grid {
   display: grid;
@@ -1283,7 +1283,7 @@ section { padding: 5rem 0; }
   border-radius: 3px;
 }
 .news-badge-type { background: var(--ca-indigo); }
-.news-badge-repo { background: var(--ca-emerald); }
+.news-badge-repo { background: #047857; }
 .news-card-title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -1757,7 +1757,7 @@ html[data-theme="dark"] .workshop-banner { background: linear-gradient(160deg, #
 html[data-theme="dark"] .contribute-section { background: linear-gradient(160deg, #0f172a, #1e1b4b); }
 html[data-theme="dark"] .method-detail { background: var(--ca-gray-800); }
 html[data-theme="dark"] .method-detail summary { color: var(--ca-indigo-light); }
-html[data-theme="dark"] .contributors-section { background: var(--ca-gray-900); }
+html[data-theme="dark"] .contributors-section { background: var(--ca-white); }
 html[data-theme="dark"] .contributor-card:hover { background: var(--ca-gray-50); }
 
 /* Force light mode via toggle (overrides OS dark preference) */

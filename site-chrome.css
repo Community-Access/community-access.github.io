@@ -1,0 +1,73 @@
+/*
+ * site-chrome.css: the parts every page shares, loaded after each page's own
+ * styles: the type family, the footer, and the header's current-page marker.
+ * Atkinson Hyperlegible is the Braille Institute's typeface for low vision
+ * readers.
+ */
+body { font-family: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; }
+code, pre, kbd, samp { font-family: 'Atkinson Hyperlegible Mono', 'Cascadia Code', Consolas, monospace; }
+
+.site-footer {
+  background: #17153b;
+  color: #e0e7ff;
+  padding: 3.5rem 0 2rem;
+}
+.site-footer .footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 56rem) {
+  .site-footer .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 36rem) {
+  .site-footer .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+.site-footer .footer-logo { display: block; font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+.site-footer .footer-tagline { color: #c7d2fe; font-size: 0.95rem; margin-top: 0.35rem; line-height: 1.5; max-width: 18rem; }
+.site-footer .footer-column h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.site-footer .footer-column .footer-links {
+  list-style: none;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.site-footer .footer-column .footer-links li { margin: 0 0 0.45rem; }
+.site-footer .footer-column .footer-links a {
+  color: #c7d2fe;
+  text-decoration: none;
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+.site-footer .footer-column .footer-links a:hover { color: #34d399; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer a:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; border-radius: 2px; }
+.site-footer .a11y-statement p { color: #c7d2fe; font-size: 0.95rem; margin: 0 0 0.5rem; }
+.site-footer .a11y-statement a { color: #34d399; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer .footer-copy { color: #a5b4fc; font-size: 0.88rem; margin: 0; }
+
+.header-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* The header and the page heroes sit on the fixed indigo gradient in both
+   themes, so their text stays light. The theme variables they used invert in
+   dark mode, which made the logo and hero headings dark on dark. */
+.site-header .logo,
+.site-header .logo-text,
+.page-hero h1, .page-hero p,
+.about-hero h1, .about-hero p {
+  color: #ffffff;
+}
+.page-hero p, .about-hero p { color: #eef2ff; }

@@ -357,7 +357,7 @@
       list.forEach(function (c) { codeContributorLogins[c.login] = true; });
 
       if (list.length === 0) {
-        grid.innerHTML = '<p class="contributors-loading">No contributors found.</p>';
+        grid.innerHTML = '<div role=\"listitem\" class=\"contributors-loading\">No contributors found.</div>';
       } else {
         var html = '';
         list.forEach(function (c) {
@@ -367,7 +367,7 @@
       }
     })
     .catch(function () {
-      grid.innerHTML = '<p class="contributors-loading">Unable to load contributors.</p>';
+      grid.innerHTML = '<div role=\"listitem\" class=\"contributors-loading\">Unable to load contributors.</div>';
     }) : Promise.resolve();
 
   // Fetch issue creators from specific repos
@@ -399,7 +399,7 @@
       list.sort(function (a, b) { return b.issues - a.issues; });
 
       if (list.length === 0) {
-        thanksGrid.innerHTML = '<p class="contributors-loading">No issue contributors found.</p>';
+        thanksGrid.innerHTML = '<div role=\"listitem\" class=\"contributors-loading\">No issue contributors found.</div>';
       } else {
         var html = '';
         list.forEach(function (c) {
@@ -409,7 +409,7 @@
       }
     })
     .catch(function () {
-      thanksGrid.innerHTML = '<p class="contributors-loading">Unable to load issue contributors.</p>';
+      thanksGrid.innerHTML = '<div role=\"listitem\" class=\"contributors-loading\">Unable to load issue contributors.</div>';
     });
   }
 })();
@@ -417,6 +417,8 @@
 /* === Latest News Feed === */
 (function () {
   'use strict';
+  // Only pages with a news list fetch it; each load costs one API call per repository.
+  if (!document.getElementById('latest-news')) return;
   var ORG = 'Community-Access';
 
   function formatDate(dateStr) {
