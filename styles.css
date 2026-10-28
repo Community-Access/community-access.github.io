@@ -1283,7 +1283,7 @@ section { padding: 5rem 0; }
   border-radius: 3px;
 }
 .news-badge-type { background: var(--ca-indigo); }
-.news-badge-repo { background: var(--ca-emerald); }
+.news-badge-repo { background: #047857; }
 .news-card-title {
   font-size: 1.1rem;
   font-weight: 700;
