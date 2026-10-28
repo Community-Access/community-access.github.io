@@ -71,3 +71,5 @@ code, pre, kbd, samp { font-family: 'Atkinson Hyperlegible Mono', 'Cascadia Code
   color: #ffffff;
 }
 .page-hero p, .about-hero p { color: #eef2ff; }
+.page-hero p a, .about-hero p a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+.section-header p a { color: var(--ca-indigo-light); text-decoration: underline; text-underline-offset: 2px; font-weight: 700; }
