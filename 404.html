@@ -13,6 +13,9 @@
   <meta property="og:url" content="https://community-access.github.io/404.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="styles.css">
   <style>
     .error-page {
@@ -97,6 +100,7 @@
       color: var(--ca-emerald-light);
     }
   </style>
+  <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
@@ -110,12 +114,14 @@
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
+        <li><a href="index.html#projects">Projects</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
-            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
             <li><a href="index.html#install">Install</a></li>
-            <li><a href="index.html#contribute">Contribute</a></li>
+            <li><a href="quickstart.html">Quick start</a></li>
+            <li><a href="docs.html">Documentation</a></li>
           </ul>
         </li>
         <li><a href="news.html">News</a></li>
@@ -152,36 +158,45 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-logo">Community Access</span>
-        <p class="footer-tagline">Making software accessible by default.</p>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
       </div>
-      <div class="footer-column">
-        <h3>Project</h3>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
         <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
           <li><a href="news.html">News</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="repos.html">Repositories</a></li>
-          <li><a href="docs.html">Documentation</a></li>
-          <li><a href="quickstart.html">Quick Start</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
-          <li><a href="feed.xml">RSS Feed</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
         </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Community</h3>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
         <ul class="footer-links">
           <li><a href="about.html">About</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
-          <li><a href="https://community-access.org/git-going-with-github/">Workshop</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="a11y-statement">
-      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
     </div>
-    <p class="footer-copy">A community project. Licensed under MIT.</p>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
   </div>
 </footer>
 

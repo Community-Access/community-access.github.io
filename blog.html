@@ -13,6 +13,9 @@
   <meta property="og:url" content="https://community-access.github.io/blog.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
   <style>
@@ -271,7 +274,10 @@
       transition: color var(--transition);
     }
     .footer-column .footer-links a:hover { color: var(--ca-emerald-light); }
+    .archive-note { margin: 1rem 0 2rem; padding: 1rem 1.25rem; border-left: 5px solid #b45309; background: var(--ca-gray-50); color: var(--ca-gray-800); border-radius: 6px; line-height: 1.6; }
+    .archive-note a { color: var(--ca-indigo-light); text-decoration: underline; }
   </style>
+  <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
@@ -285,12 +291,14 @@
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
+        <li><a href="index.html#projects">Projects</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
-            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
             <li><a href="index.html#install">Install</a></li>
-            <li><a href="index.html#contribute">Contribute</a></li>
+            <li><a href="quickstart.html">Quick start</a></li>
+            <li><a href="docs.html">Documentation</a></li>
           </ul>
         </li>
         <li><a href="news.html">News</a></li>
@@ -325,7 +333,7 @@
         <div class="blog-card-date"><time datetime="2026-02-22">February 22, 2026</time></div>
         <h2><a href="#post-ai-accessibility-universities" onclick="showPost('post-ai-accessibility-universities'); return false;">AI-Powered Accessibility Auditing for Universities</a></h2>
         <p class="blog-card-author">By Taylor Arndt, COO at Techopolis</p>
-        <p class="blog-card-excerpt">A deep dive into how AI accessibility agents can audit university documents and web properties at scale, covering the document accessibility wizard, web accessibility wizard, and CI/CD integration.</p>
+        <p class="blog-card-excerpt">Written for an earlier version of Accessibility Agents. A deep dive into how AI accessibility agents can audit university documents and web properties at scale, covering the document accessibility wizard, web accessibility wizard, and CI/CD integration.</p>
         <a href="#post-ai-accessibility-universities" class="blog-card-read" onclick="showPost('post-ai-accessibility-universities'); return false;">Read article</a>
       </article>
 
@@ -336,6 +344,7 @@
 <!-- ====== Full Article: AI-Powered Accessibility Auditing ====== -->
 <article class="blog-article" id="post-ai-accessibility-universities" hidden>
   <a href="#blog-index" class="back-link" onclick="showIndex(); return false;">Back to all posts</a>
+  <p class="archive-note" role="note"><strong>Written for an earlier version.</strong> This article describes Accessibility Agents as it was in February 2026. Version 7 replaced the per-client agent files, prompts and shell installers with one package of Agent Skills. For current installation and features, see the <a href="quickstart.html">quick start</a> and <a href="news.html#post/accessibility-agents-7-release">what&rsquo;s new in version 7</a>.</p>
 
   <h1>AI-Powered Accessibility Auditing for Universities: Document and Web Agents</h1>
   <div class="article-meta">
@@ -593,35 +602,45 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-logo">Community Access</span>
-        <p class="footer-tagline">Making software accessible by default.</p>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
       </div>
-      <div class="footer-column">
-        <h3>Project</h3>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
         <ul class="footer-links">
-          <li><a href="news.html">News</a></li>
-          <li><a href="repos.html">Repositories</a></li>
-          <li><a href="docs.html">Documentation</a></li>
-          <li><a href="quickstart.html">Quick Start</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
-          <li><a href="feed.xml">RSS Feed</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
         </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Community</h3>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
         <ul class="footer-links">
           <li><a href="about.html">About</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
-          <li><a href="https://community-access.org/git-going-with-github/">Workshop</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="a11y-statement">
-      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
     </div>
-    <p class="footer-copy">A community project. Licensed under MIT.</p>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
   </div>
 </footer>
 

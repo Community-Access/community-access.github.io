@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Documentation for 55 Accessibility Agents by Community Access. Guides, agent references, 17 skills, tools, scanning, and 54 prompts.">
+  <meta name="description" content="Documentation for Accessibility Agents 7: getting started, the skills catalog, knowledge domains, MCP tools, scanning guides and project records, read live from the repository.">
   <title>Documentation - Community Access</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
   <meta property="og:title" content="Documentation — Community Access">
-  <meta property="og:description" content="Documentation for 55 Accessibility Agents — guides, agent references, 17 skills, tools, scanning, and 54 prompts.">
+  <meta property="og:description" content="Documentation for Accessibility Agents 7: getting started, the skills catalog, knowledge domains, MCP tools, scanning guides and project records, read live from the repository.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
-  <meta property="og:url" content="https://community-access.github.io/docs.html">
+  <meta property="og:url" content="https://community-access.org/docs.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
   <style>
     /* === Reset & Base === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -257,6 +260,13 @@
       grid-template-columns: var(--sidebar-width) 1fr;
       min-height: calc(100vh - 4rem);
     }
+    /* The toggle and backdrop are children of the grid too; pin the two real
+       columns so they cannot push the sidebar into the second track. */
+    .docs-layout > .docs-sidebar { grid-column: 1; grid-row: 1; }
+    .docs-layout > .docs-content { grid-column: 2; grid-row: 1; min-width: 0; }
+    @media (max-width: 60rem) {
+      .docs-layout > .docs-content { grid-column: 1; }
+    }
 
     @media (max-width: 60rem) {
       .docs-layout {
@@ -334,6 +344,9 @@
     .sidebar-section {
       margin-bottom: 0.5rem;
     }
+
+    .sidebar-loading { padding: 0 1.5rem; color: var(--ca-gray-700); font-size: 0.95rem; }
+    .sidebar-loading a { color: var(--ca-indigo-light); }
 
     .sidebar-heading {
       display: block;
@@ -604,7 +617,7 @@
       background: var(--ca-gray-50);
       border: 1px solid var(--ca-gray-200);
       border-radius: 8px;
-      color: var(--ca-indigo);
+      color: var(--ca-indigo-light);
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -748,6 +761,7 @@
       --ca-gray-900: #111827; --ca-indigo-light: #4f46e5;
     }
   </style>
+  <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
@@ -755,27 +769,27 @@
 <a href="#docs-nav" class="skip-link" style="left: 14rem;">Skip to documentation navigation</a>
 
 <header class="site-header">
-  <div class="header-inner">
+  <div class="container header-inner">
     <a href="index.html" class="logo" aria-label="Community Access home">
-      <span class="logo-mark" aria-hidden="true">CA</span>
+      <img class="logo-mark" src="https://avatars.githubusercontent.com/u/263509777?v=4&s=80" alt="" width="40" height="40" loading="eager">
       <span class="logo-text">Community Access</span>
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
+        <li><a href="index.html#projects">Projects</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
-            <li><a href="docs.html" aria-current="page">Documentation</a></li>
-            <li><a href="index.html#agents">Agents</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
             <li><a href="index.html#install">Install</a></li>
-            <li><a href="index.html#contribute">Contribute</a></li>
+            <li><a href="quickstart.html">Quick start</a></li>
+            <li><a href="docs.html" aria-current="page">Documentation</a></li>
           </ul>
         </li>
-        <li><a href="index.html#mission">Mission</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="repos.html">Repositories</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="https://community-access.org/git-going-with-github/" class="nav-workshop-link">Workshop</a></li>
         <li><a href="https://github.com/Community-Access">GitHub</a></li>
       </ul>
     </nav>
@@ -794,219 +808,18 @@
   <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
   <nav class="docs-sidebar" id="docs-nav" aria-label="Documentation navigation">
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-getting-started">Getting Started</button>
-      <ul class="sidebar-links" id="nav-getting-started">
-        <li><a href="#docs/getting-started.md" data-doc="docs/getting-started.md">Getting Started Guide</a></li>
-        <li><a href="#docs/configuration.md" data-doc="docs/configuration.md">Configuration</a></li>
-        <li><a href="#docs/architecture.md" data-doc="docs/architecture.md">Architecture</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-agents">Agents</button>
-      <ul class="sidebar-links" id="nav-agents">
-        <li><a href="#docs/agents/README.md" data-doc="docs/agents/README.md">Agent Overview</a></li>
-        <li><a href="#docs/agents/accessibility-lead.md" data-doc="docs/agents/accessibility-lead.md">Accessibility Lead</a></li>
-        <li><a href="#docs/agents/a11y-tool-builder.md" data-doc="docs/agents/a11y-tool-builder.md">Accessibility Tool Builder</a></li>
-        <li><a href="#docs/agents/alt-text-headings.md" data-doc="docs/agents/alt-text-headings.md">Alt Text and Headings</a></li>
-        <li><a href="#docs/agents/analytics.md" data-doc="docs/agents/analytics.md">Analytics</a></li>
-        <li><a href="#docs/agents/aria-specialist.md" data-doc="docs/agents/aria-specialist.md">ARIA Specialist</a></li>
-        <li><a href="#docs/agents/cognitive-accessibility.md" data-doc="docs/agents/cognitive-accessibility.md">Cognitive Accessibility</a></li>
-        <li><a href="#docs/agents/contrast-master.md" data-doc="docs/agents/contrast-master.md">Contrast Master</a></li>
-        <li><a href="#docs/agents/contributions-hub.md" data-doc="docs/agents/contributions-hub.md">Contributions Hub</a></li>
-        <li><a href="#docs/agents/cross-document-analyzer.md" data-doc="docs/agents/cross-document-analyzer.md">Cross-Document Analyzer</a></li>
-        <li><a href="#docs/agents/cross-page-analyzer.md" data-doc="docs/agents/cross-page-analyzer.md">Cross-Page Analyzer</a></li>
-        <li><a href="#docs/agents/daily-briefing.md" data-doc="docs/agents/daily-briefing.md">Daily Briefing</a></li>
-        <li><a href="#docs/agents/design-system-auditor.md" data-doc="docs/agents/design-system-auditor.md">Design System Auditor</a></li>
-        <li><a href="#docs/agents/desktop-a11y-specialist.md" data-doc="docs/agents/desktop-a11y-specialist.md">Desktop Accessibility Specialist</a></li>
-        <li><a href="#docs/agents/desktop-a11y-testing-coach.md" data-doc="docs/agents/desktop-a11y-testing-coach.md">Desktop A11y Testing Coach</a></li>
-        <li><a href="#docs/agents/developer-hub.md" data-doc="docs/agents/developer-hub.md">Developer Hub</a></li>
-        <li><a href="#docs/agents/document-accessibility-wizard.md" data-doc="docs/agents/document-accessibility-wizard.md">Document Accessibility Wizard</a></li>
-        <li><a href="#docs/agents/document-csv-reporter.md" data-doc="docs/agents/document-csv-reporter.md">Document CSV Reporter</a></li>
-        <li><a href="#docs/agents/document-inventory.md" data-doc="docs/agents/document-inventory.md">Document Inventory</a></li>
-        <li><a href="#docs/agents/epub-accessibility.md" data-doc="docs/agents/epub-accessibility.md">EPUB Accessibility</a></li>
-        <li><a href="#docs/agents/epub-scan-config.md" data-doc="docs/agents/epub-scan-config.md">EPUB Scan Config</a></li>
-        <li><a href="#docs/agents/excel-accessibility.md" data-doc="docs/agents/excel-accessibility.md">Excel Accessibility</a></li>
-        <li><a href="#docs/agents/forms-specialist.md" data-doc="docs/agents/forms-specialist.md">Forms Specialist</a></li>
-        <li><a href="#docs/agents/github-hub.md" data-doc="docs/agents/github-hub.md">GitHub Hub</a></li>
-        <li><a href="#docs/agents/insiders-a11y-tracker.md" data-doc="docs/agents/insiders-a11y-tracker.md">Insiders A11y Tracker</a></li>
-        <li><a href="#docs/agents/issue-tracker.md" data-doc="docs/agents/issue-tracker.md">Issue Tracker</a></li>
-        <li><a href="#docs/agents/keyboard-navigator.md" data-doc="docs/agents/keyboard-navigator.md">Keyboard Navigator</a></li>
-        <li><a href="#docs/agents/lighthouse-bridge.md" data-doc="docs/agents/lighthouse-bridge.md">Lighthouse Bridge</a></li>
-        <li><a href="#docs/agents/link-checker.md" data-doc="docs/agents/link-checker.md">Link Checker</a></li>
-        <li><a href="#docs/agents/live-region-controller.md" data-doc="docs/agents/live-region-controller.md">Live Region Controller</a></li>
-        <li><a href="#docs/agents/markdown-a11y-assistant.md" data-doc="docs/agents/markdown-a11y-assistant.md">Markdown A11y Assistant</a></li>
-        <li><a href="#docs/agents/markdown-csv-reporter.md" data-doc="docs/agents/markdown-csv-reporter.md">Markdown CSV Reporter</a></li>
-        <li><a href="#docs/agents/markdown-fixer.md" data-doc="docs/agents/markdown-fixer.md">Markdown Fixer</a></li>
-        <li><a href="#docs/agents/markdown-scanner.md" data-doc="docs/agents/markdown-scanner.md">Markdown Scanner</a></li>
-        <li><a href="#docs/agents/mobile-accessibility.md" data-doc="docs/agents/mobile-accessibility.md">Mobile Accessibility</a></li>
-        <li><a href="#docs/agents/modal-specialist.md" data-doc="docs/agents/modal-specialist.md">Modal Specialist</a></li>
-        <li><a href="#docs/agents/office-scan-config.md" data-doc="docs/agents/office-scan-config.md">Office Scan Config</a></li>
-        <li><a href="#docs/agents/pdf-accessibility.md" data-doc="docs/agents/pdf-accessibility.md">PDF Accessibility</a></li>
-        <li><a href="#docs/agents/pdf-scan-config.md" data-doc="docs/agents/pdf-scan-config.md">PDF Scan Config</a></li>
-        <li><a href="#docs/agents/powerpoint-accessibility.md" data-doc="docs/agents/powerpoint-accessibility.md">PowerPoint Accessibility</a></li>
-        <li><a href="#docs/agents/pr-review.md" data-doc="docs/agents/pr-review.md">PR Review</a></li>
-        <li><a href="#docs/agents/python-specialist.md" data-doc="docs/agents/python-specialist.md">Python Specialist</a></li>
-        <li><a href="#docs/agents/repo-admin.md" data-doc="docs/agents/repo-admin.md">Repo Admin</a></li>
-        <li><a href="#docs/agents/repo-manager.md" data-doc="docs/agents/repo-manager.md">Repo Manager</a></li>
-        <li><a href="#docs/agents/scanner-bridge.md" data-doc="docs/agents/scanner-bridge.md">Scanner Bridge</a></li>
-        <li><a href="#docs/agents/tables-data-specialist.md" data-doc="docs/agents/tables-data-specialist.md">Tables and Data Specialist</a></li>
-        <li><a href="#docs/agents/team-manager.md" data-doc="docs/agents/team-manager.md">Team Manager</a></li>
-        <li><a href="#docs/agents/template-builder.md" data-doc="docs/agents/template-builder.md">Template Builder</a></li>
-        <li><a href="#docs/agents/testing-coach.md" data-doc="docs/agents/testing-coach.md">Testing Coach</a></li>
-        <li><a href="#docs/agents/wcag-guide.md" data-doc="docs/agents/wcag-guide.md">WCAG Guide</a></li>
-        <li><a href="#docs/agents/web-accessibility-wizard.md" data-doc="docs/agents/web-accessibility-wizard.md">Web Accessibility Wizard</a></li>
-        <li><a href="#docs/agents/web-csv-reporter.md" data-doc="docs/agents/web-csv-reporter.md">Web CSV Reporter</a></li>
-        <li><a href="#docs/agents/web-issue-fixer.md" data-doc="docs/agents/web-issue-fixer.md">Web Issue Fixer</a></li>
-        <li><a href="#docs/agents/word-accessibility.md" data-doc="docs/agents/word-accessibility.md">Word Accessibility</a></li>
-        <li><a href="#docs/agents/wxpython-specialist.md" data-doc="docs/agents/wxpython-specialist.md">wxPython Specialist</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-skills">Skills</button>
-      <ul class="sidebar-links" id="nav-skills">
-        <li><a href="#docs/skills/accessibility-rules.md" data-doc="docs/skills/accessibility-rules.md">Accessibility Rules</a></li>
-        <li><a href="#docs/skills/cognitive-accessibility.md" data-doc="docs/skills/cognitive-accessibility.md">Cognitive Accessibility</a></li>
-        <li><a href="#docs/skills/design-system.md" data-doc="docs/skills/design-system.md">Design System</a></li>
-        <li><a href="#docs/skills/document-scanning.md" data-doc="docs/skills/document-scanning.md">Document Scanning</a></li>
-        <li><a href="#docs/skills/framework-accessibility.md" data-doc="docs/skills/framework-accessibility.md">Framework Accessibility</a></li>
-        <li><a href="#docs/skills/github-a11y-scanner.md" data-doc="docs/skills/github-a11y-scanner.md">GitHub A11y Scanner</a></li>
-        <li><a href="#docs/skills/github-analytics-scoring.md" data-doc="docs/skills/github-analytics-scoring.md">GitHub Analytics Scoring</a></li>
-        <li><a href="#docs/skills/github-scanning.md" data-doc="docs/skills/github-scanning.md">GitHub Scanning</a></li>
-        <li><a href="#docs/skills/github-workflow-standards.md" data-doc="docs/skills/github-workflow-standards.md">GitHub Workflow Standards</a></li>
-        <li><a href="#docs/skills/help-url-reference.md" data-doc="docs/skills/help-url-reference.md">Help URL Reference</a></li>
-        <li><a href="#docs/skills/lighthouse-scanner.md" data-doc="docs/skills/lighthouse-scanner.md">Lighthouse Scanner</a></li>
-        <li><a href="#docs/skills/markdown-accessibility.md" data-doc="docs/skills/markdown-accessibility.md">Markdown Accessibility</a></li>
-        <li><a href="#docs/skills/mobile-accessibility.md" data-doc="docs/skills/mobile-accessibility.md">Mobile Accessibility</a></li>
-        <li><a href="#docs/skills/python-development.md" data-doc="docs/skills/python-development.md">Python Development</a></li>
-        <li><a href="#docs/skills/report-generation.md" data-doc="docs/skills/report-generation.md">Report Generation</a></li>
-        <li><a href="#docs/skills/web-scanning.md" data-doc="docs/skills/web-scanning.md">Web Scanning</a></li>
-        <li><a href="#docs/skills/web-severity-scoring.md" data-doc="docs/skills/web-severity-scoring.md">Web Severity Scoring</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-tools">Tools</button>
-      <ul class="sidebar-links" id="nav-tools">
-        <li><a href="#docs/tools/axe-core-integration.md" data-doc="docs/tools/axe-core-integration.md">Axe-core Integration</a></li>
-        <li><a href="#docs/tools/mcp-tools.md" data-doc="docs/tools/mcp-tools.md">MCP Tools</a></li>
-        <li><a href="#docs/tools/vpat-generation.md" data-doc="docs/tools/vpat-generation.md">VPAT Generation</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="true" aria-controls="nav-scanning">Scanning</button>
-      <ul class="sidebar-links" id="nav-scanning">
-        <li><a href="#docs/scanning/scan-configuration.md" data-doc="docs/scanning/scan-configuration.md">Scan Configuration</a></li>
-        <li><a href="#docs/scanning/custom-prompts.md" data-doc="docs/scanning/custom-prompts.md">Custom Prompts</a></li>
-        <li><a href="#docs/scanning/pdf-scanning.md" data-doc="docs/scanning/pdf-scanning.md">PDF Scanning</a></li>
-        <li><a href="#docs/scanning/office-scanning.md" data-doc="docs/scanning/office-scanning.md">Office Scanning</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-web">Prompts: Web</button>
-      <ul class="sidebar-links" id="nav-prompts-web">
-        <li><a href="#docs/prompts/web/quick-web-check.md" data-doc="docs/prompts/web/quick-web-check.md">Quick Web Check</a></li>
-        <li><a href="#docs/prompts/web/audit-web-page.md" data-doc="docs/prompts/web/audit-web-page.md">Audit Web Page</a></li>
-        <li><a href="#docs/prompts/web/audit-web-multi-page.md" data-doc="docs/prompts/web/audit-web-multi-page.md">Audit Multi-Page</a></li>
-        <li><a href="#docs/prompts/web/fix-web-issues.md" data-doc="docs/prompts/web/fix-web-issues.md">Fix Web Issues</a></li>
-        <li><a href="#docs/prompts/web/compare-web-audits.md" data-doc="docs/prompts/web/compare-web-audits.md">Compare Web Audits</a></li>
-        <li><a href="#docs/prompts/web/export-web-csv.md" data-doc="docs/prompts/web/export-web-csv.md">Export Web CSV</a></li>
-        <li><a href="#docs/prompts/web/export-markdown-csv.md" data-doc="docs/prompts/web/export-markdown-csv.md">Export Markdown CSV</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-docs">Prompts: Documents</button>
-      <ul class="sidebar-links" id="nav-prompts-docs">
-        <li><a href="#docs/prompts/documents/quick-document-check.md" data-doc="docs/prompts/documents/quick-document-check.md">Quick Document Check</a></li>
-        <li><a href="#docs/prompts/documents/audit-single-document.md" data-doc="docs/prompts/documents/audit-single-document.md">Audit Single Document</a></li>
-        <li><a href="#docs/prompts/documents/audit-document-folder.md" data-doc="docs/prompts/documents/audit-document-folder.md">Audit Document Folder</a></li>
-        <li><a href="#docs/prompts/documents/audit-changed-documents.md" data-doc="docs/prompts/documents/audit-changed-documents.md">Audit Changed Documents</a></li>
-        <li><a href="#docs/prompts/documents/compare-audits.md" data-doc="docs/prompts/documents/compare-audits.md">Compare Audits</a></li>
-        <li><a href="#docs/prompts/documents/create-accessible-template.md" data-doc="docs/prompts/documents/create-accessible-template.md">Create Accessible Template</a></li>
-        <li><a href="#docs/prompts/documents/generate-remediation-scripts.md" data-doc="docs/prompts/documents/generate-remediation-scripts.md">Generate Remediation Scripts</a></li>
-        <li><a href="#docs/prompts/documents/generate-vpat.md" data-doc="docs/prompts/documents/generate-vpat.md">Generate VPAT</a></li>
-        <li><a href="#docs/prompts/documents/setup-document-cicd.md" data-doc="docs/prompts/documents/setup-document-cicd.md">Setup Document CI/CD</a></li>
-        <li><a href="#docs/prompts/documents/export-document-csv.md" data-doc="docs/prompts/documents/export-document-csv.md">Export Document CSV</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-prompts-github">Prompts: GitHub</button>
-      <ul class="sidebar-links" id="nav-prompts-github">
-        <li><a href="#docs/prompts/github/daily-briefing.md" data-doc="docs/prompts/github/daily-briefing.md">Daily Briefing</a></li>
-        <li><a href="#docs/prompts/github/create-issue.md" data-doc="docs/prompts/github/create-issue.md">Create Issue</a></li>
-        <li><a href="#docs/prompts/github/manage-issue.md" data-doc="docs/prompts/github/manage-issue.md">Manage Issue</a></li>
-        <li><a href="#docs/prompts/github/refine-issue.md" data-doc="docs/prompts/github/refine-issue.md">Refine Issue</a></li>
-        <li><a href="#docs/prompts/github/issue-reply.md" data-doc="docs/prompts/github/issue-reply.md">Issue Reply</a></li>
-        <li><a href="#docs/prompts/github/my-issues.md" data-doc="docs/prompts/github/my-issues.md">My Issues</a></li>
-        <li><a href="#docs/prompts/github/review-pr.md" data-doc="docs/prompts/github/review-pr.md">Review PR</a></li>
-        <li><a href="#docs/prompts/github/merge-pr.md" data-doc="docs/prompts/github/merge-pr.md">Merge PR</a></li>
-        <li><a href="#docs/prompts/github/my-prs.md" data-doc="docs/prompts/github/my-prs.md">My PRs</a></li>
-        <li><a href="#docs/prompts/github/pr-comment.md" data-doc="docs/prompts/github/pr-comment.md">PR Comment</a></li>
-        <li><a href="#docs/prompts/github/pr-report.md" data-doc="docs/prompts/github/pr-report.md">PR Report</a></li>
-        <li><a href="#docs/prompts/github/pr-author-checklist.md" data-doc="docs/prompts/github/pr-author-checklist.md">PR Author Checklist</a></li>
-        <li><a href="#docs/prompts/github/address-comments.md" data-doc="docs/prompts/github/address-comments.md">Address Comments</a></li>
-        <li><a href="#docs/prompts/github/manage-branches.md" data-doc="docs/prompts/github/manage-branches.md">Manage Branches</a></li>
-        <li><a href="#docs/prompts/github/add-collaborator.md" data-doc="docs/prompts/github/add-collaborator.md">Add Collaborator</a></li>
-        <li><a href="#docs/prompts/github/onboard-repo.md" data-doc="docs/prompts/github/onboard-repo.md">Onboard Repo</a></li>
-        <li><a href="#docs/prompts/github/build-template.md" data-doc="docs/prompts/github/build-template.md">Build Template</a></li>
-        <li><a href="#docs/prompts/github/build-a11y-template.md" data-doc="docs/prompts/github/build-a11y-template.md">Build A11y Template</a></li>
-        <li><a href="#docs/prompts/github/a11y-update.md" data-doc="docs/prompts/github/a11y-update.md">A11y Update</a></li>
-        <li><a href="#docs/prompts/github/ci-status.md" data-doc="docs/prompts/github/ci-status.md">CI Status</a></li>
-        <li><a href="#docs/prompts/github/draft-release.md" data-doc="docs/prompts/github/draft-release.md">Draft Release</a></li>
-        <li><a href="#docs/prompts/github/release-prep.md" data-doc="docs/prompts/github/release-prep.md">Release Prep</a></li>
-        <li><a href="#docs/prompts/github/my-stats.md" data-doc="docs/prompts/github/my-stats.md">My Stats</a></li>
-        <li><a href="#docs/prompts/github/project-status.md" data-doc="docs/prompts/github/project-status.md">Project Status</a></li>
-        <li><a href="#docs/prompts/github/notifications.md" data-doc="docs/prompts/github/notifications.md">Notifications</a></li>
-        <li><a href="#docs/prompts/github/explain-code.md" data-doc="docs/prompts/github/explain-code.md">Explain Code</a></li>
-        <li><a href="#docs/prompts/github/react.md" data-doc="docs/prompts/github/react.md">React</a></li>
-        <li><a href="#docs/prompts/github/triage.md" data-doc="docs/prompts/github/triage.md">Triage</a></li>
-        <li><a href="#docs/prompts/github/security-dashboard.md" data-doc="docs/prompts/github/security-dashboard.md">Security Dashboard</a></li>
-        <li><a href="#docs/prompts/github/sprint-review.md" data-doc="docs/prompts/github/sprint-review.md">Sprint Review</a></li>
-        <li><a href="#docs/prompts/github/team-dashboard.md" data-doc="docs/prompts/github/team-dashboard.md">Team Dashboard</a></li>
-      </ul>
-    </div>
-
-
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-advanced">Advanced</button>
-      <ul class="sidebar-links" id="nav-advanced">
-        <li><a href="#docs/advanced/advanced-scanning-patterns.md" data-doc="docs/advanced/advanced-scanning-patterns.md">Advanced Scanning Patterns</a></li>
-        <li><a href="#docs/advanced/cross-platform-handoff.md" data-doc="docs/advanced/cross-platform-handoff.md">Cross-Platform Handoff</a></li>
-        <li><a href="#docs/advanced/platform-references.md" data-doc="docs/advanced/platform-references.md">Platform References</a></li>
-        <li><a href="#docs/advanced/plugin-packaging.md" data-doc="docs/advanced/plugin-packaging.md">Plugin Packaging</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-section">
-      <button class="sidebar-heading" aria-expanded="false" aria-controls="nav-project">Project</button>
-      <ul class="sidebar-links" id="nav-project">
-        <li><a href="#README.md" data-doc="README.md">README</a></li>
-        <li><a href="#CONTRIBUTING.md" data-doc="CONTRIBUTING.md">Contributing</a></li>
-        <li><a href="#CODE_OF_CONDUCT.md" data-doc="CODE_OF_CONDUCT.md">Code of Conduct</a></li>
-        <li><a href="#ROADMAP.md" data-doc="ROADMAP.md">Roadmap</a></li>
-        <li><a href="#SECURITY.md" data-doc="SECURITY.md">Security</a></li>
-      </ul>
-    </div>
-
+    <div id="docs-nav-sections"><p class="sidebar-loading">Loading the table of contents&hellip;</p></div>
   </nav>
 
   <main class="docs-content" id="docs-content">
     <div class="docs-welcome" id="docs-welcome">
-      <h1>Accessibility Agents Documentation</h1>
-      <p>Browse the documentation for Community Access Accessibility Agents&mdash;55 agents, 17 skills, and 54 prompts. Select a topic from the navigation to get started, or choose one of the quick links below.</p>
+      <h1>Accessibility Agents documentation</h1>
+      <p>Accessibility Agents 7 is one package of Agent Skills: six entry points that route work to 61 specialists, 16 helpers and 30 reference skills, an edit gate, and 39 MCP scanning tools. These pages are read live from the repository, so they always match the latest release. Pick a topic from the table of contents, or start here:</p>
       <ul class="quick-links">
-        <li><a href="#docs/getting-started.md" data-doc="docs/getting-started.md">Getting Started Guide</a></li>
-        <li><a href="#docs/agents/README.md" data-doc="docs/agents/README.md">Agent Overview</a></li>
-        <li><a href="#docs/configuration.md" data-doc="docs/configuration.md">Configuration</a></li>
-        <li><a href="#docs/architecture.md" data-doc="docs/architecture.md">Architecture</a></li>
+        <li><a href="#docs/getting-started/README.md" data-doc="docs/getting-started/README.md">Getting started</a></li>
+        <li><a href="#docs/reference/skills/README.md" data-doc="docs/reference/skills/README.md">Skills catalog</a></li>
+        <li><a href="#docs/reference/mcp-tools.md" data-doc="docs/reference/mcp-tools.md">MCP tools</a></li>
+        <li><a href="#docs/architecture/README.md" data-doc="docs/architecture/README.md">Architecture</a></li>
         <li><a href="#CONTRIBUTING.md" data-doc="CONTRIBUTING.md">Contributing</a></li>
         <li><a href="#ROADMAP.md" data-doc="ROADMAP.md">Roadmap</a></li>
       </ul>
@@ -1023,30 +836,50 @@
 </div>
 
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <span style="font-weight:700; font-size:1.1rem;">Community Access</span>
-      <p style="color:#b0b8c4; font-size:0.9rem; margin-top:0.25rem;">Making software accessible by default.</p>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">Community Access</span>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
+      </div>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav aria-label="Footer navigation">
-      <ul class="footer-links">
-        <li><a href="https://github.com/Community-Access">GitHub Organization</a></li>
-        <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="repos.html">Repositories</a></li>
-        <li><a href="quickstart.html">Quick Start</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="accessibility.html">Accessibility</a></li>
-        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
-      </ul>
-    </nav>
+    <div class="a11y-statement">
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
+    </div>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
   </div>
-  <div class="a11y-statement">
-    <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
-  </div>
-  <p class="footer-copy">A community project. Licensed under MIT.</p>
 </footer>
 
 <script>
@@ -1119,14 +952,45 @@
     }
   });
 
-  // Sidebar section collapse/expand
-  var headings = document.querySelectorAll('.sidebar-heading');
-  for (var i = 0; i < headings.length; i++) {
-    headings[i].addEventListener('click', function () {
-      var expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
+  // Sidebar section collapse/expand (delegated: the sections are built from the manifest)
+  sidebarEl.addEventListener('click', function (e) {
+    var h = e.target.closest('.sidebar-heading');
+    if (!h) return;
+    var expanded = h.getAttribute('aria-expanded') === 'true';
+    h.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+
+  // Table of contents from the accessibility-agents repository's manifest.json,
+  // so the sidebar follows its docs/ tree.
+  function escapeText(t) {
+    return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
   }
+  function buildSidebar(manifest) {
+    var holder = document.getElementById('docs-nav-sections');
+    var html = '';
+    (manifest.sections || []).forEach(function (section, n) {
+      var id = 'nav-' + (section.id || ('section-' + n));
+      html += '<div class="sidebar-section">' +
+        '<button class="sidebar-heading" type="button" aria-expanded="' + (n < 2 ? 'true' : 'false') + '" aria-controls="' + escapeText(id) + '">' + escapeText(section.name) + '</button>' +
+        '<ul class="sidebar-links" id="' + escapeText(id) + '">';
+      (section.items || []).forEach(function (item) {
+        html += '<li><a href="#' + escapeText(item.path) + '" data-doc="' + escapeText(item.path) + '">' + escapeText(item.title) + '</a></li>';
+      });
+      html += '</ul></div>';
+    });
+    holder.innerHTML = html || '<p class="sidebar-loading">No documents listed.</p>';
+    setActiveLink(currentDoc);
+  }
+  // Read the manifest straight from the repository, so the table of contents
+  // is current the moment a doc lands on main; fall back to the copy here.
+  fetch(REPO_RAW + 'manifest.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .catch(function () { return fetch('manifest.json').then(function (r) { return r.json(); }); })
+    .then(buildSidebar)
+    .catch(function () {
+      document.getElementById('docs-nav-sections').innerHTML =
+        '<p class="sidebar-loading">The table of contents did not load. <a href="https://github.com/Community-Access/accessibility-agents/tree/main/docs">Browse the documentation on GitHub</a>.</p>';
+    });
 
   // Highlight active nav link
   function setActiveLink(docPath) {
@@ -1196,6 +1060,38 @@
     xhr.send();
   }
 
+  // Relative links in a document are relative to its place in the repository,
+  // not to this page: Markdown links open here, anything else on GitHub.
+  function resolvePath(base, rel) {
+    var parts = base.split('/'); parts.pop();
+    rel.split('/').forEach(function (seg) {
+      if (seg === '..') parts.pop();
+      else if (seg !== '.' && seg !== '') parts.push(seg);
+    });
+    return parts.join('/');
+  }
+  function rewriteLinks(root, docPath) {
+    if (!root) return;
+    root.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (/^([a-z]+:|#|\/\/)/i.test(href)) return;
+      var hashAt = href.indexOf('#');
+      var path = hashAt === -1 ? href : href.slice(0, hashAt);
+      if (!path) return;
+      var target = resolvePath(docPath, path);
+      if (/\.md$/i.test(target)) {
+        a.setAttribute('href', '#' + target);
+        a.setAttribute('data-doc', target);
+      } else {
+        a.setAttribute('href', (/\.[a-z0-9]+$/i.test(target) ? REPO_BLOB : REPO_BLOB.replace('/blob/', '/tree/')) + target);
+      }
+    });
+    root.querySelectorAll('img[src]').forEach(function (img) {
+      var src = img.getAttribute('src');
+      if (!/^([a-z]+:|\/\/)/i.test(src)) img.setAttribute('src', REPO_RAW + resolvePath(docPath, src));
+    });
+  }
+
   function renderDoc(docPath, markdown) {
     var html = '';
     if (typeof marked !== 'undefined') {
@@ -1210,6 +1106,7 @@
     contentEl.innerHTML =
       '<a href="' + githubUrl + '" class="github-link" target="_blank" rel="noopener">View on GitHub <span class="sr-only">(opens in new tab)</span></a>' +
       '<div class="doc-rendered">' + html + '</div>';
+    rewriteLinks(contentEl.querySelector('.doc-rendered'), docPath);
 
     // Update document title
     var titleMatch = markdown.match(/^#\s+(.+)$/m);
