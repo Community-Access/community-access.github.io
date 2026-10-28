@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Community Access — our mission, contributors, and the people who make accessible software possible.">
+  <meta name="description" content="About Community Access: an open source community led by blind and low vision developers, and the people behind Accessibility Agents, QUILL, GLOW and GIT Going with GitHub.">
   <title>About — Community Access</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
@@ -13,6 +13,9 @@
   <meta property="og:url" content="https://community-access.github.io/about.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
   <style>
@@ -125,7 +128,11 @@
     .footer-column .footer-links a:hover {
       color: var(--ca-emerald-light);
     }
+    .about-projects { padding-left: 1.25rem; margin: 0 0 1.25rem; }
+    .about-projects li { margin-bottom: 0.75rem; line-height: 1.65; }
+    .about-handle { font-weight: 700; color: var(--ca-gray-700); margin: -0.25rem 0 0.5rem; }
   </style>
+  <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
@@ -139,12 +146,14 @@
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
+        <li><a href="index.html#projects">Projects</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
-            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
             <li><a href="index.html#install">Install</a></li>
-            <li><a href="index.html#contribute">Contribute</a></li>
+            <li><a href="quickstart.html">Quick start</a></li>
+            <li><a href="docs.html">Documentation</a></li>
           </ul>
         </li>
         <li><a href="news.html">News</a></li>
@@ -166,16 +175,16 @@
 <section class="about-hero">
   <div class="container">
     <h1>About Community Access</h1>
-    <p>We are a community of blind and sighted developers building open source tools that make AI-generated code accessible by default.</p>
+    <p>An open source community, led by blind and low vision developers, building the tools, training and practices that make software accessible by default.</p>
   </div>
 </section>
 
 <section class="about-content">
   <div class="container">
     <h2>Our Mission</h2>
-    <p>AI coding tools generate code fast, but they forget accessibility. Missing alt text, broken heading hierarchies, unusable keyboard navigation, and incorrect ARIA attributes ship into production every day because the AI was never taught to care.</p>
-    <p>Community Access fixes this at the source. Our 55 specialized agents run inside your AI coding environment and enforce WCAG 2.2 AA compliance on every prompt, every response, and every code suggestion before it reaches your editor.</p>
-    <p>We believe accessibility is not an afterthought or a feature request. It is a baseline requirement. Every line of code should ship inclusive.</p>
+    <p>Software is still built mostly by people who do not use assistive technology, and it shows: missing labels, broken heading order, keyboard traps, documents a screen reader cannot read, and AI coding tools that repeat all of it at speed.</p>
+    <p>Community Access works on the whole chain. We give developers and AI tools the rules and the checks (Accessibility Agents), give screen reader users software built for them from the first line (QUILL), give document authors a way to fix what they publish (GLOW), teach the skills to contribute (GIT Going with GitHub), and run our own projects by GitHub&rsquo;s Open Source Accessibility Framework.</p>
+    <p>We believe accessibility is not an afterthought or a feature request. It is a baseline requirement.</p>
 
     <h2>What We Value</h2>
     <div class="about-values">
@@ -197,20 +206,27 @@
       </div>
     </div>
 
-    <h2>The Project</h2>
-    <p>Community Access provides 55 AI agents, 17 knowledge skills, and 54 pre-built prompts across five platforms: Claude Code, GitHub Copilot, Claude Desktop, Codex CLI, and Gemini CLI. The agents cover web accessibility, document scanning (Word, Excel, PowerPoint, PDF, EPUB, Markdown), GitHub workflows, and desktop application development.</p>
-    <p>Installation takes 30 seconds with a single command. The agents are additive and never overwrite existing files. <a href="index.html#install">Get started here</a>.</p>
-    <p>The project is hosted on GitHub at <a href="https://github.com/Community-Access">github.com/Community-Access</a>. Contributions are welcome from everyone. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Read our contributing guide</a>.</p>
+    <h2>Our Projects</h2>
+    <ul class="about-projects">
+      <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a>: WCAG 2.2 AA enforcement for Claude Code, GitHub Copilot, Codex, Gemini CLI and Antigravity, as one package of Agent Skills with an edit gate and 39 MCP scanning tools. <a href="index.html#install">Install it</a>.</li>
+      <li><a href="https://quillforall.org/">QUILL for All</a>: free talking software for Windows screen reader users, from a full writing studio to radio, podcasts, audio production and a media converter.</li>
+      <li><a href="https://letitglow.app/">GLOW</a>: audit, fix and convert Office, PDF, Markdown and ePub files against the ACB and APH large print guidelines, Microsoft Accessibility Checker and WCAG 2.2 AA.</li>
+      <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a>: a free workshop that teaches open source contribution with a screen reader and a keyboard.</li>
+      <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a>: we follow GitHub&rsquo;s framework in public, and Accessibility Agents helps other projects adopt it.</li>
+    </ul>
+    <p>Everything is on GitHub at <a href="https://github.com/Community-Access">github.com/Community-Access</a>, and contributions are welcome from everyone. <a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Read our contributing guide</a>. Questions: <a href="mailto:support@community-access.org">support@community-access.org</a>.</p>
 
     <h2>Founders &amp; Maintainers</h2>
-    <p>Community Access is founded and maintained by two developers dedicated to making AI-generated code accessible by default.</p>
+    <p>Community Access was founded and is maintained by two developers dedicated to making software accessible by default.</p>
     <div class="about-values">
       <div class="about-value">
         <h3><a href="https://github.com/accesswatch" target="_blank" rel="noopener noreferrer">Jeff Bishop<span class="sr-only"> (opens in new tab)</span></a></h3>
+        <p class="about-handle">accesswatch on GitHub</p>
         <p>Co-founder and maintainer. Blind developer and accessibility advocate building tools that bridge the gap between AI code generation and real-world assistive technology.</p>
       </div>
       <div class="about-value">
         <h3><a href="https://github.com/taylorarndt" target="_blank" rel="noopener noreferrer">Taylor Arndt<span class="sr-only"> (opens in new tab)</span></a></h3>
+        <p class="about-handle">taylorarndt on GitHub</p>
         <p>Co-founder and maintainer. Developer and educator driving the project's workshops, community engagement, and accessible tooling.</p>
       </div>
     </div>
@@ -222,13 +238,13 @@
     <h2>Contributors</h2>
     <p>Community Access is built by real people who care about digital accessibility and inclusion. These contributors have shaped what we are building across every repo in the organization. Thank you for your partnership, mentorship, and empathy. Go team!</p>
     <div id="contributors-grid" class="contributors-grid" role="list" aria-label="Organization contributors">
-      <p class="contributors-loading">Loading contributors&hellip;</p>
+      <div role="listitem" class="contributors-loading">Loading contributors&hellip;</div>
     </div>
 
     <h3 class="special-thanks-heading">Special Thanks</h3>
     <p>A special thanks to everyone who has opened issues, reported bugs, requested features, and shaped our direction. Every voice matters.</p>
     <div id="thanks-grid" class="thanks-grid" role="list" aria-label="Issue contributors">
-      <p class="contributors-loading">Loading&hellip;</p>
+      <div role="listitem" class="contributors-loading">Loading&hellip;</div>
     </div>
 
     <h3 class="special-thanks-heading">Community Pillars</h3>
@@ -259,36 +275,45 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-logo">Community Access</span>
-        <p class="footer-tagline">Making software accessible by default.</p>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
       </div>
-      <div class="footer-column">
-        <h3>Project</h3>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
         <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
           <li><a href="news.html">News</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="repos.html">Repositories</a></li>
-          <li><a href="docs.html">Documentation</a></li>
-          <li><a href="quickstart.html">Quick Start</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
-          <li><a href="feed.xml">RSS Feed</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
         </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Community</h3>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
         <ul class="footer-links">
           <li><a href="about.html">About</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
-          <li><a href="https://community-access.org/git-going-with-github/">Workshop</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="a11y-statement">
-      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
     </div>
-    <p class="footer-copy">A community project. Licensed under MIT.</p>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
   </div>
 </footer>
 

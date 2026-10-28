@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Get started with Community Access in 5 minutes — install the accessibility agents and run your first audit.">
+  <meta name="description" content="Install Accessibility Agents 7 in Claude Code, GitHub Copilot, Codex, Gemini CLI or Antigravity and run your first accessibility review.">
   <title>Quick Start — Community Access</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=32" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/263509777?v=4&s=180">
   <meta property="og:title" content="Quick Start — Community Access">
-  <meta property="og:description" content="Install 55 accessibility agents and run your first audit in 5 minutes.">
+  <meta property="og:description" content="Install Accessibility Agents 7 and run your first accessibility review.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/263509777?v=4&s=400">
   <meta property="og:url" content="https://community-access.github.io/quickstart.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="alternate" type="application/rss+xml" title="Community Access RSS Feed" href="https://community-access.org/feed.xml">
   <style>
@@ -113,7 +116,7 @@
     .qs-install-block code {
       font-family: var(--font-mono);
       font-size: 0.95rem;
-      color: var(--ca-gray-50);
+      color: #f9fafb;
       white-space: pre-wrap;
       word-break: break-all;
       display: block;
@@ -227,7 +230,10 @@
       transition: color var(--transition);
     }
     .footer-column .footer-links a:hover { color: var(--ca-emerald-light); }
+    .qs-install-block code { white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+    .qs-caveat { margin-top: 2rem; color: var(--ca-gray-700); }
   </style>
+  <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
@@ -241,12 +247,14 @@
     </a>
     <nav class="header-nav" aria-label="Main navigation">
       <ul>
+        <li><a href="index.html#projects">Projects</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-toggle" aria-expanded="false">Accessibility Agents</button>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Accessibility Agents</button>
           <ul class="nav-dropdown-menu">
-            <li><a href="docs.html">Documentation</a></li>
+            <li><a href="index.html#whats-new">What&rsquo;s new in 7</a></li>
             <li><a href="index.html#install">Install</a></li>
-            <li><a href="index.html#contribute">Contribute</a></li>
+            <li><a href="quickstart.html" aria-current="page">Quick start</a></li>
+            <li><a href="docs.html">Documentation</a></li>
           </ul>
         </li>
         <li><a href="news.html">News</a></li>
@@ -268,88 +276,60 @@
 <section class="page-hero">
   <div class="container">
     <h1>Quick Start</h1>
-    <p>Go from zero to your first accessibility audit in under 5 minutes. One command installs everything.</p>
+    <p>From install to your first accessibility review in a few minutes, in the AI coding tool you already use.</p>
   </div>
 </section>
 
 <div class="container">
   <div class="quickstart-content">
 
-    <h2><span class="step-badge" aria-hidden="true">1</span> Install the agents</h2>
-    <p>Run one command to install all 55 agents across every supported platform. The installer auto-detects which AI tools you have installed.</p>
+    <h2><span class="step-badge" aria-hidden="true">1</span> Install Accessibility Agents</h2>
+    <p>Install it as a plugin. That brings the skills, the edit gate (on clients that support hooks) and the MCP server in one step. You need Node.js 22 or later.</p>
 
     <div class="qs-install-block">
-      <div class="qs-install-label">macOS / Linux</div>
-      <code>curl -fsSL https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.sh | bash</code>
+      <div class="qs-install-label">Claude Code, in a session</div>
+      <code>/plugin marketplace add Community-Access/accessibility-agents
+/plugin install accessibility-agents@community-access</code>
     </div>
     <div class="qs-install-block">
-      <div class="qs-install-label">Windows (PowerShell)</div>
-      <code>irm https://raw.githubusercontent.com/Community-Access/accessibility-agents/main/install.ps1 | iex</code>
+      <div class="qs-install-label">GitHub Copilot CLI</div>
+      <code>copilot plugin marketplace add Community-Access/accessibility-agents
+copilot plugin install accessibility-agents@community-access</code>
+    </div>
+    <div class="qs-install-block">
+      <div class="qs-install-label">Gemini CLI</div>
+      <code>gemini extensions install https://github.com/Community-Access/accessibility-agents</code>
     </div>
 
-    <p>The installer is safe and additive &mdash; it never overwrites existing files. It sets up auto-updates so you always have the latest agents.</p>
+    <p>For VS Code, Codex, Antigravity or the MCP server on its own, see <a href="index.html#install">every install option</a>.</p>
 
-    <div class="qs-platforms">
-      <div class="qs-platform"><strong>Claude Code</strong><span>CLI</span></div>
-      <div class="qs-platform"><strong>GitHub Copilot</strong><span>VS Code</span></div>
-      <div class="qs-platform"><strong>Claude Desktop</strong><span>MCP</span></div>
-      <div class="qs-platform"><strong>Codex CLI</strong><span>OpenAI</span></div>
-      <div class="qs-platform"><strong>Gemini CLI</strong><span>Google</span></div>
-    </div>
-
-    <h2><span class="step-badge" aria-hidden="true">2</span> Open your AI coding tool</h2>
-    <p>Open any project in your preferred AI coding environment. The agents are loaded automatically &mdash; no configuration needed.</p>
+    <h2><span class="step-badge" aria-hidden="true">2</span> Describe what you are working on</h2>
+    <p>You do not need to name a skill. Say what you want in plain words, and one of six entry points routes it to the right specialists:</p>
     <ul>
-      <li><strong>Claude Code</strong> &mdash; Launch the Claude Code CLI in your project directory</li>
-      <li><strong>GitHub Copilot</strong> &mdash; Open VS Code with Copilot Chat</li>
-      <li><strong>Claude Desktop</strong> &mdash; Open the Claude Desktop app</li>
+      <li><strong>&ldquo;Review this modal for accessibility&rdquo;</strong>: <code>accessibility-lead</code> picks the modal, keyboard and ARIA specialists, runs them, and tells you whether it ships.</li>
+      <li><strong>&ldquo;Audit the whole site&rdquo;</strong>: <code>web-accessibility-wizard</code> asks four questions, runs every domain and writes <code>WEB-ACCESSIBILITY-AUDIT.md</code>.</li>
+      <li><strong>&ldquo;Check these PDFs&rdquo;</strong>: <code>document-accessibility-wizard</code> scans each file and writes a scored report.</li>
+      <li><strong>&ldquo;Fix the markdown in docs/&rdquo;</strong>: <code>markdown-a11y-assistant</code> shows you the fixes it wants to make, and waits for you.</li>
     </ul>
+    <p>You can also call a skill by name: <code>/accessibility-lead</code> in Claude Code, Copilot and VS Code, or <code>$accessibility-lead</code> in Codex. Specialists such as <code>/aria-specialist</code> and <code>/contrast-master</code> are in the slash menu too.</p>
 
-    <h2><span class="step-badge" aria-hidden="true">3</span> Run your first audit</h2>
-    <p>Ask the accessibility wizard to audit your project. The wizard walks you through 11 accessibility domains step by step.</p>
+    <h2><span class="step-badge" aria-hidden="true">3</span> Meet the edit gate</h2>
+    <p>Once installed, an edit to a user-facing file (HTML, JSX, Vue, Svelte, CSS, templates) is refused until <code>accessibility-lead</code> has finished its review in the session. That refusal is the point, not a fault: let the review run, then the edit goes through. Build output, tests, stories and dependencies are exempt.</p>
 
-    <div class="qs-example">
-      <div class="qs-example-label">GitHub Copilot</div>
-      <p>In Copilot Chat, select the <strong>Web Accessibility Wizard</strong> agent and type:</p>
-      <p><code>run a full audit on this project</code></p>
-    </div>
-
-    <div class="qs-example">
-      <div class="qs-example-label">Claude Code</div>
-      <p>In your terminal, invoke the agent directly:</p>
-      <p><code>/accessibility-wizard run a full audit on this project</code></p>
-    </div>
-
-    <p>The wizard asks a few questions about your project scope, then reviews your code for heading structure, keyboard navigation, forms, color contrast, ARIA usage, data tables, link text, and more.</p>
-
-    <h2><span class="step-badge" aria-hidden="true">4</span> Review findings</h2>
-    <p>The wizard produces a prioritized report grouped by severity (Critical, Serious, Moderate, Minor) with each finding linked to the relevant WCAG criterion. It tells you exactly what to fix and in what order.</p>
-
-    <h2><span class="step-badge" aria-hidden="true">5</span> Try a specialist</h2>
-    <p>For targeted checks, invoke a specialist directly. Some examples:</p>
-
-    <div class="qs-example">
-      <div class="qs-example-label">Check a specific domain</div>
-      <p><code>@contrast-master</code> &mdash; Check all color contrast ratios</p>
-      <p><code>@keyboard-navigator</code> &mdash; Verify tab order and focus management</p>
-      <p><code>@forms-specialist</code> &mdash; Audit form labels and validation</p>
-      <p><code>@alt-text-headings</code> &mdash; Review images and heading hierarchy</p>
-    </div>
-
-    <div class="qs-example">
-      <div class="qs-example-label">Audit documents</div>
-      <p><code>@document-accessibility-wizard</code> &mdash; Scan Word, Excel, PowerPoint, and PDF files</p>
-    </div>
+    <h2><span class="step-badge" aria-hidden="true">4</span> Read the report</h2>
+    <p>Every audit report has the same seven sections, written by a script from the specialists&rsquo; findings rather than typed by the model: what was audited, a score out of 100 with a grade, the severity breakdown, each finding with its WCAG criterion, location and fix, remediation priorities, next steps, and what changed since the last report.</p>
 
     <div class="qs-next">
-      <h3>What's next?</h3>
+      <h3>What&rsquo;s next?</h3>
       <ul>
-        <li><a href="docs.html">Full documentation</a> &mdash; Browse all 55 agents, 17 skills, and 54 prompts</li>
-        <li><a href="blog.html">Blog</a> &mdash; In-depth articles on AI accessibility auditing</li>
-        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a> &mdash; Fix an agent gap, add a rule, or build a new specialist</li>
-        <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub</a> &mdash; Star the repo and follow for updates</li>
+        <li><a href="docs.html">Documentation</a>: the skills catalog, MCP tools, scanning guides and configuration</li>
+        <li><a href="news.html#post/accessibility-agents-7-release">What&rsquo;s new in Accessibility Agents 7</a></li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a>: improve a skill, add a source, or report a gap</li>
+        <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report a bug or a barrier</a></li>
       </ul>
     </div>
+
+    <p class="qs-caveat">Automated review is a first pass, not a verdict. Test with NVDA, JAWS, VoiceOver, TalkBack and a keyboard before you ship.</p>
 
   </div>
 </div>
@@ -361,35 +341,45 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-logo">Community Access</span>
-        <p class="footer-tagline">Making software accessible by default.</p>
+        <p class="footer-tagline">Accessible by default. Open source, led by blind and low vision developers.</p>
       </div>
-      <div class="footer-column">
-        <h3>Project</h3>
+      <nav class="footer-column" aria-labelledby="footer-projects">
+        <h2 id="footer-projects">Projects</h2>
         <ul class="footer-links">
+          <li><a href="https://github.com/Community-Access/accessibility-agents">Accessibility Agents</a></li>
+          <li><a href="https://quillforall.org/">QUILL for All</a></li>
+          <li><a href="https://letitglow.app/">GLOW</a></li>
+          <li><a href="https://community-access.org/git-going-with-github/">GIT Going with GitHub</a></li>
+          <li><a href="https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework/issues/52">Open Source Accessibility Framework</a></li>
+          <li><a href="repos.html">All repositories</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-site">
+        <h2 id="footer-site">This site</h2>
+        <ul class="footer-links">
+          <li><a href="quickstart.html">Quick start</a></li>
+          <li><a href="docs.html">Documentation</a></li>
           <li><a href="news.html">News</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="repos.html">Repositories</a></li>
-          <li><a href="docs.html">Documentation</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents">GitHub Repository</a></li>
-          <li><a href="feed.xml">RSS Feed</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+          <li><a href="extensions.html">Extensions (version 6)</a></li>
         </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Community</h3>
+      </nav>
+      <nav class="footer-column" aria-labelledby="footer-community">
+        <h2 id="footer-community">Community</h2>
         <ul class="footer-links">
           <li><a href="about.html">About</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
-          <li><a href="https://community-access.org/git-going-with-github/">Workshop</a></li>
+          <li><a href="accessibility.html">Accessibility statement</a></li>
           <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CONTRIBUTING.md">Contribute</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/issues">Report an Issue</a></li>
-          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+          <li><a href="https://github.com/Community-Access/accessibility-agents/blob/main/CODE_OF_CONDUCT.md">Code of conduct</a></li>
+          <li><a href="mailto:support@community-access.org">support@community-access.org</a></li>
         </ul>
-      </div>
+      </nav>
     </div>
     <div class="a11y-statement">
-      <p>This site meets WCAG 2.2 Level AA. <a href="accessibility.html" style="color:var(--ca-emerald-light);">Accessibility statement</a>. <a href="https://github.com/Community-Access/accessibility-agents/issues" style="color:var(--ca-emerald-light);">Report a barrier</a>.</p>
+      <p>This site aims to meet WCAG 2.2 Level AA. <a href="accessibility.html">Read the accessibility statement</a> or <a href="https://github.com/Community-Access/community-access.github.io/issues/new">report a barrier</a>.</p>
     </div>
-    <p class="footer-copy">A community project. Licensed under MIT.</p>
+    <p class="footer-copy">A community project. Code under the MIT License.</p>
   </div>
 </footer>
 

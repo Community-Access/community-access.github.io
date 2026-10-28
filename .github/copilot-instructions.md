@@ -5,8 +5,9 @@
 Static GitHub Pages site with two standalone HTML files — no build system, no package manager, no framework.
 
 - `index.html` — Homepage: org overview, project cards, install instructions
-- `docs.html` — Documentation page: sidebar nav, content sections populated from `manifest.json`
-- `manifest.json` — Synced hourly from `Community-Access/accessibility-agents` via `sync-docs.yml`; do not edit manually
+- `docs.html` — Documentation page: the sidebar is built from `manifest.json` in `Community-Access/accessibility-agents` (read live), and each document is rendered from that repository
+- `manifest.json` — Fallback copy of that manifest, used only when the live one cannot be read
+- `site-chrome.css` — Type family, footer and current-page styles shared by every page
 - `scripts/a11y-crawl.js` — Playwright + axe-core crawler used by the CI audit workflow
 
 ## CSS Conventions
@@ -51,7 +52,7 @@ Set `A11Y_SESSION_COOKIE` env var to crawl authenticated pages.
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | `accessibility-audit.yml` | Daily 9 AM CT + manual | axe-core WCAG 2.1 AA audit; creates/updates GitHub issues labeled `accessibility` + `automated` |
-| `sync-docs.yml` | Hourly + manual | Fetches `manifest.json` from `accessibility-agents` repo |
+| `generate-feed.yml` | Pull requests touching `posts/` | Fails if `feed.xml` is out of date; regenerate with `node .github/scripts/generate-feed.js` |
 | `branch-protection.yml` | Hourly + manual | Enforces branch protection across all org repos via `ORG_ADMIN_TOKEN` secret |
 
 The audit workflow pushes screenshots to the `a11y-screenshots` branch and uploads artifacts (report JSON, crawl log, screenshots) to the workflow run.

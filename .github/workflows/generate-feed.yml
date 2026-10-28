@@ -1,29 +1,38 @@
-name: Generate RSS Feed
+name: Check RSS Feed
+
+# feed.xml is generated from posts/posts.json and committed with it. Pushes to
+# main go through pull requests, so a job cannot commit the feed afterwards;
+# this check fails a pull request whose feed.xml is out of date instead.
+# Regenerate with: node .github/scripts/generate-feed.js
 
 on:
+  pull_request:
+    paths:
+      - 'posts/**'
+      - 'feed.xml'
+      - '.github/scripts/generate-feed.js'
   push:
     branches: [main]
     paths:
-      - 'posts/posts.json'
+      - 'posts/**'
+      - 'feed.xml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  generate-feed:
+  check-feed:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate feed.xml from posts.json
-        run: node .github/scripts/generate-feed.js
-
-      - name: Commit updated feed
+      - name: Regenerate feed.xml and compare
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add feed.xml
-          git diff --cached --quiet && echo "No changes to feed.xml" && exit 0
-          git commit -m "chore: regenerate RSS feed from posts.json"
-          git pull --rebase
-          git push
+          node .github/scripts/generate-feed.js
+          if ! git diff --quiet -- feed.xml; then
+            git --no-pager diff --stat -- feed.xml
+            echo "::error file=feed.xml::feed.xml is out of date. Run node .github/scripts/generate-feed.js and commit the result."
+            exit 1
+          fi
+          echo "feed.xml matches posts/posts.json."
