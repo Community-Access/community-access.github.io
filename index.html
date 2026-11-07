@@ -862,6 +862,37 @@
       <h2 id="install-title">Install Accessibility Agents</h2>
       <p>Pick your tool. Each install brings the skills, the edit gate where the client supports hooks, and the MCP server. New to AI coding apps? <a href="start.html">Start here</a> for step-by-step setup in Claude, Copilot, VS Code, Codex and more, written for beginners.</p>
     </div>
+<section id="demo" class="demo-section bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>See It in Action</h2>
+      <p>A real example. AI generates the code on the left. Our agent catches the issues and rewrites it on the right.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-panel demo-bad">
+        <div class="demo-panel-header">Before &mdash; AI-Generated Code</div>
+        <pre><code><span class="demo-comment">&lt;!-- Missing alt, generic link text,</span>
+<span class="demo-comment">     no form label, wrong heading order --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h3&gt;</span>Our Team<span class="demo-tag">&lt;/h3&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span><span class="demo-err">Click here</span><span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">placeholder=</span><span class="demo-val">"Email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+      <div class="demo-panel demo-good">
+        <div class="demo-panel-header">After &mdash; Agent-Fixed Code</div>
+        <pre tabindex="0"><code><span class="demo-comment">&lt;!-- Heading hierarchy, alt text,</span>
+<span class="demo-comment">     descriptive link, labeled input --&gt;</span>
+<span class="demo-tag">&lt;h1&gt;</span>Welcome<span class="demo-tag">&lt;/h1&gt;</span>
+<span class="demo-tag">&lt;h2&gt;</span>Our Team<span class="demo-tag">&lt;/h2&gt;</span>
+<span class="demo-tag">&lt;img</span> <span class="demo-attr">src=</span><span class="demo-val">"team.jpg"</span> <span class="demo-attr">alt=</span><span class="demo-val">"Our team at the 2025 summit"</span><span class="demo-tag">&gt;</span>
+<span class="demo-tag">&lt;a</span> <span class="demo-attr">href=</span><span class="demo-val">"/about"</span><span class="demo-tag">&gt;</span>Learn about our team<span class="demo-tag">&lt;/a&gt;</span>
+<span class="demo-tag">&lt;label</span> <span class="demo-attr">for=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span>Email<span class="demo-tag">&lt;/label&gt;</span>
+<span class="demo-tag">&lt;input</span> <span class="demo-attr">id=</span><span class="demo-val">"email"</span> <span class="demo-attr">type=</span><span class="demo-val">"email"</span> <span class="demo-attr">autocomplete=</span><span class="demo-val">"email"</span><span class="demo-tag">&gt;</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
 
     <div class="accordion-group install-group">
       <details open>
