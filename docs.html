@@ -1110,6 +1110,10 @@
       '<a href="' + githubUrl + '" class="github-link" target="_blank" rel="noopener">View on GitHub <span class="sr-only">(opens in new tab)</span></a>' +
       '<div class="doc-rendered">' + html + '</div>';
     rewriteLinks(contentEl.querySelector('.doc-rendered'), docPath);
+    // Keep scrollable code samples keyboard-accessible, including in Safari.
+    contentEl.querySelectorAll('.doc-rendered pre').forEach(function (pre) {
+      pre.setAttribute('tabindex', '0');
+    });
 
     // Update document title
     var titleMatch = markdown.match(/^#\s+(.+)$/m);
@@ -1220,3 +1224,4 @@
 
 </body>
 </html>
+

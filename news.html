@@ -409,7 +409,7 @@
     var html = text
       // Code blocks
       .replace(/```(\w*)\n([\s\S]*?)```/g, function (m, lang, code) {
-        return '<pre><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trim() + '</code></pre>';
+        return '<pre tabindex="0"><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trim() + '</code></pre>';
       })
       // Horizontal rules
       .replace(/^---+$/gm, '<hr>')
@@ -696,3 +696,4 @@
 </script>
 </body>
 </html>
+
